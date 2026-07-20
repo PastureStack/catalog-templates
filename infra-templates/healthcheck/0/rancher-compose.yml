@@ -1,13 +1,18 @@
+# SPDX-License-Identifier: MIT
 .catalog:
-  name: "Healthcheck Service"
-  version: "v0.1.0"
-  description: "Rancher healthcheck service"
-  minimum_rancher_version: v1.1.99
-  maximum_rancher_version: v1.1.99
+  name: Metadata Healthcheck
+  version: v0.3.14
+  description: Report metadata-defined workload health through the compatible control API.
+  minimum_rancher_version: v1.6.0
+
 healthcheck:
+  scale: 1
+  start_on_create: true
   health_check:
-      port: 42
-      interval: 2000
-      response_timeout: 2000
-      unhealthy_threshold: 3
-      healthy_threshold: 2
+    port: 42
+    interval: 2000
+    response_timeout: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    initializing_timeout: 60000
+    reinitializing_timeout: 60000

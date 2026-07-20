@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: MIT
+name: PastureStack Native
+version: 0.3.0-rc4
+category: System
+description: Default project template for the PastureStack native orchestration runtime.
