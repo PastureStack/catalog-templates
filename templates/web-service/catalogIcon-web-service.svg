@@ -1,0 +1,18 @@
+<!-- SPDX-License-Identifier: MIT -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title description">
+  <title id="title">Web Service</title>
+  <desc id="description">A blue and green browser window with a globe.</desc>
+  <defs>
+    <linearGradient id="window" x1="18" y1="15" x2="110" y2="113" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#087FA8"/>
+      <stop offset="1" stop-color="#24B47E"/>
+    </linearGradient>
+  </defs>
+  <rect x="12" y="19" width="104" height="90" rx="14" fill="url(#window)"/>
+  <path d="M12 41h104" stroke="#DDF8F1" stroke-width="6"/>
+  <circle cx="27" cy="30" r="4" fill="#FFCF5C"/>
+  <circle cx="40" cy="30" r="4" fill="#FF7C7C"/>
+  <circle cx="53" cy="30" r="4" fill="#DDF8F1"/>
+  <circle cx="64" cy="74" r="25" fill="none" stroke="#FFFFFF" stroke-width="6"/>
+  <path d="M39 74h50M64 49c8 8 12 16 12 25S72 91 64 99M64 49c-8 8-12 16-12 25s4 17 12 25" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-width="5"/>
+</svg>

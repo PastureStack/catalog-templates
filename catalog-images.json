@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "license": "MIT for this metadata file only",
+  "allowedRegistryPrefixes": [
+    "ghcr.io/pasturestack/"
+  ],
+  "images": [
+    {
+      "reference": "ghcr.io/pasturestack/web-service:1.30.4@sha256:97d490c12ba55b4946b01546d1c3ed324e8d41ab1c9fcb2a616aa470620e5b46",
+      "sourceRepository": "https://github.com/nginx/docker-nginx",
+      "sourceCommit": "ccdab6c99ae2e2fc53a144dc68d6b8f44163adf2",
+      "sourcePath": "stable/alpine",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/web-service",
+      "licenseBoundary": "PastureStack mirrors the reviewed upstream OCI digest without relicensing it; NGINX, Alpine, and bundled packages retain their upstream licenses",
+      "reviewedAt": "2026-07-22",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64/v8"
+      ],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.70.0",
+        "databaseUpdatedAt": "2026-07-21T07:28:47Z",
+        "high": 0,
+        "critical": 0
+      }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/metadata-healthcheck:v0.3.14@sha256:00d2e0a6c547d7f0e2e7344c19483e7459a2e75fd2062a19b5abfa92df0c9bce",
+      "sourceRepository": "https://github.com/PastureStack/metadata-healthcheck",
+      "sourceCommit": "731e6c5d35a55ba79e2bfd50b456c35ef957a99a",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/metadata-healthcheck",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and HAProxy packages retain their upstream licenses",
+      "reviewedAt": "2026-07-22",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.70.0",
+        "databaseUpdatedAt": "2026-07-22T01:05:55Z",
+        "high": 0,
+        "critical": 0
+      }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.26@sha256:04ee8f438b8c19e49984a5319489b8c97fff7ca90459168699b6f4175f649a9b",
+      "sourceRepository": "https://github.com/PastureStack/ipsec-vxlan-overlay-network",
+      "sourceCommit": "e80db2268c9c0182b3b627e0c185998d9db91524",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ipsec-vxlan-overlay-network",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, strongSwan, CNI, Weave, and other packages retain their upstream licenses and notices",
+      "reviewedAt": "2026-07-23",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.70.0",
+        "databaseUpdatedAt": "2026-07-22T01:05:55Z",
+        "high": 0,
+        "critical": 0
+      }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.6.34@sha256:6a1b0f04c5ea2f8e9aac5b26b3ff950847c6fc9ca3786450072a9ca179e9e67f",
+      "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
+      "sourceCommit": "b4b61856d38a9410319688144ff635868571e35f",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-plugin-manager",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, Docker CLI, and other packages retain their upstream licenses and notices",
+      "reviewedAt": "2026-07-23",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.70.0",
+        "databaseUpdatedAt": "2026-07-22T01:05:55Z",
+        "high": 0,
+        "critical": 0
+      }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/metadata-service:v0.9.11@sha256:00f35785580edc498f202e1d9670fecf913b5cc15f6d268912c57662a8b10723",
+      "sourceRepository": "https://github.com/PastureStack/metadata-service",
+      "sourceCommit": "2096eb100a6c900ab70a952483306965c2278fe9",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/metadata-service",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and other packages retain their upstream licenses and notices",
+      "reviewedAt": "2026-07-23",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.70.0",
+        "databaseUpdatedAt": "2026-07-22T01:05:55Z",
+        "high": 0,
+        "critical": 0
+      }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/internal-dns:v0.17.11@sha256:a67a68e5d370ea01d6f1b81ab7340c0ecc6acfad4ed3efdf298d038c04a00f36",
+      "sourceRepository": "https://github.com/PastureStack/internal-dns",
+      "sourceCommit": "5459f857cb7ead00888e900d77e4dc713107fef1",
+      "sourcePath": "package/linux/amd64/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/internal-dns",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and other packages retain their upstream licenses and notices",
+      "reviewedAt": "2026-07-23",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.70.0",
+        "databaseUpdatedAt": "2026-07-22T01:05:55Z",
+        "high": 0,
+        "critical": 0
+      }
+    }
+  ]
+}

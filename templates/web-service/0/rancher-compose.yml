@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: Web Service
+  version: 1.30.4
+  description: Deploy a digest-pinned NGINX web service.
+  minimum_rancher_version: v1.6.0
+  questions:
+    - variable: PUBLIC_PORT
+      label: Public Port
+      description: TCP port exposed by the host for the web service.
+      type: int
+      required: true
+      default: "8088"
+      min: 1024
+      max: 65535
+
+web:
+  scale: 1
+  start_on_create: true
+  health_check:
+    port: 80
+    interval: 5000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 3000
