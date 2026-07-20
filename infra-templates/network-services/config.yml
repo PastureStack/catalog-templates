@@ -1,6 +1,10 @@
-name: Network Services
-version: v0.2.11
-category: Framework
+# SPDX-License-Identifier: MIT
+name: PastureStack Network Services
+description: Install host networking, metadata, and internal DNS services required by managed workloads.
+version: 0.3.0-rc2
+category: Networking
+maintainer: PastureStack contributors
+license: MIT template; Apache-2.0 images and third-party package licenses apply
+project_url: https://github.com/PastureStack/catalog-templates
 labels:
-  io.rancher.certified: rancher
   io.rancher.orchestration.supported: 'cattle,mesos,swarm,kubernetes'

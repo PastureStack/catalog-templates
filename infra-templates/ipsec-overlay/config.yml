@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: MIT
-name: Metadata Healthcheck
-description: Report metadata-defined workload health through the compatible control API.
-version: v0.3.14
-category: Infrastructure
+name: PastureStack IPsec Overlay
+description: Provide an encrypted host-to-host network for managed workloads.
+version: 0.3.0-rc1
+category: Networking
 maintainer: PastureStack contributors
 license: MIT template; Apache-2.0 image and third-party package licenses apply
-project_url: https://github.com/PastureStack/metadata-healthcheck
+project_url: https://github.com/PastureStack/ipsec-vxlan-overlay-network
 labels:
   io.rancher.orchestration.supported: 'cattle,mesos,swarm,kubernetes'
