@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: MIT
+name: Web Service
+description: Deploy a digest-pinned NGINX web service with a configurable public port.
+version: 1.30.4
+category: Web
+maintainer: PastureStack contributors
+license: MIT template; third-party image licenses apply
+project_url: https://github.com/nginx/docker-nginx/tree/ccdab6c99ae2e2fc53a144dc68d6b8f44163adf2/stable/alpine

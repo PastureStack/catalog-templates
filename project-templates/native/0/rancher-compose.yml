@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack Native
+  version: 0.3.0-rc5
+  minimum_rancher_version: v1.6.26-rc1
