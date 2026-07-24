@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: MIT
+version: '2'
+
+services:
+  secret-volume-driver:
+    image: ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.1.1
+    cap_drop:
+    - ALL
+    cap_add:
+    - SYS_ADMIN
+    - CHOWN
+    - FOWNER
+    read_only: true
+    tmpfs:
+    - /tmp:rw,noexec,nosuid,nodev,size=16m
+    security_opt:
+    - 'apparmor:unconfined'
+    - 'no-new-privileges:true'
+    labels:
+      io.pasturestack.component: secret-volume-driver
+      io.rancher.container.agent.role: environment,agent
+      io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.global: 'true'
+    volumes:
+    - /run/docker/plugins:/run/docker/plugins
+    - /var/lib/pasturestack/volumes:/var/lib/pasturestack/volumes:shared
+    - /var/lib/rancher/etc/ssl/host.key:/var/lib/pasturestack/etc/ssl/host.key:ro
+    cpu_shares: 128
+    mem_limit: 96m
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '2'

@@ -1,8 +1,12 @@
-name: Network Policy Manager
-description: |
-  Manager that applies Rancher network policies.
-version: v0.0.4
+# SPDX-License-Identifier: MIT
+name: PastureStack Network Policy Manager
+description: Enforce metadata-defined network policy on every managed host with independently owned nftables rules.
+version: v0.3.1
 category: Networking
+maintainer: PastureStack contributors
+license: MIT template; Apache-2.0 image and bundled dependency licenses apply
+project_url: https://github.com/PastureStack/network-policy-manager
 labels:
-  io.rancher.certified: rancher
   io.rancher.orchestration.supported: 'cattle'
+  io.pasturestack.catalog.name.zh-tw: 'PastureStack 網路政策管理器'
+  io.pasturestack.catalog.description.zh-tw: '依中繼資料中的網路政策，在每台受管主機套用最小權限的流量控管規則。'

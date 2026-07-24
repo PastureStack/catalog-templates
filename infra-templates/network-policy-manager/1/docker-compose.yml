@@ -1,14 +1,35 @@
+# SPDX-License-Identifier: MIT
 version: '2'
+
 services:
   network-policy-manager:
-    privileged: true
+    image: ghcr.io/pasturestack/network-policy-manager:v0.3.1
+    command:
+      - serve
+      - --poll-interval
+      - 20s
+      - --fail-open-after
+      - 10m
+      - --health-listen
+      - 0.0.0.0:8092
+      - --cleanup-on-exit
     network_mode: host
-    pid: host
-    image: rancher/network-policy-manager:v0.2.4
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_ADMIN
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=8m
+    security_opt:
+      - 'no-new-privileges:true'
     labels:
+      io.pasturestack.component: network-policy-manager
       io.rancher.scheduler.global: 'true'
+    cpu_shares: 128
+    mem_limit: 64m
     logging:
       driver: json-file
       options:
-        max-size: 25m
+        max-size: 10m
         max-file: '2'

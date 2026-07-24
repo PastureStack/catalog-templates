@@ -1,0 +1,69 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack Vault Volume
+  version: v0.2.1
+  description: Deliver response-wrapped, short-lived Vault tokens through host-authenticated read-only volumes.
+  minimum_rancher_version: v1.6.15-rc1
+  labels:
+    io.pasturestack.catalog.question.vault_url.label.zh-tw: 'Vault API 網址'
+    io.pasturestack.catalog.question.vault_url.description.zh-tw: 'Vault API 的 HTTPS 基底網址；隔離網路亦可使用內部 HTTP 端點。'
+    io.pasturestack.catalog.question.vault_role.label.zh-tw: 'Vault 權杖角色'
+    io.pasturestack.catalog.question.vault_role.description.zh-tw: '發行用權杖透過此角色建立短效子權杖。'
+    io.pasturestack.catalog.question.vault_allowed_policies.label.zh-tw: '允許的 Vault 存取政策'
+    io.pasturestack.catalog.question.vault_allowed_policies.description.zh-tw: '工作負載磁碟區可要求的存取政策允許清單，以半形逗號分隔。'
+    io.pasturestack.catalog.question.issuing_token_secret.label.zh-tw: 'Vault 發行用權杖機密資料'
+    io.pasturestack.catalog.question.issuing_token_secret.description.zh-tw: '既有平台機密資料，內容為可續期且權限範圍最小化的 Vault 發行用權杖。'
+  questions:
+  - variable: VAULT_URL
+    label: Vault API URL
+    description: HTTPS Vault API base URL, or a private HTTP endpoint for an isolated network.
+    type: string
+    required: true
+  - variable: VAULT_ROLE
+    label: Vault token role
+    description: Token role used by the issuing token to create short-lived child tokens.
+    type: string
+    required: true
+  - variable: VAULT_ALLOWED_POLICIES
+    label: Allowed Vault policies
+    description: Comma-separated allowlist of policies that workload volumes may request.
+    type: string
+    default: default
+    required: true
+  - variable: ISSUING_TOKEN_SECRET
+    label: Vault issuing-token Secret
+    description: Existing platform Secret containing one renewable, narrowly scoped Vault issuing token.
+    type: secret
+    required: true
+
+vault-secrets-bridge:
+  scale: 1
+  start_on_create: true
+  health_check:
+    request_line: GET /readyz HTTP/1.0
+    port: 8080
+    interval: 10000
+    initializing_timeout: 120000
+    reinitializing_timeout: 120000
+    response_timeout: 3000
+    healthy_threshold: 2
+    unhealthy_threshold: 3
+    strategy: none
+
+vault-volume-driver:
+  storage_driver:
+    name: pasturestack-vault-volume
+    description: Host-authenticated, response-wrapped Vault token volumes
+    scope: local
+    volume_access_mode: singleHostRW
+  start_on_create: true
+  health_check:
+    request_line: GET /readyz HTTP/1.0
+    port: 8094
+    interval: 10000
+    initializing_timeout: 120000
+    reinitializing_timeout: 120000
+    response_timeout: 3000
+    healthy_threshold: 2
+    unhealthy_threshold: 3
+    strategy: none

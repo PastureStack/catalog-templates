@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack NFS Storage
+  version: v0.10.0
+  description: Provide NFS v3 and v4 Docker volumes with safe data-retention defaults.
+  minimum_rancher_version: v1.6.15-rc1
+  questions:
+  - variable: NFS_SERVER
+    label: NFS server
+    description: IP address or DNS name of the default NFS server.
+    type: string
+    required: true
+  - variable: MOUNT_DIR
+    label: Export base directory
+    description: Absolute path of the default exported base directory.
+    type: string
+    required: true
+  - variable: MOUNT_OPTS
+    label: Mount options
+    description: Comma-delimited mount options other than the NFS version.
+    type: string
+    default: proto=tcp
+    required: true
+  - variable: NFS_VERS
+    label: NFS version
+    description: Default NFS protocol version.
+    type: enum
+    default: nfsvers=4
+    required: true
+    options:
+    - nfsvers=4
+    - nfsvers=3
+  - variable: ON_REMOVE
+    label: Data removal policy
+    description: Retain data by default, or explicitly purge the driver's owned volume subdirectory.
+    type: enum
+    default: retain
+    required: true
+    options:
+    - retain
+    - purge
+  - variable: PASTURESTACK_DEBUG
+    label: Enable debug logging
+    description: Enable verbose storage-driver diagnostics.
+    type: boolean
+    default: false
+    required: true
+
+nfs-storage-driver:
+  storage_driver:
+    name: pasturestack-nfs
+    scope: environment
+    volume_access_mode: multiHostRW
