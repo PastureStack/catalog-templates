@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+name: PastureStack Route 53 DNS Sync
+description: Synchronize compatible environment service addresses to an Amazon Route 53 hosted zone.
+version: v0.8.0
+category: External DNS
+maintainer: PastureStack contributors
+license: MIT template; Apache-2.0 image and bundled dependency licenses apply
+project_url: https://github.com/PastureStack/external-dns-sync
+labels:
+  io.rancher.orchestration.supported: 'cattle'
+  io.pasturestack.catalog.name.zh-tw: 'PastureStack Route 53 DNS 紀錄同步'
+  io.pasturestack.catalog.description.zh-tw: '將相容環境的服務位址同步至指定的 Amazon Route 53 託管區域。'
