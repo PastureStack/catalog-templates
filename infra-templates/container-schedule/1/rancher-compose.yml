@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack Container Schedule
+  version: v0.6.0
+  description: Run scheduled start, stop, or restart actions from container labels.
+  minimum_rancher_version: v1.6.15-rc1
+  questions:
+    - variable: ENABLE_METRICS
+      label: Enable the metrics endpoint
+      description: Expose Prometheus job counts on container port 9191.
+      type: boolean
+      default: false
+      required: true
+    - variable: ENABLE_DEBUG
+      label: Enable debug logging
+      description: Write detailed event and scheduling diagnostics.
+      type: boolean
+      default: false
+      required: true
+
+container-schedule:
+  scale: 1
+  start_on_create: true

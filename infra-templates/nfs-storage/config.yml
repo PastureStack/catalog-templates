@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+name: PastureStack NFS Storage
+description: Provide NFS v3 and v4 Docker volumes with safe data-retention defaults.
+version: v0.10.0
+category: Storage
+maintainer: PastureStack contributors
+license: MIT template; Apache-2.0 image and third-party package licenses apply
+project_url: https://github.com/PastureStack/storage-plugins
+labels:
+  io.rancher.orchestration.supported: 'cattle,mesos,swarm'
+  io.pasturestack.catalog.name.zh-tw: 'PastureStack NFS 儲存空間'
+  io.pasturestack.catalog.description.zh-tw: '提供 NFS 第 3 版與第 4 版的 Docker 磁碟區，移除磁碟區時預設保留資料。'
