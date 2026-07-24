@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: MIT
+name: Resource Scheduler
+version: v0.8.15
+category: System
+description: Schedule native workloads from control-plane events and current Metadata state.
+projectURL: https://github.com/PastureStack/resource-scheduler
+labels:
+  io.rancher.orchestration.supported: 'cattle'
+  io.pasturestack.catalog.name.zh-tw: '資源排程器'
+  io.pasturestack.catalog.description.zh-tw: '依控制平面事件與目前的中繼資料狀態，排程原生工作負載。'

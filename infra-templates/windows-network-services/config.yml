@@ -1,6 +1,12 @@
-name: Windows Network Services
-version: v0.2.0
-category: Framework
+# SPDX-License-Identifier: MIT
+name: PastureStack Windows Network Services
+description: Install metadata and internal DNS services for compatible Windows Server 2022 workloads.
+version: v0.3.0-windows-ltsc2022
+category: Networking
+maintainer: PastureStack contributors
+license: MIT template; Apache-2.0 images, Microsoft Nano Server Supplemental License, and bundled dependency licenses apply
+project_url: https://github.com/PastureStack/catalog-templates
 labels:
-  io.rancher.certified: Experimental
   io.rancher.orchestration.supported: 'windows'
+  io.pasturestack.catalog.name.zh-tw: 'PastureStack Windows 網路服務'
+  io.pasturestack.catalog.description.zh-tw: '為相容的 Windows Server 2022 工作負載安裝中繼資料與內部 DNS 服務。'

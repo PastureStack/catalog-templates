@@ -1,0 +1,51 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack Amazon EBS Storage
+  version: v0.10.0
+  description: Attach existing Amazon EBS volumes, with opt-in encrypted volume provisioning.
+  minimum_rancher_version: v1.6.29-rc1
+  questions:
+  - variable: AWS_REGION
+    label: Amazon region
+    description: Optional when the managed hosts can read their region through EC2 IMDSv2.
+    type: string
+    default: ''
+    required: false
+  - variable: AWS_ACCESS_KEY_ID
+    label: AWS access key ID
+    description: Optional when the managed hosts use an IAM instance profile.
+    type: string
+    default: ''
+    required: false
+  - variable: AWS_SECRET_ACCESS_KEY
+    label: AWS secret access key
+    description: Optional when the managed hosts use an IAM instance profile.
+    type: password
+    default: ''
+    required: false
+  - variable: AWS_SESSION_TOKEN
+    label: AWS session token
+    description: Optional token for temporary AWS credentials.
+    type: password
+    default: ''
+    required: false
+  - variable: ALLOW_CLOUD_PROVISIONING
+    label: Allow cloud resource provisioning and deletion
+    description: Keep disabled to use existing EBS volumes only. Enabling this permits encrypted volume creation, formatting, detachment, and deletion.
+    type: boolean
+    default: false
+    required: true
+  - variable: PASTURESTACK_DEBUG
+    label: Enable debug logging
+    description: Enable verbose storage-driver diagnostics.
+    type: boolean
+    default: false
+    required: true
+
+amazon-ebs-storage-driver:
+  storage_driver:
+    name: pasturestack-ebs
+    description: Amazon EBS block storage
+    scope: environment
+    volume_access_mode: singleHostRW
+    start_on_create: true

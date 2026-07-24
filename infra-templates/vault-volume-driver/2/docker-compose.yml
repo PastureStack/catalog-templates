@@ -1,0 +1,81 @@
+# SPDX-License-Identifier: MIT
+version: '2'
+
+services:
+  vault-secrets-bridge:
+    image: ghcr.io/pasturestack/vault-secrets-bridge:v0.1.1
+    read_only: true
+    cap_drop:
+    - ALL
+    tmpfs:
+    - /tmp:rw,noexec,nosuid,nodev,size=16m
+    security_opt:
+    - 'no-new-privileges:true'
+    environment:
+      VAULT_ADDR: '${VAULT_URL}'
+      VAULT_ROLE: '${VAULT_ROLE}'
+      PASTURESTACK_VAULT_ALLOWED_POLICIES: '${VAULT_ALLOWED_POLICIES}'
+      PASTURESTACK_VAULT_ISSUER_TOKEN_FILE: '/run/secrets/{{.Values.ISSUING_TOKEN_SECRET}}'
+    secrets:
+    - "{{.Values.ISSUING_TOKEN_SECRET}}"
+    volumes:
+    - vault-secrets-bridge-state:/var/lib/pasturestack/vault-secrets-bridge
+    labels:
+      io.pasturestack.component: vault-secrets-bridge
+      io.rancher.container.agent.role: environment
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.dns: 'true'
+    cpu_shares: 128
+    mem_limit: 64m
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '2'
+
+  vault-volume-driver:
+    image: ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.0
+    environment:
+      PASTURESTACK_SECRET_PROVIDER: vault
+      PASTURESTACK_SECRET_DRIVER_NAME: pasturestack-vault-volume
+      PASTURESTACK_SECRET_SOCKET: /run/docker/plugins/pasturestack-vault-volume.sock
+      PASTURESTACK_SECRET_VOLUME_ROOT: /var/lib/pasturestack/volumes/vault-volume
+      PASTURESTACK_SECRET_HEALTH_LISTEN: 0.0.0.0:8094
+      PASTURESTACK_VAULT_BRIDGE_URL: http://vault-secrets-bridge:8080
+    cap_drop:
+    - ALL
+    cap_add:
+    - SYS_ADMIN
+    - CHOWN
+    - FOWNER
+    read_only: true
+    tmpfs:
+    - /tmp:rw,noexec,nosuid,nodev,size=16m
+    security_opt:
+    - 'apparmor:unconfined'
+    - 'no-new-privileges:true'
+    links:
+    - vault-secrets-bridge:vault-secrets-bridge
+    labels:
+      io.pasturestack.component: vault-volume-driver
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.dns: 'true'
+    volumes:
+    - /run/docker/plugins:/run/docker/plugins
+    - /var/lib/pasturestack/volumes:/var/lib/pasturestack/volumes:shared
+    - /var/lib/rancher/etc/ssl/host.key:/var/lib/pasturestack/etc/ssl/host.key:ro
+    cpu_shares: 128
+    mem_limit: 96m
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '2'
+
+volumes:
+  vault-secrets-bridge-state:
+    driver: local
+
+secrets:
+  "{{.Values.ISSUING_TOKEN_SECRET}}":
+    external: true
