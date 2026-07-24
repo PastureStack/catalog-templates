@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: MIT -->
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">PastureStack Per-Host Subnet Network</title>
+  <desc id="desc">Two hosts with separate workload subnets connected by a routed link.</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="17" y="24" width="49" height="72" rx="10" fill="#0c8dbd" stroke="#15536b" stroke-width="6"/>
+    <rect x="94" y="24" width="49" height="72" rx="10" fill="#51c878" stroke="#16713b" stroke-width="6"/>
+    <path d="M31 42h21M31 57h21M108 42h21M108 57h21" stroke="#ffffff" stroke-width="6"/>
+    <circle cx="41" cy="80" r="5" fill="#ffffff" stroke="none"/>
+    <circle cx="119" cy="80" r="5" fill="#ffffff" stroke="none"/>
+    <path d="M67 59h26" stroke="#f3b61f" stroke-width="8"/>
+    <path d="M84 49l10 10-10 10M76 69L66 59l10-10" stroke="#a96500" stroke-width="5"/>
+    <path d="M25 119h34M101 119h34" stroke="#15536b" stroke-width="8"/>
+    <circle cx="25" cy="119" r="9" fill="#7b75e8" stroke="#423da0" stroke-width="4"/>
+    <circle cx="59" cy="119" r="9" fill="#7b75e8" stroke="#423da0" stroke-width="4"/>
+    <circle cx="101" cy="119" r="9" fill="#f3b61f" stroke="#a96500" stroke-width="4"/>
+    <circle cx="135" cy="119" r="9" fill="#f3b61f" stroke="#a96500" stroke-width="4"/>
+    <path d="M41 96v23M119 96v23" stroke="#445b69" stroke-width="6"/>
+  </g>
+</svg>

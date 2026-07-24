@@ -1,5 +1,19 @@
+# SPDX-License-Identifier: MIT
 .catalog:
-  name: Network Policy Manager
-  version: v0.0.2
-  minimum_rancher_version: v1.5.0-rc1
-  maximum_rancher_version: v1.6.14
+  name: PastureStack Network Policy Manager
+  version: v0.3.1
+  description: Enforce metadata-defined network policy on every managed host with independently owned nftables rules.
+  minimum_rancher_version: v1.6.26-rc1
+
+network-policy-manager:
+  start_on_create: true
+  health_check:
+    request_line: GET /readyz HTTP/1.0
+    port: 8092
+    interval: 10000
+    initializing_timeout: 120000
+    reinitializing_timeout: 120000
+    response_timeout: 3000
+    healthy_threshold: 2
+    unhealthy_threshold: 3
+    strategy: none

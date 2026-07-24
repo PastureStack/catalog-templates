@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack VXLAN Overlay Network
+  version: 0.3.0-rc9
+  description: Provide an unencrypted UDP VXLAN network across managed hosts.
+  minimum_rancher_version: v1.6.11-rc1
+  questions:
+  - variable: DOCKER_BRIDGE
+    label: Docker bridge
+    description: Host bridge used for managed workload traffic.
+    type: string
+    default: docker0
+    required: true
+  - variable: MTU
+    label: Network MTU
+    description: Match the host network MTU; common values are 1460 for GCE and 1500 for Ethernet.
+    type: int
+    default: 1500
+    required: true
+  - variable: PASTURESTACK_DEBUG
+    label: Enable debug logs
+    description: Enable verbose diagnostic logging for the VXLAN components.
+    type: boolean
+    default: 'false'
+    required: true
+  - variable: HOST_PORTS
+    label: Enable host ports
+    description: Allow managed workloads to publish ports on their hosts.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: PASTURESTACK_HAIRPIN_MODE
+    label: Enable hairpin mode
+    description: Hairpin mode and promiscuous mode must not both be enabled.
+    type: boolean
+    default: 'false'
+    required: true
+  - variable: PASTURESTACK_PROMISCUOUS_MODE
+    label: Enable promiscuous mode
+    description: Promiscuous mode and hairpin mode must not both be enabled.
+    type: boolean
+    default: 'true'
+    required: true
