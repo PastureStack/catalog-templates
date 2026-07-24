@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: MIT
+version: '2'
+services:
+  amazon-ebs-storage-driver:
+    image: ghcr.io/pasturestack/ebs-storage-driver:v0.10.0
+    privileged: true
+    network_mode: host
+    environment:
+      ALLOW_CLOUD_PROVISIONING: '${ALLOW_CLOUD_PROVISIONING}'
+      AWS_ACCESS_KEY_ID: '${AWS_ACCESS_KEY_ID}'
+      AWS_SECRET_ACCESS_KEY: '${AWS_SECRET_ACCESS_KEY}'
+      AWS_SESSION_TOKEN: '${AWS_SESSION_TOKEN}'
+      AWS_REGION: '${AWS_REGION}'
+      PASTURESTACK_DEBUG: '${PASTURESTACK_DEBUG}'
+    labels:
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent.role: environment
+      io.rancher.container.dns: 'true'
+    volumes:
+    - /run:/run
+    - /var/run:/var/run
+    - /dev:/host/dev
+    - /var/lib/rancher/volumes:/var/lib/pasturestack/volumes:shared
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'

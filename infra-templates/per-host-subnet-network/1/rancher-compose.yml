@@ -1,0 +1,67 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack Per-Host Subnet Network
+  version: 0.3.0-rc8
+  description: Assign a distinct workload subnet to each host and maintain host-gateway routes between hosts.
+  minimum_rancher_version: v1.6.26-rc1
+  questions:
+  - variable: BRIDGE
+    label: Workload bridge
+    description: Host bridge used for each host's managed workload subnet.
+    type: string
+    default: docker0
+    required: true
+  - variable: MTU
+    label: Network MTU
+    description: MTU supported end to end between all participating hosts.
+    type: int
+    default: 1500
+    required: true
+  - variable: ENABLE_ROUTE_UPDATE
+    label: Maintain host routes
+    description: Maintain marked host-gateway routes for the other hosts' workload subnets.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: HOST_NAT
+    label: Enable host NAT
+    description: Apply host NAT to traffic leaving each host-specific workload subnet.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: HOST_PORTS
+    label: Enable host ports
+    description: Allow managed workloads to publish ports on their hosts.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: HAIRPIN_MODE
+    label: Enable hairpin mode
+    description: Hairpin mode and promiscuous mode must not both be enabled.
+    type: boolean
+    default: 'false'
+    required: true
+  - variable: PROMISCUOUS_MODE
+    label: Enable promiscuous mode
+    description: Promiscuous mode and hairpin mode must not both be enabled.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: METADATA_STARTUP_TIMEOUT
+    label: Metadata startup timeout
+    description: Maximum time to wait for the metadata service before the controller exits.
+    type: string
+    default: 2m
+    required: true
+  - variable: WATCH_INTERVAL
+    label: Metadata watch interval
+    description: Retry and long-poll interval used while reconciling host routes.
+    type: string
+    default: 5s
+    required: true
+  - variable: PASTURESTACK_DEBUG
+    label: Enable debug logs
+    description: Enable verbose diagnostics for subnet, route, and CNI operations.
+    type: boolean
+    default: 'false'
+    required: true
