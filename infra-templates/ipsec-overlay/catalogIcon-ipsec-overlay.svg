@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: MIT -->
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">PastureStack IPsec overlay</title>
+  <desc id="desc">A shield protecting an encrypted connection between two network nodes.</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M28 119c13-25 31-36 52-36s39 11 52 36" stroke="#0c8dbd" stroke-width="8"/>
+    <path d="M35 126h90" stroke="#72b84a" stroke-width="8"/>
+    <circle cx="31" cy="126" r="13" fill="#0c8dbd" stroke="#ffffff" stroke-width="4"/>
+    <circle cx="129" cy="126" r="13" fill="#72b84a" stroke="#ffffff" stroke-width="4"/>
+    <path d="M80 17l34 13v28c0 24-13 42-34 53-21-11-34-29-34-53V30l34-13z" fill="#ffffff" stroke="#15536b" stroke-width="7"/>
+    <path d="M64 56h32v28H64z" fill="#0c8dbd" stroke="#15536b" stroke-width="5"/>
+    <path d="M70 56v-8a10 10 0 0120 0v8" stroke="#15536b" stroke-width="6"/>
+    <circle cx="80" cy="69" r="4" fill="#ffffff" stroke="none"/>
+  </g>
+</svg>
