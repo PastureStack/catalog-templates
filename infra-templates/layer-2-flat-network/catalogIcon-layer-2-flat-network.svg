@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: MIT -->
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">PastureStack Layer 2 Flat Network</title>
+  <desc id="desc">Three workload nodes connected directly to a shared network bridge.</desc>
+  <defs>
+    <linearGradient id="bridge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#19b7a6"/>
+      <stop offset="1" stop-color="#087ea4"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M28 88h104" stroke="#15536b" stroke-width="10"/>
+    <path d="M43 88V55M80 88V55M117 88V55" stroke="#087ea4" stroke-width="8"/>
+    <rect x="19" y="84" width="122" height="31" rx="13" fill="url(#bridge)" stroke="#ffffff" stroke-width="6"/>
+    <circle cx="43" cy="42" r="17" fill="#f3b61f" stroke="#a96500" stroke-width="5"/>
+    <circle cx="80" cy="42" r="17" fill="#51c878" stroke="#16713b" stroke-width="5"/>
+    <circle cx="117" cy="42" r="17" fill="#7b75e8" stroke="#423da0" stroke-width="5"/>
+    <path d="M42 99h76" stroke="#ffffff" stroke-width="6"/>
+    <circle cx="43" cy="99" r="5" fill="#ffffff" stroke="none"/>
+    <circle cx="80" cy="99" r="5" fill="#ffffff" stroke="none"/>
+    <circle cx="117" cy="99" r="5" fill="#ffffff" stroke="none"/>
+  </g>
+</svg>
