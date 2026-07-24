@@ -1,6 +1,12 @@
-name: Network Diagnostics
-version: 0.0.2
-category: Networking
+# SPDX-License-Identifier: MIT
+name: PastureStack Network Diagnostics
+description: Collect bounded, pseudonymous host-network health summaries and retain operator-requested diagnostic bundles.
+version: v0.2.0
+category: Monitoring
+maintainer: PastureStack contributors
+license: MIT template; image source and bundled dependency licenses apply
+project_url: https://github.com/PastureStack/network-diagnostics-service
 labels:
-  io.rancher.certified: rancher
-  io.rancher.orchestration.supported: 'cattle,kubernetes'
+  io.rancher.orchestration.supported: 'cattle'
+  io.pasturestack.catalog.name.zh-tw: 'PastureStack 網路診斷'
+  io.pasturestack.catalog.description.zh-tw: '蒐集經過界線控管與去識別化處理的主機網路健康摘要，並保留由管理者建立的診斷封存檔。'

@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+name: PastureStack Secret Volume
+description: Deliver approved encrypted secrets to workloads through isolated in-memory volumes.
+version: v0.1.0
+category: Storage
+maintainer: PastureStack contributors
+license: MIT template; Apache-2.0 image and bundled dependency licenses apply
+project_url: https://github.com/PastureStack/secrets-flexvolume-plugin
+labels:
+  io.rancher.orchestration.supported: 'cattle'
+  io.pasturestack.catalog.name.zh-tw: 'PastureStack 機密資料磁碟區'
+  io.pasturestack.catalog.description.zh-tw: '將控制平面核准的加密機密資料，以唯讀的記憶體磁碟區安全提供給工作負載。'
