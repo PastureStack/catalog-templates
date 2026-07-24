@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: MIT -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">PastureStack System Image Preloader</title>
+  <desc id="desc">A download arrow carrying a container image into a stack of colored layers.</desc>
+  <defs>
+    <linearGradient id="cloud" x1="48" y1="35" x2="202" y2="147" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00a7b5"/>
+      <stop offset="1" stop-color="#0878b8"/>
+    </linearGradient>
+    <linearGradient id="stack" x1="58" y1="151" x2="204" y2="222" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#72b84a"/>
+      <stop offset="1" stop-color="#f5a623"/>
+    </linearGradient>
+  </defs>
+  <path d="M74 143h112c28 0 50-20 50-46 0-25-20-45-46-46-10-22-32-36-58-36-34 0-62 25-66 57-25 3-44 21-44 43 0 16 9 29 23 37 8 4 18-1 18-10 0-5-3-9-7-12-7-4-11-9-11-15 0-11 11-21 25-21h18v-12c0-24 20-43 44-43 19 0 36 12 42 30l3 9h10c15 0 27 11 27 25 0 14-12 25-28 25H74c-7 0-13 6-13 13s6 12 13 12Z" fill="url(#cloud)"/>
+  <path d="M128 64v75" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="17"/>
+  <path d="m94 111 34 34 34-34" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="17"/>
+  <path d="m52 166 76-33 76 33-76 34-76-34Z" fill="url(#stack)" stroke="#fff" stroke-linejoin="round" stroke-width="7"/>
+  <path d="m52 166v28l76 35v-29l-76-34Zm152 0v28l-76 35v-29l76-34Z" fill="#0878b8" stroke="#fff" stroke-linejoin="round" stroke-width="7"/>
+  <path d="m77 178 51 23 51-23" fill="none" stroke="#dff8fb" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"/>
+</svg>

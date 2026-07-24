@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+name: PastureStack Amazon EFS Storage
+description: Mount existing Amazon EFS filesystems, with controlled opt-in provisioning.
+version: v0.10.0
+category: Storage
+maintainer: PastureStack contributors
+license: MIT template; Apache-2.0 image and third-party package licenses apply
+project_url: https://github.com/PastureStack/storage-plugins
+labels:
+  io.rancher.orchestration.supported: 'cattle,mesos,swarm'
+  io.pasturestack.catalog.name.zh-tw: 'PastureStack Amazon EFS 儲存空間'
+  io.pasturestack.catalog.description.zh-tw: '掛載既有的 Amazon EFS 檔案系統；如需建立檔案系統與掛載目標，必須明確啟用雲端資源配置。'

@@ -1,8 +1,12 @@
-name: Healthcheck Service
-description: Rancher healthcheck service
-version: v0.3.8
-category: Framework
-projectURL: https://github.com/rancher/healthcheck
+# SPDX-License-Identifier: MIT
+name: Metadata Healthcheck
+description: Report metadata-defined workload health through the compatible control API.
+version: v0.3.15
+category: Infrastructure
+maintainer: PastureStack contributors
+license: MIT template; Apache-2.0 image and third-party package licenses apply
+project_url: https://github.com/PastureStack/metadata-healthcheck
 labels:
-  io.rancher.certified: rancher
   io.rancher.orchestration.supported: 'cattle,mesos,swarm,kubernetes'
+  io.pasturestack.catalog.name.zh-tw: '中繼資料健康檢查'
+  io.pasturestack.catalog.description.zh-tw: '依據中繼資料定義檢查工作負載健康狀態，並透過相容控制 API 回報結果。'

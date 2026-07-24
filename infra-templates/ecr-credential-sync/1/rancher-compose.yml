@@ -1,0 +1,126 @@
+# SPDX-License-Identifier: MIT
+version: '2'
+.catalog:
+  name: PastureStack Amazon ECR Credential Sync
+  version: v3.1.0
+  description: Refresh short-lived Amazon Elastic Container Registry credentials in a compatible environment.
+  minimum_rancher_version: v1.6.13-rc1
+  questions:
+    - variable: AWS_REGION
+      label: AWS region
+      description: AWS region that contains the Amazon ECR registry.
+      type: string
+      default: us-east-1
+      required: true
+    - variable: AWS_ACCESS_KEY_ID
+      label: AWS access key ID
+      description: Optional when an IAM role, shared profile, or EC2 instance identity supplies credentials.
+      type: string
+      default: ''
+      required: false
+    - variable: AWS_SECRET_ACCESS_KEY
+      label: AWS secret access key
+      description: Secret paired with the AWS access key ID.
+      type: password
+      default: ''
+      required: false
+    - variable: AWS_SESSION_TOKEN
+      label: AWS session token
+      description: Optional token for temporary AWS credentials.
+      type: password
+      default: ''
+      required: false
+    - variable: AWS_ROLE_ARN
+      label: AWS IAM role ARN
+      description: Optional IAM role to assume before requesting Amazon ECR authorization tokens.
+      type: string
+      default: ''
+      required: false
+    - variable: AWS_ECR_REGISTRY_IDS
+      label: AWS account IDs
+      description: Optional comma-separated list of 12-digit AWS account IDs; blank requests the default registry.
+      type: string
+      default: ''
+      required: false
+    - variable: AUTO_CREATE
+      label: Create missing registry
+      description: Create a registry and credential record when no matching registry exists.
+      type: boolean
+      default: false
+      required: true
+    - variable: USE_SHARED_AWS_PROFILE
+      label: Mount a shared AWS profile
+      description: Mount a host directory containing AWS credentials and configuration files.
+      type: boolean
+      default: false
+      required: true
+    - variable: AWS_PROFILE_DIRECTORY
+      label: Shared AWS profile directory
+      description: Absolute host path containing the AWS credentials and configuration files.
+      type: string
+      default: /root/.aws
+      required: true
+    - variable: AWS_PROFILE
+      label: AWS profile name
+      description: Optional profile name from the mounted shared AWS configuration.
+      type: string
+      default: ''
+      required: false
+    - variable: REGISTRY_ENVIRONMENT
+      label: Registry environment
+      description: Synchronize the current environment or another compatible environment.
+      type: enum
+      default: current
+      required: true
+      options:
+        - current
+        - other
+    - variable: PLATFORM_URL
+      label: Other environment API URL
+      description: Required only when synchronizing another environment; use its environment-scoped API endpoint.
+      type: string
+      default: ''
+      required: false
+    - variable: PLATFORM_ACCESS_KEY
+      label: Other environment API access key
+      description: Required only when synchronizing another environment; use an environment-scoped access key.
+      type: password
+      default: ''
+      required: false
+    - variable: PLATFORM_SECRET_KEY
+      label: Other environment API secret key
+      description: Required only when synchronizing another environment; use the matching environment-scoped secret key.
+      type: password
+      default: ''
+      required: false
+    - variable: AWS_ECR_ENDPOINT_URL
+      label: Alternate ECR API endpoint
+      description: Optional HTTP(S) endpoint for an AWS-compatible ECR API or isolated validation.
+      type: string
+      default: ''
+      required: false
+    - variable: LOG_LEVEL
+      label: Log level
+      description: Runtime log detail.
+      type: enum
+      default: info
+      required: true
+      options:
+        - error
+        - warn
+        - info
+        - debug
+
+ecr-credential-sync:
+  scale: 1
+  start_on_create: true
+  health_check:
+    request_line: GET /ping HTTP/1.0
+    port: 8080
+    interval: 10000
+    initializing_timeout: 60000
+    reinitializing_timeout: 60000
+    response_timeout: 3000
+    healthy_threshold: 2
+    unhealthy_threshold: 3
+    strategy: none

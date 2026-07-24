@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title description">
+  <title id="title">PastureStack Amazon EBS Storage</title>
+  <desc id="description">An encrypted block volume attached to a managed host</desc>
+  <defs>
+    <linearGradient id="disk" x1="54" y1="44" x2="190" y2="205" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14b8a6"/>
+      <stop offset="1" stop-color="#0878b8"/>
+    </linearGradient>
+    <linearGradient id="lock" x1="145" y1="125" x2="213" y2="210" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f9b233"/>
+      <stop offset="1" stop-color="#ee6c4d"/>
+    </linearGradient>
+  </defs>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M42 67c0-18 38-32 86-32s86 14 86 32v97c0 19-38 34-86 34s-86-15-86-34z" fill="url(#disk)" stroke="#fff" stroke-width="8"/>
+    <ellipse cx="128" cy="67" rx="86" ry="32" fill="#35c7c3" stroke="#fff" stroke-width="8"/>
+    <path d="M42 110c0 19 38 34 86 34s86-15 86-34" fill="none" stroke="#fff" stroke-width="8" opacity=".9"/>
+    <path d="M42 151c0 19 38 34 86 34s86-15 86-34" fill="none" stroke="#fff" stroke-width="8" opacity=".9"/>
+    <rect x="139" y="148" width="76" height="67" rx="16" fill="url(#lock)" stroke="#fff" stroke-width="8"/>
+    <path d="M157 148v-13c0-17 9-28 20-28s20 11 20 28v13" fill="none" stroke="#fff" stroke-width="10"/>
+    <circle cx="177" cy="178" r="8" fill="#fff"/>
+    <path d="M177 186v12" fill="none" stroke="#fff" stroke-width="7"/>
+  </g>
+</svg>

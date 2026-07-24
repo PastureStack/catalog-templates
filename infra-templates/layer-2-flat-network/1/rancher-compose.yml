@@ -1,0 +1,73 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack Layer 2 Flat Network
+  version: 0.3.0-rc8
+  description: Connect managed workloads directly to a shared Layer 2 subnet through a host bridge.
+  minimum_rancher_version: v1.6.26-rc1
+  questions:
+  - variable: LAYER_2_BRIDGE
+    label: Layer 2 bridge
+    description: Existing or automatically configured host bridge used by the shared Layer 2 network.
+    type: string
+    default: flatbr0
+    required: true
+  - variable: FLAT_INTERFACE
+    label: Physical interface
+    description: Physical host interface to attach to the bridge only when automatic bridge setup is enabled.
+    type: string
+    default: eth0
+    required: true
+  - variable: AUTO_SETUP_LAYER_2_BRIDGE
+    label: Configure the bridge automatically
+    description: Move the physical interface address onto the Layer 2 bridge. Verify console access before enabling this option.
+    type: boolean
+    default: 'false'
+    required: true
+  - variable: SUBNET
+    label: Shared subnet
+    description: IPv4 subnet shared by the hosts, bridge, gateway, and managed workloads.
+    type: string
+    default: 192.0.2.0/24
+    required: true
+  - variable: START_ADDRESS
+    label: First workload address
+    description: First IPv4 address that the control plane may assign to a managed workload.
+    type: string
+    default: 192.0.2.100
+    required: true
+  - variable: END_ADDRESS
+    label: Last workload address
+    description: Last IPv4 address that the control plane may assign to a managed workload.
+    type: string
+    default: 192.0.2.199
+    required: true
+  - variable: GATEWAY
+    label: Default gateway
+    description: IPv4 gateway for managed workloads on the shared subnet.
+    type: string
+    default: 192.0.2.1
+    required: true
+  - variable: MTU
+    label: Network MTU
+    description: MTU supported end to end by the physical Layer 2 network.
+    type: int
+    default: 1500
+    required: true
+  - variable: HOST_PORTS
+    label: Enable host ports
+    description: Allow managed workloads to publish ports on their hosts.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: PASTURESTACK_METADATA_ADDRESS
+    label: Metadata address
+    description: Link-local IPv4 address of the compatible metadata service.
+    type: string
+    default: 169.254.169.250
+    required: true
+  - variable: PASTURESTACK_DEBUG
+    label: Enable debug logs
+    description: Enable verbose diagnostics for bridge setup and CNI operations.
+    type: boolean
+    default: 'false'
+    required: true
