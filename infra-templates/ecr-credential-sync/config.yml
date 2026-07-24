@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+name: PastureStack Amazon ECR Credential Sync
+description: Refresh short-lived Amazon Elastic Container Registry credentials in a compatible environment.
+version: v3.1.0
+category: Registry
+maintainer: PastureStack contributors
+license: MIT template; Apache-2.0 image and bundled dependency licenses apply
+project_url: https://github.com/PastureStack/ecr-credential-sync
+labels:
+  io.rancher.orchestration.supported: 'cattle'
+  io.pasturestack.catalog.name.zh-tw: 'PastureStack Amazon ECR 登入資訊同步'
+  io.pasturestack.catalog.description.zh-tw: '定期更新 Amazon Elastic Container Registry 的短效登入資訊，並同步至目前或指定的環境。'
