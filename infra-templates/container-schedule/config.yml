@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+name: PastureStack Container Schedule
+description: Run scheduled start, stop, or restart actions from container labels.
+version: v0.6.0
+category: System
+maintainer: PastureStack contributors
+license: MIT template; Apache-2.0 image and bundled dependency licenses apply
+project_url: https://github.com/PastureStack/container-cron
+labels:
+  io.rancher.orchestration.supported: 'cattle'
+  io.pasturestack.catalog.name.zh-tw: 'PastureStack 容器定時排程'
+  io.pasturestack.catalog.description.zh-tw: '依容器標籤中的 Cron 表達式，定時啟動、停止或重新啟動容器。'

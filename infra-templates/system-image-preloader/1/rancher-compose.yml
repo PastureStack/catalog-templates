@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: MIT
+version: '2'
+.catalog:
+  name: PastureStack System Image Preloader
+  version: v0.3.0
+  description: Preload the container images required by compatible infrastructure stacks.
+  minimum_rancher_version: v1.6.15-rc1
+  questions:
+    - variable: CHECK_CPU_USAGE
+      label: Check CPU usage before pulling
+      description: Wait while host CPU usage is above the configured limit.
+      type: boolean
+      default: true
+      required: true
+    - variable: CPU_USAGE_MAX
+      label: Maximum CPU usage
+      description: Highest host CPU usage percentage accepted before a pull.
+      type: int
+      default: 75
+      required: true
+    - variable: CPU_USAGE_SLEEP
+      label: CPU retry delay
+      description: Seconds to wait between CPU usage checks.
+      type: int
+      default: 30
+      required: true
+    - variable: CPU_WAIT_MAX_ATTEMPTS
+      label: Maximum CPU checks
+      description: Stop with an error after this many CPU usage checks.
+      type: int
+      default: 60
+      required: true
+    - variable: IMAGE_PULL_MAX_ATTEMPTS
+      label: Maximum image pull attempts
+      description: Stop with an error after this many failed pulls per image.
+      type: int
+      default: 5
+      required: true
+    - variable: IMAGE_PULL_RETRY_DELAY_SECONDS
+      label: Image pull retry delay
+      description: Seconds to wait after a failed image pull.
+      type: int
+      default: 10
+      required: true
+    - variable: MOUNT_DOCKER_CONFIG
+      label: Mount a Docker client configuration
+      description: Read private-registry credentials from the selected host file.
+      type: boolean
+      default: false
+      required: true
+    - variable: DOCKER_CONFIG_LOCATION
+      label: Docker client configuration path
+      description: Absolute host path of the Docker client config.json file.
+      type: string
+      default: /root/.docker/config.json
+      required: true
+    - variable: PRIVILEGED
+      label: Run in privileged mode
+      description: Enable only when the host security policy requires it.
+      type: boolean
+      default: false
+      required: true
+    - variable: RANDOM_SLEEP
+      label: Stagger image pulls between hosts
+      description: Add a metadata-derived random delay between image pulls.
+      type: boolean
+      default: false
+      required: true
+    - variable: PLATFORM_AGENT_IMAGE
+      label: Additional agent image
+      description: Optional semantic image tag to preload after infrastructure images.
+      type: string
+      default: ''
+      required: false
+    - variable: PLATFORM_VERSION
+      label: Compatible platform version
+      description: Version used when selecting compatible Catalog template revisions.
+      type: string
+      default: v1.6.282
+      required: true
+    - variable: PLATFORM_TLS_VERIFY
+      label: Verify platform TLS certificates
+      description: Require a trusted certificate for compatibility API requests.
+      type: boolean
+      default: false
+      required: true
+
+system-image-preloader:
+  start_on_create: true
