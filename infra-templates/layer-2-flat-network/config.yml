@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+name: Layer 2 Flat Network
+description: Connect managed workloads directly to a shared Layer 2 subnet through a host bridge.
+version: 0.3.0-rc8-pasturestack.1
+category: Networking
+maintainer: PastureStack contributors
+license: MIT template; Apache-2.0 image and bundled component licenses apply
+project_url: https://github.com/PastureStack/ipsec-vxlan-overlay-network
+labels:
+  io.pasturestack.catalog.origin: upstream-first-party
+  io.pasturestack.catalog.origin-template: l2-flat
+  io.pasturestack.catalog.origin-status: first-party
+  io.rancher.orchestration.supported: cattle
+  io.pasturestack.catalog.name.zh-tw: '第 2 層平面網路'
+  io.pasturestack.catalog.description.zh-tw: '透過主機網橋，將受管理的工作負載直接連接到共用的第 2 層子網路。'

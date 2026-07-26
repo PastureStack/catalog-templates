@@ -1,0 +1,159 @@
+# SPDX-License-Identifier: MIT
+version: '2'
+.catalog:
+  name: PastureStack Amazon ECR Credential Sync
+  version: v3.1.0-pasturestack.1
+  description: Refresh short-lived Amazon Elastic Container Registry credentials in a compatible environment.
+  minimum_rancher_version: v1.6.13-rc1
+  labels:
+    io.pasturestack.catalog.question.aws_region.label.zh-tw: 'AWS 區域'
+    io.pasturestack.catalog.question.aws_region.description.zh-tw: 'Amazon ECR 登錄所在的 AWS 區域。'
+    io.pasturestack.catalog.question.aws_access_key_id.label.zh-tw: 'AWS 存取金鑰識別碼'
+    io.pasturestack.catalog.question.aws_access_key_id.description.zh-tw: '由 IAM 角色、共用設定檔或 EC2 執行個體身分提供登入資訊時可留空。'
+    io.pasturestack.catalog.question.aws_secret_access_key.label.zh-tw: 'AWS 私密存取金鑰'
+    io.pasturestack.catalog.question.aws_secret_access_key.description.zh-tw: '與 AWS 存取金鑰識別碼配對的私密金鑰。'
+    io.pasturestack.catalog.question.aws_session_token.label.zh-tw: 'AWS 工作階段權杖'
+    io.pasturestack.catalog.question.aws_session_token.description.zh-tw: '使用 AWS 臨時登入資訊時提供的選用權杖。'
+    io.pasturestack.catalog.question.aws_role_arn.label.zh-tw: 'AWS IAM 角色 ARN'
+    io.pasturestack.catalog.question.aws_role_arn.description.zh-tw: '要求 Amazon ECR 授權權杖前要擔任的選用 IAM 角色。'
+    io.pasturestack.catalog.question.aws_ecr_registry_ids.label.zh-tw: 'AWS 帳戶識別碼'
+    io.pasturestack.catalog.question.aws_ecr_registry_ids.description.zh-tw: '要同步的 12 位數 AWS 帳戶識別碼，以半形逗號分隔；留空時使用預設登錄。'
+    io.pasturestack.catalog.question.auto_create.label.zh-tw: '建立缺少的登錄'
+    io.pasturestack.catalog.question.auto_create.description.zh-tw: '找不到相符登錄時，自動建立登錄與登入資訊紀錄。'
+    io.pasturestack.catalog.question.use_shared_aws_profile.label.zh-tw: '掛載共用 AWS 設定檔'
+    io.pasturestack.catalog.question.use_shared_aws_profile.description.zh-tw: '掛載含有 AWS 登入資訊及設定檔的主機目錄。'
+    io.pasturestack.catalog.question.aws_profile_directory.label.zh-tw: '共用 AWS 設定檔目錄'
+    io.pasturestack.catalog.question.aws_profile_directory.description.zh-tw: '含有 AWS 登入資訊及設定檔的主機絕對路徑。'
+    io.pasturestack.catalog.question.aws_profile.label.zh-tw: 'AWS 設定檔名稱'
+    io.pasturestack.catalog.question.aws_profile.description.zh-tw: '掛載之共用 AWS 設定中的選用設定檔名稱。'
+    io.pasturestack.catalog.question.registry_environment.label.zh-tw: '登錄所在環境'
+    io.pasturestack.catalog.question.registry_environment.description.zh-tw: '選擇同步目前環境或另一個相容環境。'
+    io.pasturestack.catalog.question.platform_url.label.zh-tw: '其他環境 API 網址'
+    io.pasturestack.catalog.question.platform_url.description.zh-tw: '只有同步其他環境時才需要；請使用該環境範圍的 API 端點。'
+    io.pasturestack.catalog.question.platform_access_key.label.zh-tw: '其他環境 API 存取金鑰'
+    io.pasturestack.catalog.question.platform_access_key.description.zh-tw: '只有同步其他環境時才需要；請使用該環境範圍的存取金鑰。'
+    io.pasturestack.catalog.question.platform_secret_key.label.zh-tw: '其他環境 API 私密金鑰'
+    io.pasturestack.catalog.question.platform_secret_key.description.zh-tw: '只有同步其他環境時才需要；請使用配對且限於該環境的私密金鑰。'
+    io.pasturestack.catalog.question.aws_ecr_endpoint_url.label.zh-tw: '替代 ECR API 端點'
+    io.pasturestack.catalog.question.aws_ecr_endpoint_url.description.zh-tw: 'AWS 相容 ECR API 或隔離驗證環境使用的選用 HTTP(S) 端點。'
+    io.pasturestack.catalog.question.log_level.label.zh-tw: '日誌詳細程度'
+    io.pasturestack.catalog.question.log_level.description.zh-tw: '服務執行期間要記錄的詳細程度。'
+  questions:
+    - variable: AWS_REGION
+      label: AWS region
+      description: AWS region that contains the Amazon ECR registry.
+      type: string
+      default: us-east-1
+      required: true
+    - variable: AWS_ACCESS_KEY_ID
+      label: AWS access key ID
+      description: Optional when an IAM role, shared profile, or EC2 instance identity supplies credentials.
+      type: string
+      default: ''
+      required: false
+    - variable: AWS_SECRET_ACCESS_KEY
+      label: AWS secret access key
+      description: Secret paired with the AWS access key ID.
+      type: password
+      default: ''
+      required: false
+    - variable: AWS_SESSION_TOKEN
+      label: AWS session token
+      description: Optional token for temporary AWS credentials.
+      type: password
+      default: ''
+      required: false
+    - variable: AWS_ROLE_ARN
+      label: AWS IAM role ARN
+      description: Optional IAM role to assume before requesting Amazon ECR authorization tokens.
+      type: string
+      default: ''
+      required: false
+    - variable: AWS_ECR_REGISTRY_IDS
+      label: AWS account IDs
+      description: Optional comma-separated list of 12-digit AWS account IDs; blank requests the default registry.
+      type: string
+      default: ''
+      required: false
+    - variable: AUTO_CREATE
+      label: Create missing registry
+      description: Create a registry and credential record when no matching registry exists.
+      type: boolean
+      default: false
+      required: true
+    - variable: USE_SHARED_AWS_PROFILE
+      label: Mount a shared AWS profile
+      description: Mount a host directory containing AWS credentials and configuration files.
+      type: boolean
+      default: false
+      required: true
+    - variable: AWS_PROFILE_DIRECTORY
+      label: Shared AWS profile directory
+      description: Absolute host path containing the AWS credentials and configuration files.
+      type: string
+      default: /root/.aws
+      required: true
+    - variable: AWS_PROFILE
+      label: AWS profile name
+      description: Optional profile name from the mounted shared AWS configuration.
+      type: string
+      default: ''
+      required: false
+    - variable: REGISTRY_ENVIRONMENT
+      label: Registry environment
+      description: Synchronize the current environment or another compatible environment.
+      type: enum
+      default: current
+      required: true
+      options:
+        - current
+        - other
+    - variable: PLATFORM_URL
+      label: Other environment API URL
+      description: Required only when synchronizing another environment; use its environment-scoped API endpoint.
+      type: string
+      default: ''
+      required: false
+    - variable: PLATFORM_ACCESS_KEY
+      label: Other environment API access key
+      description: Required only when synchronizing another environment; use an environment-scoped access key.
+      type: password
+      default: ''
+      required: false
+    - variable: PLATFORM_SECRET_KEY
+      label: Other environment API secret key
+      description: Required only when synchronizing another environment; use the matching environment-scoped secret key.
+      type: password
+      default: ''
+      required: false
+    - variable: AWS_ECR_ENDPOINT_URL
+      label: Alternate ECR API endpoint
+      description: Optional HTTP(S) endpoint for an AWS-compatible ECR API or isolated validation.
+      type: string
+      default: ''
+      required: false
+    - variable: LOG_LEVEL
+      label: Log level
+      description: Runtime log detail.
+      type: enum
+      default: info
+      required: true
+      options:
+        - error
+        - warn
+        - info
+        - debug
+
+ecr-credential-sync:
+  scale: 1
+  start_on_create: true
+  health_check:
+    request_line: GET /ping HTTP/1.0
+    port: 8080
+    interval: 10000
+    initializing_timeout: 60000
+    reinitializing_timeout: 60000
+    response_timeout: 3000
+    healthy_threshold: 2
+    unhealthy_threshold: 3
+    strategy: none

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: MIT -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">PastureStack Resource Scheduler</title>
+  <defs>
+    <linearGradient id="g" x1="18" y1="16" x2="108" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16a6b6"/>
+      <stop offset="1" stop-color="#2767c5"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="10" width="108" height="108" rx="25" fill="url(#g)"/>
+  <path d="M37 41h54M37 64h34M37 87h21" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="92" cy="64" r="16" fill="#fff"/>
+  <path d="M92 54v11l7 5" fill="none" stroke="#2767c5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

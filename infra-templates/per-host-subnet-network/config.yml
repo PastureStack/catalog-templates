@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+name: Per-Host Subnet Network
+description: Assign a distinct workload subnet to each host and maintain host-gateway routes between hosts.
+version: 0.3.0-rc8-pasturestack.1
+category: Networking
+maintainer: PastureStack contributors
+license: MIT template; Apache-2.0 image and bundled component licenses apply
+project_url: https://github.com/PastureStack/per-host-subnet
+labels:
+  io.pasturestack.catalog.origin: upstream-first-party
+  io.pasturestack.catalog.origin-template: per-host-subnet
+  io.pasturestack.catalog.origin-status: supported
+  io.rancher.orchestration.supported: cattle
+  io.pasturestack.catalog.name.zh-tw: '每台主機獨立子網路'
+  io.pasturestack.catalog.description.zh-tw: '為每台主機配置獨立的工作負載子網路，並維護主機間的閘道路由。'

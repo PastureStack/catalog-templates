@@ -1,0 +1,88 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack Per-Host Subnet Network
+  version: 0.3.0-rc8-pasturestack.1
+  description: Assign a distinct workload subnet to each host and maintain host-gateway routes between hosts.
+  minimum_rancher_version: v1.6.26-rc1
+  labels:
+    io.pasturestack.catalog.question.bridge.label.zh-tw: '工作負載網橋'
+    io.pasturestack.catalog.question.bridge.description.zh-tw: '每台主機的受管工作負載子網路使用的主機網橋。'
+    io.pasturestack.catalog.question.mtu.label.zh-tw: '網路 MTU'
+    io.pasturestack.catalog.question.mtu.description.zh-tw: '所有參與主機之間端對端支援的 MTU。'
+    io.pasturestack.catalog.question.enable_route_update.label.zh-tw: '維護主機路由'
+    io.pasturestack.catalog.question.enable_route_update.description.zh-tw: '維護前往其他主機工作負載子網路且帶有專用標記的主機閘道路由。'
+    io.pasturestack.catalog.question.host_nat.label.zh-tw: '啟用主機 NAT'
+    io.pasturestack.catalog.question.host_nat.description.zh-tw: '對離開各主機專用工作負載子網路的流量套用主機 NAT。'
+    io.pasturestack.catalog.question.host_ports.label.zh-tw: '啟用主機連接埠'
+    io.pasturestack.catalog.question.host_ports.description.zh-tw: '允許受管工作負載在主機上公開連接埠。'
+    io.pasturestack.catalog.question.hairpin_mode.label.zh-tw: '啟用 Hairpin 模式'
+    io.pasturestack.catalog.question.hairpin_mode.description.zh-tw: 'Hairpin 模式與混雜模式不可同時啟用。'
+    io.pasturestack.catalog.question.promiscuous_mode.label.zh-tw: '啟用混雜模式'
+    io.pasturestack.catalog.question.promiscuous_mode.description.zh-tw: '混雜模式與 Hairpin 模式不可同時啟用。'
+    io.pasturestack.catalog.question.metadata_startup_timeout.label.zh-tw: '中繼資料服務啟動逾時'
+    io.pasturestack.catalog.question.metadata_startup_timeout.description.zh-tw: '控制器結束前，等待中繼資料服務可用的最長時間。'
+    io.pasturestack.catalog.question.watch_interval.label.zh-tw: '中繼資料監看間隔'
+    io.pasturestack.catalog.question.watch_interval.description.zh-tw: '協調主機路由時使用的重試及長輪詢間隔。'
+    io.pasturestack.catalog.question.pasturestack_debug.label.zh-tw: '啟用除錯日誌'
+    io.pasturestack.catalog.question.pasturestack_debug.description.zh-tw: '記錄較詳細的子網路、路由與 CNI 操作診斷資訊。'
+  questions:
+  - variable: BRIDGE
+    label: Workload bridge
+    description: Host bridge used for each host's managed workload subnet.
+    type: string
+    default: docker0
+    required: true
+  - variable: MTU
+    label: Network MTU
+    description: MTU supported end to end between all participating hosts.
+    type: int
+    default: 1500
+    required: true
+  - variable: ENABLE_ROUTE_UPDATE
+    label: Maintain host routes
+    description: Maintain marked host-gateway routes for the other hosts' workload subnets.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: HOST_NAT
+    label: Enable host NAT
+    description: Apply host NAT to traffic leaving each host-specific workload subnet.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: HOST_PORTS
+    label: Enable host ports
+    description: Allow managed workloads to publish ports on their hosts.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: HAIRPIN_MODE
+    label: Enable hairpin mode
+    description: Hairpin mode and promiscuous mode must not both be enabled.
+    type: boolean
+    default: 'false'
+    required: true
+  - variable: PROMISCUOUS_MODE
+    label: Enable promiscuous mode
+    description: Promiscuous mode and hairpin mode must not both be enabled.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: METADATA_STARTUP_TIMEOUT
+    label: Metadata startup timeout
+    description: Maximum time to wait for the metadata service before the controller exits.
+    type: string
+    default: 2m
+    required: true
+  - variable: WATCH_INTERVAL
+    label: Metadata watch interval
+    description: Retry and long-poll interval used while reconciling host routes.
+    type: string
+    default: 5s
+    required: true
+  - variable: PASTURESTACK_DEBUG
+    label: Enable debug logs
+    description: Enable verbose diagnostics for subnet, route, and CNI operations.
+    type: boolean
+    default: 'false'
+    required: true
