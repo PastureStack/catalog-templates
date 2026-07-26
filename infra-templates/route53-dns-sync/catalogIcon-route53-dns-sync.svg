@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Route 53 DNS synchronization</title>
+  <desc id="desc">A globe connected to synchronized DNS route points</desc>
+  <defs>
+    <linearGradient id="globe" x1="42" y1="35" x2="175" y2="196" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14b8a6"/>
+      <stop offset="1" stop-color="#0783b5"/>
+    </linearGradient>
+    <linearGradient id="route" x1="113" y1="67" x2="226" y2="188" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f9b233"/>
+      <stop offset="1" stop-color="#ee6c4d"/>
+    </linearGradient>
+  </defs>
+  <circle cx="103" cy="128" r="71" fill="url(#globe)"/>
+  <circle cx="103" cy="128" r="70" fill="none" stroke="#fff" stroke-width="8"/>
+  <path d="M35 128h136M103 58c22 20 34 43 34 70s-12 50-34 70M103 58c-22 20-34 43-34 70s12 50 34 70"
+        fill="none" stroke="#fff" stroke-linecap="round" stroke-width="7" opacity=".9"/>
+  <path d="M133 82c26-21 64-12 72 20 6 23-7 45-31 55l-20 8"
+        fill="none" stroke="#fff" stroke-linecap="round" stroke-width="19"/>
+  <path d="M133 82c26-21 64-12 72 20 6 23-7 45-31 55l-20 8"
+        fill="none" stroke="url(#route)" stroke-linecap="round" stroke-width="10"/>
+  <circle cx="133" cy="82" r="16" fill="#f9b233" stroke="#fff" stroke-width="7"/>
+  <circle cx="154" cy="165" r="16" fill="#ee6c4d" stroke="#fff" stroke-width="7"/>
+  <path d="m139 145 15 20-25 5" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"/>
+</svg>

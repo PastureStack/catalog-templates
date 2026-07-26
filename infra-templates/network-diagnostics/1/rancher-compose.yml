@@ -1,22 +1,77 @@
+# SPDX-License-Identifier: MIT
+version: '2'
+
 .catalog:
-  version: 0.0.2
-  minimum_rancher_version: v1.6.6-rc1
+  name: PastureStack Network Diagnostics
+  version: v0.2.0
+  description: Collect bounded, pseudonymous host-network health summaries and retain operator-requested diagnostic bundles.
+  minimum_rancher_version: v1.6.13-rc1
   questions:
-    - variable: RANCHER_DEBUG
-      label: "Enable Debug logs"
-      description: "To enable very verbose debug logging for the services"
+    - variable: COLLECTION_TOKEN
+      label: Collection token
+      description: Random shared token containing 32 to 256 characters. It authorizes agent uploads and operator API requests.
+      type: password
       required: true
-      default: false
-      type: boolean
-    - variable: INFO_COLLECTION_INTERVAL
-      label: "Log collection interval (in milliseconds)"
-      description: "How often should the logs be collected on every host?"
-      required: true
-      default: 600000
+    - variable: PUBLISHED_PORT
+      label: Operator port
+      description: Host TCP port used to reach the diagnostics service. Port 8080 is intentionally avoided because it is normally used by the control plane.
       type: int
-    - variable: INFO_HISTORY_LENGTH
-      label: "Log History Length"
-      description: "How many log snapshots to keep?"
+      default: 8091
       required: true
-      default: 1000
+    - variable: COLLECTION_INTERVAL_SECONDS
+      label: Collection interval
+      description: Seconds between bounded host summary uploads.
       type: int
+      default: 600
+      required: true
+    - variable: REQUEST_TIMEOUT_SECONDS
+      label: Request timeout
+      description: Seconds allowed for an individual upload request.
+      type: int
+      default: 15
+      required: true
+    - variable: HISTORY_LENGTH
+      label: Snapshots per host
+      description: Maximum snapshots retained for each pseudonymous host.
+      type: int
+      default: 12
+      required: true
+    - variable: MAX_AGENTS
+      label: Maximum hosts
+      description: Maximum distinct pseudonymous hosts accepted by the service.
+      type: int
+      default: 256
+      required: true
+    - variable: RETENTION_HOURS
+      label: Retention period
+      description: Hours that snapshots and generated bundles remain available.
+      type: int
+      default: 24
+      required: true
+
+network-diagnostics-service:
+  scale: 1
+  start_on_create: true
+  health_check:
+    request_line: GET /healthz HTTP/1.0
+    port: 8080
+    interval: 10000
+    initializing_timeout: 60000
+    reinitializing_timeout: 60000
+    response_timeout: 3000
+    healthy_threshold: 2
+    unhealthy_threshold: 3
+    strategy: none
+
+network-diagnostics-agent:
+  start_on_create: true
+  health_check:
+    request_line: GET /healthz HTTP/1.0
+    port: 8090
+    interval: 10000
+    initializing_timeout: 120000
+    reinitializing_timeout: 120000
+    response_timeout: 3000
+    healthy_threshold: 2
+    unhealthy_threshold: 3
+    strategy: recreate
