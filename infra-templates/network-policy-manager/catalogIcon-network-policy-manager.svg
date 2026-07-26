@@ -1,0 +1,18 @@
+<!-- SPDX-License-Identifier: MIT -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Network policy shield">
+  <defs>
+    <linearGradient id="shield" x1="52" y1="34" x2="202" y2="220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10B9B4"/>
+      <stop offset="1" stop-color="#087EAF"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#shield)" d="M128 20 218 54v62c0 59-34 99-90 120-56-21-90-61-90-120V54l90-34Z"/>
+  <path fill="#FFFFFF" fill-opacity=".14" d="M128 35 202 63v53c0 49-27 83-74 103V35Z"/>
+  <path fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" d="m83 131 31 30 60-67"/>
+  <g fill="#F4C95D" stroke="#FFFFFF" stroke-width="6">
+    <circle cx="77" cy="90" r="13"/>
+    <circle cx="128" cy="72" r="13"/>
+    <circle cx="179" cy="90" r="13"/>
+  </g>
+  <path fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" d="m89 86 27-10m24 0 27 10"/>
+</svg>

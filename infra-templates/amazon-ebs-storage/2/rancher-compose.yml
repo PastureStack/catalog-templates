@@ -1,0 +1,64 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack Amazon EBS Storage
+  version: v0.10.0-pasturestack.1
+  description: Attach existing Amazon EBS volumes, with opt-in encrypted volume provisioning.
+  minimum_rancher_version: v1.6.29-rc1
+  labels:
+    io.pasturestack.catalog.question.aws_region.label.zh-tw: 'AWS 區域'
+    io.pasturestack.catalog.question.aws_region.description.zh-tw: '若受管主機可透過 EC2 IMDSv2 取得所在區域，可留空。'
+    io.pasturestack.catalog.question.aws_access_key_id.label.zh-tw: 'AWS 存取金鑰識別碼'
+    io.pasturestack.catalog.question.aws_access_key_id.description.zh-tw: '受管主機使用 IAM 執行個體設定檔時可留空。'
+    io.pasturestack.catalog.question.aws_secret_access_key.label.zh-tw: 'AWS 私密存取金鑰'
+    io.pasturestack.catalog.question.aws_secret_access_key.description.zh-tw: '受管主機使用 IAM 執行個體設定檔時可留空。'
+    io.pasturestack.catalog.question.aws_session_token.label.zh-tw: 'AWS 工作階段權杖'
+    io.pasturestack.catalog.question.aws_session_token.description.zh-tw: '使用 AWS 臨時登入資訊時提供的選用權杖。'
+    io.pasturestack.catalog.question.allow_cloud_provisioning.label.zh-tw: '允許建立及刪除雲端資源'
+    io.pasturestack.catalog.question.allow_cloud_provisioning.description.zh-tw: '保持停用時只使用既有 EBS 磁碟區；啟用後可建立加密磁碟區，並允許格式化、卸離及刪除。'
+    io.pasturestack.catalog.question.pasturestack_debug.label.zh-tw: '啟用除錯日誌'
+    io.pasturestack.catalog.question.pasturestack_debug.description.zh-tw: '記錄較詳細的儲存驅動程式診斷資訊。'
+  questions:
+  - variable: AWS_REGION
+    label: Amazon region
+    description: Optional when the managed hosts can read their region through EC2 IMDSv2.
+    type: string
+    default: ''
+    required: false
+  - variable: AWS_ACCESS_KEY_ID
+    label: AWS access key ID
+    description: Optional when the managed hosts use an IAM instance profile.
+    type: string
+    default: ''
+    required: false
+  - variable: AWS_SECRET_ACCESS_KEY
+    label: AWS secret access key
+    description: Optional when the managed hosts use an IAM instance profile.
+    type: password
+    default: ''
+    required: false
+  - variable: AWS_SESSION_TOKEN
+    label: AWS session token
+    description: Optional token for temporary AWS credentials.
+    type: password
+    default: ''
+    required: false
+  - variable: ALLOW_CLOUD_PROVISIONING
+    label: Allow cloud resource provisioning and deletion
+    description: Keep disabled to use existing EBS volumes only. Enabling this permits encrypted volume creation, formatting, detachment, and deletion.
+    type: boolean
+    default: false
+    required: true
+  - variable: PASTURESTACK_DEBUG
+    label: Enable debug logging
+    description: Enable verbose storage-driver diagnostics.
+    type: boolean
+    default: false
+    required: true
+
+amazon-ebs-storage-driver:
+  storage_driver:
+    name: pasturestack-ebs
+    description: Amazon EBS block storage
+    scope: environment
+    volume_access_mode: singleHostRW
+    start_on_create: true

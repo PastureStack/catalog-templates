@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">PastureStack Container Schedule</title>
+  <defs>
+    <linearGradient id="calendar" x1="32" y1="24" x2="218" y2="226" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00a7b5"/>
+      <stop offset="1" stop-color="#0878b8"/>
+    </linearGradient>
+  </defs>
+  <rect x="27" y="43" width="176" height="165" rx="28" fill="url(#calendar)"/>
+  <path d="M27 87h176" fill="none" stroke="#fff" stroke-width="14"/>
+  <path d="M72 28v38M158 28v38" fill="none" stroke="#075f7f" stroke-linecap="round" stroke-width="17"/>
+  <path d="m75 123 42-22 42 22-42 23-42-23Z" fill="#fff"/>
+  <path d="m75 123v45l42 24v-46l-42-23Zm84 0v45l-42 24v-46l42-23Z" fill="#dff8fb"/>
+  <circle cx="190" cy="181" r="48" fill="#f5a623" stroke="#fff" stroke-width="9"/>
+  <path d="M190 153v30l20 12" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="11"/>
+</svg>
