@@ -1,0 +1,279 @@
+name: Validate Catalog Templates
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out immutable Catalog source
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git"
+          git fetch --depth=1 origin "$SOURCE_SHA"
+          git -c advice.detachedHead=false checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          test -z "$(git status --short)"
+
+      - name: Validate images, schema, and localized metadata
+        env:
+          CATALOG_SERVICE_VERSION: 0.20.7
+          CATALOG_SERVICE_SHA256: b195dd7f54fecc58e4af6942cd537b7deaaa7c659cfa97b3869e998e6b75fde3
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          work_root=$(mktemp -d)
+          service_pid=
+          cleanup() {
+            status=$?
+            if [ -n "$service_pid" ]; then
+              kill "$service_pid" 2>/dev/null || true
+              wait "$service_pid" 2>/dev/null || true
+            fi
+            rm -rf "$work_root" 2>/dev/null || true
+            exit "$status"
+          }
+          trap cleanup EXIT
+
+          bash scripts/audit-deployable-images
+          asset="$work_root/catalog-service.tar.xz"
+          curl \
+            --proto '=https' \
+            --tlsv1.2 \
+            --fail \
+            --silent \
+            --show-error \
+            --location \
+            --retry 5 \
+            --retry-all-errors \
+            --retry-delay 2 \
+            -o "$asset" \
+            "https://github.com/PastureStack/catalog-service/releases/download/v${CATALOG_SERVICE_VERSION}/catalog-service-${CATALOG_SERVICE_VERSION}.tar.xz"
+          printf '%s  %s\n' "$CATALOG_SERVICE_SHA256" "$asset" |
+            sha256sum --check
+          tar -xJf "$asset" -C "$work_root"
+          catalog_service="$work_root/catalog-service-sqlite"
+          test "$("$catalog_service" --version)" = "v${CATALOG_SERVICE_VERSION}"
+
+          branch="validation-${SOURCE_SHA}"
+          git branch -f "$branch" "$SOURCE_SHA"
+          jq -n \
+            --arg url "file://${GITHUB_WORKSPACE}" \
+            --arg branch "$branch" \
+            --arg commit "$SOURCE_SHA" \
+            '{catalogs:{pasturestack:{url:$url,branch:$branch,pinnedCommit:$commit}}}' \
+            >"$work_root/repo.json"
+
+          "$catalog_service" \
+            --config "$work_root/repo.json" \
+            --cache "$work_root/validate-cache" \
+            --validate \
+            --sqlite \
+            --port 18088
+
+          "$catalog_service" \
+            --config "$work_root/repo.json" \
+            --cache "$work_root/service-cache" \
+            --sqlite \
+            --refresh-interval 7200 \
+            --port 18088 \
+            >"$work_root/catalog-service.log" 2>&1 &
+          service_pid=$!
+
+          ready=false
+          for _ in $(seq 1 60); do
+            if curl -fsS --max-time 5 \
+              'http://127.0.0.1:18088/v1-catalog/templates?limit=-1' \
+              -o "$work_root/templates.json" 2>/dev/null; then
+              template_count=$(jq '(.data // []) | length' \
+                "$work_root/templates.json")
+              if [ "$template_count" -eq 23 ]; then
+                ready=true
+                break
+              fi
+            fi
+            sleep 1
+          done
+          if [ "$ready" != true ]; then
+            tail -100 "$work_root/catalog-service.log" >&2 || true
+            exit 1
+          fi
+
+          test "$(jq '(.data // []) | length' "$work_root/templates.json")" -eq 23
+          test "$(jq '[.data[] | select(
+            .templateBase == "infra" and
+            .labels["io.pasturestack.catalog.origin"] == "upstream-first-party" and
+            (.labels["io.pasturestack.catalog.origin-template"] | length) > 0 and
+            (.labels["io.pasturestack.catalog.origin-status"] |
+              IN("supported", "experimental", "first-party"))
+          )] | length' "$work_root/templates.json")" -eq 22
+
+          curl -fsS --max-time 10 \
+            'http://127.0.0.1:18088/v1-catalog/templateversions/pasturestack:infra*kubernetes-cluster:2' \
+            -o "$work_root/kubernetes-v2.json"
+          curl -fsS --max-time 10 \
+            'http://127.0.0.1:18088/v1-catalog/templateversions/pasturestack:infra*kubernetes-cluster:3' \
+            -o "$work_root/kubernetes-v3.json"
+          curl -fsS --max-time 10 \
+            'http://127.0.0.1:18088/v1-catalog/templateversions/pasturestack:infra*kubernetes-cluster:4' \
+            -o "$work_root/kubernetes-v4.json"
+          curl -fsS --max-time 10 \
+            'http://127.0.0.1:18088/v1-catalog/templateversions/pasturestack:infra*kubernetes-cluster:5' \
+            -o "$work_root/kubernetes-v5.json"
+          curl -fsS --max-time 10 \
+            'http://127.0.0.1:18088/v1-catalog/templateversions/pasturestack:infra*kubernetes-cluster:6' \
+            -o "$work_root/kubernetes-v6.json"
+          test "$(jq -r '.version' "$work_root/kubernetes-v2.json")" = \
+            'v1.12.10-pasturestack.2'
+          test "$(jq -r '.version' "$work_root/kubernetes-v3.json")" = \
+            'v1.12.10-pasturestack.3'
+          test "$(jq -r '.version' "$work_root/kubernetes-v4.json")" = \
+            'v1.12.10-pasturestack.4'
+          test "$(jq -r '.version' "$work_root/kubernetes-v5.json")" = \
+            'v1.12.10-pasturestack.5'
+          test "$(jq -r '.version' "$work_root/kubernetes-v6.json")" = \
+            'v1.12.10-pasturestack.6'
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v2.json" | \
+            grep -Fc 'kubernetes-package:v1.12.10-pasturestack.1')" -eq 6
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v3.json" | \
+            grep -Fc 'kubernetes-package:v1.12.10-pasturestack.3')" -eq 6
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v2.json" | \
+            grep -Fc 'kubectl-service:v0.9.11-pasturestack.1')" -eq 2
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v3.json" | \
+            grep -Fc 'kubectl-service:v0.9.11-pasturestack.3')" -eq 2
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v4.json" | \
+            grep -Fc 'kubernetes-package:v1.12.10-pasturestack.3')" -eq 6
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v4.json" | \
+            grep -Fc 'kubectl-service:v0.9.11-pasturestack.5')" -eq 2
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v5.json" | \
+            grep -Fc 'kubernetes-package:v1.12.10-pasturestack.3')" -eq 6
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v5.json" | \
+            grep -Fc 'etcd-compat:v2.3.7-pasturestack.2')" -eq 1
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v5.json" | \
+            grep -Fc 'kubectl-service:v0.9.11-pasturestack.5')" -eq 2
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v6.json" | \
+            grep -Fc 'kubernetes-package:v1.12.10-pasturestack.4')" -eq 6
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v6.json" | \
+            grep -Fc 'etcd-compat:v2.3.7-pasturestack.2')" -eq 1
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v6.json" | \
+            grep -Fc 'kubectl-service:v0.9.11-pasturestack.7')" -eq 2
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v6.json" | \
+            grep -Fc '/var/lib/docker:/var/lib/docker:rslave,z')" -eq 2
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v6.json" | \
+            grep -Fc '/var/lib/docker:/var/lib/docker:z')" -eq 0
+          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
+            "$work_root/kubernetes-v6.json" | grep -Fc '@sha256:')" -eq 0
+          verify_localized() {
+            base=$1
+            folder=$2
+            expected_name=$3
+            expected_description=$4
+            jq -e \
+              --arg base "$base" \
+              --arg folder "$folder" \
+              --arg name "$expected_name" \
+              --arg description "$expected_description" \
+              'any(.data[];
+                ((if ((.templateBase // "") == "")
+                  then "template"
+                  else .templateBase
+                  end) == $base) and
+                (.folderName == $folder) and
+                (.labels["io.pasturestack.catalog.name.zh-tw"] == $name) and
+                (.labels["io.pasturestack.catalog.description.zh-tw"] == $description))' \
+              "$work_root/templates.json" >/dev/null
+          }
+
+          verify_localized infra amazon-ebs-storage \
+            'Amazon EBS 儲存空間' \
+            '掛載既有的 Amazon EBS 磁碟區；如需建立加密磁碟區，必須明確啟用雲端資源配置。'
+          verify_localized infra amazon-efs-storage \
+            'Amazon EFS 儲存空間' \
+            '掛載既有的 Amazon EFS 檔案系統；如需建立檔案系統與掛載目標，必須明確啟用雲端資源配置。'
+          verify_localized infra container-schedule \
+            '容器定時排程' \
+            '依容器標籤中的 Cron 表達式，定時啟動、停止或重新啟動容器。'
+          verify_localized infra ecr-credential-sync \
+            'Amazon ECR 登入資訊同步' \
+            '定期更新 Amazon Elastic Container Registry 的短效登入資訊，並同步至目前或指定的環境。'
+          verify_localized infra healthcheck \
+            '中繼資料健康檢查' \
+            '依據中繼資料定義檢查工作負載健康狀態，並透過相容控制 API 回報結果。'
+          verify_localized infra ipsec-overlay \
+            'IPsec 加密網路' \
+            '為受管工作負載提供跨主機的加密網路。'
+          verify_localized infra kubernetes-cluster \
+            'Kubernetes 叢集' \
+            '部署維護中的 Kubernetes 1.12 相容控制平面與主機服務。'
+          verify_localized infra layer-2-flat-network \
+            '第 2 層平面網路' \
+            '透過主機網橋，將受管理的工作負載直接連接到共用的第 2 層子網路。'
+          verify_localized infra network-policy-manager \
+            '網路政策管理器' \
+            '依中繼資料中的網路政策，在每台受管主機套用最小權限的流量控管規則。'
+          verify_localized infra network-services \
+            '網路服務' \
+            '安裝受管工作負載所需的主機網路、中繼資料與內部 DNS 服務。'
+          verify_localized infra network-diagnostics \
+            '網路診斷' \
+            '蒐集經過界線控管與去識別化處理的主機網路健康摘要，並保留由管理者建立的診斷封存檔。'
+          verify_localized infra nfs-storage \
+            'NFS 儲存空間' \
+            '提供 NFS 第 3 版與第 4 版的 Docker 磁碟區，移除磁碟區時預設保留資料。'
+          verify_localized infra secret-volume-driver \
+            '機密資料磁碟區' \
+            '將控制平面核准的加密機密資料，以唯讀的記憶體磁碟區安全提供給工作負載。'
+          verify_localized infra per-host-subnet-network \
+            '每台主機獨立子網路' \
+            '為每台主機配置獨立的工作負載子網路，並維護主機間的閘道路由。'
+          verify_localized infra resource-scheduler \
+            '資源排程器' \
+            '依控制平面事件與目前的中繼資料狀態，排程原生工作負載。'
+          verify_localized infra route53-dns-sync \
+            'Route 53 DNS 紀錄同步' \
+            '將相容環境的服務位址同步至指定的 Amazon Route 53 託管區域。'
+          verify_localized infra system-image-preloader \
+            '系統映像預先下載' \
+            '預先下載相容基礎架構堆疊所需的容器映像，以縮短主機升級等待時間。'
+          verify_localized infra vault-volume-driver \
+            'Vault 存取權杖磁碟區' \
+            '透過主機身分驗證及唯讀記憶體磁碟區，為每個工作負載安全提供短效、回應封裝的 Vault 存取權杖。'
+          verify_localized infra vxlan-overlay-network \
+            'VXLAN 覆疊網路' \
+            '透過 UDP 4789，在受管主機之間建立未加密的 VXLAN 覆疊網路。'
+          verify_localized infra windows-container-networking \
+            'Windows 容器網路' \
+            '為相容的 Windows 容器主機定義 NAT 與透明 Docker 網路驅動程式。'
+          verify_localized infra windows-ecr-credential-sync \
+            'Windows ECR 登入資訊同步' \
+            '從相容的 Windows Server 2022 主機定期更新 Amazon ECR 短效登入資訊。'
+          verify_localized infra windows-network-services \
+            'Windows 網路服務' \
+            '為相容的 Windows Server 2022 工作負載安裝中繼資料與內部 DNS 服務。'
+          verify_localized project native \
+            '原生專案範本' \
+            'PastureStack 原生編排執行環境的預設專案範本。'
+
+          echo "CATALOG_TW_LOCALIZATION_OK source=$SOURCE_SHA templates=23 infra_first_party=22 questions=171"

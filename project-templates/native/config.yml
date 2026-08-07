@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: MIT
+name: Native
+version: 0.3.0-rc6
+category: System
+description: Default project template for the PastureStack native orchestration runtime.
+labels:
+  io.pasturestack.catalog.name.zh-tw: '原生專案範本'
+  io.pasturestack.catalog.description.zh-tw: 'PastureStack 原生編排執行環境的預設專案範本。'

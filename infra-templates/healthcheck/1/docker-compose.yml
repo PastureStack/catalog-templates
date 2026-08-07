@@ -1,10 +1,17 @@
+# SPDX-License-Identifier: MIT
 version: '2'
 services:
   healthcheck:
+    image: ghcr.io/pasturestack/metadata-healthcheck:v0.3.16
+    restart: always
+    command:
+    - --metadata-url
+    - http://169.254.169.250/2015-12-19
+    environment:
+      PLATFORM_CA_ROOT: /var/lib/rancher/etc/ssl/ca.crt
     labels:
       io.rancher.container.create_agent: 'true'
       io.rancher.scheduler.global: 'true'
-    image: rancher/healthcheck:v0.2.0
     logging:
       driver: json-file
       options:

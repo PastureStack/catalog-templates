@@ -1,12 +1,64 @@
+# SPDX-License-Identifier: MIT
 .catalog:
-  name: Network Services
-  version: v0.0.3
-  minimum_rancher_version: v1.1.99
-  maximum_rancher_version: v1.3.99
+  name: PastureStack Network Services
+  version: 0.3.0-rc2-pasturestack.1
+  description: Install host networking, metadata, and internal DNS services required by managed workloads.
+  minimum_rancher_version: v1.6.26-rc1
+  labels:
+    io.pasturestack.catalog.question.docker_bridge.label.zh-tw: 'Docker 網橋'
+    io.pasturestack.catalog.question.docker_bridge.description.zh-tw: '受管工作負載流量使用的主機網橋。'
+    io.pasturestack.catalog.question.dns_recurser_timeout.label.zh-tw: 'DNS 遞迴查詢逾時'
+    io.pasturestack.catalog.question.dns_recurser_timeout.description.zh-tw: '等待上游 DNS 查詢回應的秒數。'
+    io.pasturestack.catalog.question.ttl.label.zh-tw: '服務探索 DNS 紀錄存留時間'
+    io.pasturestack.catalog.question.ttl.description.zh-tw: '內部服務探索 DNS 回應可保留的秒數。'
+    io.pasturestack.catalog.question.cpu_period.label.zh-tw: '中繼資料服務 CPU 週期'
+    io.pasturestack.catalog.question.cpu_period.description.zh-tw: '分配給每個中繼資料服務執行個體的 CPU 排程週期。'
+    io.pasturestack.catalog.question.cpu_quota.label.zh-tw: '中繼資料服務 CPU 配額'
+    io.pasturestack.catalog.question.cpu_quota.description.zh-tw: '分配給每個中繼資料服務執行個體的 CPU 配額。'
+    io.pasturestack.catalog.question.reload_interval_limit.label.zh-tw: '中繼資料重新載入間隔'
+    io.pasturestack.catalog.question.reload_interval_limit.description.zh-tw: '兩次中繼資料設定重新載入之間的最短毫秒數。'
+    io.pasturestack.catalog.question.arp_sync_interval.label.zh-tw: 'ARP 同步間隔'
+    io.pasturestack.catalog.question.arp_sync_interval.description.zh-tw: '兩次主機 ARP 協調作業之間的秒數。'
   questions:
-    - variable: "DOCKER_BRIDGE"
-      label: "Docker Bridge"
-      description: "Name of Docker Bridge. Default is `docker0`"
-      type: "string"
-      default: "docker0"
-      required: true
+  - variable: DOCKER_BRIDGE
+    label: Docker bridge
+    description: Host bridge used for managed workload traffic.
+    type: string
+    default: docker0
+    required: true
+  - variable: DNS_RECURSER_TIMEOUT
+    label: DNS recursion timeout
+    description: Seconds allowed for an upstream DNS query.
+    type: int
+    default: 2
+    required: true
+  - variable: TTL
+    label: Service discovery TTL
+    description: Seconds that internal service-discovery answers remain valid.
+    type: int
+    default: 1
+    required: true
+  - variable: CPU_PERIOD
+    label: Metadata CPU period
+    description: CPU scheduler period assigned to each metadata service instance.
+    type: int
+    default: 400000
+    required: true
+  - variable: CPU_QUOTA
+    label: Metadata CPU quota
+    description: CPU quota assigned to each metadata service instance.
+    type: int
+    default: 200000
+    required: true
+  - variable: RELOAD_INTERVAL_LIMIT
+    label: Metadata reload interval
+    description: Minimum milliseconds between metadata configuration reloads.
+    type: int
+    default: 1000
+    required: true
+  - variable: ARP_SYNC_INTERVAL
+    label: ARP synchronization interval
+    description: Seconds between host ARP reconciliation passes.
+    type: int
+    default: 5
+    required: true
