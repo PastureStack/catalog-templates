@@ -1,0 +1,80 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack Amazon EFS Storage
+  version: v0.10.0-pasturestack.1
+  description: Mount existing Amazon EFS filesystems, with controlled opt-in provisioning.
+  minimum_rancher_version: v1.6.15-rc1
+  labels:
+    io.pasturestack.catalog.question.aws_region.label.zh-tw: 'AWS 區域'
+    io.pasturestack.catalog.question.aws_region.description.zh-tw: '若受管主機可透過 EC2 IMDSv2 取得所在區域，可留空。'
+    io.pasturestack.catalog.question.aws_access_key_id.label.zh-tw: 'AWS 存取金鑰識別碼'
+    io.pasturestack.catalog.question.aws_access_key_id.description.zh-tw: '受管主機使用 IAM 執行個體設定檔時可留空。'
+    io.pasturestack.catalog.question.aws_secret_access_key.label.zh-tw: 'AWS 私密存取金鑰'
+    io.pasturestack.catalog.question.aws_secret_access_key.description.zh-tw: '受管主機使用 IAM 執行個體設定檔時可留空。'
+    io.pasturestack.catalog.question.aws_session_token.label.zh-tw: 'AWS 工作階段權杖'
+    io.pasturestack.catalog.question.aws_session_token.description.zh-tw: '使用 AWS 臨時登入資訊時提供的選用權杖。'
+    io.pasturestack.catalog.question.allow_cloud_provisioning.label.zh-tw: '允許建立及刪除雲端資源'
+    io.pasturestack.catalog.question.allow_cloud_provisioning.description.zh-tw: '保持停用時只使用既有 EFS 檔案系統；啟用後可建立及刪除加密檔案系統與掛載目標。'
+    io.pasturestack.catalog.question.efs_subnet_id.label.zh-tw: 'EFS 掛載目標子網路識別碼'
+    io.pasturestack.catalog.question.efs_subnet_id.description.zh-tw: '只有啟用雲端資源建立功能時才需要。'
+    io.pasturestack.catalog.question.efs_security_group_id.label.zh-tw: 'EFS 掛載目標安全性群組識別碼'
+    io.pasturestack.catalog.question.efs_security_group_id.description.zh-tw: '只有啟用雲端資源建立功能時才需要；選取的群組只能允許受信任用戶端使用 NFS。'
+    io.pasturestack.catalog.question.pasturestack_debug.label.zh-tw: '啟用除錯日誌'
+    io.pasturestack.catalog.question.pasturestack_debug.description.zh-tw: '記錄較詳細的儲存驅動程式診斷資訊。'
+  questions:
+  - variable: AWS_REGION
+    label: Amazon region
+    description: Optional when the managed hosts can read their region through EC2 IMDSv2.
+    type: string
+    default: ''
+    required: false
+  - variable: AWS_ACCESS_KEY_ID
+    label: AWS access key ID
+    description: Optional when the managed hosts use an IAM instance profile.
+    type: string
+    default: ''
+    required: false
+  - variable: AWS_SECRET_ACCESS_KEY
+    label: AWS secret access key
+    description: Optional when the managed hosts use an IAM instance profile.
+    type: password
+    default: ''
+    required: false
+  - variable: AWS_SESSION_TOKEN
+    label: AWS session token
+    description: Optional token for temporary AWS credentials.
+    type: password
+    default: ''
+    required: false
+  - variable: ALLOW_CLOUD_PROVISIONING
+    label: Allow cloud resource provisioning and deletion
+    description: Keep disabled to use existing EFS filesystems only. Enabling this permits encrypted filesystem and mount-target creation and deletion.
+    type: boolean
+    default: false
+    required: true
+  - variable: EFS_SUBNET_ID
+    label: EFS mount-target subnet ID
+    description: Required only when cloud provisioning is enabled.
+    type: string
+    default: ''
+    required: false
+  - variable: EFS_SECURITY_GROUP_ID
+    label: EFS mount-target security group ID
+    description: Required only when cloud provisioning is enabled. The selected group must permit NFS only from trusted clients.
+    type: string
+    default: ''
+    required: false
+  - variable: PASTURESTACK_DEBUG
+    label: Enable debug logging
+    description: Enable verbose storage-driver diagnostics.
+    type: boolean
+    default: false
+    required: true
+
+amazon-efs-storage-driver:
+  storage_driver:
+    name: pasturestack-efs
+    description: Amazon EFS shared file storage
+    scope: environment
+    volume_access_mode: multiHostRW
+    start_on_create: true
