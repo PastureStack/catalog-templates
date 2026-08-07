@@ -1,0 +1,92 @@
+# SPDX-License-Identifier: MIT
+version: '2'
+
+.catalog:
+  name: PastureStack Network Diagnostics
+  version: v0.2.0-pasturestack.1
+  description: Collect bounded, pseudonymous host-network health summaries and retain operator-requested diagnostic bundles.
+  minimum_rancher_version: v1.6.13-rc1
+  labels:
+    io.pasturestack.catalog.question.collection_token.label.zh-tw: '蒐集授權權杖'
+    io.pasturestack.catalog.question.collection_token.description.zh-tw: '32 到 256 個字元的隨機共用權杖，用於授權代理程式上傳與管理者 API 請求。'
+    io.pasturestack.catalog.question.published_port.label.zh-tw: '管理者連接埠'
+    io.pasturestack.catalog.question.published_port.description.zh-tw: '管理者連線到診斷服務的主機 TCP 連接埠；刻意避開控制平面通常使用的 8080。'
+    io.pasturestack.catalog.question.collection_interval_seconds.label.zh-tw: '蒐集間隔'
+    io.pasturestack.catalog.question.collection_interval_seconds.description.zh-tw: '兩次上傳有範圍限制的主機摘要之間的秒數。'
+    io.pasturestack.catalog.question.request_timeout_seconds.label.zh-tw: '請求逾時'
+    io.pasturestack.catalog.question.request_timeout_seconds.description.zh-tw: '單次上傳請求允許使用的秒數。'
+    io.pasturestack.catalog.question.history_length.label.zh-tw: '每台主機保留的快照數'
+    io.pasturestack.catalog.question.history_length.description.zh-tw: '每個去識別化主機可保留的快照上限。'
+    io.pasturestack.catalog.question.max_agents.label.zh-tw: '主機數上限'
+    io.pasturestack.catalog.question.max_agents.description.zh-tw: '服務可接受的不同去識別化主機數上限。'
+    io.pasturestack.catalog.question.retention_hours.label.zh-tw: '保留期限'
+    io.pasturestack.catalog.question.retention_hours.description.zh-tw: '快照與產生的診斷封存檔可保留的小時數。'
+  questions:
+    - variable: COLLECTION_TOKEN
+      label: Collection token
+      description: Random shared token containing 32 to 256 characters. It authorizes agent uploads and operator API requests.
+      type: password
+      required: true
+    - variable: PUBLISHED_PORT
+      label: Operator port
+      description: Host TCP port used to reach the diagnostics service. Port 8080 is intentionally avoided because it is normally used by the control plane.
+      type: int
+      default: 8091
+      required: true
+    - variable: COLLECTION_INTERVAL_SECONDS
+      label: Collection interval
+      description: Seconds between bounded host summary uploads.
+      type: int
+      default: 600
+      required: true
+    - variable: REQUEST_TIMEOUT_SECONDS
+      label: Request timeout
+      description: Seconds allowed for an individual upload request.
+      type: int
+      default: 15
+      required: true
+    - variable: HISTORY_LENGTH
+      label: Snapshots per host
+      description: Maximum snapshots retained for each pseudonymous host.
+      type: int
+      default: 12
+      required: true
+    - variable: MAX_AGENTS
+      label: Maximum hosts
+      description: Maximum distinct pseudonymous hosts accepted by the service.
+      type: int
+      default: 256
+      required: true
+    - variable: RETENTION_HOURS
+      label: Retention period
+      description: Hours that snapshots and generated bundles remain available.
+      type: int
+      default: 24
+      required: true
+
+network-diagnostics-service:
+  scale: 1
+  start_on_create: true
+  health_check:
+    request_line: GET /healthz HTTP/1.0
+    port: 8080
+    interval: 10000
+    initializing_timeout: 60000
+    reinitializing_timeout: 60000
+    response_timeout: 3000
+    healthy_threshold: 2
+    unhealthy_threshold: 3
+    strategy: none
+
+network-diagnostics-agent:
+  start_on_create: true
+  health_check:
+    request_line: GET /healthz HTTP/1.0
+    port: 8090
+    interval: 10000
+    initializing_timeout: 120000
+    reinitializing_timeout: 120000
+    response_timeout: 3000
+    healthy_threshold: 2
+    unhealthy_threshold: 3
+    strategy: recreate

@@ -1,0 +1,84 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack IPsec Overlay
+  version: 0.3.0-rc2-pasturestack.1
+  description: Provide an encrypted host-to-host network for managed workloads.
+  minimum_rancher_version: v1.6.19-rc1
+  labels:
+    io.pasturestack.catalog.question.docker_bridge.label.zh-tw: 'Docker 網橋'
+    io.pasturestack.catalog.question.docker_bridge.description.zh-tw: '受管工作負載流量使用的主機網橋。'
+    io.pasturestack.catalog.question.mtu.label.zh-tw: '網路 MTU'
+    io.pasturestack.catalog.question.mtu.description.zh-tw: '請與主機網路 MTU 一致；GCE 常用 1460，一般乙太網路常用 1500。'
+    io.pasturestack.catalog.question.pasturestack_debug.label.zh-tw: '啟用除錯日誌'
+    io.pasturestack.catalog.question.pasturestack_debug.description.zh-tw: '記錄較詳細的加密網路元件診斷資訊。'
+    io.pasturestack.catalog.question.host_ports.label.zh-tw: '啟用主機連接埠'
+    io.pasturestack.catalog.question.host_ports.description.zh-tw: '允許受管工作負載在主機上公開連接埠。'
+    io.pasturestack.catalog.question.pasturestack_hairpin_mode.label.zh-tw: '啟用 Hairpin 模式'
+    io.pasturestack.catalog.question.pasturestack_hairpin_mode.description.zh-tw: 'Hairpin 模式與混雜模式不可同時啟用。'
+    io.pasturestack.catalog.question.pasturestack_promiscuous_mode.label.zh-tw: '啟用混雜模式'
+    io.pasturestack.catalog.question.pasturestack_promiscuous_mode.description.zh-tw: '混雜模式與 Hairpin 模式不可同時啟用。'
+    io.pasturestack.catalog.question.connectivity_check_interval.label.zh-tw: '對等主機檢查間隔'
+    io.pasturestack.catalog.question.connectivity_check_interval.description.zh-tw: '兩次加密對等主機連線檢查之間的毫秒數。'
+    io.pasturestack.catalog.question.peer_connection_timeout.label.zh-tw: '對等主機連線逾時'
+    io.pasturestack.catalog.question.peer_connection_timeout.description.zh-tw: '每次嘗試連線對等主機可使用的毫秒數。'
+  questions:
+  - variable: DOCKER_BRIDGE
+    label: Docker bridge
+    description: Host bridge used for managed workload traffic.
+    type: string
+    default: docker0
+    required: true
+  - variable: MTU
+    label: Network MTU
+    description: Match the host network MTU; common values are 1460 for GCE and 1500 for Ethernet.
+    type: int
+    default: 1500
+    required: true
+  - variable: PASTURESTACK_DEBUG
+    label: Enable debug logs
+    description: Enable verbose diagnostic logging for the overlay components.
+    type: boolean
+    default: 'false'
+    required: true
+  - variable: HOST_PORTS
+    label: Enable host ports
+    description: Allow managed workloads to publish ports on their hosts.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: PASTURESTACK_HAIRPIN_MODE
+    label: Enable hairpin mode
+    description: Hairpin mode and promiscuous mode must not both be enabled.
+    type: boolean
+    default: 'false'
+    required: true
+  - variable: PASTURESTACK_PROMISCUOUS_MODE
+    label: Enable promiscuous mode
+    description: Promiscuous mode and hairpin mode must not both be enabled.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: CONNECTIVITY_CHECK_INTERVAL
+    label: Peer check interval
+    description: Milliseconds between encrypted peer-connectivity checks.
+    type: int
+    default: 10000
+    required: true
+  - variable: PEER_CONNECTION_TIMEOUT
+    label: Peer connection timeout
+    description: Milliseconds allowed for each peer connection attempt.
+    type: int
+    default: 60000
+    required: true
+
+overlay-network:
+  health_check:
+    request_line: GET "/connectivity" "HTTP/1.0"
+    port: 80
+    interval: 5000
+    initializing_timeout: 60000
+    reinitializing_timeout: 60000
+    response_timeout: 2000
+    healthy_threshold: 2
+    unhealthy_threshold: 3
+    strategy: none

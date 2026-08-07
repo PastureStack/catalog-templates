@@ -1,0 +1,67 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack IPsec Overlay
+  version: 0.3.0-rc2
+  description: Provide an encrypted host-to-host network for managed workloads.
+  minimum_rancher_version: v1.6.19-rc1
+  questions:
+  - variable: DOCKER_BRIDGE
+    label: Docker bridge
+    description: Host bridge used for managed workload traffic.
+    type: string
+    default: docker0
+    required: true
+  - variable: MTU
+    label: Network MTU
+    description: Match the host network MTU; common values are 1460 for GCE and 1500 for Ethernet.
+    type: int
+    default: 1500
+    required: true
+  - variable: PASTURESTACK_DEBUG
+    label: Enable debug logs
+    description: Enable verbose diagnostic logging for the overlay components.
+    type: boolean
+    default: 'false'
+    required: true
+  - variable: HOST_PORTS
+    label: Enable host ports
+    description: Allow managed workloads to publish ports on their hosts.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: PASTURESTACK_HAIRPIN_MODE
+    label: Enable hairpin mode
+    description: Hairpin mode and promiscuous mode must not both be enabled.
+    type: boolean
+    default: 'false'
+    required: true
+  - variable: PASTURESTACK_PROMISCUOUS_MODE
+    label: Enable promiscuous mode
+    description: Promiscuous mode and hairpin mode must not both be enabled.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: CONNECTIVITY_CHECK_INTERVAL
+    label: Peer check interval
+    description: Milliseconds between encrypted peer-connectivity checks.
+    type: int
+    default: 10000
+    required: true
+  - variable: PEER_CONNECTION_TIMEOUT
+    label: Peer connection timeout
+    description: Milliseconds allowed for each peer connection attempt.
+    type: int
+    default: 60000
+    required: true
+
+overlay-network:
+  health_check:
+    request_line: GET "/connectivity" "HTTP/1.0"
+    port: 80
+    interval: 5000
+    initializing_timeout: 60000
+    reinitializing_timeout: 60000
+    response_timeout: 2000
+    healthy_threshold: 2
+    unhealthy_threshold: 3
+    strategy: none

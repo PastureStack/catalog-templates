@@ -1,0 +1,96 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack Layer 2 Flat Network
+  version: 0.3.0-rc8-pasturestack.1
+  description: Connect managed workloads directly to a shared Layer 2 subnet through a host bridge.
+  minimum_rancher_version: v1.6.26-rc1
+  labels:
+    io.pasturestack.catalog.question.layer_2_bridge.label.zh-tw: '第 2 層網橋'
+    io.pasturestack.catalog.question.layer_2_bridge.description.zh-tw: '共用第 2 層網路使用的既有或自動設定主機網橋。'
+    io.pasturestack.catalog.question.flat_interface.label.zh-tw: '實體網路介面'
+    io.pasturestack.catalog.question.flat_interface.description.zh-tw: '只有啟用自動網橋設定時，才會把此主機實體介面加入網橋。'
+    io.pasturestack.catalog.question.auto_setup_layer_2_bridge.label.zh-tw: '自動設定網橋'
+    io.pasturestack.catalog.question.auto_setup_layer_2_bridge.description.zh-tw: '把實體介面的位址移到第 2 層網橋；啟用前請先確認可使用主控台連線。'
+    io.pasturestack.catalog.question.subnet.label.zh-tw: '共用子網路'
+    io.pasturestack.catalog.question.subnet.description.zh-tw: '主機、網橋、閘道與受管工作負載共用的 IPv4 子網路。'
+    io.pasturestack.catalog.question.start_address.label.zh-tw: '第一個工作負載位址'
+    io.pasturestack.catalog.question.start_address.description.zh-tw: '控制平面可分配給受管工作負載的第一個 IPv4 位址。'
+    io.pasturestack.catalog.question.end_address.label.zh-tw: '最後一個工作負載位址'
+    io.pasturestack.catalog.question.end_address.description.zh-tw: '控制平面可分配給受管工作負載的最後一個 IPv4 位址。'
+    io.pasturestack.catalog.question.gateway.label.zh-tw: '預設閘道'
+    io.pasturestack.catalog.question.gateway.description.zh-tw: '共用子網路中受管工作負載使用的 IPv4 閘道。'
+    io.pasturestack.catalog.question.mtu.label.zh-tw: '網路 MTU'
+    io.pasturestack.catalog.question.mtu.description.zh-tw: '實體第 2 層網路端對端支援的 MTU。'
+    io.pasturestack.catalog.question.host_ports.label.zh-tw: '啟用主機連接埠'
+    io.pasturestack.catalog.question.host_ports.description.zh-tw: '允許受管工作負載在主機上公開連接埠。'
+    io.pasturestack.catalog.question.pasturestack_metadata_address.label.zh-tw: '中繼資料服務位址'
+    io.pasturestack.catalog.question.pasturestack_metadata_address.description.zh-tw: '相容中繼資料服務使用的連結本機 IPv4 位址。'
+    io.pasturestack.catalog.question.pasturestack_debug.label.zh-tw: '啟用除錯日誌'
+    io.pasturestack.catalog.question.pasturestack_debug.description.zh-tw: '記錄較詳細的網橋設定與 CNI 操作診斷資訊。'
+  questions:
+  - variable: LAYER_2_BRIDGE
+    label: Layer 2 bridge
+    description: Existing or automatically configured host bridge used by the shared Layer 2 network.
+    type: string
+    default: flatbr0
+    required: true
+  - variable: FLAT_INTERFACE
+    label: Physical interface
+    description: Physical host interface to attach to the bridge only when automatic bridge setup is enabled.
+    type: string
+    default: eth0
+    required: true
+  - variable: AUTO_SETUP_LAYER_2_BRIDGE
+    label: Configure the bridge automatically
+    description: Move the physical interface address onto the Layer 2 bridge. Verify console access before enabling this option.
+    type: boolean
+    default: 'false'
+    required: true
+  - variable: SUBNET
+    label: Shared subnet
+    description: IPv4 subnet shared by the hosts, bridge, gateway, and managed workloads.
+    type: string
+    default: 192.0.2.0/24
+    required: true
+  - variable: START_ADDRESS
+    label: First workload address
+    description: First IPv4 address that the control plane may assign to a managed workload.
+    type: string
+    default: 192.0.2.100
+    required: true
+  - variable: END_ADDRESS
+    label: Last workload address
+    description: Last IPv4 address that the control plane may assign to a managed workload.
+    type: string
+    default: 192.0.2.199
+    required: true
+  - variable: GATEWAY
+    label: Default gateway
+    description: IPv4 gateway for managed workloads on the shared subnet.
+    type: string
+    default: 192.0.2.1
+    required: true
+  - variable: MTU
+    label: Network MTU
+    description: MTU supported end to end by the physical Layer 2 network.
+    type: int
+    default: 1500
+    required: true
+  - variable: HOST_PORTS
+    label: Enable host ports
+    description: Allow managed workloads to publish ports on their hosts.
+    type: boolean
+    default: 'true'
+    required: true
+  - variable: PASTURESTACK_METADATA_ADDRESS
+    label: Metadata address
+    description: Link-local IPv4 address of the compatible metadata service.
+    type: string
+    default: 169.254.169.250
+    required: true
+  - variable: PASTURESTACK_DEBUG
+    label: Enable debug logs
+    description: Enable verbose diagnostics for bridge setup and CNI operations.
+    type: boolean
+    default: 'false'
+    required: true
