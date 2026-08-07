@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: MIT
+version: '2'
+.catalog:
+  name: PastureStack Windows Container Networking
+  version: v0.1.0-windows-ltsc2022-pasturestack.1
+  description: Define NAT and transparent Docker network drivers for compatible Windows container hosts.
+  minimum_rancher_version: v1.6.15-rc1
+  labels:
+    io.pasturestack.catalog.name.zh-tw: 'PastureStack Windows 容器網路'
+    io.pasturestack.catalog.description.zh-tw: '為相容的 Windows 容器主機定義 NAT 與透明 Docker 網路驅動程式。'
+    io.pasturestack.catalog.question.transparent_network_driver_name.label.zh-tw: '透明網路驅動程式名稱'
+    io.pasturestack.catalog.question.transparent_network_driver_name.description.zh-tw: 'Windows 主機上已設定的透明網路驅動程式名稱。'
+  questions:
+  - variable: TRANSPARENT_NETWORK_DRIVER_NAME
+    label: Transparent network driver name
+    description: Existing transparent network driver name configured on the Windows host.
+    type: string
+    required: true
+    default: transparent
+
+services:
+  windows-nat-network:
+    network_driver:
+      name: PastureStack Windows NAT Network
+      default_network:
+        name: nat
+        kind: nat
+
+  windows-transparent-network:
+    network_driver:
+      name: PastureStack Windows Transparent Network
+      default_network:
+        name: transparent
+        kind: $TRANSPARENT_NETWORK_DRIVER_NAME

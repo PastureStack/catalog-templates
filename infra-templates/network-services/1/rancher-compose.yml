@@ -1,12 +1,49 @@
+# SPDX-License-Identifier: MIT
 .catalog:
-  name: Network Services
-  version: v0.0.2
-  minimum_rancher_version: v1.1.99
-  maximum_rancher_version: v1.3.99
+  name: PastureStack Network Services
+  version: 0.3.0-rc2
+  description: Install host networking, metadata, and internal DNS services required by managed workloads.
+  minimum_rancher_version: v1.6.26-rc1
   questions:
-    - variable: "DOCKER_BRIDGE"
-      label: "Docker Bridge"
-      description: "Name of Docker Bridge. Default is `docker0`"
-      type: "string"
-      default: "docker0"
-      required: true
+  - variable: DOCKER_BRIDGE
+    label: Docker bridge
+    description: Host bridge used for managed workload traffic.
+    type: string
+    default: docker0
+    required: true
+  - variable: DNS_RECURSER_TIMEOUT
+    label: DNS recursion timeout
+    description: Seconds allowed for an upstream DNS query.
+    type: int
+    default: 2
+    required: true
+  - variable: TTL
+    label: Service discovery TTL
+    description: Seconds that internal service-discovery answers remain valid.
+    type: int
+    default: 1
+    required: true
+  - variable: CPU_PERIOD
+    label: Metadata CPU period
+    description: CPU scheduler period assigned to each metadata service instance.
+    type: int
+    default: 400000
+    required: true
+  - variable: CPU_QUOTA
+    label: Metadata CPU quota
+    description: CPU quota assigned to each metadata service instance.
+    type: int
+    default: 200000
+    required: true
+  - variable: RELOAD_INTERVAL_LIMIT
+    label: Metadata reload interval
+    description: Minimum milliseconds between metadata configuration reloads.
+    type: int
+    default: 1000
+    required: true
+  - variable: ARP_SYNC_INTERVAL
+    label: ARP synchronization interval
+    description: Seconds between host ARP reconciliation passes.
+    type: int
+    default: 5
+    required: true

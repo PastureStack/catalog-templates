@@ -1,0 +1,66 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack NFS Storage
+  version: v0.10.0-pasturestack.1
+  description: Provide NFS v3 and v4 Docker volumes with safe data-retention defaults.
+  minimum_rancher_version: v1.6.15-rc1
+  labels:
+    io.pasturestack.catalog.question.nfs_server.label.zh-tw: 'NFS 伺服器'
+    io.pasturestack.catalog.question.nfs_server.description.zh-tw: '預設 NFS 伺服器的 IP 位址或 DNS 名稱。'
+    io.pasturestack.catalog.question.mount_dir.label.zh-tw: '匯出基底目錄'
+    io.pasturestack.catalog.question.mount_dir.description.zh-tw: '預設匯出基底目錄的絕對路徑。'
+    io.pasturestack.catalog.question.mount_opts.label.zh-tw: '掛載選項'
+    io.pasturestack.catalog.question.mount_opts.description.zh-tw: 'NFS 版本以外的掛載選項，以半形逗號分隔。'
+    io.pasturestack.catalog.question.nfs_vers.label.zh-tw: 'NFS 版本'
+    io.pasturestack.catalog.question.nfs_vers.description.zh-tw: '預設使用的 NFS 協定版本。'
+    io.pasturestack.catalog.question.on_remove.label.zh-tw: '資料移除原則'
+    io.pasturestack.catalog.question.on_remove.description.zh-tw: '預設保留資料；只有明確選擇清除時，才會刪除驅動程式所管理的磁碟區子目錄。'
+    io.pasturestack.catalog.question.pasturestack_debug.label.zh-tw: '啟用除錯日誌'
+    io.pasturestack.catalog.question.pasturestack_debug.description.zh-tw: '記錄較詳細的儲存驅動程式診斷資訊。'
+  questions:
+  - variable: NFS_SERVER
+    label: NFS server
+    description: IP address or DNS name of the default NFS server.
+    type: string
+    required: true
+  - variable: MOUNT_DIR
+    label: Export base directory
+    description: Absolute path of the default exported base directory.
+    type: string
+    required: true
+  - variable: MOUNT_OPTS
+    label: Mount options
+    description: Comma-delimited mount options other than the NFS version.
+    type: string
+    default: proto=tcp
+    required: true
+  - variable: NFS_VERS
+    label: NFS version
+    description: Default NFS protocol version.
+    type: enum
+    default: nfsvers=4
+    required: true
+    options:
+    - nfsvers=4
+    - nfsvers=3
+  - variable: ON_REMOVE
+    label: Data removal policy
+    description: Retain data by default, or explicitly purge the driver's owned volume subdirectory.
+    type: enum
+    default: retain
+    required: true
+    options:
+    - retain
+    - purge
+  - variable: PASTURESTACK_DEBUG
+    label: Enable debug logging
+    description: Enable verbose storage-driver diagnostics.
+    type: boolean
+    default: false
+    required: true
+
+nfs-storage-driver:
+  storage_driver:
+    name: pasturestack-nfs
+    scope: environment
+    volume_access_mode: multiHostRW

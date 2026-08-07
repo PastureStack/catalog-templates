@@ -1,28 +1,116 @@
-#!/bin/bash
-set -ex
+#!/usr/bin/env bash
+set -euo pipefail
 
-cd $(dirname $0)/..
+repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+cd "$repo_root"
 
-trap "rm -rf /scratch/*" exit
+scratch_config=
+service_log=
+service_pid=
+test_parent=
+cache_dir=
+cleanup() {
+    status=$?
+    if [ "$status" -ne 0 ] && [ -f "${service_log:-}" ]; then
+        tail -100 "$service_log" >&2 || true
+    fi
+    if [ -n "${service_pid:-}" ]; then
+        kill "$service_pid" 2>/dev/null || true
+        wait "$service_pid" 2>/dev/null || true
+    fi
+    [ -z "${scratch_config:-}" ] || rm -f -- "$scratch_config"
+    [ -z "${service_log:-}" ] || rm -f -- "$service_log"
+    [ -z "${test_parent:-}" ] || rm -rf -- "$test_parent"
+    [ -z "${cache_dir:-}" ] || rm -rf -- "$cache_dir"
+    exit "$status"
+}
+trap cleanup EXIT
 
-GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-if [ -n "${DRONE_BRANCH}" ] && [ "${DRONE_BRANCH}" != "${GIT_BRANCH}" ]; then
-    git checkout -b ${DRONE_BRANCH}
-    GIT_BRANCH=${DRONE_BRANCH}
+: "${CATALOG_SERVICE_BIN:?Set CATALOG_SERVICE_BIN to a reviewed catalog-service binary}"
+if ! command -v "$CATALOG_SERVICE_BIN" >/dev/null 2>&1; then
+    echo "CATALOG_SERVICE_BIN must identify an executable catalog-service binary" >&2
+    exit 2
+fi
+CATALOG_SERVICE_BIN=$(command -v "$CATALOG_SERVICE_BIN")
+
+bash scripts/audit-deployable-images
+
+source_commit=$(git rev-parse HEAD)
+test_branch=pasturestack-catalog-test
+test_parent=$(mktemp -d /tmp/pasturestack-catalog-test.XXXXXX)
+test_repo="$test_parent/repo"
+git clone --quiet --no-hardlinks "$repo_root" "$test_repo"
+git -C "$test_repo" checkout --quiet -B "$test_branch" "$source_commit"
+
+export CATALOG_SERVICE_BIN
+export CATALOG_TEST_REPO="$test_repo"
+export CATALOG_TEST_BRANCH="$test_branch"
+export CATALOG_TEST_COMMIT="$source_commit"
+
+scratch_config=$(mktemp /tmp/pasturestack-catalog-config.XXXXXX)
+service_log=$(mktemp /tmp/pasturestack-catalog-service.XXXXXX.log)
+cache_dir=$(mktemp -d /tmp/pasturestack-catalog-cache.XXXXXX)
+cat > "$scratch_config" <<JSON
+{
+  "catalogs": {
+    "library": {
+      "url": "${CATALOG_TEST_REPO}",
+      "branch": "${CATALOG_TEST_BRANCH}",
+      "pinnedCommit": "${CATALOG_TEST_COMMIT}"
+    }
+  }
+}
+JSON
+
+(
+    cd "$cache_dir"
+    exec "$CATALOG_SERVICE_BIN" \
+        --config "$scratch_config" \
+        --cache "$cache_dir" \
+        --sqlite \
+        --refresh-interval 7200 \
+        --port 8088
+) >"$service_log" 2>&1 &
+service_pid=$!
+
+ready=false
+for _ in $(seq 1 30); do
+    if curl -fsS http://localhost:8088/v1-catalog/schemas >/dev/null; then
+        ready=true
+        break
+    fi
+    sleep 1
+done
+if [ "$ready" != true ]; then
+    echo "catalog-service did not become ready" >&2
+    exit 1
 fi
 
-if [ "$GIT_BRANCH" != "master" ]; then
-  sed -i "s#master#$GIT_BRANCH#" ./scripts/repo.json
-fi
+for version_id in \
+    kubernetes-cluster:2 \
+    kubernetes-cluster:3 \
+    kubernetes-cluster:4 \
+    kubernetes-cluster:5 \
+    healthcheck:0 \
+    healthcheck:1 \
+    ipsec-overlay:1 \
+    ipsec-overlay:2 \
+    network-diagnostics:1 \
+    network-diagnostics:2 \
+    network-policy-manager:1 \
+    network-policy-manager:2 \
+    network-services:1 \
+    network-services:2 \
+    nfs-storage:1 \
+    nfs-storage:2 \
+    resource-scheduler:1 \
+    resource-scheduler:2 \
+    secret-volume-driver:1 \
+    secret-volume-driver:2; do
+    curl -fsS \
+        "http://localhost:8088/v1-catalog/templateversions/library:infra*${version_id}" \
+        >/dev/null
+done
 
-if [ -d "/scratch" ]; then
-    rsync -a --exclude .tox ./ /scratch
-fi
-
-pushd ./integration
-
-# Start rancher-catalog-service and wait for it to start.
-/usr/bin/rancher-catalog-service -catalogUrl ../ -refreshInterval 7200 > /dev/null 2>&1 &
-sleep 10
-tox -e flake8,py27
-popd
+cd integration
+tox -e flake8,py314

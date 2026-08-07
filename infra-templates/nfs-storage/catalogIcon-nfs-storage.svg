@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title description">
+  <title id="title">PastureStack NFS Storage</title>
+  <desc id="description">Three storage layers connected to a network hub</desc>
+  <defs>
+    <linearGradient id="storage" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#19b9c6"/>
+      <stop offset="1" stop-color="#0878b8"/>
+    </linearGradient>
+    <linearGradient id="network" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#60c96f"/>
+      <stop offset="1" stop-color="#2f9d62"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M128 70v38M75 188v-24h106v24" stroke="#445b69" stroke-width="12"/>
+    <circle cx="128" cy="54" r="25" fill="url(#network)" stroke="#fff" stroke-width="8"/>
+    <circle cx="75" cy="199" r="18" fill="#60c96f" stroke="#fff" stroke-width="7"/>
+    <circle cx="181" cy="199" r="18" fill="#60c96f" stroke="#fff" stroke-width="7"/>
+    <g fill="url(#storage)" stroke="#fff" stroke-width="7">
+      <path d="M54 91c0-13 33-24 74-24s74 11 74 24v57c0 14-33 25-74 25s-74-11-74-25z"/>
+      <ellipse cx="128" cy="91" rx="74" ry="24"/>
+      <path d="M54 119c0 14 33 25 74 25s74-11 74-25"/>
+    </g>
+    <path d="M95 104h40" stroke="#fff" stroke-width="9"/>
+    <circle cx="172" cy="105" r="6" fill="#fff" stroke="none"/>
+  </g>
+</svg>

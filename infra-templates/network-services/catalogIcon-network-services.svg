@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: MIT -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">PastureStack Network Services</title>
+  <desc id="desc">Three connected service nodes around a central network hub.</desc>
+  <defs>
+    <linearGradient id="hub" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#19b7a6"/>
+      <stop offset="1" stop-color="#087ea4"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M64 64 31 30M64 64l33-34M64 64l33 34" stroke="#087ea4" stroke-width="8"/>
+    <circle cx="64" cy="64" r="18" fill="url(#hub)" stroke="#075b78" stroke-width="5"/>
+    <circle cx="31" cy="30" r="15" fill="#f3b61f" stroke="#a96500" stroke-width="5"/>
+    <circle cx="97" cy="30" r="15" fill="#51c878" stroke="#16713b" stroke-width="5"/>
+    <circle cx="97" cy="98" r="15" fill="#7b75e8" stroke="#423da0" stroke-width="5"/>
+    <path d="M55 64h18M64 55v18" stroke="#fff" stroke-width="5"/>
+  </g>
+</svg>

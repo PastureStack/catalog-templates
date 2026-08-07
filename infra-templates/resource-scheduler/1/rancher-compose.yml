@@ -1,0 +1,60 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: Resource Scheduler
+  description: Schedule native workloads from control-plane events and current Metadata state.
+  version: v0.8.15
+  minimum_rancher_version: v1.6.26-rc1
+  questions:
+    - variable: PASTURESTACK_DEBUG
+      label: Enable debug logging
+      description: Enable verbose scheduler diagnostics.
+      type: boolean
+      default: false
+      required: true
+    - variable: HEALTHCHECK_INTERVAL
+      label: Health-check interval
+      description: Milliseconds between health checks.
+      type: int
+      default: 2000
+      required: true
+    - variable: HEALTHCHECK_INIT_TIMEOUT
+      label: Initialization timeout
+      description: Milliseconds allowed for initial scheduler readiness.
+      type: int
+      default: 10000
+      required: true
+    - variable: HEALTHCHECK_REINIT_TIMEOUT
+      label: Reinitialization timeout
+      description: Milliseconds allowed for scheduler reinitialization.
+      type: int
+      default: 10000
+      required: true
+    - variable: HEALTHCHECK_RESPONSE_TIMEOUT
+      label: Response timeout
+      description: Milliseconds allowed for an individual health-check response.
+      type: int
+      default: 30000
+      required: true
+    - variable: HEALTHCHECK_UNHEALTHY_THRESHOLD
+      label: Unhealthy threshold
+      description: Consecutive failed checks required to mark the service unhealthy.
+      type: int
+      default: 3
+      required: true
+    - variable: HEALTHCHECK_HEALTHY_THRESHOLD
+      label: Healthy threshold
+      description: Consecutive successful checks required to mark the service healthy.
+      type: int
+      default: 2
+      required: true
+
+resource-scheduler:
+  health_check:
+    request_line: GET /healthcheck HTTP/1.0
+    port: 80
+    interval: ${HEALTHCHECK_INTERVAL}
+    initializing_timeout: ${HEALTHCHECK_INIT_TIMEOUT}
+    reinitializing_timeout: ${HEALTHCHECK_REINIT_TIMEOUT}
+    response_timeout: ${HEALTHCHECK_RESPONSE_TIMEOUT}
+    unhealthy_threshold: ${HEALTHCHECK_UNHEALTHY_THRESHOLD}
+    healthy_threshold: ${HEALTHCHECK_HEALTHY_THRESHOLD}

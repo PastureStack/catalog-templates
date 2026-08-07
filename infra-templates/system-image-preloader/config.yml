@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+name: System Image Preloader
+description: Preload the container images required by compatible infrastructure stacks.
+version: v0.3.0-pasturestack.1
+category: System
+maintainer: PastureStack contributors
+license: MIT template; Apache-2.0 image and bundled dependency licenses apply
+project_url: https://github.com/PastureStack/system-image-preloader
+labels:
+  io.pasturestack.catalog.origin: upstream-first-party
+  io.pasturestack.catalog.origin-template: pre-pull-images
+  io.pasturestack.catalog.origin-status: first-party
+  io.rancher.orchestration.supported: 'cattle'
+  io.pasturestack.catalog.name.zh-tw: '系統映像預先下載'
+  io.pasturestack.catalog.description.zh-tw: '預先下載相容基礎架構堆疊所需的容器映像，以縮短主機升級等待時間。'
