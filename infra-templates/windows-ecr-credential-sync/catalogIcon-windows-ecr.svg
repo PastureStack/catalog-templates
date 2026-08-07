@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">PastureStack Windows ECR credential synchronization</title>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="38" y="38" width="72" height="72" rx="16" fill="#00A6A6"/>
+    <rect x="122" y="38" width="72" height="72" rx="16" fill="#007E9E"/>
+    <rect x="38" y="122" width="72" height="72" rx="16" fill="#72C9C9"/>
+    <rect x="122" y="122" width="72" height="72" rx="16" fill="#075B78"/>
+    <path d="M178 154a50 50 0 0 1-82 38" stroke="#F4B942" stroke-width="14"/>
+    <path d="m87 181 8 18 18-8" stroke="#F4B942" stroke-width="14"/>
+    <circle cx="182" cy="174" r="27" fill="#fff" stroke="#075B78" stroke-width="10"/>
+    <path d="M182 174h34m-10 0v12m-12-12v8" stroke="#075B78" stroke-width="10"/>
+  </g>
+</svg>

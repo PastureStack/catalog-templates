@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">PastureStack Windows container networking</title>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="42" y="38" width="70" height="70" rx="17" fill="#00A6A6"/>
+    <rect x="124" y="38" width="70" height="70" rx="17" fill="#007E9E"/>
+    <rect x="42" y="120" width="70" height="70" rx="17" fill="#72C9C9"/>
+    <rect x="124" y="120" width="70" height="70" rx="17" fill="#075B78"/>
+    <path d="M77 208v16m82-16v16M77 224h82" stroke="#075B78" stroke-width="12"/>
+    <circle cx="77" cy="224" r="15" fill="#F4B942" stroke="#075B78" stroke-width="7"/>
+    <circle cx="159" cy="224" r="15" fill="#F4B942" stroke="#075B78" stroke-width="7"/>
+    <path d="M112 72h12m-6-6 6 6-6 6M112 155h12m-6-6 6 6-6 6" stroke="#fff" stroke-width="8"/>
+  </g>
+</svg>

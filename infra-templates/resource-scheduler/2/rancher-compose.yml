@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: Resource Scheduler
+  description: Schedule native workloads from control-plane events and current Metadata state.
+  version: v0.8.15-pasturestack.1
+  minimum_rancher_version: v1.6.26-rc1
+  labels:
+    io.pasturestack.catalog.question.pasturestack_debug.label.zh-tw: '啟用除錯日誌'
+    io.pasturestack.catalog.question.pasturestack_debug.description.zh-tw: '記錄較詳細的排程器診斷資訊。'
+    io.pasturestack.catalog.question.healthcheck_interval.label.zh-tw: '健康檢查間隔'
+    io.pasturestack.catalog.question.healthcheck_interval.description.zh-tw: '兩次健康檢查之間的毫秒數。'
+    io.pasturestack.catalog.question.healthcheck_init_timeout.label.zh-tw: '初始化逾時'
+    io.pasturestack.catalog.question.healthcheck_init_timeout.description.zh-tw: '等待排程器初次就緒的毫秒數上限。'
+    io.pasturestack.catalog.question.healthcheck_reinit_timeout.label.zh-tw: '重新初始化逾時'
+    io.pasturestack.catalog.question.healthcheck_reinit_timeout.description.zh-tw: '等待排程器重新初始化的毫秒數上限。'
+    io.pasturestack.catalog.question.healthcheck_response_timeout.label.zh-tw: '回應逾時'
+    io.pasturestack.catalog.question.healthcheck_response_timeout.description.zh-tw: '等待單次健康檢查回應的毫秒數上限。'
+    io.pasturestack.catalog.question.healthcheck_unhealthy_threshold.label.zh-tw: '判定為不健康的失敗次數'
+    io.pasturestack.catalog.question.healthcheck_unhealthy_threshold.description.zh-tw: '連續失敗達到此次數時，將服務標示為不健康。'
+    io.pasturestack.catalog.question.healthcheck_healthy_threshold.label.zh-tw: '判定為健康的成功次數'
+    io.pasturestack.catalog.question.healthcheck_healthy_threshold.description.zh-tw: '連續成功達到此次數時，將服務標示為健康。'
+  questions:
+    - variable: PASTURESTACK_DEBUG
+      label: Enable debug logging
+      description: Enable verbose scheduler diagnostics.
+      type: boolean
+      default: false
+      required: true
+    - variable: HEALTHCHECK_INTERVAL
+      label: Health-check interval
+      description: Milliseconds between health checks.
+      type: int
+      default: 2000
+      required: true
+    - variable: HEALTHCHECK_INIT_TIMEOUT
+      label: Initialization timeout
+      description: Milliseconds allowed for initial scheduler readiness.
+      type: int
+      default: 10000
+      required: true
+    - variable: HEALTHCHECK_REINIT_TIMEOUT
+      label: Reinitialization timeout
+      description: Milliseconds allowed for scheduler reinitialization.
+      type: int
+      default: 10000
+      required: true
+    - variable: HEALTHCHECK_RESPONSE_TIMEOUT
+      label: Response timeout
+      description: Milliseconds allowed for an individual health-check response.
+      type: int
+      default: 30000
+      required: true
+    - variable: HEALTHCHECK_UNHEALTHY_THRESHOLD
+      label: Unhealthy threshold
+      description: Consecutive failed checks required to mark the service unhealthy.
+      type: int
+      default: 3
+      required: true
+    - variable: HEALTHCHECK_HEALTHY_THRESHOLD
+      label: Healthy threshold
+      description: Consecutive successful checks required to mark the service healthy.
+      type: int
+      default: 2
+      required: true
+
+resource-scheduler:
+  health_check:
+    request_line: GET /healthcheck HTTP/1.0
+    port: 80
+    interval: ${HEALTHCHECK_INTERVAL}
+    initializing_timeout: ${HEALTHCHECK_INIT_TIMEOUT}
+    reinitializing_timeout: ${HEALTHCHECK_REINIT_TIMEOUT}
+    response_timeout: ${HEALTHCHECK_RESPONSE_TIMEOUT}
+    unhealthy_threshold: ${HEALTHCHECK_UNHEALTHY_THRESHOLD}
+    healthy_threshold: ${HEALTHCHECK_HEALTHY_THRESHOLD}

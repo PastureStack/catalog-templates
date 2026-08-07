@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack Secret Volume
+  version: v0.1.1
+  description: Deliver approved encrypted secrets to workloads through isolated in-memory volumes.
+  minimum_rancher_version: v1.6.15-rc1
+
+secret-volume-driver:
+  storage_driver:
+    name: pasturestack-secret-volume
+    description: Secure in-memory secret volume driver
+    scope: local
+    create_supported: false
+    volume_access_mode: singleHostRW
+    volume_capabilities:
+    - secrets
+  start_on_create: true
+  health_check:
+    request_line: GET /readyz HTTP/1.0
+    port: 8093
+    interval: 10000
+    initializing_timeout: 120000
+    reinitializing_timeout: 120000
+    response_timeout: 3000
+    healthy_threshold: 2
+    unhealthy_threshold: 3
+    strategy: none

@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+version: '2'
+
+services:
+  windows-nat-network:
+    image: ghcr.io/pasturestack/pod-pause-image:v3.0.1-pasturestack.1
+    labels:
+      io.rancher.service.selector.container: experimental-windows-rancher
+
+  windows-transparent-network:
+    image: ghcr.io/pasturestack/pod-pause-image:v3.0.1-pasturestack.1
+    labels:
+      io.rancher.service.selector.container: experimental-windows-rancher

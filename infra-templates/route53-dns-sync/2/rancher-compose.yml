@@ -1,0 +1,125 @@
+# SPDX-License-Identifier: MIT
+version: '2'
+.catalog:
+  name: PastureStack Route 53 DNS Sync
+  version: v0.8.0-pasturestack.1
+  description: Synchronize compatible environment service addresses to an Amazon Route 53 hosted zone.
+  minimum_rancher_version: v1.6.13-rc1
+  labels:
+    io.pasturestack.catalog.question.aws_region.label.zh-tw: 'AWS 區域'
+    io.pasturestack.catalog.question.aws_region.description.zh-tw: 'AWS 要求籤章使用的區域；請使用 AWS 帳戶設定的區域。'
+    io.pasturestack.catalog.question.aws_access_key_id.label.zh-tw: 'AWS 存取金鑰識別碼'
+    io.pasturestack.catalog.question.aws_access_key_id.description.zh-tw: '由 EC2 IAM 角色提供登入資訊時可留空。'
+    io.pasturestack.catalog.question.aws_secret_access_key.label.zh-tw: 'AWS 私密存取金鑰'
+    io.pasturestack.catalog.question.aws_secret_access_key.description.zh-tw: '與 AWS 存取金鑰識別碼配對的私密金鑰。'
+    io.pasturestack.catalog.question.aws_session_token.label.zh-tw: 'AWS 工作階段權杖'
+    io.pasturestack.catalog.question.aws_session_token.description.zh-tw: '使用 AWS 臨時登入資訊時提供的選用權杖。'
+    io.pasturestack.catalog.question.root_domain.label.zh-tw: '託管區域名稱'
+    io.pasturestack.catalog.question.root_domain.description.zh-tw: '既有 Route 53 託管區域名稱，例如 example.com。'
+    io.pasturestack.catalog.question.route53_zone_id.label.zh-tw: '託管區域識別碼'
+    io.pasturestack.catalog.question.route53_zone_id.description.zh-tw: '選填；若有多個同名託管區域則為必填。'
+    io.pasturestack.catalog.question.name_template.label.zh-tw: 'DNS 名稱範本'
+    io.pasturestack.catalog.question.name_template.description.zh-tw: '選用的紀錄名稱範本；留空時使用服務、堆疊與環境名稱。'
+    io.pasturestack.catalog.question.ttl.label.zh-tw: 'DNS 紀錄存留時間'
+    io.pasturestack.catalog.question.ttl.description.zh-tw: '資源紀錄可快取的秒數。'
+    io.pasturestack.catalog.question.route53_max_retries.label.zh-tw: 'Route 53 重試次數上限'
+    io.pasturestack.catalog.question.route53_max_retries.description.zh-tw: 'Route 53 要求遭限流或暫時失敗時的重試次數上限。'
+    io.pasturestack.catalog.question.mount_platform_ca.label.zh-tw: '掛載平台 CA 憑證'
+    io.pasturestack.catalog.question.mount_platform_ca.description.zh-tw: '相容環境 API 使用私有憑證授權單位時，掛載經審核的主機 CA 檔案。'
+    io.pasturestack.catalog.question.platform_ca_file.label.zh-tw: '平台 CA 憑證路徑'
+    io.pasturestack.catalog.question.platform_ca_file.description.zh-tw: 'PEM 格式 CA 憑證的主機絕對路徑；只有啟用掛載時才會使用。'
+    io.pasturestack.catalog.question.health_check_interval.label.zh-tw: '健康檢查間隔'
+    io.pasturestack.catalog.question.health_check_interval.description.zh-tw: '兩次相依服務感知健康檢查之間的毫秒數。'
+  questions:
+    - variable: AWS_REGION
+      label: AWS region
+      description: AWS signing region; use the region configured for your AWS account.
+      type: string
+      default: us-east-1
+      required: true
+    - variable: AWS_ACCESS_KEY_ID
+      label: AWS access key ID
+      description: Optional when an EC2 IAM role supplies credentials.
+      type: string
+      default: ''
+      required: false
+    - variable: AWS_SECRET_ACCESS_KEY
+      label: AWS secret access key
+      description: Secret paired with the AWS access key ID.
+      type: password
+      default: ''
+      required: false
+    - variable: AWS_SESSION_TOKEN
+      label: AWS session token
+      description: Optional token for temporary AWS credentials.
+      type: password
+      default: ''
+      required: false
+    - variable: ROOT_DOMAIN
+      label: Hosted zone name
+      description: Existing Route 53 hosted-zone name, such as example.com.
+      type: string
+      default: ''
+      required: true
+    - variable: ROUTE53_ZONE_ID
+      label: Hosted zone ID
+      description: Optional hosted-zone ID; required when more than one zone has the same name.
+      type: string
+      default: ''
+      required: false
+    - variable: NAME_TEMPLATE
+      label: DNS name template
+      description: Optional record-name template; blank uses service, stack, and environment names.
+      type: string
+      default: ''
+      required: false
+    - variable: TTL
+      label: DNS record TTL
+      description: Resource-record cache time in seconds.
+      type: int
+      min: 1
+      max: 86400
+      default: 60
+      required: true
+    - variable: ROUTE53_MAX_RETRIES
+      label: Maximum Route 53 retries
+      description: Retry limit for throttled or transient Route 53 requests.
+      type: int
+      min: 0
+      max: 10
+      default: 3
+      required: true
+    - variable: MOUNT_PLATFORM_CA
+      label: Mount a platform CA certificate
+      description: Mount a reviewed host CA file when the compatible environment API uses a private certificate authority.
+      type: boolean
+      default: false
+      required: true
+    - variable: PLATFORM_CA_FILE
+      label: Platform CA certificate path
+      description: Absolute host path of the PEM-encoded CA certificate; used only when mounting is enabled.
+      type: string
+      default: /var/lib/pasturestack/etc/ssl/ca.crt
+      required: true
+    - variable: HEALTH_CHECK_INTERVAL
+      label: Health check interval
+      description: Milliseconds between dependency-aware health checks.
+      type: int
+      min: 2000
+      max: 60000
+      default: 10000
+      required: true
+
+route53-dns-sync:
+  scale: 1
+  start_on_create: true
+  health_check:
+    request_line: GET /ping HTTP/1.0
+    port: 10000
+    interval: ${HEALTH_CHECK_INTERVAL}
+    initializing_timeout: 60000
+    reinitializing_timeout: 60000
+    response_timeout: 8000
+    healthy_threshold: 2
+    unhealthy_threshold: 3
+    strategy: none

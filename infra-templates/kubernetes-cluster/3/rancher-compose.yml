@@ -1,0 +1,360 @@
+.catalog:
+  name: PastureStack Kubernetes Cluster
+  version: v1.12.10-pasturestack.3
+  description: Maintained Kubernetes 1.12 compatibility control plane and host services.
+  minimum_rancher_version: v1.6.29-rc1
+  labels:
+    io.pasturestack.catalog.name.zh-tw: 'PastureStack Kubernetes 叢集'
+    io.pasturestack.catalog.description.zh-tw: '部署維護中的 Kubernetes 1.12 相容控制平面與主機服務。'
+    io.pasturestack.catalog.question.constraint_type.label.zh-tw: '平面隔離'
+    io.pasturestack.catalog.question.constraint_type.description.zh-tw: '使用主機標籤隔離資料、協調與運算平面；正式環境請選擇「required」。'
+    io.pasturestack.catalog.question.cloud_provider.label.zh-tw: '雲端服務供應商'
+    io.pasturestack.catalog.question.cloud_provider.description.zh-tw: 'Kubernetes 叢集所在的雲端環境；自行管理的主機請選擇「none」。'
+    io.pasturestack.catalog.question.azure_cloud.label.zh-tw: 'Azure 雲端環境'
+    io.pasturestack.catalog.question.azure_cloud.description.zh-tw: '選擇 Azure 雲端環境識別值。'
+    io.pasturestack.catalog.question.azure_tenant_id.label.zh-tw: 'Azure 租用戶識別碼'
+    io.pasturestack.catalog.question.azure_tenant_id.description.zh-tw: '叢集所在 Azure 訂用帳戶的 Microsoft Entra 租用戶識別碼。'
+    io.pasturestack.catalog.question.azure_client_id.label.zh-tw: 'Azure 用戶端識別碼'
+    io.pasturestack.catalog.question.azure_client_id.description.zh-tw: '可存取 Azure API 的應用程式用戶端識別碼。'
+    io.pasturestack.catalog.question.azure_client_secret.label.zh-tw: 'Azure 用戶端密碼'
+    io.pasturestack.catalog.question.azure_client_secret.description.zh-tw: '可存取 Azure API 的應用程式用戶端密碼。'
+    io.pasturestack.catalog.question.azure_sec_group.label.zh-tw: 'Azure 網路安全性群組'
+    io.pasturestack.catalog.question.azure_sec_group.description.zh-tw: '套用至負載平衡器後端主機的 Azure 網路安全性群組。'
+    io.pasturestack.catalog.question.rbac.label.zh-tw: 'Kubernetes 角色型存取控制'
+    io.pasturestack.catalog.question.rbac.description.zh-tw: '啟用 Kubernetes 角色型存取控制，並使用平台整合驗證。'
+    io.pasturestack.catalog.question.pod_infra_container_image.label.zh-tw: 'Pod 基礎容器映像'
+    io.pasturestack.catalog.question.pod_infra_container_image.description.zh-tw: '每個 Pod 共用網路與 IPC 命名空間的基礎容器映像；請使用完整映像名稱與版本標籤。'
+    io.pasturestack.catalog.question.http_proxy.label.zh-tw: 'Kubernetes 服務使用的 HTTP Proxy'
+    io.pasturestack.catalog.question.http_proxy.description.zh-tw: '主機位於 Proxy 後方時使用的 HTTP 或 HTTPS Proxy 網址。'
+    io.pasturestack.catalog.question.no_proxy.label.zh-tw: '不使用 Proxy 的位址'
+    io.pasturestack.catalog.question.no_proxy.description.zh-tw: '不經 Proxy 連線的主機名稱、IP 位址或網段，以半形逗號分隔。'
+    io.pasturestack.catalog.question.enable_platform_ingress_controller.label.zh-tw: '啟用入口流量控制器'
+    io.pasturestack.catalog.question.enable_platform_ingress_controller.description.zh-tw: '依 Kubernetes Ingress 資源自動建立平台負載平衡器。'
+    io.pasturestack.catalog.question.platform_lb_separator.label.zh-tw: '負載平衡器名稱分隔字串'
+    io.pasturestack.catalog.question.platform_lb_separator.description.zh-tw: '入口流量控制器產生負載平衡器名稱時使用的分隔字串。'
+    io.pasturestack.catalog.question.additional_kubelet_flags.label.zh-tw: '其他 Kubelet 參數'
+    io.pasturestack.catalog.question.additional_kubelet_flags.description.zh-tw: '附加至 Kubelet 命令列的進階參數。'
+    io.pasturestack.catalog.question.additional_kubeproxy_flags.label.zh-tw: '其他 Kubernetes Proxy 參數'
+    io.pasturestack.catalog.question.additional_kubeproxy_flags.description.zh-tw: '附加至 Kubernetes Proxy 命令列的進階參數。'
+    io.pasturestack.catalog.question.additional_kubeapi_flags.label.zh-tw: '其他 Kubernetes API 伺服器參數'
+    io.pasturestack.catalog.question.additional_kubeapi_flags.description.zh-tw: '附加至 Kubernetes API 伺服器命令列的進階參數。'
+    io.pasturestack.catalog.question.additional_kubescheduler_flags.label.zh-tw: '其他 Kubernetes 排程器參數'
+    io.pasturestack.catalog.question.additional_kubescheduler_flags.description.zh-tw: '附加至 Kubernetes 排程器命令列的進階參數。'
+    io.pasturestack.catalog.question.additional_kubecontrollermanager_flags.label.zh-tw: '其他 Kubernetes 控制器管理員參數'
+    io.pasturestack.catalog.question.additional_kubecontrollermanager_flags.description.zh-tw: '附加至 Kubernetes 控制器管理員命令列的進階參數。'
+    io.pasturestack.catalog.question.fail_on_swap.label.zh-tw: '偵測到交換空間時停止'
+    io.pasturestack.catalog.question.fail_on_swap.description.zh-tw: '主機啟用交換空間時，讓 Kubelet 停止啟動。'
+    io.pasturestack.catalog.question.audit_logs.label.zh-tw: '稽核日誌'
+    io.pasturestack.catalog.question.audit_logs.description.zh-tw: '將 Kubernetes API 伺服器的稽核事件輸出至標準輸出。'
+    io.pasturestack.catalog.question.admission_controllers.label.zh-tw: 'Kubernetes 請求許可控制器'
+    io.pasturestack.catalog.question.admission_controllers.description.zh-tw: '依序驗證或調整已通過身分驗證與授權的 API 請求。'
+    io.pasturestack.catalog.question.service_cluster_cidr.label.zh-tw: '服務叢集 IP 網段'
+    io.pasturestack.catalog.question.service_cluster_cidr.description.zh-tw: '配置服務 IP 的 CIDR 網段，不可與 Pod 網段重疊。'
+    io.pasturestack.catalog.question.kubeapi_cluster_ip.label.zh-tw: 'Kubernetes API 叢集 IP'
+    io.pasturestack.catalog.question.kubeapi_cluster_ip.description.zh-tw: '加入 TLS 憑證 SAN 的 Kubernetes API 服務 IP，通常為服務網段的第一個位址。'
+    io.pasturestack.catalog.question.kubernetes_cipher_suites.label.zh-tw: 'Kubernetes TLS 加密套件'
+    io.pasturestack.catalog.question.kubernetes_cipher_suites.description.zh-tw: 'Kubernetes API 伺服器與 Kubelet 使用的 TLS 加密套件，以半形逗號分隔。'
+    io.pasturestack.catalog.question.embedded_backups.label.zh-tw: '啟用內建備份'
+    io.pasturestack.catalog.question.embedded_backups.description.zh-tw: '定期將 etcd 狀態備份至 /var/etcd/backups；請先在所有主機掛載可靠的儲存空間。'
+    io.pasturestack.catalog.question.backup_period.label.zh-tw: '備份建立間隔'
+    io.pasturestack.catalog.question.backup_period.description.zh-tw: '建立兩次備份之間的時間，必須符合 duration 格式。'
+    io.pasturestack.catalog.question.backup_retention.label.zh-tw: '備份保留期限'
+    io.pasturestack.catalog.question.backup_retention.description.zh-tw: '備份到期前的保留時間，必須符合 duration 格式。'
+    io.pasturestack.catalog.question.etcd_heartbeat_interval.label.zh-tw: 'etcd 心跳間隔'
+    io.pasturestack.catalog.question.etcd_heartbeat_interval.description.zh-tw: 'etcd 心跳間隔，單位為毫秒。'
+    io.pasturestack.catalog.question.etcd_election_timeout.label.zh-tw: 'etcd 選舉逾時'
+    io.pasturestack.catalog.question.etcd_election_timeout.description.zh-tw: 'etcd 等待選舉完成的逾時時間，單位為毫秒。'
+    io.pasturestack.catalog.question.platform_metadata_address.label.zh-tw: '平台中繼資料位址'
+    io.pasturestack.catalog.question.platform_metadata_address.description.zh-tw: '平台中繼資料服務可存取的主機名稱或 IP 位址。'
+    io.pasturestack.catalog.question.cloud_provider_config.label.zh-tw: 'Kubernetes 雲端服務供應商設定'
+    io.pasturestack.catalog.question.cloud_provider_config.description.zh-tw: 'Azure 或 AWS 雲端服務供應商設定檔的完整內容。'
+  questions:
+  - variable: CONSTRAINT_TYPE
+    label: Plane Isolation
+    description: Isolate data, orchestration, and compute planes with host labels. Use required for production-style separation.
+    required: true
+    default: none
+    type: enum
+    options:
+    - none
+    - required
+  - variable: CLOUD_PROVIDER
+    label: Cloud Provider
+    description: Cloud environment for the cluster. Select none for self-managed hosts.
+    required: true
+    default: none
+    type: enum
+    options:
+    - none
+    - aws
+    - azure
+  - variable: AZURE_CLOUD
+    label: Azure Cloud Environment
+    description: Azure cloud environment identifier.
+    required: false
+    default: AzurePublicCloud
+    type: enum
+    options:
+    - AzurePublicCloud
+    - AzureUSGovernmentCloud
+    - AzureChinaCloud
+    - AzureGermanCloud
+  - variable: AZURE_TENANT_ID
+    label: Azure Tenant ID
+    description: Microsoft Entra tenant ID for the Azure subscription where the cluster is deployed.
+    required: false
+    default: ""
+    type: string
+  - variable: AZURE_CLIENT_ID
+    label: Azure Client ID
+    description: Client ID of an application authorized to access Azure APIs.
+    required: false
+    default: ""
+    type: string
+  - variable: AZURE_CLIENT_SECRET
+    label: Azure Client Secret
+    description: Client secret of an application authorized to access Azure APIs.
+    required: false
+    default: ""
+    type: string
+  - variable: AZURE_SEC_GROUP
+    label: Azure Network Security Group
+    description: Network security group assigned to hosts that are Azure load-balancer backends.
+    required: false
+    default: ""
+    type: string
+  - variable: RBAC
+    label: Kubernetes RBAC
+    description: Enable Kubernetes role-based access control with integrated platform authentication.
+    required: true
+    default: false
+    type: boolean
+  - variable: POD_INFRA_CONTAINER_IMAGE
+    label: Pod Infrastructure Container Image
+    description: Complete semantic-tagged image reference used for each pod network and IPC namespace.
+    required: true
+    default: "ghcr.io/pasturestack/pod-pause-image:v3.0.1-pasturestack.1"
+    type: string
+  - variable: HTTP_PROXY
+    label: HTTP Proxy for Kubernetes Services
+    description: HTTP or HTTPS proxy URL used when cluster hosts are behind a proxy.
+    required: false
+    default: ""
+    type: string
+  - variable: NO_PROXY
+    label: Proxy Exclusion List
+    description: Comma-separated host names, addresses, and networks that bypass the proxy.
+    required: false
+    default: rancher.internal,cluster.local,rancher-metadata,platform-kubernetes-authentication,kubernetes,169.254.169.254,169.254.169.250,10.42.0.0/16,10.43.0.0/16
+    type: string
+  - variable: ENABLE_PLATFORM_INGRESS_CONTROLLER
+    label: Enable Platform Ingress Controller
+    description: Create platform load balancers in response to Kubernetes Ingress resources.
+    required: true
+    default: true
+    type: boolean
+  - variable: PLATFORM_LB_SEPARATOR
+    label: Load-Balancer Name Separator
+    description: Separator used in load-balancer names generated by the ingress controller.
+    required: false
+    default: pasturestacklb
+    type: string
+  - variable: ADDITIONAL_KUBELET_FLAGS
+    label: Additional Kubelet Flags
+    description: Advanced flags appended to the Kubelet command line.
+    required: false
+    default: ""
+    type: string
+  - variable: ADDITIONAL_KUBEPROXY_FLAGS
+    label: Additional Kubernetes Proxy Flags
+    description: Advanced flags appended to the Kubernetes Proxy command line.
+    required: false
+    default: ""
+    type: string
+  - variable: ADDITIONAL_KUBEAPI_FLAGS
+    label: Additional Kubernetes API Server Flags
+    description: Advanced flags appended to the Kubernetes API server command line.
+    required: false
+    default: ""
+    type: string
+  - variable: ADDITIONAL_KUBESCHEDULER_FLAGS
+    label: Additional Kubernetes Scheduler Flags
+    description: Advanced flags appended to the Kubernetes scheduler command line.
+    required: false
+    default: ""
+    type: string
+  - variable: ADDITIONAL_KUBECONTROLLERMANAGER_FLAGS
+    label: Additional Kubernetes Controller Manager Flags
+    description: Advanced flags appended to the Kubernetes controller-manager command line.
+    required: false
+    default: ""
+    type: string
+  - variable: FAIL_ON_SWAP
+    label: Fail When Swap Is Enabled
+    description: Stop Kubelet startup when swap is enabled on the host.
+    required: true
+    default: false
+    type: enum
+    options:
+    - true
+    - false
+  - variable: AUDIT_LOGS
+    label: Audit Logs
+    description: Write Kubernetes API server audit events to standard output.
+    required: false
+    default: false
+    type: boolean
+  - variable: ADMISSION_CONTROLLERS
+    label: Kubernetes Admission Controllers
+    description: Ordered controllers that validate or mutate authenticated and authorized API requests.
+    required: false
+    default: NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,DefaultStorageClass,DefaultTolerationSeconds,ResourceQuota
+    type: string
+  - variable: SERVICE_CLUSTER_CIDR
+    label: Service Cluster IP Range
+    description: CIDR range used for service IPs. It must not overlap the pod network.
+    required: true
+    default: "10.43.0.0/16"
+    type: string
+  - variable: KUBEAPI_CLUSTER_IP
+    label: Kubernetes API Cluster IP
+    description: Kubernetes API service IP added to the TLS certificate SAN, normally the first service-network address.
+    required: true
+    default: "10.43.0.1"
+    type: string
+  - variable: KUBERNETES_CIPHER_SUITES
+    label: Kubernetes TLS Cipher Suites
+    description: Comma-separated TLS cipher suites used by the API server and Kubelet.
+    required: true
+    default: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305"
+    type: string
+  - variable: EMBEDDED_BACKUPS
+    label: Enable Embedded Backups
+    description: Periodically back up state to /var/etcd/backups. Mount reliable storage on every host first.
+    required: true
+    default: true
+    type: boolean
+  - variable: BACKUP_PERIOD
+    label: Backup Creation Interval
+    description: Time between backup creations in duration format.
+    required: true
+    default: 15m0s
+    type: string
+  - variable: BACKUP_RETENTION
+    label: Backup Retention Period
+    description: Time before a backup expires in duration format.
+    required: true
+    default: 24h
+    type: string
+  - variable: ETCD_HEARTBEAT_INTERVAL
+    label: etcd Heartbeat Interval
+    description: Heartbeat interval in milliseconds.
+    required: true
+    default: 500
+    type: int
+  - variable: ETCD_ELECTION_TIMEOUT
+    label: etcd Election Timeout
+    description: Election timeout in milliseconds.
+    required: true
+    default: 5000
+    type: int
+  - variable: PLATFORM_METADATA_ADDRESS
+    label: Platform Metadata Address
+    description: Host name or IP address used to reach the platform metadata service.
+    required: true
+    default: "169.254.169.250"
+    type: string
+  - variable: CLOUD_PROVIDER_CONFIG
+    label: Kubernetes Cloud Provider Configuration
+    description: Complete cloud-provider configuration file content for Azure or AWS.
+    required: false
+    default: ""
+    type: multiline
+
+kubernetes:
+  metadata:
+    sans:
+    - "IP:${KUBEAPI_CLUSTER_IP}"
+    - "kubernetes.default.svc.cluster.local"
+    - "kubernetes.default.svc.cluster"
+    - "kubernetes.default.svc"
+  health_check:
+    port: 6443
+    interval: 2000
+    response_timeout: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    initializing_timeout: 60000
+    reinitializing_timeout: 60000
+  retain_ip: true
+
+etcd:
+  metadata:
+    sans:
+    - "IP:127.0.0.1"
+    - "localhost"
+    - "etcd.kubernetes.rancher.internal"
+    - "kubernetes-etcd-1"
+    - "kubernetes-etcd-2"
+    - "kubernetes-etcd-3"
+    - "kubernetes-etcd-4"
+    - "kubernetes-etcd-5"
+  retain_ip: true
+  scale_policy:
+    increment: 1
+    max: 3
+    min: 1
+  health_check:
+    port: 2378
+    interval: 5000
+    response_timeout: 3000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    initializing_timeout: 600000
+    reinitializing_timeout: 120000
+    recreate_on_quorum_strategy_config:
+      quorum: 2
+    strategy: recreateOnQuorum
+
+platform-kubernetes-agent:
+  health_check:
+    request_line: GET /healthcheck HTTP/1.0
+    port: 10240
+    interval: 2000
+    response_timeout: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    initializing_timeout: 60000
+    reinitializing_timeout: 60000
+
+scheduler:
+  health_check:
+    request_line: GET /healthz HTTP/1.0
+    port: 10251
+    interval: 2000
+    response_timeout: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    initializing_timeout: 60000
+    reinitializing_timeout: 60000
+
+controller-manager:
+  health_check:
+    request_line: GET /healthz HTTP/1.0
+    port: 10252
+    interval: 2000
+    response_timeout: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    initializing_timeout: 60000
+    reinitializing_timeout: 60000
+
+kubectld:
+  health_check:
+    port: 10240
+    interval: 2000
+    response_timeout: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    initializing_timeout: 60000
+    reinitializing_timeout: 60000

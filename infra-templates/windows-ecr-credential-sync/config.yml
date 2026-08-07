@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+name: Windows ECR Credential Sync
+description: Refresh short-lived Amazon ECR credentials from compatible Windows Server 2022 hosts.
+version: v3.1.2-windows-ltsc2022-pasturestack.1
+category: Registry
+maintainer: PastureStack contributors
+license: MIT template; Apache-2.0 image, Microsoft Nano Server Supplemental License, and bundled dependency licenses apply
+project_url: https://github.com/PastureStack/ecr-credential-sync
+labels:
+  io.pasturestack.catalog.origin: upstream-first-party
+  io.pasturestack.catalog.origin-template: ecr-windows
+  io.pasturestack.catalog.origin-status: experimental
+  io.rancher.orchestration.supported: 'windows'
+  io.pasturestack.catalog.name.zh-tw: 'Windows ECR 登入資訊同步'
+  io.pasturestack.catalog.description.zh-tw: '從相容的 Windows Server 2022 主機定期更新 Amazon ECR 短效登入資訊。'
