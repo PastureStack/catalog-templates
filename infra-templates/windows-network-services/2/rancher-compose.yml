@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: MIT
+version: '2'
+.catalog:
+  name: PastureStack Windows Network Services
+  version: v0.3.0-windows-ltsc2022-pasturestack.1
+  description: Install metadata and internal DNS services for compatible Windows Server 2022 workloads.
+  minimum_rancher_version: v1.6.15-rc1
+  labels:
+    io.pasturestack.catalog.name.zh-tw: 'PastureStack Windows 網路服務'
+    io.pasturestack.catalog.description.zh-tw: '為相容的 Windows Server 2022 工作負載安裝中繼資料與內部 DNS 服務。'
+    io.pasturestack.catalog.question.dns_recurser_timeout.label.zh-tw: 'DNS 遞迴查詢逾時'
+    io.pasturestack.catalog.question.dns_recurser_timeout.description.zh-tw: '等待上游 DNS 查詢回應的秒數。'
+    io.pasturestack.catalog.question.ttl.label.zh-tw: '服務探索 DNS 記錄存留時間'
+    io.pasturestack.catalog.question.ttl.description.zh-tw: '內部服務探索 DNS 回應可保留的秒數。'
+    io.pasturestack.catalog.question.reload_interval_limit.label.zh-tw: '中繼資料重新載入間隔'
+    io.pasturestack.catalog.question.reload_interval_limit.description.zh-tw: '兩次中繼資料設定重新載入之間的最短毫秒數。'
+  questions:
+  - variable: DNS_RECURSER_TIMEOUT
+    label: DNS recursion timeout
+    description: Seconds allowed for an upstream DNS query.
+    required: true
+    default: 2
+    type: int
+  - variable: TTL
+    label: Service discovery TTL
+    description: Seconds that internal service-discovery answers remain valid.
+    required: true
+    default: 1
+    type: int
+  - variable: RELOAD_INTERVAL_LIMIT
+    label: Metadata reload interval
+    description: Minimum milliseconds between metadata configuration reloads.
+    required: true
+    default: 1000
+    type: int
+
+windows-metadata:
+  scale: 1
+  start_on_create: true
+
+windows-internal-dns:
+  scale: 1
+  start_on_create: true

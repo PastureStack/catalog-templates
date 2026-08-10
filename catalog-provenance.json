@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "sourceRepository": "https://github.com/rancher/rancher-catalog",
+  "preservedBoundary": "44d3e8451b6f7441fb991c0e087d7aad5ad47b84",
+  "classification": "upstream-first-party",
+  "statusSemantics": {
+    "supported": "The source template carried the upstream first-party certification label at the preserved boundary.",
+    "experimental": "The source template carried the upstream Experimental label at the preserved boundary.",
+    "first-party": "The source template was present in the upstream first-party catalog without either status label at the preserved boundary."
+  },
+  "entries": {
+    "amazon-ebs-storage": {
+      "sourcePath": "infra-templates/ebs",
+      "originStatus": "supported"
+    },
+    "amazon-efs-storage": {
+      "sourcePath": "infra-templates/efs",
+      "originStatus": "experimental"
+    },
+    "container-schedule": {
+      "sourcePath": "infra-templates/container-crontab",
+      "originStatus": "first-party"
+    },
+    "ecr-credential-sync": {
+      "sourcePath": "infra-templates/ecr",
+      "originStatus": "supported"
+    },
+    "healthcheck": {
+      "sourcePath": "infra-templates/healthcheck",
+      "originStatus": "supported"
+    },
+    "ipsec-overlay": {
+      "sourcePath": "infra-templates/ipsec",
+      "originStatus": "supported"
+    },
+    "kubernetes-cluster": {
+      "sourcePath": "infra-templates/k8s",
+      "originStatus": "supported"
+    },
+    "layer-2-flat-network": {
+      "sourcePath": "infra-templates/l2-flat",
+      "originStatus": "first-party"
+    },
+    "network-diagnostics": {
+      "sourcePath": "infra-templates/network-diagnostics",
+      "originStatus": "supported"
+    },
+    "network-policy-manager": {
+      "sourcePath": "infra-templates/network-policy-manager",
+      "originStatus": "supported"
+    },
+    "network-services": {
+      "sourcePath": "infra-templates/network-services",
+      "originStatus": "supported"
+    },
+    "nfs-storage": {
+      "sourcePath": "infra-templates/nfs",
+      "originStatus": "supported"
+    },
+    "per-host-subnet-network": {
+      "sourcePath": "infra-templates/per-host-subnet",
+      "originStatus": "supported"
+    },
+    "resource-scheduler": {
+      "sourcePath": "infra-templates/scheduler",
+      "originStatus": "supported"
+    },
+    "route53-dns-sync": {
+      "sourcePath": "infra-templates/route53",
+      "originStatus": "supported"
+    },
+    "secret-volume-driver": {
+      "sourcePath": "infra-templates/secrets",
+      "originStatus": "experimental"
+    },
+    "system-image-preloader": {
+      "sourcePath": "infra-templates/pre-pull-images",
+      "originStatus": "first-party"
+    },
+    "vault-volume-driver": {
+      "sourcePath": "infra-templates/secrets-bridge-v2",
+      "originStatus": "supported"
+    },
+    "vxlan-overlay-network": {
+      "sourcePath": "infra-templates/vxlan",
+      "originStatus": "supported"
+    },
+    "windows-container-networking": {
+      "sourcePath": "infra-templates/windows",
+      "originStatus": "experimental"
+    },
+    "windows-ecr-credential-sync": {
+      "sourcePath": "infra-templates/ecr-windows",
+      "originStatus": "experimental"
+    },
+    "windows-network-services": {
+      "sourcePath": "infra-templates/windows-network-services",
+      "originStatus": "experimental"
+    }
+  }
+}
