@@ -35,8 +35,8 @@ VERSION_TAG_PATTERN = re.compile(
     r"v?\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$"
 )
 COMMIT_PATTERN = re.compile(r"^[0-9a-f]{40}$")
-EXPECTED_INFRA_TEMPLATE_COUNT = 22
-EXPECTED_QUESTION_COUNT = 171
+EXPECTED_INFRA_TEMPLATE_COUNT = 21
+EXPECTED_QUESTION_COUNT = 140
 NON_TAIWAN_TERMS = (
     "審計",
     "日志",
@@ -53,7 +53,6 @@ NON_TAIWAN_TERMS = (
 RETAINED_VERSION_LAYOUTS = {
     "healthcheck": ("0", "1"),
     "ipsec-overlay": ("1", "2"),
-    "kubernetes-cluster": ("2", "3", "4", "5", "6"),
     "network-diagnostics": ("1", "2"),
     "network-policy-manager": ("1", "2"),
     "network-services": ("1", "2"),
@@ -62,22 +61,6 @@ RETAINED_VERSION_LAYOUTS = {
     "secret-volume-driver": ("1", "2"),
 }
 RETAINED_VERSION_HASHES = {
-    "infra-templates/kubernetes-cluster/2/docker-compose.yml.tpl": "ab60161f70e98f2b7b27f46ddc428dc05fcdecf16cfc6226cb2168f1d35f6b83",
-    "infra-templates/kubernetes-cluster/2/rancher-compose.yml": "2b29fa295300395b5003c3fe803e5eb79e85d16fb30238f9d111a906e9f5d1df",
-    "infra-templates/kubernetes-cluster/2/README.md": "5d2cb068a5c9cb37a732ef794d671b09c93591c3281a141148ae114dae0dc63f",
-    "infra-templates/kubernetes-cluster/2/README.zh-TW.md": "dc66b9020711f46cc2708dbd34c619ead31b42a795944b620ce62486e32de28b",
-    "infra-templates/kubernetes-cluster/3/docker-compose.yml.tpl": "1351b6673e6b721820847cc25c131f2a3a343b6ddb46edde1dc062e31417a3c2",
-    "infra-templates/kubernetes-cluster/3/rancher-compose.yml": "2cefc7e8a97f14882115af699787eb95620c192d25cfd2fe433b73c02c6cfe9e",
-    "infra-templates/kubernetes-cluster/3/README.md": "ed80938e3a623ae663168aab017a980fc173f9115266b54532318cd5eeade6d4",
-    "infra-templates/kubernetes-cluster/3/README.zh-TW.md": "60a51c2772dd10f747eed529ca20f0155fac6a80c1aee5707eb3ce3ef04e2543",
-    "infra-templates/kubernetes-cluster/4/docker-compose.yml.tpl": "98a65bbc1daf4c14afad40dfcaf1a2ebac9a5904f065cfdbd022bbb195cb9d35",
-    "infra-templates/kubernetes-cluster/4/rancher-compose.yml": "672ef67924fce27cfdc3a722fdb487168c3ed9b5de8e1ce1945976e655956738",
-    "infra-templates/kubernetes-cluster/4/README.md": "244e1db8a69f313d85f245c24fd4417ef72635935348a2be90f92cdd12443530",
-    "infra-templates/kubernetes-cluster/4/README.zh-TW.md": "96350b9566adf6f69ec98d2def2a1f10db3a1c5129a23dcb71285b8834a0477c",
-    "infra-templates/kubernetes-cluster/5/docker-compose.yml.tpl": "7001fb13ef32e50c84f2356cd14abd0a6dde03adf4483d302fe7172c76852382",
-    "infra-templates/kubernetes-cluster/5/rancher-compose.yml": "21d9cbd753ab87306638d06fd46dffe98dee59cc9cefd88d6c04dc4758d3c366",
-    "infra-templates/kubernetes-cluster/5/README.md": "3fd3a097cb983068cbe7e701cae370b7ac3b086c16770ef4cb3b79ef7a136474",
-    "infra-templates/kubernetes-cluster/5/README.zh-TW.md": "807be23c4f721233ccb2cec705ede68ac9af0730af195bca667c2f40c8c49c53",
     "infra-templates/healthcheck/0/README.md": "1b18863d98ba3c042676f81daf6d6fc510c255cd1df275495985ed41f3b13aaa",
     "infra-templates/healthcheck/0/docker-compose.yml": "7706d9ed46c0cfcac2e29b6b4dc95e8f6f4c771e8da772541791261ee8030f53",
     "infra-templates/healthcheck/0/rancher-compose.yml": "38c775ce54a9d3ad366d7be40a792f3e40838153ab10c93b51faaadc53dc2183",

@@ -16,7 +16,6 @@ or out-of-scope templates from being presented as deployable software.
 | PastureStack Network Diagnostics | Infrastructure diagnostics service | v0.2.0 | Two public PastureStack GHCR images with explicit version tags | Reproducible builds, anonymous distribution, full snapshot and bundle lifecycle, persistence, localization, and HIGH/CRITICAL scan passed |
 | PastureStack Network Policy Manager | Infrastructure network-policy agent | v0.3.1 | Public PastureStack GHCR image with an explicit version tag | Five consecutive two-host default-deny, directed TCP allow, rollback, cleanup, and zero-restart gates passed |
 | PastureStack IPsec Overlay | Infrastructure network driver | 0.3.0-rc2 | Public PastureStack GHCR image with an explicit version tag | Catalog-created two-host encrypted lifecycle, restart, upgrade, and rollback passed |
-| PastureStack Kubernetes Cluster | Infrastructure orchestration stack | v1.12.10-pasturestack.6 | Nine reviewed public PastureStack GHCR images with semantic version tags | Source, license, vulnerability, anonymous-pull, template-rendering, and isolated image gates passed; full two-host stack lifecycle pending |
 | PastureStack Windows ECR Credential Sync | Windows infrastructure registry service | v3.1.2-windows-ltsc2022 | Public PastureStack GHCR Windows image with an explicit version tag | Source tests, cross-compilation, PE, license, anonymous distribution, and vulnerability gates passed; Windows-host runtime pending |
 | PastureStack Windows Network Services | Windows infrastructure Metadata and DNS stack | v0.3.0-windows-ltsc2022 | Two public PastureStack GHCR Windows images with explicit version tags | Source tests, cross-compilation, PE, license, anonymous distribution, and vulnerability gates passed; Windows-host runtime pending |
 | PastureStack Windows Container Networking | Windows NAT and transparent network-driver definition | v0.1.0-windows-ltsc2022 | Reviewed selector-only placeholder image with an explicit version tag | Catalog rendering and compatibility-boundary review passed; Windows-host network-driver lifecycle pending |
@@ -302,76 +301,15 @@ use privileged mode, host networking, a host PID namespace, or a
 container-engine socket. Health faults are reported with `strategy: none` so a
 temporary Vault outage does not create a restart loop or disturb active mounts.
 
-## PastureStack Kubernetes Cluster evidence
+## Retired Kubernetes template
 
-- Kubernetes package:
-  `ghcr.io/pasturestack/kubernetes-package:v1.12.10-pasturestack.4`
-  from [`PastureStack/kubernetes-package@63632bb7bc29e180c037e668c6a57720544e6ecf`](https://github.com/PastureStack/kubernetes-package/tree/63632bb7bc29e180c037e668c6a57720544e6ecf)
-- etcd:
-  `ghcr.io/pasturestack/etcd-compat:v2.3.7-pasturestack.2`
-  from [`PastureStack/etcd-compat@4d648e9ee671716009bc68fa067e967f6d09d3e4`](https://github.com/PastureStack/etcd-compat/tree/4d648e9ee671716009bc68fa067e967f6d09d3e4)
-- kubectl service:
-  `ghcr.io/pasturestack/kubectl-service:v0.9.11-pasturestack.7`
-  from [`PastureStack/kubectl-service@8800cd74613dadc7a51c27a22f9937df1bc146df`](https://github.com/PastureStack/kubectl-service/tree/8800cd74613dadc7a51c27a22f9937df1bc146df)
-- host-file updater:
-  `ghcr.io/pasturestack/hosts-file-updater:v0.0.4-pasturestack.1`
-  from [`PastureStack/hosts-file-updater@2f04f37c992c17fec4f509a78a21d90c190321b1`](https://github.com/PastureStack/hosts-file-updater/tree/2f04f37c992c17fec4f509a78a21d90c190321b1)
-- control-plane agent:
-  `ghcr.io/pasturestack/kubernetes-agent:v0.7.2-pasturestack.1`
-  from [`PastureStack/kubernetes-agent@52b069d8c4e9d2360f42034262f0191016ed33e2`](https://github.com/PastureStack/kubernetes-agent/tree/52b069d8c4e9d2360f42034262f0191016ed33e2)
-- authentication bridge:
-  `ghcr.io/pasturestack/kubernetes-authentication-bridge:v0.0.11-pasturestack.1`
-  from [`PastureStack/kubernetes-authentication-bridge@3c562ab30f5019678506398eeed0656b8e86c9d0`](https://github.com/PastureStack/kubernetes-authentication-bridge/tree/3c562ab30f5019678506398eeed0656b8e86c9d0)
-- ingress load balancer:
-  `ghcr.io/pasturestack/load-balancer-service:v0.9.25`
-  from [`PastureStack/load-balancer-controller@f1f6620e5a2ea0c2e41726b81503c41134801d19`](https://github.com/PastureStack/load-balancer-controller/tree/f1f6620e5a2ea0c2e41726b81503c41134801d19)
-- pod-pause image:
-  `ghcr.io/pasturestack/pod-pause-image:v3.0.1-pasturestack.1`
-  from [`PastureStack/pod-pause-image@9ffe1def861c2f8b6ecd5eb2f26f583e05beca0b`](https://github.com/PastureStack/pod-pause-image/tree/9ffe1def861c2f8b6ecd5eb2f26f583e05beca0b)
-- data-volume helper:
-  `ghcr.io/pasturestack/kubernetes-data-helper-image:v0.1.1-pasturestack.1`
-  from [`PastureStack/kubernetes-data-helper-image@5dcae8574d6719494ebd5c17d2a05cdb3c83538b`](https://github.com/PastureStack/kubernetes-data-helper-image/tree/5dcae8574d6719494ebd5c17d2a05cdb3c83538b)
-- License: Apache-2.0 for the catalog template and listed source projects;
-  Ubuntu, Kubernetes, etcd, HAProxy, Go, CNI, Helm client, and bundled
-  dependencies retain their upstream licenses and notices
-- Reviewed: 2026-08-08
-- Vulnerability gate: the current etcd compatibility release has 0 HIGH, 0
-  CRITICAL, and 0 detected image secrets, with a 130-component CycloneDX SBOM.
-  The current kubectl-service release has 0 HIGH, 0 CRITICAL, and 0 detected
-  image secrets, with a 313-component CycloneDX SBOM. The Kubernetes package
-  has a 437-component CycloneDX SBOM; its original scan retains 0 CRITICAL and
-  2 HIGH findings for installed `cryptography 48.0.1`, while the published
-  OpenVEX assessment records 0 applicable CRITICAL and 0 applicable HIGH for
-  the verified offline Azure CLI execution path. The original findings remain
-  available and are not replaced by the VEX result.
-- Registry gate: anonymous GHCR manifest requests returned the reviewed
-  manifests for all three semantic tags. Digests remain integrity evidence and
-  are deliberately not inserted into user-facing Catalog image fields.
-- Catalog boundary: revision 6 explicitly uses one-way `rslave` propagation
-  for both Docker-root bind mounts required by Docker 29. Revisions 2 through 5
-  remain immutable. Kubernetes 1.12, etcd 2.3, and Helm 2 are still EOL; this
-  revision is an import and staged-migration boundary, not renewed upstream
-  support.
-  The current Kubernetes package retains its raw 0 CRITICAL and 2 HIGH report
-  plus the source-linked OpenVEX review; the applicable result is 0 CRITICAL
-  and 0 HIGH. The release assets preserve both results instead of hiding the
-  scanner output.
-- Distribution gate: every listed semantic tag passed anonymous GHCR manifest
-  access without stored registry credentials
-
-Catalog version 5 is the default and uses the current etcd, package, and kubectl
-service releases above. Catalog versions 2, 3, and 4 remain byte-for-byte
-immutable for definition comparison and rollback; their older image locks
-remain recorded in `catalog-images.json` but are not the default.
-
-The historical optional Dashboard, KubeDNS, Heapster, Grafana, InfluxDB, and
-Tiller bundle is deliberately excluded. A review of the exact upstream images
-found Critical vulnerabilities in KubeDNS, its sidecar, Grafana, and Tiller;
-the retired third-party bundle is outside this official-platform migration
-scope. The template therefore exposes no add-on switch and leaves workload DNS
-to a separately reviewed deployment. Core API, scheduling, service networking,
-authentication, ingress, backup, pod-sandbox, upgrade, rollback, and exact
-removal remain the live Catalog acceptance gates.
+The Rancher-era Kubernetes template is intentionally absent from the current
+catalog. It coupled Kubernetes 1.12, etcd 2.3, Docker-shim, Helm 2, and several
+compatibility services, so replacing only the Kubernetes image would create a
+broken and unsafe deployment. Git history preserves the former definitions for
+migration analysis. New deployments must use a current Kubernetes bootstrap
+path; the maintained `kubernetes-package` repository supplies current component
+binaries but is not a drop-in Rancher Compose stack.
 
 ## PastureStack Windows infrastructure evidence
 

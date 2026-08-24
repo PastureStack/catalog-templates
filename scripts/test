@@ -87,11 +87,6 @@ if [ "$ready" != true ]; then
 fi
 
 for version_id in \
-    kubernetes-cluster:2 \
-    kubernetes-cluster:3 \
-    kubernetes-cluster:4 \
-    kubernetes-cluster:5 \
-    kubernetes-cluster:6 \
     healthcheck:0 \
     healthcheck:1 \
     ipsec-overlay:1 \

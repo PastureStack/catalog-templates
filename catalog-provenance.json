@@ -33,10 +33,6 @@
       "sourcePath": "infra-templates/ipsec",
       "originStatus": "supported"
     },
-    "kubernetes-cluster": {
-      "sourcePath": "infra-templates/k8s",
-      "originStatus": "supported"
-    },
     "layer-2-flat-network": {
       "sourcePath": "infra-templates/l2-flat",
       "originStatus": "first-party"

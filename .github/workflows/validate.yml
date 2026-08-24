@@ -123,84 +123,14 @@ jobs:
             exit 1
           fi
 
-          test "$(jq '(.data // []) | length' "$work_root/templates.json")" -eq 23
+          test "$(jq '(.data // []) | length' "$work_root/templates.json")" -eq 22
           test "$(jq '[.data[] | select(
             .templateBase == "infra" and
             .labels["io.pasturestack.catalog.origin"] == "upstream-first-party" and
             (.labels["io.pasturestack.catalog.origin-template"] | length) > 0 and
             (.labels["io.pasturestack.catalog.origin-status"] |
               IN("supported", "experimental", "first-party"))
-          )] | length' "$work_root/templates.json")" -eq 22
-
-          curl -fsS --max-time 10 \
-            'http://127.0.0.1:18088/v1-catalog/templateversions/pasturestack:infra*kubernetes-cluster:2' \
-            -o "$work_root/kubernetes-v2.json"
-          curl -fsS --max-time 10 \
-            'http://127.0.0.1:18088/v1-catalog/templateversions/pasturestack:infra*kubernetes-cluster:3' \
-            -o "$work_root/kubernetes-v3.json"
-          curl -fsS --max-time 10 \
-            'http://127.0.0.1:18088/v1-catalog/templateversions/pasturestack:infra*kubernetes-cluster:4' \
-            -o "$work_root/kubernetes-v4.json"
-          curl -fsS --max-time 10 \
-            'http://127.0.0.1:18088/v1-catalog/templateversions/pasturestack:infra*kubernetes-cluster:5' \
-            -o "$work_root/kubernetes-v5.json"
-          curl -fsS --max-time 10 \
-            'http://127.0.0.1:18088/v1-catalog/templateversions/pasturestack:infra*kubernetes-cluster:6' \
-            -o "$work_root/kubernetes-v6.json"
-          test "$(jq -r '.version' "$work_root/kubernetes-v2.json")" = \
-            'v1.12.10-pasturestack.2'
-          test "$(jq -r '.version' "$work_root/kubernetes-v3.json")" = \
-            'v1.12.10-pasturestack.3'
-          test "$(jq -r '.version' "$work_root/kubernetes-v4.json")" = \
-            'v1.12.10-pasturestack.4'
-          test "$(jq -r '.version' "$work_root/kubernetes-v5.json")" = \
-            'v1.12.10-pasturestack.5'
-          test "$(jq -r '.version' "$work_root/kubernetes-v6.json")" = \
-            'v1.12.10-pasturestack.6'
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v2.json" | \
-            grep -Fc 'kubernetes-package:v1.12.10-pasturestack.1')" -eq 6
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v3.json" | \
-            grep -Fc 'kubernetes-package:v1.12.10-pasturestack.3')" -eq 6
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v2.json" | \
-            grep -Fc 'kubectl-service:v0.9.11-pasturestack.1')" -eq 2
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v3.json" | \
-            grep -Fc 'kubectl-service:v0.9.11-pasturestack.3')" -eq 2
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v4.json" | \
-            grep -Fc 'kubernetes-package:v1.12.10-pasturestack.3')" -eq 6
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v4.json" | \
-            grep -Fc 'kubectl-service:v0.9.11-pasturestack.5')" -eq 2
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v5.json" | \
-            grep -Fc 'kubernetes-package:v1.12.10-pasturestack.3')" -eq 6
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v5.json" | \
-            grep -Fc 'etcd-compat:v2.3.7-pasturestack.2')" -eq 1
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v5.json" | \
-            grep -Fc 'kubectl-service:v0.9.11-pasturestack.5')" -eq 2
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v6.json" | \
-            grep -Fc 'kubernetes-package:v1.12.10-pasturestack.4')" -eq 6
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v6.json" | \
-            grep -Fc 'etcd-compat:v2.3.7-pasturestack.2')" -eq 1
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v6.json" | \
-            grep -Fc 'kubectl-service:v0.9.11-pasturestack.7')" -eq 2
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v6.json" | \
-            grep -Fc '/var/lib/docker:/var/lib/docker:rslave,z')" -eq 2
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v6.json" | \
-            grep -Fc '/var/lib/docker:/var/lib/docker:z')" -eq 0
-          test "$(jq -r '.files["docker-compose.yml.tpl"]' \
-            "$work_root/kubernetes-v6.json" | grep -Fc '@sha256:')" -eq 0
+          )] | length' "$work_root/templates.json")" -eq 21
           verify_localized() {
             base=$1
             folder=$2
@@ -240,9 +170,6 @@ jobs:
           verify_localized infra ipsec-overlay \
             'IPsec 加密網路' \
             '為受管工作負載提供跨主機的加密網路。'
-          verify_localized infra kubernetes-cluster \
-            'Kubernetes 叢集' \
-            '部署維護中的 Kubernetes 1.12 相容控制平面與主機服務。'
           verify_localized infra layer-2-flat-network \
             '第 2 層平面網路' \
             '透過主機網橋，將受管理的工作負載直接連接到共用的第 2 層子網路。'

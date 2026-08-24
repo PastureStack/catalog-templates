@@ -19,12 +19,12 @@ directories when an installed system stack can still reference them; the
 current reviewed version remains the default.
 
 The supported set contains the `PastureStack Native` project template and
-twenty-two infrastructure entries selected from the preserved upstream
+twenty-one infrastructure entries selected from the preserved upstream
 first-party catalog: `PastureStack Container Schedule`,
 `PastureStack Amazon ECR Credential Sync`, `PastureStack System Image
 Preloader`, `Metadata Healthcheck`, `PastureStack Network Services`,
 `PastureStack Network Diagnostics`, `PastureStack Network Policy Manager`,
-`PastureStack IPsec Overlay`, `PastureStack Kubernetes Cluster`,
+`PastureStack IPsec Overlay`,
 `PastureStack Windows ECR Credential Sync`,
 `PastureStack Windows Network Services`,
 `PastureStack Windows Container Networking`,
@@ -41,11 +41,11 @@ infrastructure entry are recorded in
 [catalog-provenance.json](catalog-provenance.json). These provenance records
 describe the source tree at the preserved boundary; they do not claim current
 vendor certification, endorsement, or support for the PastureStack revisions.
-The Kubernetes entry similarly excludes the historical Dashboard, Heapster,
-Grafana, InfluxDB, Tiller, and DNS add-on bundle: those retired third-party
-images are outside this migration scope, and the reviewed upstream images
-include Critical vulnerabilities. The maintained core cluster does not expose
-an add-on switch that would create an insecure or broken deployment.
+The former Rancher-era Kubernetes entry is no longer deployable from this
+catalog. Its Kubernetes 1.12, etcd 2.3, Docker-shim, and Helm 2 contracts cannot
+be upgraded by replacing an image tag. The historical templates remain in Git;
+new clusters must use a current Kubernetes provisioning path and the separately
+maintained `kubernetes-package` component bundle where appropriate.
 The three Windows entries restore the official upstream ECR, Metadata/DNS, and
 NAT/transparent-networking intents with PastureStack-owned semantic image
 tags. Their source tests, Windows cross-compilation, PE inspection, license

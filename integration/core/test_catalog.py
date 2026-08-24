@@ -31,12 +31,6 @@ def _catalog_name():
     return os.environ.get('CATALOG_TEST_NAME', 'library')
 
 
-def _kubernetes_version_url(version_id):
-    return _catalog_url(
-        '/v1-catalog/templateversions/{}:infra*kubernetes-cluster:{}'.format(
-            _catalog_name(), version_id))
-
-
 class CatalogService(object):
     def __init__(self, catalog_bin):
         self.catalog_bin = catalog_bin
@@ -136,7 +130,7 @@ def test_validate_exits_normal(catalog_service):
 def test_catalog_list():
     templates = _get_json(_catalog_url('/v1-catalog/templates'))
     data = templates.get('data', [])
-    assert len(data) == 23
+    assert len(data) == 22
     by_folder = {
         (item.get('templateBase') or 'template', item['folderName']): item
         for item in data
@@ -148,7 +142,6 @@ def test_catalog_list():
         ('infra', 'ecr-credential-sync'),
         ('infra', 'healthcheck'),
         ('infra', 'ipsec-overlay'),
-        ('infra', 'kubernetes-cluster'),
         ('infra', 'layer-2-flat-network'),
         ('infra', 'network-diagnostics'),
         ('infra', 'network-policy-manager'),
@@ -214,13 +207,6 @@ def test_catalog_list():
     assert by_folder[('infra', 'ipsec-overlay')][
         'links']['defaultVersion'].endswith(
         ':2')
-    assert by_folder[('infra', 'kubernetes-cluster')]['name'] == (
-        'Kubernetes Cluster')
-    assert by_folder[('infra', 'kubernetes-cluster')][
-        'defaultVersion'] == 'v1.12.10-pasturestack.6'
-    assert by_folder[('infra', 'kubernetes-cluster')][
-        'links']['defaultVersion'].endswith(
-        ':6')
     assert by_folder[('infra', 'layer-2-flat-network')]['name'] == (
         'Layer 2 Flat Network')
     assert by_folder[('infra', 'layer-2-flat-network')][
@@ -349,9 +335,6 @@ def test_catalog_list():
         ('infra', 'ipsec-overlay'): (
             'IPsec 加密網路',
             '為受管工作負載提供跨主機的加密網路。'),
-        ('infra', 'kubernetes-cluster'): (
-            'Kubernetes 叢集',
-            '部署維護中的 Kubernetes 1.12 相容控制平面與主機服務。'),
         ('infra', 'layer-2-flat-network'): (
             '第 2 層平面網路',
             '透過主機網橋，將受管理的工作負載直接連接到共用的第 2 層子網路。'),
@@ -438,7 +421,7 @@ def test_catalog_list():
                 .format(variable.lower()))
             assert '{}.label.zh-tw:'.format(prefix) in compose
             assert '{}.description.zh-tw:'.format(prefix) in compose
-    assert localized_question_count == 171
+    assert localized_question_count == 140
 
 
 def test_catalog_compose_shapes_are_runtime_compatible():
@@ -447,71 +430,6 @@ def test_catalog_compose_shapes_are_runtime_compatible():
         (item.get('templateBase') or 'template', item['folderName']): item
         for item in templates.get('data', [])
     }
-
-    kubernetes_version = _get_json(
-        by_folder[('infra', 'kubernetes-cluster')][
-            'links']['defaultVersion'])
-    kubernetes_files = kubernetes_version['files']
-    kubernetes_docker = kubernetes_files['docker-compose.yml.tpl']
-    kubernetes_platform = kubernetes_files['rancher-compose.yml']
-    expected_kubernetes_images = {
-        'ghcr.io/pasturestack/kubernetes-package:'
-        'v1.12.10-pasturestack.4': 6,
-        'ghcr.io/pasturestack/etcd-compat:'
-        'v2.3.7-pasturestack.2': 1,
-        'ghcr.io/pasturestack/kubectl-service:'
-        'v0.9.11-pasturestack.7': 2,
-        'ghcr.io/pasturestack/hosts-file-updater:'
-        'v0.0.4-pasturestack.1': 1,
-        'ghcr.io/pasturestack/kubernetes-agent:'
-        'v0.7.2-pasturestack.1': 1,
-        'ghcr.io/pasturestack/kubernetes-authentication-bridge:'
-        'v0.0.11-pasturestack.1': 1,
-        'ghcr.io/pasturestack/load-balancer-service:v0.9.25': 1,
-        'ghcr.io/pasturestack/kubernetes-data-helper-image:'
-        'v0.1.1-pasturestack.1': 1,
-    }
-    for image, count in expected_kubernetes_images.items():
-        assert kubernetes_docker.count(
-            'image: {}'.format(image)) == count
-    for version_id in ('2', '3', '4'):
-        retained = _get_json(_kubernetes_version_url(version_id))
-        retained_docker = retained['files']['docker-compose.yml.tpl']
-        assert retained_docker.count(
-            'image: ghcr.io/pasturestack/etcd-compat:'
-            'v2.3.7-pasturestack.1') == 1
-        assert 'v2.3.7-pasturestack.2' not in retained_docker
-    revision_five = _get_json(_kubernetes_version_url('5'))
-    revision_five_docker = revision_five['files']['docker-compose.yml.tpl']
-    assert revision_five['version'] == 'v1.12.10-pasturestack.5'
-    assert revision_five_docker.count(
-        'image: ghcr.io/pasturestack/kubernetes-package:'
-        'v1.12.10-pasturestack.3') == 6
-    assert revision_five_docker.count(
-        'image: ghcr.io/pasturestack/kubectl-service:'
-        'v0.9.11-pasturestack.5') == 2
-    assert revision_five_docker.count(
-        'image: ghcr.io/pasturestack/etcd-compat:'
-        'v2.3.7-pasturestack.2') == 1
-    assert kubernetes_docker.count(
-        '/var/lib/docker:/var/lib/docker:rslave,z') == 2
-    assert '/var/lib/docker:/var/lib/docker:z' not in kubernetes_docker
-    assert kubernetes_docker.count(
-        '/var/lib/kubelet:/var/lib/kubelet:shared,z') == 2
-    assert 'ghcr.io/pasturestack/pod-pause-image:' in (
-        kubernetes_platform)
-    assert '@sha256:' not in kubernetes_docker
-    assert '@sha256:' not in kubernetes_platform
-    assert 'addon-starter:' not in kubernetes_docker
-    assert 'ENABLE_ADDONS' not in kubernetes_platform
-    assert 'platform-kubernetes-agent:' in kubernetes_docker
-    assert 'platform-kubernetes-authentication:' in kubernetes_docker
-    assert 'platform-ingress-controller:' in kubernetes_docker
-    assert 'rancher-kubernetes-agent:' not in kubernetes_docker
-    assert 'rancher-kubernetes-auth:' not in kubernetes_docker
-    assert 'rancher-ingress-controller:' not in kubernetes_docker
-    assert 'PASTURESTACK_DEBUG' in kubernetes_docker
-    assert 'RANCHER_DEBUG' not in kubernetes_docker
 
     ebs_version = _get_json(
         by_folder[('infra', 'amazon-ebs-storage')][

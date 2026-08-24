@@ -17,18 +17,13 @@ same catalog version ID and an installed catalog service can continue serving
 its cached content. Integration tests must assert both the human-readable
 version and the numeric suffix of the default-version link.
 
-Kubernetes catalog revision 6 updates the control-plane and node image to
-`kubernetes-package:v1.12.10-pasturestack.4`, updates both catalog-operation
-services to `kubectl-service:v0.9.11-pasturestack.7`, retains
-`etcd-compat:v2.3.7-pasturestack.2`, and explicitly gives the two Docker-root
-bind mounts `rslave` propagation for Docker 29 recreation. Revision 5 is
-retained byte-for-byte and protected by recorded SHA-256 values.
-
-Kubernetes catalog revision 5 changed only the etcd compatibility image from
-`v2.3.7-pasturestack.1` to `v2.3.7-pasturestack.2`. Revisions 2, 3, and 4 are
-also retained byte-for-byte, and their older image locks remain part of the
-catalog evidence. This avoids silently changing the definition already
-associated with an installed catalog version ID.
+The Rancher-era Kubernetes template is removed from the current catalog tree.
+Its multi-container contract binds Kubernetes 1.12, etcd 2.3, Docker-shim, and
+Helm 2 and therefore cannot consume the current standalone Kubernetes component
+image safely. Existing definitions remain recoverable from Git history; they
+must not be restored as a deployable entry or upgraded through image-tag
+substitution. Provision a current cluster through a supported Kubernetes
+bootstrap path instead.
 
 Literal compatibility filenames, schema keys, labels, environment variables, provider values, binary names, and persisted paths retain their established identifiers when changing them would break the catalog protocol or the software inside an unpublished image. They are compatibility debt, not current branding, and must be retired together with the dependent implementation rather than changed in isolation.
 
