@@ -111,7 +111,7 @@ jobs:
               -o "$work_root/templates.json" 2>/dev/null; then
               template_count=$(jq '(.data // []) | length' \
                 "$work_root/templates.json")
-              if [ "$template_count" -eq 23 ]; then
+              if [ "$template_count" -eq 22 ]; then
                 ready=true
                 break
               fi
@@ -228,4 +228,4 @@ jobs:
             python -m pytest -q integration/core \
               -k 'not test_validate_exits_normal'
 
-          echo "CATALOG_TW_LOCALIZATION_OK source=$SOURCE_SHA templates=23 infra_first_party=22 questions=171 python=3.14.6 pytest=3"
+          echo "CATALOG_TW_LOCALIZATION_OK source=$SOURCE_SHA templates=22 infra_first_party=21 questions=140 python=3.14.6 pytest=4"

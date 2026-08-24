@@ -393,7 +393,7 @@ def test_catalog_list():
     with open(_file('catalog-provenance.json'), encoding='utf-8') as source:
         provenance = json.load(source)
     assert provenance['classification'] == 'upstream-first-party'
-    assert len(provenance['entries']) == 22
+    assert len(provenance['entries']) == 21
     localized_question_count = 0
     for folder, origin in provenance['entries'].items():
         template = by_folder[('infra', folder)]
