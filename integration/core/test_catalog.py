@@ -161,6 +161,7 @@ def test_catalog_list():
     }
     for template in by_folder.values():
         assert not template['name'].casefold().startswith('pasturestack ')
+        assert re.fullmatch(r'v\d+\.\d+\.\d+', template['defaultVersion'])
         localized_name = template.get('labels', {}).get(
             'io.pasturestack.catalog.name.zh-tw', '')
         assert not localized_name.casefold().startswith('pasturestack ')
@@ -168,154 +169,154 @@ def test_catalog_list():
     assert by_folder[('infra', 'amazon-ebs-storage')][
         'name'] == 'Amazon EBS Storage'
     assert by_folder[('infra', 'amazon-ebs-storage')][
-        'defaultVersion'] == 'v0.10.0-pasturestack.1'
+        'defaultVersion'] == 'v0.10.0'
     assert by_folder[('infra', 'amazon-ebs-storage')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'amazon-efs-storage')][
         'name'] == 'Amazon EFS Storage'
     assert by_folder[('infra', 'amazon-efs-storage')][
-        'defaultVersion'] == 'v0.10.0-pasturestack.1'
+        'defaultVersion'] == 'v0.10.0'
     assert by_folder[('infra', 'amazon-efs-storage')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'container-schedule')][
         'name'] == 'Container Schedule'
     assert by_folder[('infra', 'container-schedule')][
-        'defaultVersion'] == 'v0.6.0-pasturestack.1'
+        'defaultVersion'] == 'v0.6.0'
     assert by_folder[('infra', 'container-schedule')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'ecr-credential-sync')][
         'name'] == 'Amazon ECR Credential Sync'
     assert by_folder[('infra', 'ecr-credential-sync')][
-        'defaultVersion'] == 'v3.1.0-pasturestack.1'
+        'defaultVersion'] == 'v3.1.0'
     assert by_folder[('infra', 'ecr-credential-sync')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'healthcheck')][
         'name'] == 'Metadata Healthcheck'
     assert by_folder[('infra', 'healthcheck')][
-        'defaultVersion'] == 'v0.3.16-pasturestack.1'
+        'defaultVersion'] == 'v0.3.16'
     assert by_folder[('infra', 'healthcheck')][
         'links']['defaultVersion'].endswith(
         ':1')
     assert by_folder[('infra', 'ipsec-overlay')]['name'] == (
         'IPsec Overlay')
     assert by_folder[('infra', 'ipsec-overlay')][
-        'defaultVersion'] == '0.3.0-rc2-pasturestack.1'
+        'defaultVersion'] == 'v0.3.0'
     assert by_folder[('infra', 'ipsec-overlay')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'layer-2-flat-network')]['name'] == (
         'Layer 2 Flat Network')
     assert by_folder[('infra', 'layer-2-flat-network')][
-        'defaultVersion'] == '0.3.0-rc8-pasturestack.1'
+        'defaultVersion'] == 'v0.3.0'
     assert by_folder[('infra', 'layer-2-flat-network')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'network-diagnostics')]['name'] == (
         'Network Diagnostics')
     assert by_folder[('infra', 'network-diagnostics')][
-        'defaultVersion'] == 'v0.2.0-pasturestack.1'
+        'defaultVersion'] == 'v0.2.1'
     assert by_folder[('infra', 'network-diagnostics')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'network-policy-manager')]['name'] == (
         'Network Policy Manager')
     assert by_folder[('infra', 'network-policy-manager')][
-        'defaultVersion'] == 'v0.3.1-pasturestack.1'
+        'defaultVersion'] == 'v0.3.2'
     assert by_folder[('infra', 'network-policy-manager')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'network-services')]['name'] == (
         'Network Services')
     assert by_folder[('infra', 'network-services')][
-        'defaultVersion'] == '0.3.0-rc2-pasturestack.1'
+        'defaultVersion'] == 'v0.3.0'
     assert by_folder[('infra', 'network-services')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'nfs-storage')][
         'name'] == 'NFS Storage'
     assert by_folder[('infra', 'nfs-storage')][
-        'defaultVersion'] == 'v0.10.0-pasturestack.1'
+        'defaultVersion'] == 'v0.10.0'
     assert by_folder[('infra', 'nfs-storage')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'secret-volume-driver')][
         'name'] == 'Secret Volume'
     assert by_folder[('infra', 'secret-volume-driver')][
-        'defaultVersion'] == 'v0.1.1-pasturestack.1'
+        'defaultVersion'] == 'v0.1.2'
     assert by_folder[('infra', 'secret-volume-driver')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'vault-volume-driver')][
         'name'] == 'Vault Volume'
     assert by_folder[('infra', 'vault-volume-driver')][
-        'defaultVersion'] == 'v0.2.1-pasturestack.1'
+        'defaultVersion'] == 'v0.2.1'
     assert by_folder[('infra', 'vault-volume-driver')][
         'links']['defaultVersion'].endswith(
         ':3')
     assert by_folder[('infra', 'per-host-subnet-network')]['name'] == (
         'Per-Host Subnet Network')
     assert by_folder[('infra', 'per-host-subnet-network')][
-        'defaultVersion'] == '0.3.0-rc8-pasturestack.1'
+        'defaultVersion'] == 'v0.3.0'
     assert by_folder[('infra', 'per-host-subnet-network')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'resource-scheduler')][
         'name'] == 'Resource Scheduler'
     assert by_folder[('infra', 'resource-scheduler')][
-        'defaultVersion'] == 'v0.8.16'
+        'defaultVersion'] == 'v0.8.17'
     assert by_folder[('infra', 'resource-scheduler')][
         'links']['defaultVersion'].endswith(
         ':3')
     assert by_folder[('infra', 'route53-dns-sync')][
         'name'] == 'Route 53 DNS Sync'
     assert by_folder[('infra', 'route53-dns-sync')][
-        'defaultVersion'] == 'v0.8.0-pasturestack.1'
+        'defaultVersion'] == 'v0.8.0'
     assert by_folder[('infra', 'route53-dns-sync')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'system-image-preloader')]['name'] == (
         'System Image Preloader')
     assert by_folder[('infra', 'system-image-preloader')][
-        'defaultVersion'] == 'v0.3.0-pasturestack.1'
+        'defaultVersion'] == 'v0.3.0'
     assert by_folder[('infra', 'system-image-preloader')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'vxlan-overlay-network')]['name'] == (
         'VXLAN Overlay Network')
     assert by_folder[('infra', 'vxlan-overlay-network')][
-        'defaultVersion'] == '0.3.0-rc9-pasturestack.1'
+        'defaultVersion'] == 'v0.3.0'
     assert by_folder[('infra', 'vxlan-overlay-network')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'windows-container-networking')][
         'name'] == 'Windows Container Networking'
     assert by_folder[('infra', 'windows-container-networking')][
-        'defaultVersion'] == 'v0.1.0-windows-ltsc2022-pasturestack.1'
+        'defaultVersion'] == 'v0.1.0'
     assert by_folder[('infra', 'windows-container-networking')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'windows-ecr-credential-sync')][
         'name'] == 'Windows ECR Credential Sync'
     assert by_folder[('infra', 'windows-ecr-credential-sync')][
-        'defaultVersion'] == 'v3.1.2-windows-ltsc2022-pasturestack.1'
+        'defaultVersion'] == 'v3.1.2'
     assert by_folder[('infra', 'windows-ecr-credential-sync')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('infra', 'windows-network-services')][
         'name'] == 'Windows Network Services'
     assert by_folder[('infra', 'windows-network-services')][
-        'defaultVersion'] == 'v0.3.0-windows-ltsc2022-pasturestack.1'
+        'defaultVersion'] == 'v0.3.0'
     assert by_folder[('infra', 'windows-network-services')][
         'links']['defaultVersion'].endswith(
         ':2')
     assert by_folder[('project', 'native')][
         'name'] == 'Native'
     assert by_folder[('project', 'native')][
-        'defaultVersion'] == '0.3.0-rc6'
+        'defaultVersion'] == 'v0.3.0'
     localized = {
         ('infra', 'amazon-ebs-storage'): (
             'Amazon EBS 儲存空間',

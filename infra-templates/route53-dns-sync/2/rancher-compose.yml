@@ -2,7 +2,7 @@
 version: '2'
 .catalog:
   name: PastureStack Route 53 DNS Sync
-  version: v0.8.0-pasturestack.1
+  version: v0.8.0
   description: Synchronize compatible environment service addresses to an Amazon Route 53 hosted zone.
   minimum_rancher_version: v1.6.13-rc1
   labels:

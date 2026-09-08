@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 name: Amazon ECR Credential Sync
 description: Refresh short-lived Amazon Elastic Container Registry credentials in a compatible environment.
-version: v3.1.0-pasturestack.1
+version: v3.1.0
 category: Registry
 maintainer: PastureStack contributors
 license: MIT template; Apache-2.0 image and bundled dependency licenses apply

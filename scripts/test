@@ -34,6 +34,7 @@ fi
 CATALOG_SERVICE_BIN=$(command -v "$CATALOG_SERVICE_BIN")
 
 bash scripts/audit-deployable-images
+python scripts/check-catalog-version-labels.py
 
 source_commit=$(git rev-parse HEAD)
 test_branch=pasturestack-catalog-test

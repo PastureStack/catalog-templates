@@ -2,7 +2,7 @@
 .catalog:
   name: Resource Scheduler
   description: Schedule native workloads from control-plane events and current Metadata state.
-  version: v0.8.16
+  version: v0.8.17
   minimum_rancher_version: v1.6.26-rc1
   labels:
     io.pasturestack.catalog.question.pasturestack_debug.label.zh-tw: '啟用除錯日誌'

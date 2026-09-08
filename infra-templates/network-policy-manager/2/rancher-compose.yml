@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 .catalog:
   name: PastureStack Network Policy Manager
-  version: v0.3.1-pasturestack.1
+  version: v0.3.2
   description: Enforce metadata-defined network policy on every managed host with independently owned nftables rules.
   minimum_rancher_version: v1.6.26-rc1
 

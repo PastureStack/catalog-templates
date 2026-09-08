@@ -2,7 +2,7 @@
 version: '2'
 .catalog:
   name: PastureStack Windows ECR Credential Sync
-  version: v3.1.2-windows-ltsc2022-pasturestack.1
+  version: v3.1.2
   description: Refresh short-lived Amazon ECR credentials from compatible Windows Server 2022 hosts.
   minimum_rancher_version: v1.6.15-rc1
   labels:

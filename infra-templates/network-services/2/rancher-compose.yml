@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 .catalog:
   name: PastureStack Network Services
-  version: 0.3.0-rc2-pasturestack.1
+  version: v0.3.0
   description: Install host networking, metadata, and internal DNS services required by managed workloads.
   minimum_rancher_version: v1.6.26-rc1
   labels:

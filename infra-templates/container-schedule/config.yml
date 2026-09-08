@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 name: Container Schedule
 description: Run scheduled start, stop, or restart actions from container labels.
-version: v0.6.0-pasturestack.1
+version: v0.6.0
 category: System
 maintainer: PastureStack contributors
 license: MIT template; Apache-2.0 image and bundled dependency licenses apply

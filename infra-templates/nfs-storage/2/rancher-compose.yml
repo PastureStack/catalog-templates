@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 .catalog:
   name: PastureStack NFS Storage
-  version: v0.10.0-pasturestack.1
+  version: v0.10.0
   description: Provide NFS v3 and v4 Docker volumes with safe data-retention defaults.
   minimum_rancher_version: v1.6.15-rc1
   labels:

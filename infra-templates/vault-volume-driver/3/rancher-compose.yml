@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 .catalog:
   name: PastureStack Vault Volume
-  version: v0.2.1-pasturestack.1
+  version: v0.2.1
   description: Deliver response-wrapped, short-lived Vault tokens through host-authenticated read-only volumes.
   minimum_rancher_version: v1.6.15-rc1
   labels:

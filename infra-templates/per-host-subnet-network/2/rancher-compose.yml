@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 .catalog:
   name: PastureStack Per-Host Subnet Network
-  version: 0.3.0-rc8-pasturestack.1
+  version: v0.3.0
   description: Assign a distinct workload subnet to each host and maintain host-gateway routes between hosts.
   minimum_rancher_version: v1.6.26-rc1
   labels:

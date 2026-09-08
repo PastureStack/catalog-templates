@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 .catalog:
   name: PastureStack Secret Volume
-  version: v0.1.1-pasturestack.1
+  version: v0.1.2
   description: Deliver approved encrypted secrets to workloads through isolated in-memory volumes.
   minimum_rancher_version: v1.6.15-rc1
 

@@ -3,7 +3,7 @@ version: '2'
 
 .catalog:
   name: PastureStack Network Diagnostics
-  version: v0.2.0-pasturestack.1
+  version: v0.2.1
   description: Collect bounded, pseudonymous host-network health summaries and retain operator-requested diagnostic bundles.
   minimum_rancher_version: v1.6.13-rc1
   labels:
