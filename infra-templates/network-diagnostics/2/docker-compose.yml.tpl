@@ -11,7 +11,7 @@ services:
       PASTURESTACK_DIAGNOSTICS_MAX_AGENTS: '${MAX_AGENTS}'
       PASTURESTACK_DIAGNOSTICS_RETENTION_HOURS: '${RETENTION_HOURS}'
     ports:
-      - '${PUBLISHED_PORT}:8080'
+      - '${PUBLISHED_PORT}:8080/tcp'
     volumes:
       - network-diagnostics-data:/var/lib/pasturestack-network-diagnostics
     labels:
