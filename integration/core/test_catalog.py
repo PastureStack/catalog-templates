@@ -655,7 +655,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     assert '/etc/resolv.conf:/host/etc/resolv.conf:ro' in diagnostics_docker
     assert '/etc/machine-id:/host/etc/machine-id:ro' in diagnostics_docker
     assert 'network-diagnostics-data:' in diagnostics_docker
-    assert "'${PUBLISHED_PORT}:8080'" in diagnostics_docker
+    assert "'${PUBLISHED_PORT}:8080/tcp'" in diagnostics_docker
     assert 'privileged: true' not in diagnostics_docker
     assert 'network_mode: host' not in diagnostics_docker
     assert '/var/run/docker.sock' not in diagnostics_docker
