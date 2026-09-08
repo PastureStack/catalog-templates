@@ -60,6 +60,7 @@ jobs:
           python -m flake8 integration/core
 
           bash scripts/audit-deployable-images
+          python scripts/check-catalog-version-labels.py
           asset="$work_root/catalog-service.tar.xz"
           curl \
             --proto '=https' \

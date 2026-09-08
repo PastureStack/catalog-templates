@@ -2,7 +2,7 @@
 version: '2'
 .catalog:
   name: PastureStack Amazon ECR Credential Sync
-  version: v3.1.0-pasturestack.1
+  version: v3.1.0
   description: Refresh short-lived Amazon Elastic Container Registry credentials in a compatible environment.
   minimum_rancher_version: v1.6.13-rc1
   labels:

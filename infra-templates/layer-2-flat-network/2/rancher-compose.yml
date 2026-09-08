@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 .catalog:
   name: PastureStack Layer 2 Flat Network
-  version: 0.3.0-rc8-pasturestack.1
+  version: v0.3.0
   description: Connect managed workloads directly to a shared Layer 2 subnet through a host bridge.
   minimum_rancher_version: v1.6.26-rc1
   labels:

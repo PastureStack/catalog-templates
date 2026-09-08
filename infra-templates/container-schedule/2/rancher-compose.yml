@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 .catalog:
   name: PastureStack Container Schedule
-  version: v0.6.0-pasturestack.1
+  version: v0.6.0
   description: Run scheduled start, stop, or restart actions from container labels.
   minimum_rancher_version: v1.6.15-rc1
   labels:

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 .catalog:
   name: PastureStack Amazon EFS Storage
-  version: v0.10.0-pasturestack.1
+  version: v0.10.0
   description: Mount existing Amazon EFS filesystems, with controlled opt-in provisioning.
   minimum_rancher_version: v1.6.15-rc1
   labels:

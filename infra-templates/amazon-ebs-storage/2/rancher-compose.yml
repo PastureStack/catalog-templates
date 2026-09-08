@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 .catalog:
   name: PastureStack Amazon EBS Storage
-  version: v0.10.0-pasturestack.1
+  version: v0.10.0
   description: Attach existing Amazon EBS volumes, with opt-in encrypted volume provisioning.
   minimum_rancher_version: v1.6.29-rc1
   labels:

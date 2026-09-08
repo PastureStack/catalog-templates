@@ -2,7 +2,7 @@
 version: '2'
 .catalog:
   name: PastureStack System Image Preloader
-  version: v0.3.0-pasturestack.1
+  version: v0.3.0
   description: Preload the container images required by compatible infrastructure stacks.
   minimum_rancher_version: v1.6.15-rc1
   labels:

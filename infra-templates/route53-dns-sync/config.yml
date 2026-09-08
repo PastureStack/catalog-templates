@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 name: Route 53 DNS Sync
 description: Synchronize compatible environment service addresses to an Amazon Route 53 hosted zone.
-version: v0.8.0-pasturestack.1
+version: v0.8.0
 category: External DNS
 maintainer: PastureStack contributors
 license: MIT template; Apache-2.0 image and bundled dependency licenses apply

@@ -2,7 +2,7 @@
 version: '2'
 .catalog:
   name: PastureStack Windows Container Networking
-  version: v0.1.0-windows-ltsc2022-pasturestack.1
+  version: v0.1.0
   description: Define NAT and transparent Docker network drivers for compatible Windows container hosts.
   minimum_rancher_version: v1.6.15-rc1
   labels:

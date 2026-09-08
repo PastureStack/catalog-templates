@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 name: Resource Scheduler
-version: v0.8.16
+version: v0.8.17
 category: System
 description: Schedule native workloads from control-plane events and current Metadata state.
 projectURL: https://github.com/PastureStack/resource-scheduler

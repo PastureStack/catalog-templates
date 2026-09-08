@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 name: Windows Container Networking
 description: Define NAT and transparent Docker network drivers for compatible Windows container hosts.
-version: v0.1.0-windows-ltsc2022-pasturestack.1
+version: v0.1.0
 category: Networking
 maintainer: PastureStack contributors
 license: MIT template; selector-only placeholder image retains its Apache-2.0 and bundled dependency licenses
