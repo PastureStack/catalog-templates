@@ -8,10 +8,10 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 ## Project status
 
-Earlier prerelease tags remain immutable historical evidence. This tree and
-its current release use the pure numeric coordinate `v0.3.1`; product identity
-is carried by the repository, catalog metadata, and provenance rather than the
-version tag.
+Earlier prerelease coordinates are retired from current release references;
+their reviewed source commits remain in Git history. This tree and its current
+release use the pure numeric coordinate `v0.3.2`; product identity is carried by
+the repository, catalog metadata, and provenance rather than the version tag.
 
 The current tree is a deliberately small release candidate. It contains only
 templates whose image source, semantic version tag, license boundary, and
@@ -95,10 +95,11 @@ still referenced by the reviewed deployment: Metadata Healthcheck `0`;
 IPsec Overlay, Network Services, NFS Storage, Resource Scheduler, Network
 Diagnostics, Network Policy Manager, and Secret Volume Driver `1`; and each
 corresponding current definition. Historical definitions are restored exactly
-from the reviewed `v0.3.0-rc21` tag, except NFS Storage `1`, whose deployed
-`v0.9.13` definition comes from `v0.3.0-rc13`. Taiwan Traditional Chinese
-readmes are added without changing those workload definitions. The integration
-gate resolves all 16 retained and current version IDs through Catalog Service
+from reviewed immutable source snapshots; their original commits and contents
+remain available in Git history without making prerelease tag names part of the
+current operator workflow. Taiwan Traditional Chinese readmes are added without
+changing those workload definitions. The integration gate resolves all 24
+retained and current version IDs through Catalog Service
 so an existing stack cannot regress to a version-detail 404.
 
 ## Distribution

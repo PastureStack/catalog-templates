@@ -116,6 +116,25 @@
       }
     },
     {
+      "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.8.10",
+      "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
+      "sourceCommit": "6df7d01290a1f5cb19e7ba0f0ee761c9602bca64",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-plugin-manager",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, Docker CLI, and other packages retain their upstream licenses and notices",
+      "reviewedAt": "2026-09-09",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.74.0",
+        "reportCreatedAt": "2026-09-09",
+        "high": 0,
+        "critical": 0,
+        "secrets": 0
+      }
+    },
+    {
       "reference": "ghcr.io/pasturestack/network-diagnostics-agent:v0.2.0",
       "sourceRepository": "https://github.com/PastureStack/network-diagnostics-agent",
       "sourceCommit": "01f8eefa4db9735a084e6470d814aaef4722e924",
@@ -223,6 +242,31 @@
         "reportCreatedAt": "2026-08-10T09:35:48.687101246Z",
         "high": 0,
         "critical": 0
+      }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/resource-scheduler:v0.8.18",
+      "sourceRepository": "https://github.com/PastureStack/resource-scheduler",
+      "sourceCommit": "033f0f4fb9b13b7524216accd5d9bab804a3b69b",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/resource-scheduler",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and other packages retain their upstream licenses and notices",
+      "reviewedAt": "2026-09-10",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.74.0",
+        "reportCreatedAt": "2026-09-09T17:33:41.115183943Z",
+        "low": 4,
+        "medium": 30,
+        "high": 0,
+        "critical": 0,
+        "secrets": 0,
+        "vendorUnfixedLowMedium": 34,
+        "actionable": 0,
+        "disposition": "under_investigation",
+        "evidence": "https://github.com/PastureStack/resource-scheduler/releases/tag/v0.8.18"
       }
     },
     {
@@ -430,6 +474,29 @@
         "high": 0,
         "critical": 0,
         "secrets": 0
+      }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/ecr-credential-sync:v3.1.5",
+      "sourceRepository": "https://github.com/PastureStack/ecr-credential-sync",
+      "sourceCommit": "d0f375106dd564feaa650798214959d22d7a457b",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ecr-credential-sync",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and vendored Go dependencies retain their upstream licenses and notices",
+      "reviewedAt": "2026-09-10",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.74.0",
+        "reportCreatedAt": "2026-09-10",
+        "unknown": 0,
+        "low": 0,
+        "medium": 0,
+        "high": 0,
+        "critical": 0,
+        "secrets": 0,
+        "evidence": "https://github.com/PastureStack/ecr-credential-sync/releases/tag/v3.1.5"
       }
     },
     {
