@@ -3,7 +3,7 @@ version: '2'
 
 services:
   windows-metadata:
-    image: ghcr.io/pasturestack/metadata-service-windows:v0.9.12-windows-ltsc2022
+    image: ghcr.io/pasturestack/metadata-service-windows:v0.9.12
     network_mode: transparent
     command:
     - --reload-interval-limit=${RELOAD_INTERVAL_LIMIT}
@@ -24,7 +24,7 @@ services:
         max-file: '2'
 
   windows-internal-dns:
-    image: ghcr.io/pasturestack/internal-dns-windows:v0.17.12-windows-ltsc2022
+    image: ghcr.io/pasturestack/internal-dns-windows:v0.17.12
     network_mode: transparent
     command:
     - --listen=169.254.169.251:53

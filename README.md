@@ -8,6 +8,11 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 ## Project status
 
+Earlier prerelease tags remain immutable historical evidence. This tree and
+its current release use the pure numeric coordinate `v0.3.1`; product identity
+is carried by the repository, catalog metadata, and provenance rather than the
+version tag.
+
 The current tree is a deliberately small release candidate. It contains only
 templates whose image source, semantic version tag, license boundary, and
 vulnerability result are recorded in

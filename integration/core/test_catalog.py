@@ -973,7 +973,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     windows_ecr_platform = windows_ecr_files['rancher-compose.yml']
     windows_ecr_image = (
         'ghcr.io/pasturestack/ecr-credential-sync-windows:'
-        'v3.1.2-windows-ltsc2022')
+        'v3.1.2')
     assert windows_ecr_docker.count(
         'image: {}'.format(windows_ecr_image)) == 1
     assert 'io.rancher.host.os=windows' in windows_ecr_docker
@@ -1000,10 +1000,10 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     windows_network_platform = windows_network_files['rancher-compose.yml']
     windows_metadata_image = (
         'ghcr.io/pasturestack/metadata-service-windows:'
-        'v0.9.12-windows-ltsc2022')
+        'v0.9.12')
     windows_dns_image = (
         'ghcr.io/pasturestack/internal-dns-windows:'
-        'v0.17.12-windows-ltsc2022')
+        'v0.17.12')
     assert windows_network_docker.count(
         'image: {}'.format(windows_metadata_image)) == 1
     assert windows_network_docker.count(
@@ -1038,7 +1038,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
         windows_container_network_files['rancher-compose.yml'])
     selector_image = (
         'ghcr.io/pasturestack/pod-pause-image:'
-        'v3.0.1-pasturestack.1')
+        'v3.0.2')
     assert windows_container_network_docker.count(
         'image: {}'.format(selector_image)) == 2
     assert windows_container_network_docker.count(

@@ -1,6 +1,12 @@
 name: Validate Catalog Templates
 
 on:
+  pull_request:
+    branches:
+      - main
+  push:
+    tags:
+      - 'v*.*.*'
   workflow_dispatch:
 
 permissions:
@@ -230,3 +236,34 @@ jobs:
               -k 'not test_validate_exits_normal'
 
           echo "CATALOG_TW_LOCALIZATION_OK source=$SOURCE_SHA templates=22 infra_first_party=21 questions=140 python=3.14.6 pytest=4"
+
+  release:
+    if: github.event_name == 'push' && github.ref_type == 'tag'
+    needs: validate
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Check out immutable tag
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Publish validated numeric release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_TYPE" = tag
+          [[ "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          test "$(git cat-file -t "refs/tags/$GITHUB_REF_NAME")" = tag
+          test "$(git rev-list -n 1 "$GITHUB_REF_NAME")" = "$GITHUB_SHA"
+          test -z "$(git status --porcelain)"
+          gh release create "$GITHUB_REF_NAME" \
+            --repo "$GITHUB_REPOSITORY" \
+            --verify-tag \
+            --latest \
+            --title "PastureStack Catalog Templates $GITHUB_REF_NAME" \
+            --notes 'Validated pure numeric Catalog release. Deployable image coordinates, localized metadata, schema, rendered templates, and Catalog Service integration tests passed before publication.'

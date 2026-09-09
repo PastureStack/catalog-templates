@@ -14,11 +14,13 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 - Least-privilege AWS credentials that can request ECR authorization tokens.
 - An environment-scoped API credential when another environment is selected.
 
-The image is public on GHCR and is referenced by the semantic tag
-`v3.1.2-windows-ltsc2022`; Catalog never places an image digest in the
-user-facing Compose definition. The executable accepts neutral `PLATFORM_*`
-variables and a bounded compatibility fallback for credentials injected by the
-existing control protocol.
+The visible Catalog version and GHCR coordinate are the pure numeric
+`v3.1.2`. That coordinate is an exact manifest alias of the already reviewed
+Windows build (`sha256:937b0f642694c6e6638486ec98aa786b82083a12848fd7c0764c1a4ebf718ee5`),
+so the version cleanup does not change image bytes. Catalog never places an
+image digest in the user-facing Compose definition. The executable accepts
+neutral `PLATFORM_*` variables and a bounded compatibility fallback for
+credentials injected by the existing control protocol.
 
 ## Validation status
 
