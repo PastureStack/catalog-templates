@@ -708,7 +708,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     network_docker = network_files['docker-compose.yml.tpl']
     network_platform = network_files['rancher-compose.yml']
     network_manager_image = (
-        'ghcr.io/pasturestack/network-plugin-manager:v0.6.34')
+        'ghcr.io/pasturestack/network-plugin-manager:v0.8.10')
     metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.9.11'
     dns_image = 'ghcr.io/pasturestack/internal-dns:v0.17.11'
     assert network_docker.count(
@@ -896,7 +896,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     scheduler_files = scheduler_version['files']
     scheduler_docker = scheduler_files['docker-compose.yml']
     scheduler_platform = scheduler_files['rancher-compose.yml']
-    scheduler_image = 'ghcr.io/pasturestack/resource-scheduler:v0.8.16'
+    scheduler_image = 'ghcr.io/pasturestack/resource-scheduler:v0.8.18'
     assert scheduler_docker.count(
         'image: {}'.format(scheduler_image)) == 1
     assert '\n  resource-scheduler:\n' in scheduler_docker
