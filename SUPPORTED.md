@@ -8,27 +8,28 @@ or out-of-scope templates from being presented as deployable software.
 
 | Entry | Type | Version | Image policy | Release state |
 |---|---|---|---|---|
-| PastureStack Native | Project template | 0.3.0-rc6 | Composes only reviewed, semantic-versioned infrastructure entries | Clean single-host provisioning and restart passed; restored-data validation pending |
+| PastureStack Native | Project template | v0.3.0 | Composes only reviewed, semantic-versioned infrastructure entries | Clean single-host provisioning and restart passed; restored-data validation pending |
 | PastureStack Container Schedule | Infrastructure scheduling service | v0.6.0 | Public PastureStack GHCR image with an explicit version tag | Race tests, anonymous distribution, HIGH/CRITICAL scan, and Docker start/stop lifecycle passed |
 | PastureStack System Image Preloader | Infrastructure image-cache service | v0.3.0 | Public PastureStack GHCR image with an explicit version tag | Mock compatibility API discovery, real Docker pull/cache lifecycle, anonymous distribution, and HIGH/CRITICAL scan passed |
+| PastureStack Amazon ECR Credential Sync | Infrastructure registry service | v3.1.0 | Public PastureStack GHCR image with an explicit version tag | Source tests, anonymous distribution, and credential lifecycle gates passed |
 | Metadata Healthcheck | Infrastructure stack | v0.3.16 | Public PastureStack GHCR image with a non-overwritten version tag | Link-local Metadata integration and stdout/stderr routing passed; production rolling upgrade pending |
-| PastureStack Network Services | Infrastructure system stack | 0.3.0-rc2 | Three public PastureStack GHCR images with explicit version tags | Integrated single-host managed-network gate passed |
-| PastureStack Network Diagnostics | Infrastructure diagnostics service | v0.2.0 | Two public PastureStack GHCR images with explicit version tags | Reproducible builds, anonymous distribution, full snapshot and bundle lifecycle, persistence, localization, and HIGH/CRITICAL scan passed |
-| PastureStack Network Policy Manager | Infrastructure network-policy agent | v0.3.1 | Public PastureStack GHCR image with an explicit version tag | Five consecutive two-host default-deny, directed TCP allow, rollback, cleanup, and zero-restart gates passed |
-| PastureStack IPsec Overlay | Infrastructure network driver | 0.3.0-rc2 | Public PastureStack GHCR image with an explicit version tag | Catalog-created two-host encrypted lifecycle, restart, upgrade, and rollback passed |
-| PastureStack Windows ECR Credential Sync | Windows infrastructure registry service | v3.1.2-windows-ltsc2022 | Public PastureStack GHCR Windows image with an explicit version tag | Source tests, cross-compilation, PE, license, anonymous distribution, and vulnerability gates passed; Windows-host runtime pending |
-| PastureStack Windows Network Services | Windows infrastructure Metadata and DNS stack | v0.3.0-windows-ltsc2022 | Two public PastureStack GHCR Windows images with explicit version tags | Source tests, cross-compilation, PE, license, anonymous distribution, and vulnerability gates passed; Windows-host runtime pending |
-| PastureStack Windows Container Networking | Windows NAT and transparent network-driver definition | v0.1.0-windows-ltsc2022 | Reviewed selector-only placeholder image with an explicit version tag | Catalog rendering and compatibility-boundary review passed; Windows-host network-driver lifecycle pending |
-| PastureStack Layer 2 Flat Network | Optional infrastructure network driver | 0.3.0-rc8 | Reviewed network image with a semantic version tag; bridge setup is opt-in | Packaged Flat CNI ADD/DEL and isolated physical-bridge setup passed |
-| Resource Scheduler | Infrastructure scheduling agent | v0.8.15 | Public PastureStack GHCR image with an explicit version tag | Production timeout fix, managed allocation, idempotent retry, and restart stability passed |
+| PastureStack Network Services | Infrastructure system stack | v0.3.0 | Three public PastureStack GHCR images with explicit version tags | Integrated single-host managed-network gate passed |
+| PastureStack Network Diagnostics | Infrastructure diagnostics service | v0.2.1 | Two public PastureStack GHCR images with explicit version tags | Reproducible builds, anonymous distribution, full snapshot and bundle lifecycle, persistence, localization, and HIGH/CRITICAL scan passed |
+| PastureStack Network Policy Manager | Infrastructure network-policy agent | v0.3.2 | Public PastureStack GHCR image with an explicit version tag | Five consecutive two-host default-deny, directed TCP allow, rollback, cleanup, and zero-restart gates passed |
+| PastureStack IPsec Overlay | Infrastructure network driver | v0.3.0 | Public PastureStack GHCR image with an explicit version tag | Catalog-created two-host encrypted lifecycle, restart, upgrade, and rollback passed |
+| PastureStack Windows ECR Credential Sync | Windows infrastructure registry service | v3.1.2 | Public PastureStack GHCR Windows image with an explicit version tag | Source tests, cross-compilation, PE, license, anonymous distribution, and vulnerability gates passed; Windows-host runtime pending |
+| PastureStack Windows Network Services | Windows infrastructure Metadata and DNS stack | v0.3.0 | Two public PastureStack GHCR Windows images with explicit version tags | Source tests, cross-compilation, PE, license, anonymous distribution, and vulnerability gates passed; Windows-host runtime pending |
+| PastureStack Windows Container Networking | Windows NAT and transparent network-driver definition | v0.1.0 | Reviewed selector-only placeholder image with an explicit version tag | Catalog rendering and compatibility-boundary review passed; Windows-host network-driver lifecycle pending |
+| PastureStack Layer 2 Flat Network | Optional infrastructure network driver | v0.3.0 | Reviewed network image with a semantic version tag; bridge setup is opt-in | Packaged Flat CNI ADD/DEL and isolated physical-bridge setup passed |
+| Resource Scheduler | Infrastructure scheduling agent | v0.8.17 | Public PastureStack GHCR image with an explicit version tag | Production timeout fix, managed allocation, idempotent retry, and restart stability passed |
 | PastureStack Route 53 DNS Sync | Infrastructure external-DNS agent | v0.8.0 | Public PastureStack GHCR image with an explicit version tag | Route 53 create, update, restart, removal, health, secret, and vulnerability gates passed |
 | PastureStack Amazon EBS Storage | Infrastructure block-storage driver | v0.10.0 | Public PastureStack GHCR image with an explicit version tag | Existing-volume contract, safe opt-in provisioning boundary, anonymous distribution, and HIGH/CRITICAL scan passed; live AWS lifecycle pending |
 | PastureStack Amazon EFS Storage | Infrastructure shared-storage driver | v0.10.0 | Public PastureStack GHCR image with an explicit version tag | Existing-filesystem contract, controlled mount-target provisioning boundary, anonymous distribution, and HIGH/CRITICAL scan passed; live AWS lifecycle pending |
 | PastureStack NFS Storage | Infrastructure storage driver | v0.10.0 | Public PastureStack GHCR image with an explicit version tag | NFS v3 create, mount, read/write, unmount, retain, safe purge, anonymous distribution, and HIGH/CRITICAL scan passed |
-| PastureStack Secret Volume | Infrastructure secret-volume driver | v0.1.1 | Public PastureStack GHCR image with an explicit version tag | Production Catalog deployment, authenticated encrypted delivery, non-root `0400` materialization, restart continuity, tmpfs cleanup, anonymous distribution, and HIGH/CRITICAL scan passed |
-| PastureStack Vault Volume | Infrastructure Vault token-volume driver | v0.2.0 | Two public PastureStack GHCR images with explicit version tags | Real Vault issue, unwrap, restart recovery, accessor revocation, read-only Secret input, anonymous distribution, and HIGH/CRITICAL scans passed |
-| PastureStack Per-Host Subnet Network | Optional infrastructure network driver | 0.3.0-rc8 | Reviewed network image with a semantic version tag | Packaged Host-Local CNI ADD/DEL plus isolated route and IP-set reconciliation passed |
-| PastureStack VXLAN Overlay Network | Optional infrastructure network driver | 0.3.0-rc9 | Reviewed network image with a semantic version tag | Isolated two-node VXLAN forwarding and overlay traffic passed; Catalog lifecycle pending |
+| PastureStack Secret Volume | Infrastructure secret-volume driver | v0.1.2 | Public PastureStack GHCR image with an explicit version tag | Production Catalog deployment, authenticated encrypted delivery, non-root `0400` materialization, restart continuity, tmpfs cleanup, anonymous distribution, and HIGH/CRITICAL scan passed |
+| PastureStack Vault Volume | Infrastructure Vault token-volume driver | v0.2.1 | Two public PastureStack GHCR images with explicit version tags | Real Vault issue, unwrap, restart recovery, accessor revocation, read-only Secret input, anonymous distribution, and HIGH/CRITICAL scans passed |
+| PastureStack Per-Host Subnet Network | Optional infrastructure network driver | v0.3.0 | Reviewed network image with a semantic version tag | Packaged Host-Local CNI ADD/DEL plus isolated route and IP-set reconciliation passed |
+| PastureStack VXLAN Overlay Network | Optional infrastructure network driver | v0.3.0 | Reviewed network image with a semantic version tag | Isolated two-node VXLAN forwarding and overlay traffic passed; Catalog lifecycle pending |
 
 Deployable image references contain semantic version tags only. A published
 version tag must never be replaced. Manifest digests are retained only in the
@@ -317,17 +318,17 @@ The three Windows entries restore only the official upstream Windows
 infrastructure intents. No third-party application template is included.
 
 - ECR Credential Sync:
-  `ghcr.io/pasturestack/ecr-credential-sync-windows:v3.1.2-windows-ltsc2022`
+  `ghcr.io/pasturestack/ecr-credential-sync-windows:v3.1.2`
   from [`PastureStack/ecr-credential-sync@665f944673612dd7d968acf8bf4ebb9d79ec26bb`](https://github.com/PastureStack/ecr-credential-sync/tree/665f944673612dd7d968acf8bf4ebb9d79ec26bb)
 - Internal DNS:
-  `ghcr.io/pasturestack/internal-dns-windows:v0.17.12-windows-ltsc2022`
+  `ghcr.io/pasturestack/internal-dns-windows:v0.17.12`
   from [`PastureStack/internal-dns@f015f6350f54348ce644d72c3ec365e5e6547e73`](https://github.com/PastureStack/internal-dns/tree/f015f6350f54348ce644d72c3ec365e5e6547e73)
 - Metadata Service:
-  `ghcr.io/pasturestack/metadata-service-windows:v0.9.12-windows-ltsc2022`
+  `ghcr.io/pasturestack/metadata-service-windows:v0.9.12`
   from [`PastureStack/metadata-service@bca01d1a3e23605a8a42df06caea5df565cc64e3`](https://github.com/PastureStack/metadata-service/tree/bca01d1a3e23605a8a42df06caea5df565cc64e3)
 - Selector-only schema placeholder:
-  `ghcr.io/pasturestack/pod-pause-image:v3.0.1-pasturestack.1`
-  from [`PastureStack/pod-pause-image@9ffe1def861c2f8b6ecd5eb2f26f583e05beca0b`](https://github.com/PastureStack/pod-pause-image/tree/9ffe1def861c2f8b6ecd5eb2f26f583e05beca0b)
+  `ghcr.io/pasturestack/pod-pause-image:v3.0.2`
+  from [`PastureStack/pod-pause-image@5e2297df9dcdfc1f41109609088144301faa7a49`](https://github.com/PastureStack/pod-pause-image/tree/5e2297df9dcdfc1f41109609088144301faa7a49)
 - License: MIT for the new template files; Apache-2.0 for the listed service
   sources and images. Microsoft Nano Server and bundled dependencies retain
   their own license terms and notices.

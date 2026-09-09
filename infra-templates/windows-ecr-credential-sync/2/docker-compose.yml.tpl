@@ -3,7 +3,7 @@ version: '2'
 
 services:
   windows-ecr-credential-sync:
-    image: ghcr.io/pasturestack/ecr-credential-sync-windows:v3.1.2-windows-ltsc2022
+    image: ghcr.io/pasturestack/ecr-credential-sync-windows:v3.1.2
     environment:
       AUTO_CREATE: '${AUTO_CREATE}'
       AWS_ACCESS_KEY_ID: '${AWS_ACCESS_KEY_ID}'

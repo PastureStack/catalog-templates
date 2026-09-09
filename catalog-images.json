@@ -414,26 +414,26 @@
       }
     },
     {
-      "reference": "ghcr.io/pasturestack/pod-pause-image:v3.0.1-pasturestack.1",
+      "reference": "ghcr.io/pasturestack/pod-pause-image:v3.0.2",
       "sourceRepository": "https://github.com/PastureStack/pod-pause-image",
-      "sourceCommit": "9ffe1def861c2f8b6ecd5eb2f26f583e05beca0b",
+      "sourceCommit": "5e2297df9dcdfc1f41109609088144301faa7a49",
       "sourcePath": "Dockerfile",
       "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/pod-pause-image",
       "licenseBoundary": "Apache-2.0 source and image; the pinned Ubuntu base and build packages retain their upstream licenses and notices",
-      "reviewedAt": "2026-07-26",
+      "reviewedAt": "2026-09-09",
       "platforms": [
         "linux/amd64"
       ],
       "vulnerabilityScan": {
-        "scanner": "Trivy 0.70.0",
-        "reportCreatedAt": "2026-07-26",
+        "scanner": "Trivy 0.74.0",
+        "reportCreatedAt": "2026-09-09",
         "high": 0,
         "critical": 0,
         "secrets": 0
       }
     },
     {
-      "reference": "ghcr.io/pasturestack/ecr-credential-sync-windows:v3.1.2-windows-ltsc2022",
+      "reference": "ghcr.io/pasturestack/ecr-credential-sync-windows:v3.1.2",
       "sourceRepository": "https://github.com/PastureStack/ecr-credential-sync",
       "sourceCommit": "665f944673612dd7d968acf8bf4ebb9d79ec26bb",
       "sourcePath": "package/windows/amd64/Dockerfile",
@@ -452,7 +452,7 @@
       }
     },
     {
-      "reference": "ghcr.io/pasturestack/internal-dns-windows:v0.17.12-windows-ltsc2022",
+      "reference": "ghcr.io/pasturestack/internal-dns-windows:v0.17.12",
       "sourceRepository": "https://github.com/PastureStack/internal-dns",
       "sourceCommit": "f015f6350f54348ce644d72c3ec365e5e6547e73",
       "sourcePath": "package/windows/amd64/Dockerfile",
@@ -471,7 +471,7 @@
       }
     },
     {
-      "reference": "ghcr.io/pasturestack/metadata-service-windows:v0.9.12-windows-ltsc2022",
+      "reference": "ghcr.io/pasturestack/metadata-service-windows:v0.9.12",
       "sourceRepository": "https://github.com/PastureStack/metadata-service",
       "sourceCommit": "bca01d1a3e23605a8a42df06caea5df565cc64e3",
       "sourcePath": "package/windows/amd64/Dockerfile",
