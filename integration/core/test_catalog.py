@@ -190,10 +190,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'ecr-credential-sync')][
         'name'] == 'Amazon ECR Credential Sync'
     assert by_folder[('infra', 'ecr-credential-sync')][
-        'defaultVersion'] == 'v3.1.0'
+        'defaultVersion'] == 'v3.1.5'
     assert by_folder[('infra', 'ecr-credential-sync')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'healthcheck')][
         'name'] == 'Metadata Healthcheck'
     assert by_folder[('infra', 'healthcheck')][
@@ -204,10 +204,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'ipsec-overlay')]['name'] == (
         'IPsec Overlay')
     assert by_folder[('infra', 'ipsec-overlay')][
-        'defaultVersion'] == 'v0.3.0'
+        'defaultVersion'] == 'v0.3.1'
     assert by_folder[('infra', 'ipsec-overlay')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'layer-2-flat-network')]['name'] == (
         'Layer 2 Flat Network')
     assert by_folder[('infra', 'layer-2-flat-network')][
@@ -232,10 +232,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'network-services')]['name'] == (
         'Network Services')
     assert by_folder[('infra', 'network-services')][
-        'defaultVersion'] == 'v0.3.0'
+        'defaultVersion'] == 'v0.3.1'
     assert by_folder[('infra', 'network-services')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'nfs-storage')][
         'name'] == 'NFS Storage'
     assert by_folder[('infra', 'nfs-storage')][
@@ -267,10 +267,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'resource-scheduler')][
         'name'] == 'Resource Scheduler'
     assert by_folder[('infra', 'resource-scheduler')][
-        'defaultVersion'] == 'v0.8.17'
+        'defaultVersion'] == 'v0.8.18'
     assert by_folder[('infra', 'resource-scheduler')][
         'links']['defaultVersion'].endswith(
-        ':3')
+        ':4')
     assert by_folder[('infra', 'route53-dns-sync')][
         'name'] == 'Route 53 DNS Sync'
     assert by_folder[('infra', 'route53-dns-sync')][
@@ -288,10 +288,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'vxlan-overlay-network')]['name'] == (
         'VXLAN Overlay Network')
     assert by_folder[('infra', 'vxlan-overlay-network')][
-        'defaultVersion'] == 'v0.3.0'
+        'defaultVersion'] == 'v0.3.1'
     assert by_folder[('infra', 'vxlan-overlay-network')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'windows-container-networking')][
         'name'] == 'Windows Container Networking'
     assert by_folder[('infra', 'windows-container-networking')][
@@ -522,7 +522,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     ecr_files = ecr_version['files']
     ecr_docker = ecr_files['docker-compose.yml.tpl']
     ecr_platform = ecr_files['rancher-compose.yml']
-    ecr_image = 'ghcr.io/pasturestack/ecr-credential-sync:v3.1.0'
+    ecr_image = 'ghcr.io/pasturestack/ecr-credential-sync:v3.1.5'
     assert ecr_docker.count('image: {}'.format(ecr_image)) == 1
     assert '\n  ecr-credential-sync:\n' in ecr_docker
     assert '$${PLATFORM_URL:-$${CATTLE_URL:-}}' in ecr_docker
