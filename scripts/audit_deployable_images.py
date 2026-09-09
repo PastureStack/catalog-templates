@@ -32,7 +32,7 @@ CATALOG_VERSION_PATTERN = re.compile(
 )
 VERSION_TAG_PATTERN = re.compile(
     r"^ghcr\.io/pasturestack/[a-z0-9][a-z0-9._-]*:"
-    r"v?\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$"
+    r"v?\d+\.\d+\.\d+$"
 )
 COMMIT_PATTERN = re.compile(r"^[0-9a-f]{40}$")
 EXPECTED_INFRA_TEMPLATE_COUNT = 21
@@ -51,14 +51,16 @@ NON_TAIWAN_TERMS = (
     "配置文件",
 )
 RETAINED_VERSION_LAYOUTS = {
+    "ecr-credential-sync": ("2", "3"),
     "healthcheck": ("0", "1"),
-    "ipsec-overlay": ("1", "2"),
+    "ipsec-overlay": ("1", "2", "3"),
     "network-diagnostics": ("1", "2"),
     "network-policy-manager": ("1", "2"),
-    "network-services": ("1", "2"),
+    "network-services": ("1", "2", "3"),
     "nfs-storage": ("1", "2"),
-    "resource-scheduler": ("1", "2", "3"),
+    "resource-scheduler": ("1", "2", "3", "4"),
     "secret-volume-driver": ("1", "2"),
+    "vxlan-overlay-network": ("2", "3"),
 }
 RETAINED_VERSION_HASHES = {
     "infra-templates/healthcheck/0/README.md": "1b18863d98ba3c042676f81daf6d6fc510c255cd1df275495985ed41f3b13aaa",

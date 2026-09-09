@@ -88,23 +88,30 @@ if [ "$ready" != true ]; then
 fi
 
 for version_id in \
+    ecr-credential-sync:2 \
+    ecr-credential-sync:3 \
     healthcheck:0 \
     healthcheck:1 \
     ipsec-overlay:1 \
     ipsec-overlay:2 \
+    ipsec-overlay:3 \
     network-diagnostics:1 \
     network-diagnostics:2 \
     network-policy-manager:1 \
     network-policy-manager:2 \
     network-services:1 \
     network-services:2 \
+    network-services:3 \
     nfs-storage:1 \
     nfs-storage:2 \
     resource-scheduler:1 \
     resource-scheduler:2 \
     resource-scheduler:3 \
+    resource-scheduler:4 \
     secret-volume-driver:1 \
-    secret-volume-driver:2; do
+    secret-volume-driver:2 \
+    vxlan-overlay-network:2 \
+    vxlan-overlay-network:3; do
     curl -fsS \
         "http://localhost:8088/v1-catalog/templateversions/library:infra*${version_id}" \
         >/dev/null
