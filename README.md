@@ -98,7 +98,7 @@ corresponding current definition. Historical definitions are restored exactly
 from reviewed immutable source snapshots; their original commits and contents
 remain available in Git history without making prerelease tag names part of the
 current operator workflow. Taiwan Traditional Chinese readmes are added without
-changing those workload definitions. The integration gate resolves all 24
+changing those workload definitions. The integration gate is configured to resolve all 26
 retained and current version IDs through Catalog Service
 so an existing stack cannot regress to a version-detail 404.
 
