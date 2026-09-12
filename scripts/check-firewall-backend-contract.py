@@ -6,10 +6,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1] / "infra-templates"
 CHOICES = ("auto", "nftables", "iptables-nft", "iptables-legacy")
+CURRENT_VERSIONS = {"network-services": "4", "ipsec-overlay": "5"}
 
 
 def read(template: str, filename: str) -> str:
-    return (ROOT / template / "4" / filename).read_text(encoding="utf-8")
+    return (ROOT / template / CURRENT_VERSIONS[template] / filename).read_text(
+        encoding="utf-8"
+    )
 
 
 def check_question(template: str) -> None:
