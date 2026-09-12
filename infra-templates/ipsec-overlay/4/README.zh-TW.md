@@ -9,9 +9,10 @@
 
 ## 候選範本：映像已發布
 
-- 映像 `ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.27` 已正式發布；
-  不可變 manifest digest、來源 revision 與執行映像安全掃描已記錄於
-  `catalog-images.json`。商店範本與各後端的主機生命週期驗收仍待完成，
+- 映像 `ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.29` 已正式發布；
+  manifest digest、來源 revision 與執行映像安全掃描已記錄於
+  `catalog-images.json`。GitHub Release 並未標示為不可變。商店範本與
+  整套受管服務的主機生命週期驗收仍待完成，
   目前不得部署此候選版。
 - 第 `3` 版 `v0.14.26` 的驗收證據只適用於歷史版，不能替代新版驗收。
 - 原始碼採 Apache-2.0 授權；Ubuntu、strongSwan、CNI、Weave 與
@@ -19,13 +20,14 @@
 
 ## 權限與機密資料界線
 
-路由器使用特權模式並加入主機 PID 與網路命名空間。在原生
-`nftables` 模式下，路由器只同步 XFRM 與路由；網路外掛管理器以
-自己的主機規則負責 overlay 網橋子網路的轉送標記及 NAT 排除。
-路由器不另建 nftables 標記表，也不修改 Docker 的規則表。明確
-選用的 `iptables-nft` 與 `iptables-legacy` 各保留自己的 xtables
-路徑，不與原生 nftables 混用。CNI 相關容器
-也使用特權模式並存取 Docker Socket。這些權限是相容架構所需，
+路由器使用特權模式並加入主機 PID 與網路命名空間。在三種防火牆
+後端，它只同步 IPsec XFRM 狀態與路由，不寫入主機防火牆規則。
+網路外掛管理器獨自維護 overlay 網橋子網路的轉送標記、NAT 排除及
+主機連接埠規則。路由器不另建 nftables 標記表、不修改管理器的
+`CATTLE_*` 規則鏈，也不修改 Docker 的規則表。路由器以唯讀掛載 Docker Socket 查詢
+實際防火牆驅動程式；唯讀掛載仍賦予強大的 Docker API 存取能力，
+只限此受信任的特權系統服務使用。CNI 相關容器也存取 Docker Socket。
+這些權限是相容架構所需，
 不得套用到一般工作負載。
 
 路由器會從相容控制平面取得範圍受限的代理程式登入資訊，再透過已驗證
@@ -46,9 +48,11 @@
 
 主機防火牆後端可選 `auto`、原生 `nftables`、`iptables-nft` 或
 `iptables-legacy`。選擇會透過 `PASTURESTACK_FIREWALL_BACKEND` 傳給
-`overlay-router`。明確指定的後端與主機不符時應安全停止；現代後端
-不得自動降級至 legacy。僅在明確配置的舊主機使用 legacy，並與
-同環境的 Network Services 範本選項保持一致。
+`overlay-router`。路由器檢查 Docker 實際驅動程式與現役規則擁有者，
+不以 Ubuntu 版本推斷；Ubuntu 26.04 及更新版若已使用 `iptables-legacy`
+或 `iptables-nft`，仍維持該現役路徑。明確指定與實際後端不符或狀態
+無法判定時安全停止，不切換後端，也不載入尚未啟用的 legacy 模組。
+同環境的 Network Services 範本應使用一致的選項。
 
 Native 專案定義將 Network Services 排在 IPsec 前面，但清單順序
 本身不保證健康狀態相依。建立或升級加密網路前，應先套用相符版本
@@ -59,8 +63,9 @@ Native 專案定義將 Network Services 排在 IPsec 前面，但清單順序
 
 ## 發布界線
 
-`v0.14.27` 映像已正式發布，並以真實 manifest digest 鎖定。升格商店
-候選版前，仍須通過商店稽核，並依後端選項驗收現代 nft-only 與明確
-選用 legacy 的主機。先前
+`v0.14.29` 映像已正式發布，並以真實 manifest digest 鎖定。升格商店
+候選版前，仍須通過商店稽核，並依主機 Docker 實際驅動程式與規則
+擁有者驗收原生 nftables、iptables-nft 與 iptables-legacy，以及耦合的
+Network Services 與其他受影響網路外掛。先前
 `v0.14.26` 的雙主機及滾動升級結果只適用於第 `3` 版，不能視為本版
 證據。

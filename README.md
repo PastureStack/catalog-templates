@@ -76,6 +76,16 @@ Layer 2 bridge setup and the Per-Host controller's marked routes and dedicated
 IP set also passed without changing a production host interface. They are not
 installed automatically by the project template.
 
+Firewall acceptance keeps module ownership intact: Network Plugin Manager
+alone manages host NAT, forwarding marks, and host-port `CATTLE_*` chains;
+IPsec Overlay manages XFRM and routes without patching those host chains;
+Network Policy Manager manages only its own policy table. Each plugin must
+follow the host's active Docker backend, including iptables-nft or
+iptables-legacy on a new Ubuntu release, and must fail on a mismatch without
+silently switching backends. The three-backend isolated rule tests do not
+replace the coupled two-host service, workload egress/DNS, restart, and
+rollback gates before the new Catalog versions become deployable.
+
 Deployable Compose files use semantic version tags only. A published version
 tag must never be replaced. Manifest digests remain release-verification
 evidence and are not inserted into Catalog, Compose, API, or user-interface

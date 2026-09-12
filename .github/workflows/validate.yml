@@ -69,6 +69,7 @@ jobs:
 
           bash scripts/audit-deployable-images
           python scripts/check-catalog-version-labels.py
+          python scripts/check-firewall-backend-contract.py
           asset="$work_root/catalog-service.tar.xz"
           curl \
             --proto '=https' \

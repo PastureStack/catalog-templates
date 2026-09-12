@@ -6,13 +6,13 @@ This infrastructure template is a candidate for the IPsec overlay data plane on 
 
 ## Candidate template — published image
 
-- Image: `ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.27` is published. Its immutable manifest digest, source revision, and runtime-image security scan are recorded in `catalog-images.json`. The catalog template and backend-specific host lifecycle gates remain pending; do not deploy this candidate yet.
+- Image: `ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.29` is published. Its manifest digest, source revision, and runtime-image security scan are recorded in `catalog-images.json`. The GitHub Release is not marked immutable. The catalog template and complete managed-service lifecycle gates remain pending; do not deploy this candidate yet.
 - The `v0.14.26` evidence in version `3` is historical and does not validate this candidate image.
 - Source license: Apache-2.0; Ubuntu, strongSwan, CNI, Weave, and bundled dependencies retain their upstream licenses and notices.
 
 ## Privilege and secret boundary
 
-The router is privileged and uses host PID and network namespaces. In native `nftables` mode it synchronizes XFRM and routes only; Network Plugin Manager owns the overlay bridge-subnet forward mark and NAT exclusion in its own host firewall rules. The router does not create another nftables mark table or change Docker's tables. The explicit `iptables-nft` and `iptables-legacy` modes keep their respective xtables-specific paths, separate from native nftables. The CNI sidecar is privileged and accesses the Docker socket. These permissions are required by this compatibility architecture and must not be copied to ordinary workloads.
+The router is privileged and uses host PID and network namespaces. In all three firewall backends it synchronizes IPsec XFRM state and routes, but does not write host firewall chains. Network Plugin Manager alone owns the overlay bridge-subnet forward mark, NAT exclusion, and host-port rules. The router does not create a second nftables mark table, patch the manager's `CATTLE_*` chains, or change Docker's tables. The router receives a read-only Docker socket mount to query the actual firewall driver; Unix socket access still grants a powerful Docker API capability, so it remains confined to this trusted privileged system service. The CNI sidecar also accesses the Docker socket. These permissions are required by this compatibility architecture and must not be copied to ordinary workloads.
 
 The router receives a scoped create-agent credential from the compatible control plane and downloads the generated IPsec pre-shared key through the authenticated `configcontent/psk` contract. This template does not accept a user-supplied key and never places a key in the public Catalog repository, Compose variables, image, or logs.
 
@@ -22,10 +22,10 @@ The literal `rancher-compose.yml` filename, `minimum_rancher_version` key, requi
 
 The data plane currently supports the compatibility network `10.42.0.0/16`; the template intentionally does not expose a subnet selector that the runtime cannot safely honor.
 
-The host firewall backend is selected explicitly or left at `auto`. The four supported choices are `auto`, native `nftables`, `iptables-nft`, and `iptables-legacy`. The selection is passed only to `overlay-router` through `PASTURESTACK_FIREWALL_BACKEND`. An explicit mismatch fails safely; selecting a modern backend must not activate legacy rules. Use legacy only on an intentionally configured legacy host, and align this choice with the Network Services template on the same environment.
+The host firewall backend is selected explicitly or left at `auto`. The four supported choices are `auto`, native `nftables`, `iptables-nft`, and `iptables-legacy`. The selection is passed only to `overlay-router` through `PASTURESTACK_FIREWALL_BACKEND`. The router checks Docker's actual driver and live rule owner, not the Ubuntu version: even on Ubuntu 26.04 and later, an existing `iptables-legacy` or `iptables-nft` deployment keeps that active path. An explicit mismatch or ambiguous state fails safely without switching backends or activating unloaded legacy modules. Align the choice with the Network Services template on the same environment.
 
 The Native project definition lists Network Services before IPsec, but list order alone does not establish a health dependency. Before creating or upgrading this overlay, apply the matching Network Services version and wait until Network Plugin Manager is healthy on every target host. In native `nftables` mode, first satisfy that template's Docker firewall-backend, bridge-accept-fwmark, and persistent IPv4-forwarding prerequisites; an IPsec router alone cannot provide the manager-owned forwarding and NAT rules.
 
 ## Release boundary
 
-The `v0.14.27` image is published and locked by its real manifest digest. Before promoting this catalog candidate, run the catalog audit and validate the selected backend on modern nft-only and explicit legacy hosts as appropriate. The earlier `v0.14.26` two-host and rolling-upgrade results apply only to version `3`; they are not evidence for this candidate.
+The `v0.14.29` image is published and locked by its real manifest digest. Before promoting this catalog candidate, run the catalog audit and validate native nftables, iptables-nft, and iptables-legacy against the host's actual Docker driver and rule owner, including the coupled Network Services and other affected network plugins. The earlier `v0.14.26` two-host and rolling-upgrade results apply only to version `3`; they are not evidence for this candidate.

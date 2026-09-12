@@ -98,10 +98,10 @@
       }
     },
     {
-      "reference": "ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.27",
-      "manifestDigest": "sha256:917c4369ee22808c100dd890d17296fe341e0dda4b2ad2923050f4fca5c22386",
+      "reference": "ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.29",
+      "manifestDigest": "sha256:e65921d3ea7ec3a3582400b0bc2ca3297484375bad42dd61bbf74b1201c18ad1",
       "sourceRepository": "https://github.com/PastureStack/ipsec-vxlan-overlay-network",
-      "sourceCommit": "8bdf40346eeea3436cbe4a68f0d9c397b99cb6bf",
+      "sourceCommit": "276f8fee8ceb64a216a2907fdb0c60394296a208",
       "sourcePath": "package/Dockerfile",
       "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ipsec-vxlan-overlay-network",
       "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, strongSwan, CNI, Weave, and other packages retain their upstream licenses and notices",
@@ -156,10 +156,10 @@
       }
     },
     {
-      "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.8.13",
-      "manifestDigest": "sha256:94a260e1648b61e4c8a3c08496c84db9e6b22b65fafc854957bea6e476c4fc1b",
+      "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.8.15",
+      "manifestDigest": "sha256:622cfb38a58f204d23152205e6d850d204d1cb9d3c50392a935afee49d780e3e",
       "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
-      "sourceCommit": "e24e92027a45177ae0332d67093c636627a1ff9e",
+      "sourceCommit": "26eee48df2e3bac96fc97fcd596a16deccc9f4ad",
       "sourcePath": "package/Dockerfile",
       "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-plugin-manager",
       "licenseBoundary": "Apache-2.0 source and image; bundled Alpine, Docker CLI, and other packages retain their upstream licenses and notices",
@@ -170,10 +170,9 @@
       "vulnerabilityScan": {
         "scanner": "Trivy 0.74.0",
         "reportCreatedAt": "2026-09-12",
-        "scope": "release runtime image",
+        "scope": "published runtime image",
         "high": 0,
-        "critical": 0,
-        "secrets": 0
+        "critical": 0
       }
     },
     {

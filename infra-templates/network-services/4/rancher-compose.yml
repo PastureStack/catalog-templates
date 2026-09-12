@@ -8,7 +8,7 @@
     io.pasturestack.catalog.question.docker_bridge.label.zh-tw: 'Docker 網橋'
     io.pasturestack.catalog.question.docker_bridge.description.zh-tw: '受管工作負載流量使用的主機網橋。'
     io.pasturestack.catalog.question.firewall_backend.label.zh-tw: '主機防火牆後端'
-    io.pasturestack.catalog.question.firewall_backend.description.zh-tw: '自動偵測 Docker 後端；Docker 原生 nftables、iptables-nft 相容前端與舊版 legacy 互不混用。選擇原生 nftables 前須先設定 Docker bridge-accept-fwmark。'
+    io.pasturestack.catalog.question.firewall_backend.description.zh-tw: '依 Docker 現役後端自動選擇；不論 Ubuntu 版本，原生 nftables、iptables-nft 與 iptables-legacy 互不混用。切換原生 nftables 前須先設定 Docker bridge-accept-fwmark。'
     io.pasturestack.catalog.question.dns_recurser_timeout.label.zh-tw: 'DNS 遞迴查詢逾時'
     io.pasturestack.catalog.question.dns_recurser_timeout.description.zh-tw: '等待上游 DNS 查詢回應的秒數。'
     io.pasturestack.catalog.question.ttl.label.zh-tw: '服務探索 DNS 紀錄存留時間'
@@ -30,7 +30,7 @@
     required: true
   - variable: FIREWALL_BACKEND
     label: Host firewall backend
-    description: Auto-detect the Docker backend, or explicitly select native nftables, iptables-nft compatibility, or legacy. A mismatch fails safely; native nftables requires Docker bridge-accept-fwmark configured on the host.
+    description: Follow Docker's active firewall backend on any supported Ubuntu version, or explicitly select native nftables, iptables-nft, or iptables-legacy. A mismatch fails safely; native nftables requires Docker bridge-accept-fwmark on the host.
     type: enum
     default: auto
     required: true

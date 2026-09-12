@@ -3,7 +3,7 @@ version: '2'
 
 services:
   overlay-network:
-    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.27
+    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.29
     command:
     - /bin/bash
     - -c
@@ -18,7 +18,7 @@ services:
       io.rancher.network.arpsync: 'true'
 
   overlay-router:
-    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.27
+    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.29
     command: start-ipsec.sh
     privileged: true
     network_mode: container:overlay-network
@@ -31,6 +31,8 @@ services:
       PASTURESTACK_NETWORK_RUN_IN_HOST_NETNS: 'true'
       PASTURESTACK_NETWORK_ARP_INTERFACE: '${DOCKER_BRIDGE}'
       PASTURESTACK_NETWORK_SYNC_HOST_ROUTES: 'true'
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
     labels:
       io.pasturestack.component: ipsec-overlay-router
       io.rancher.container.create_agent: 'true'
@@ -45,7 +47,7 @@ services:
       net.ipv4.conf.default.send_redirects: '0'
 
   connectivity-check:
-    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.27
+    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.29
     command:
     - ipsec-vxlan-connectivity-check
     - --connectivity-check-interval
@@ -60,7 +62,7 @@ services:
       io.pasturestack.component: ipsec-overlay-connectivity
 
   cni-driver:
-    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.27
+    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.29
     command: start-cni-driver.sh
     privileged: true
     network_mode: host
