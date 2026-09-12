@@ -10,7 +10,7 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 Earlier prerelease coordinates are retired from current release references;
 their reviewed source commits remain in Git history. This source tree targets
-the pure numeric coordinate `v0.3.4`; the GitHub tag and Release, rather than
+the pure numeric coordinate `v0.3.5`; the GitHub tag and Release, rather than
 this README, determine when it is published. Product identity is carried by
 the repository, catalog metadata, and provenance rather than the version tag.
 
@@ -86,12 +86,12 @@ silently switching backends. The three-backend isolated rule tests do not
 replace the coupled two-host service, workload egress/DNS, restart, and
 rollback gates before the new Catalog versions become deployable.
 
-IPsec Overlay template version `5` references the formally published
-`v0.14.30` image. It retains Network Plugin Manager as the only owner of host
-NAT and forwarding rules and adds a bounded host-network port handoff for
-rolling router replacement. Its two-host live upgrade and recovery evidence
-must be checked separately from version `4`; a final healthy state from an
-earlier release does not prove the race is resolved.
+IPsec Overlay template version `6` targets `v0.14.31`, retaining version `5`'s
+bounded port handoff. It retries a temporarily offline peer through the
+existing health reconciliation without restarting the shared charon daemon or
+changing Network Plugin Manager's host-firewall ownership. The exact image
+digest, security result, and two-host peer-restart evidence are separate
+publication gates; earlier template versions remain unchanged.
 
 Deployable Compose files use semantic version tags only. A published version
 tag must never be replaced. Manifest digests remain release-verification
