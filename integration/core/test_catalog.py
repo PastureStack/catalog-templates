@@ -568,7 +568,8 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     overlay_image = (
         'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.27')
     assert overlay_docker.count('image: {}'.format(overlay_image)) == 4
-    assert overlay_docker.count("PASTURESTACK_FIREWALL_BACKEND: '${FIREWALL_BACKEND}'") == 1
+    assert overlay_docker.count(
+        "PASTURESTACK_FIREWALL_BACKEND: '${FIREWALL_BACKEND}'") == 1
     assert overlay_platform.count('variable: FIREWALL_BACKEND') == 1
     assert 'default: auto' in overlay_platform
     for backend in ('nftables', 'iptables-nft', 'iptables-legacy'):
