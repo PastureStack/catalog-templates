@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1] / "infra-templates"
 CHOICES = ("auto", "nftables", "iptables-nft", "iptables-legacy")
-CURRENT_VERSIONS = {"network-services": "4", "ipsec-overlay": "5"}
+CURRENT_VERSIONS = {"network-services": "4", "ipsec-overlay": "6"}
 
 
 def read(template: str, filename: str) -> str:
