@@ -13,7 +13,7 @@ or out-of-scope templates from being presented as deployable software.
 | PastureStack System Image Preloader | Infrastructure image-cache service | v0.3.0 | Public PastureStack GHCR image with an explicit version tag | Mock compatibility API discovery, real Docker pull/cache lifecycle, anonymous distribution, and HIGH/CRITICAL scan passed |
 | PastureStack Amazon ECR Credential Sync | Infrastructure registry service | v3.1.0 | Public PastureStack GHCR image with an explicit version tag | Source tests, anonymous distribution, and credential lifecycle gates passed |
 | Metadata Healthcheck | Infrastructure stack | v0.3.16 | Public PastureStack GHCR image with a non-overwritten version tag | Link-local Metadata integration and stdout/stderr routing passed; production rolling upgrade pending |
-| PastureStack Network Services | Infrastructure system stack | v0.3.2 candidate | Network Plugin Manager v0.8.12 published and manifest digest locked; Metadata Service and Internal DNS unchanged | Isolated VM native-nft backend, egress, DNS, HTTPS, and host-port checks passed before and after reboot; formal two-host control-plane lifecycle pending |
+| PastureStack Network Services | Infrastructure system stack | v0.3.2 candidate | Network Plugin Manager v0.8.13 published; official manifest digest, source revision, and release scan recorded; Metadata Service and Internal DNS unchanged | Earlier isolated native-nft VM gates passed; the official image still requires formal multi-host lifecycle verification before catalog publication |
 | PastureStack Network Diagnostics | Infrastructure diagnostics service | v0.2.1 | Two public PastureStack GHCR images with explicit version tags | Reproducible builds, anonymous distribution, full snapshot and bundle lifecycle, persistence, localization, and HIGH/CRITICAL scan passed |
 | PastureStack Network Policy Manager | Infrastructure network-policy agent | v0.3.2 | Public PastureStack GHCR image with an explicit version tag | Five consecutive two-host default-deny, directed TCP allow, rollback, cleanup, and zero-restart gates passed |
 | PastureStack IPsec Overlay | Infrastructure network driver | v0.3.2 candidate | v0.14.27 published and manifest digest locked | Isolated VM two-container XFRM and encrypted-packet check passed; formal two-host control-plane lifecycle pending |
@@ -424,11 +424,12 @@ production approval.
 
 The new Network Services `v0.3.2` definition in directory `4` is not yet
 published as a deployable release. It selects one host firewall backend and
-references published Network Plugin Manager `v0.8.12`; its official manifest
+references published Network Plugin Manager `v0.8.13`; its official manifest
 digest, merged source revision, and runtime-image release scan are recorded in
-`catalog-images.json`. Metadata Service and Internal DNS are unchanged from
-directory `3`. The 2026-07-23 evidence above applies to the earlier released
-image and must not be presented as host lifecycle validation of `v0.8.12`.
+`catalog-images.json`. Metadata
+Service and Internal DNS are unchanged from directory `3`. The 2026-07-23
+evidence above applies to the earlier released image and must not be presented
+as host lifecycle validation of `v0.8.13`.
 An isolated VM using Docker native nftables has since passed backend detection,
 both watcher readiness checks, host-NAT egress, DNS, HTTPS, and same-bridge and
 cross-bridge host-port checks before and after reboot. This does not replace a

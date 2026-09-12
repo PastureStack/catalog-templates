@@ -2,7 +2,7 @@
 
 # PastureStack Network Services
 
-This version adds a single, selectable host firewall backend for Network Plugin Manager. It keeps Metadata Service and Internal DNS unchanged from version 3. The prepared template references the published Network Plugin Manager `v0.8.12`; its source revision and manifest digest are recorded in `catalog-images.json`. This catalog candidate still requires backend-specific host lifecycle verification before deployment.
+This version adds a single, selectable host firewall backend for Network Plugin Manager. It keeps Metadata Service and Internal DNS unchanged from version 3. The prepared template references published Network Plugin Manager `v0.8.13`; its official image manifest digest, source revision, and runtime-image scan are recorded in `catalog-images.json`. This catalog candidate still requires backend-specific host lifecycle verification before deployment.
 
 ## Firewall backend
 

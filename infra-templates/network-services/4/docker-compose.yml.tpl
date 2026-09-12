@@ -3,7 +3,7 @@ version: '2'
 
 services:
   network-plugin-manager:
-    image: ghcr.io/pasturestack/network-plugin-manager:v0.8.12
+    image: ghcr.io/pasturestack/network-plugin-manager:v0.8.13
     privileged: true
     network_mode: host
     pid: host

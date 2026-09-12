@@ -156,13 +156,13 @@
       }
     },
     {
-      "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.8.12",
-      "manifestDigest": "sha256:f210ecc8519528feb79d68ba70b4fc3f99c6b4f4afe20af156bb68601c73edb7",
+      "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.8.13",
+      "manifestDigest": "sha256:94a260e1648b61e4c8a3c08496c84db9e6b22b65fafc854957bea6e476c4fc1b",
       "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
-      "sourceCommit": "d72a97841152b57052b3d22082cc682902fbd175",
+      "sourceCommit": "e24e92027a45177ae0332d67093c636627a1ff9e",
       "sourcePath": "package/Dockerfile",
       "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-plugin-manager",
-      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, Docker CLI, and other packages retain their upstream licenses and notices",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Alpine, Docker CLI, and other packages retain their upstream licenses and notices",
       "reviewedAt": "2026-09-12",
       "platforms": [
         "linux/amd64"
@@ -170,7 +170,7 @@
       "vulnerabilityScan": {
         "scanner": "Trivy 0.74.0",
         "reportCreatedAt": "2026-09-12",
-        "scope": "published runtime image",
+        "scope": "release runtime image",
         "high": 0,
         "critical": 0,
         "secrets": 0

@@ -9,8 +9,9 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 ## Project status
 
 Earlier prerelease coordinates are retired from current release references;
-their reviewed source commits remain in Git history. This tree and its current
-release use the pure numeric coordinate `v0.3.2`; product identity is carried by
+their reviewed source commits remain in Git history. This source tree targets
+the pure numeric coordinate `v0.3.3`; the GitHub tag and Release, rather than
+this README, determine when it is published. Product identity is carried by
 the repository, catalog metadata, and provenance rather than the version tag.
 
 The current tree is a deliberately small release candidate. It contains only
