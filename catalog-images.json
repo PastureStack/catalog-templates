@@ -98,6 +98,27 @@
       }
     },
     {
+      "reference": "ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.29",
+      "manifestDigest": "sha256:e65921d3ea7ec3a3582400b0bc2ca3297484375bad42dd61bbf74b1201c18ad1",
+      "sourceRepository": "https://github.com/PastureStack/ipsec-vxlan-overlay-network",
+      "sourceCommit": "276f8fee8ceb64a216a2907fdb0c60394296a208",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ipsec-vxlan-overlay-network",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, strongSwan, CNI, Weave, and other packages retain their upstream licenses and notices",
+      "reviewedAt": "2026-09-12",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.74.0",
+        "reportCreatedAt": "2026-09-12",
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "secrets": 0
+      }
+    },
+    {
       "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.6.34",
       "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
       "sourceCommit": "b4b61856d38a9410319688144ff635868571e35f",
@@ -132,6 +153,26 @@
         "high": 0,
         "critical": 0,
         "secrets": 0
+      }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.8.15",
+      "manifestDigest": "sha256:622cfb38a58f204d23152205e6d850d204d1cb9d3c50392a935afee49d780e3e",
+      "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
+      "sourceCommit": "26eee48df2e3bac96fc97fcd596a16deccc9f4ad",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-plugin-manager",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Alpine, Docker CLI, and other packages retain their upstream licenses and notices",
+      "reviewedAt": "2026-09-12",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.74.0",
+        "reportCreatedAt": "2026-09-12",
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0
       }
     },
     {

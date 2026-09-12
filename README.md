@@ -9,8 +9,9 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 ## Project status
 
 Earlier prerelease coordinates are retired from current release references;
-their reviewed source commits remain in Git history. This tree and its current
-release use the pure numeric coordinate `v0.3.2`; product identity is carried by
+their reviewed source commits remain in Git history. This source tree targets
+the pure numeric coordinate `v0.3.3`; the GitHub tag and Release, rather than
+this README, determine when it is published. Product identity is carried by
 the repository, catalog metadata, and provenance rather than the version tag.
 
 The current tree is a deliberately small release candidate. It contains only
@@ -75,6 +76,16 @@ Layer 2 bridge setup and the Per-Host controller's marked routes and dedicated
 IP set also passed without changing a production host interface. They are not
 installed automatically by the project template.
 
+Firewall acceptance keeps module ownership intact: Network Plugin Manager
+alone manages host NAT, forwarding marks, and host-port `CATTLE_*` chains;
+IPsec Overlay manages XFRM and routes without patching those host chains;
+Network Policy Manager manages only its own policy table. Each plugin must
+follow the host's active Docker backend, including iptables-nft or
+iptables-legacy on a new Ubuntu release, and must fail on a mismatch without
+silently switching backends. The three-backend isolated rule tests do not
+replace the coupled two-host service, workload egress/DNS, restart, and
+rollback gates before the new Catalog versions become deployable.
+
 Deployable Compose files use semantic version tags only. A published version
 tag must never be replaced. Manifest digests remain release-verification
 evidence and are not inserted into Catalog, Compose, API, or user-interface
@@ -98,7 +109,7 @@ corresponding current definition. Historical definitions are restored exactly
 from reviewed immutable source snapshots; their original commits and contents
 remain available in Git history without making prerelease tag names part of the
 current operator workflow. Taiwan Traditional Chinese readmes are added without
-changing those workload definitions. The integration gate resolves all 24
+changing those workload definitions. The integration gate is configured to resolve all 26
 retained and current version IDs through Catalog Service
 so an existing stack cannot regress to a version-detail 404.
 

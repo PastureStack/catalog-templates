@@ -36,7 +36,7 @@ VERSION_TAG_PATTERN = re.compile(
 )
 COMMIT_PATTERN = re.compile(r"^[0-9a-f]{40}$")
 EXPECTED_INFRA_TEMPLATE_COUNT = 21
-EXPECTED_QUESTION_COUNT = 140
+EXPECTED_QUESTION_COUNT = 142
 NON_TAIWAN_TERMS = (
     "審計",
     "日志",
@@ -53,10 +53,10 @@ NON_TAIWAN_TERMS = (
 RETAINED_VERSION_LAYOUTS = {
     "ecr-credential-sync": ("2", "3"),
     "healthcheck": ("0", "1"),
-    "ipsec-overlay": ("1", "2", "3"),
+    "ipsec-overlay": ("1", "2", "3", "4"),
     "network-diagnostics": ("1", "2"),
     "network-policy-manager": ("1", "2"),
-    "network-services": ("1", "2", "3"),
+    "network-services": ("1", "2", "3", "4"),
     "nfs-storage": ("1", "2"),
     "resource-scheduler": ("1", "2", "3", "4"),
     "secret-volume-driver": ("1", "2"),

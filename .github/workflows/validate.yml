@@ -37,8 +37,10 @@ jobs:
 
       - name: Validate images, schema, and localized metadata
         env:
-          CATALOG_SERVICE_VERSION: 0.20.7
-          CATALOG_SERVICE_SHA256: b195dd7f54fecc58e4af6942cd537b7deaaa7c659cfa97b3869e998e6b75fde3
+          CATALOG_SERVICE_VERSION: 0.20.11
+          CATALOG_SERVICE_SHA256: b44bc4d337ea3b54d5a5febca2060ce23e3b988c298c2fb926227fea3c228d3d
+          PASTURESTACK_CATALOG_ALLOWED_LOCAL_ROOTS: /tmp
+          TMPDIR: /tmp
           SOURCE_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
@@ -67,6 +69,7 @@ jobs:
 
           bash scripts/audit-deployable-images
           python scripts/check-catalog-version-labels.py
+          python scripts/check-firewall-backend-contract.py
           asset="$work_root/catalog-service.tar.xz"
           curl \
             --proto '=https' \
@@ -88,8 +91,13 @@ jobs:
 
           branch="validation-${SOURCE_SHA}"
           git branch -f "$branch" "$SOURCE_SHA"
+          source_repo="$work_root/catalog-source"
+          git clone --quiet --no-hardlinks --single-branch \
+            --branch "$branch" "$GITHUB_WORKSPACE" "$source_repo"
+          test "$(git -C "$source_repo" rev-parse HEAD)" = "$SOURCE_SHA"
+          test -z "$(git -C "$source_repo" status --porcelain)"
           jq -n \
-            --arg url "file://${GITHUB_WORKSPACE}" \
+            --arg url "$source_repo" \
             --arg branch "$branch" \
             --arg commit "$SOURCE_SHA" \
             '{catalogs:{pasturestack:{url:$url,branch:$branch,pinnedCommit:$commit}}}' \
@@ -227,7 +235,7 @@ jobs:
             'PastureStack 原生編排執行環境的預設專案範本。'
 
           CATALOG_SERVICE_BIN="$catalog_service" \
-          CATALOG_TEST_REPO="$GITHUB_WORKSPACE" \
+          CATALOG_TEST_REPO="$source_repo" \
           CATALOG_TEST_BRANCH="$branch" \
           CATALOG_TEST_COMMIT="$SOURCE_SHA" \
           CATALOG_TEST_BASE_URL='http://127.0.0.1:18088' \
@@ -235,7 +243,7 @@ jobs:
             python -m pytest -q integration/core \
               -k 'not test_validate_exits_normal'
 
-          echo "CATALOG_TW_LOCALIZATION_OK source=$SOURCE_SHA templates=22 infra_first_party=21 questions=140 python=3.14.6 pytest=4"
+          echo "CATALOG_TW_LOCALIZATION_OK source=$SOURCE_SHA templates=22 infra_first_party=21 python=3.14.6"
 
   release:
     if: github.event_name == 'push' && github.ref_type == 'tag'

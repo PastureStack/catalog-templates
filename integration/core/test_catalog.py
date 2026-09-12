@@ -204,10 +204,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'ipsec-overlay')]['name'] == (
         'IPsec Overlay')
     assert by_folder[('infra', 'ipsec-overlay')][
-        'defaultVersion'] == 'v0.3.1'
+        'defaultVersion'] == 'v0.3.2'
     assert by_folder[('infra', 'ipsec-overlay')][
         'links']['defaultVersion'].endswith(
-        ':3')
+        ':4')
     assert by_folder[('infra', 'layer-2-flat-network')]['name'] == (
         'Layer 2 Flat Network')
     assert by_folder[('infra', 'layer-2-flat-network')][
@@ -232,10 +232,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'network-services')]['name'] == (
         'Network Services')
     assert by_folder[('infra', 'network-services')][
-        'defaultVersion'] == 'v0.3.1'
+        'defaultVersion'] == 'v0.3.2'
     assert by_folder[('infra', 'network-services')][
         'links']['defaultVersion'].endswith(
-        ':3')
+        ':4')
     assert by_folder[('infra', 'nfs-storage')][
         'name'] == 'NFS Storage'
     assert by_folder[('infra', 'nfs-storage')][
@@ -422,7 +422,7 @@ def test_catalog_list():
                 .format(variable.lower()))
             assert '{}.label.zh-tw:'.format(prefix) in compose
             assert '{}.description.zh-tw:'.format(prefix) in compose
-    assert localized_question_count == 140
+    assert localized_question_count == 142
 
 
 def test_catalog_compose_shapes_are_runtime_compatible():
@@ -566,8 +566,14 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     overlay_docker = overlay_files['docker-compose.yml.tpl']
     overlay_platform = overlay_files['rancher-compose.yml']
     overlay_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.26')
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.29')
     assert overlay_docker.count('image: {}'.format(overlay_image)) == 4
+    assert overlay_docker.count(
+        "PASTURESTACK_FIREWALL_BACKEND: '${FIREWALL_BACKEND}'") == 1
+    assert overlay_platform.count('variable: FIREWALL_BACKEND') == 1
+    assert 'default: auto' in overlay_platform
+    for backend in ('nftables', 'iptables-nft', 'iptables-legacy'):
+        assert '\n    - {}'.format(backend) in overlay_platform
     assert '\n  overlay-network:\n' in overlay_docker
     assert '\n  overlay-router:\n' in overlay_docker
     assert '\n  connectivity-check:\n' in overlay_docker
@@ -593,7 +599,10 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     vxlan_files = vxlan_version['files']
     vxlan_docker = vxlan_files['docker-compose.yml.tpl']
     vxlan_platform = vxlan_files['rancher-compose.yml']
-    assert vxlan_docker.count('image: {}'.format(overlay_image)) == 3
+    alternative_network_image = (
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.26')
+    assert vxlan_docker.count(
+        'image: {}'.format(alternative_network_image)) == 3
     assert '\n  vxlan-network:\n' in vxlan_docker
     assert '\n  vxlan-router:\n' in vxlan_docker
     assert '\n  cni-driver:\n' in vxlan_docker
@@ -614,8 +623,6 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     layer_2_files = layer_2_version['files']
     layer_2_docker = layer_2_files['docker-compose.yml.tpl']
     layer_2_platform = layer_2_files['rancher-compose.yml']
-    alternative_network_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.26')
     assert layer_2_docker.count(
         'image: {}'.format(alternative_network_image)) == 1
     assert '\n  layer-2-flat-cni:\n' in layer_2_docker
@@ -708,7 +715,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     network_docker = network_files['docker-compose.yml.tpl']
     network_platform = network_files['rancher-compose.yml']
     network_manager_image = (
-        'ghcr.io/pasturestack/network-plugin-manager:v0.8.10')
+        'ghcr.io/pasturestack/network-plugin-manager:v0.8.15')
     metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.9.11'
     dns_image = 'ghcr.io/pasturestack/internal-dns:v0.17.11'
     assert network_docker.count(
@@ -727,6 +734,12 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     assert 'io.rancher.sidekicks: dns' in network_docker
     assert 'rancher-cni-driver:/etc/cni' in network_docker
     assert 'rancher-cni-driver:/opt/cni' in network_docker
+    assert network_docker.count('--firewall-backend') == 1
+    assert network_docker.count('${FIREWALL_BACKEND}') == 1
+    assert network_platform.count('variable: FIREWALL_BACKEND') == 1
+    assert 'default: auto' in network_platform
+    for backend in ('nftables', 'iptables-nft', 'iptables-legacy'):
+        assert '\n    - {}'.format(backend) in network_platform
     assert '$${CATTLE_URL:-}' in network_docker
     assert '$${CATTLE_ACCESS_KEY:-}' in network_docker
     assert '$${CATTLE_SECRET_KEY:-}' in network_docker

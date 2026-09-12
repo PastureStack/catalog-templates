@@ -34,7 +34,7 @@ fi
 CATALOG_SERVICE_BIN=$(command -v "$CATALOG_SERVICE_BIN")
 
 bash scripts/audit-deployable-images
-python scripts/check-catalog-version-labels.py
+python3 scripts/check-catalog-version-labels.py
 
 source_commit=$(git rev-parse HEAD)
 test_branch=pasturestack-catalog-test
@@ -65,7 +65,7 @@ JSON
 
 (
     cd "$cache_dir"
-    exec "$CATALOG_SERVICE_BIN" \
+    exec env TMPDIR=/tmp PASTURESTACK_CATALOG_ALLOWED_LOCAL_ROOTS=/tmp "$CATALOG_SERVICE_BIN" \
         --config "$scratch_config" \
         --cache "$cache_dir" \
         --sqlite \
@@ -87,6 +87,21 @@ if [ "$ready" != true ]; then
     exit 1
 fi
 
+catalog_ready=false
+for _ in $(seq 1 30); do
+    if curl -fsS \
+        'http://localhost:8088/v1-catalog/templateversions/library:infra*healthcheck:0' \
+        >/dev/null 2>&1; then
+        catalog_ready=true
+        break
+    fi
+    sleep 1
+done
+if [ "$catalog_ready" != true ]; then
+    echo "catalog-service did not index library:infra*healthcheck:0 from pinned commit $source_commit" >&2
+    exit 1
+fi
+
 for version_id in \
     ecr-credential-sync:2 \
     ecr-credential-sync:3 \
@@ -95,6 +110,7 @@ for version_id in \
     ipsec-overlay:1 \
     ipsec-overlay:2 \
     ipsec-overlay:3 \
+    ipsec-overlay:4 \
     network-diagnostics:1 \
     network-diagnostics:2 \
     network-policy-manager:1 \
@@ -102,6 +118,7 @@ for version_id in \
     network-services:1 \
     network-services:2 \
     network-services:3 \
+    network-services:4 \
     nfs-storage:1 \
     nfs-storage:2 \
     resource-scheduler:1 \
@@ -112,9 +129,11 @@ for version_id in \
     secret-volume-driver:2 \
     vxlan-overlay-network:2 \
     vxlan-overlay-network:3; do
-    curl -fsS \
-        "http://localhost:8088/v1-catalog/templateversions/library:infra*${version_id}" \
-        >/dev/null
+    version_url="http://localhost:8088/v1-catalog/templateversions/library:infra*${version_id}"
+    if ! curl -fsS "$version_url" >/dev/null; then
+        echo "catalog-service version lookup failed: ${version_id} (${version_url}), pinned commit ${source_commit}" >&2
+        exit 1
+    fi
 done
 
 cd integration
