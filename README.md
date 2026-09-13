@@ -10,7 +10,7 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 Earlier prerelease coordinates are retired from current release references;
 their reviewed source commits remain in Git history. This source tree targets
-the pure numeric coordinate `v0.3.7`; the GitHub tag and Release, rather than
+the pure numeric coordinate `v0.3.8`; the GitHub tag and Release, rather than
 this README, determine when it is published. Product identity is carried by
 the repository, catalog metadata, and provenance rather than the version tag.
 
@@ -68,13 +68,23 @@ health-reporting, and encrypted-workload gates. The scheduler passed source,
 build, security, public distribution, live Metadata, idempotent reservation,
 managed allocation, and restart gates. Version `v0.8.15` additionally remained
 healthy through repeated Metadata long-poll windows in production without a
-second container start. Restored-data provisioning, complete multi-host
+second container start. Network Services version `5` moves to `v0.8.17`,
+rejects malformed per-host subnet labels before applying host firewall rules,
+and preserves routed container source IPs between validated active peers.
+Restored-data provisioning, complete multi-host
 scheduler lifecycle, and complete project-template upgrade and rollback remain
 release-candidate gates. The two alternative network drivers passed packaged
 CNI address allocation and cleanup in isolated Linux network namespaces.
 Layer 2 bridge setup and the Per-Host controller's marked routes and dedicated
-IP set also passed without changing a production host interface. They are not
-installed automatically by the project template.
+IP set also passed without changing a production host interface. Per-Host
+version `3` uses the control plane's plain-text host-label endpoint. On two
+isolated Ubuntu 26.04.1 / Docker 29.8 hosts, the source-equivalent candidate
+passed bidirectional workload ping and TCP, service DNS, egress, a published
+host port, Docker restart, and both host reboots. The peer was explicitly
+tested with native nftables, iptables-nft, and iptables-legacy, then restored
+to its original native-nft configuration. This does not qualify every
+existing deployment's upgrade or rollback path. The
+alternative drivers are not installed automatically by the project template.
 
 Firewall acceptance keeps module ownership intact: Network Plugin Manager
 alone manages host NAT, forwarding marks, and host-port `CATTLE_*` chains;
@@ -104,7 +114,10 @@ is not the recommended update. Version `8` targets `v0.14.33`: the IPsec
 module alone handles peer-SA recovery and conservative cleanup of an idle
 duplicate, while Network Plugin Manager retains sole ownership of host NAT,
 forwarding marks, and host ports. The three-backend firewall selection is
-unchanged. Image digest and live upgrade evidence are separate gates.
+unchanged. Version `9` uses `v0.14.34` and corrects the bundled CNI host-label
+adapter for the per-host driver. Image digests and live upgrade evidence are
+separate gates; neither package source tests nor one-host allocation prove the
+encrypted two-host lifecycle.
 
 Deployable Compose files use semantic version tags only. A published version
 tag must never be replaced. Manifest digests remain release-verification
