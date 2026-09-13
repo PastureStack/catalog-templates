@@ -10,7 +10,7 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 Earlier prerelease coordinates are retired from current release references;
 their reviewed source commits remain in Git history. This source tree targets
-the pure numeric coordinate `v0.3.8`; the GitHub tag and Release, rather than
+the pure numeric coordinate `v0.3.9`; the GitHub tag and Release, rather than
 this README, determine when it is published. Product identity is carried by
 the repository, catalog metadata, and provenance rather than the version tag.
 
@@ -118,6 +118,12 @@ unchanged. Version `9` uses `v0.14.34` and corrects the bundled CNI host-label
 adapter for the per-host driver. Image digests and live upgrade evidence are
 separate gates; neither package source tests nor one-host allocation prove the
 encrypted two-host lifecycle.
+
+Version `10` uses the published `v0.14.35` image and bounds the connectivity
+sidecar's TCP 80 bind retry during a managed upgrade. It does not alter
+firewall ownership or backend selection. The image digest is recorded in
+`catalog-images.json`; live Catalog activation and two-host lifecycle remain
+separate acceptance gates.
 
 Deployable Compose files use semantic version tags only. A published version
 tag must never be replaced. Manifest digests remain release-verification

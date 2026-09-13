@@ -204,10 +204,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'ipsec-overlay')]['name'] == (
         'IPsec Overlay')
     assert by_folder[('infra', 'ipsec-overlay')][
-        'defaultVersion'] == 'v0.3.7'
+        'defaultVersion'] == 'v0.3.8'
     assert by_folder[('infra', 'ipsec-overlay')][
         'links']['defaultVersion'].endswith(
-        ':9')
+        ':10')
     assert by_folder[('infra', 'layer-2-flat-network')]['name'] == (
         'Layer 2 Flat Network')
     assert by_folder[('infra', 'layer-2-flat-network')][
@@ -566,7 +566,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     overlay_docker = overlay_files['docker-compose.yml.tpl']
     overlay_platform = overlay_files['rancher-compose.yml']
     overlay_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.34')
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.35')
     assert overlay_docker.count('image: {}'.format(overlay_image)) == 4
     assert overlay_docker.count(
         "PASTURESTACK_FIREWALL_BACKEND: '${FIREWALL_BACKEND}'") == 1
