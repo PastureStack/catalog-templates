@@ -79,10 +79,14 @@ installed automatically by the project template.
 Firewall acceptance keeps module ownership intact: Network Plugin Manager
 alone manages host NAT, forwarding marks, and host-port `CATTLE_*` chains;
 IPsec Overlay manages XFRM and routes without patching those host chains;
-Network Policy Manager manages only its own policy table. Each plugin must
-follow the host's active Docker backend, including iptables-nft or
+Network Policy Manager manages only its own nftables policy table. The bridge
+CNI templates pass `hostNat` to Network Plugin Manager and never enable the
+CNI binary's separate `ipMasq` host-NAT path. VXLAN's local MASQUERADE rule is
+confined to the overlay container's network namespace. Host-chain writers
+must follow the host's active Docker backend, including iptables-nft or
 iptables-legacy on a new Ubuntu release, and must fail on a mismatch without
-silently switching backends. The three-backend isolated rule tests do not
+silently switching backends; the policy manager's independent nftables table
+coexists with all three modes. The three-backend isolated rule tests do not
 replace the coupled two-host service, workload egress/DNS, restart, and
 rollback gates before the new Catalog versions become deployable.
 
