@@ -1,16 +1,24 @@
 #!/usr/bin/env python3
-"""Guard the two coupled, current firewall-backend Catalog templates."""
+"""Guard the latest coupled firewall-backend Catalog templates."""
 
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1] / "infra-templates"
 CHOICES = ("auto", "nftables", "iptables-nft", "iptables-legacy")
-CURRENT_VERSIONS = {"network-services": "4", "ipsec-overlay": "6"}
+TEMPLATES = ("network-services", "ipsec-overlay")
+
+
+def latest_version(template: str) -> str:
+    versions = [int(path.name) for path in (ROOT / template).iterdir()
+                if path.is_dir() and path.name.isdecimal()]
+    if not versions:
+        raise AssertionError(f"No numbered versions for {template}")
+    return str(max(versions))
 
 
 def read(template: str, filename: str) -> str:
-    return (ROOT / template / CURRENT_VERSIONS[template] / filename).read_text(
+    return (ROOT / template / latest_version(template) / filename).read_text(
         encoding="utf-8"
     )
 
@@ -27,7 +35,7 @@ def check_question(template: str) -> None:
 
 
 def main() -> None:
-    for template in ("network-services", "ipsec-overlay"):
+    for template in TEMPLATES:
         check_question(template)
 
     manager = read("network-services", "docker-compose.yml.tpl")

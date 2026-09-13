@@ -10,7 +10,7 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 Earlier prerelease coordinates are retired from current release references;
 their reviewed source commits remain in Git history. This source tree targets
-the pure numeric coordinate `v0.3.6`; the GitHub tag and Release, rather than
+the pure numeric coordinate `v0.3.7`; the GitHub tag and Release, rather than
 this README, determine when it is published. Product identity is carried by
 the repository, catalog metadata, and provenance rather than the version tag.
 
@@ -94,10 +94,13 @@ digest, security result, and two-host peer-restart evidence are separate
 publication gates; earlier template versions remain unchanged.
 
 IPsec Overlay template version `7` targets `v0.14.32` for the same managed
-network contract. It adds per-peer SA convergence after concurrent initiation
-or a peer restart, while retaining the three-backend firewall selection and
-Network Plugin Manager ownership boundary. Version `6` remains unchanged for
-existing stacks. Image digest and live upgrade evidence are separate gates.
+network contract. A live two-host upgrade exposed two long-lived established
+IKE SAs for one peer, so version `7` is retained only for existing stacks and
+is not the recommended update. Version `8` targets `v0.14.33`: the IPsec
+module alone handles peer-SA recovery and conservative cleanup of an idle
+duplicate, while Network Plugin Manager retains sole ownership of host NAT,
+forwarding marks, and host ports. The three-backend firewall selection is
+unchanged. Image digest and live upgrade evidence are separate gates.
 
 Deployable Compose files use semantic version tags only. A published version
 tag must never be replaced. Manifest digests remain release-verification
