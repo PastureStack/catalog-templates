@@ -211,10 +211,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'layer-2-flat-network')]['name'] == (
         'Layer 2 Flat Network')
     assert by_folder[('infra', 'layer-2-flat-network')][
-        'defaultVersion'] == 'v0.3.1'
+        'defaultVersion'] == 'v0.3.2'
     assert by_folder[('infra', 'layer-2-flat-network')][
         'links']['defaultVersion'].endswith(
-        ':3')
+        ':4')
     assert by_folder[('infra', 'network-diagnostics')]['name'] == (
         'Network Diagnostics')
     assert by_folder[('infra', 'network-diagnostics')][
@@ -232,10 +232,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'network-services')]['name'] == (
         'Network Services')
     assert by_folder[('infra', 'network-services')][
-        'defaultVersion'] == 'v0.3.3'
+        'defaultVersion'] == 'v0.3.4'
     assert by_folder[('infra', 'network-services')][
         'links']['defaultVersion'].endswith(
-        ':5')
+        ':6')
     assert by_folder[('infra', 'nfs-storage')][
         'name'] == 'NFS Storage'
     assert by_folder[('infra', 'nfs-storage')][
@@ -623,8 +623,10 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     layer_2_files = layer_2_version['files']
     layer_2_docker = layer_2_files['docker-compose.yml.tpl']
     layer_2_platform = layer_2_files['rancher-compose.yml']
+    flat_network_image = (
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.36')
     assert layer_2_docker.count(
-        'image: {}'.format(alternative_network_image)) == 1
+        'image: {}'.format(flat_network_image)) == 1
     assert '\n  layer-2-flat-cni:\n' in layer_2_docker
     assert 'command: start-cni-driver.sh' in layer_2_docker
     assert 'start-flat.sh && exec start-cni-driver.sh' in layer_2_docker
@@ -715,7 +717,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     network_docker = network_files['docker-compose.yml.tpl']
     network_platform = network_files['rancher-compose.yml']
     network_manager_image = (
-        'ghcr.io/pasturestack/network-plugin-manager:v0.8.17')
+        'ghcr.io/pasturestack/network-plugin-manager:v0.8.18')
     metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.9.11'
     dns_image = 'ghcr.io/pasturestack/internal-dns:v0.17.11'
     assert network_docker.count(

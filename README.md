@@ -10,7 +10,7 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 Earlier prerelease coordinates are retired from current release references;
 their reviewed source commits remain in Git history. This source tree targets
-the pure numeric coordinate `v0.3.9`; the GitHub tag and Release, rather than
+the pure numeric coordinate `v0.3.10`; the GitHub tag and Release, rather than
 this README, determine when it is published. Product identity is carried by
 the repository, catalog metadata, and provenance rather than the version tag.
 
@@ -68,9 +68,12 @@ health-reporting, and encrypted-workload gates. The scheduler passed source,
 build, security, public distribution, live Metadata, idempotent reservation,
 managed allocation, and restart gates. Version `v0.8.15` additionally remained
 healthy through repeated Metadata long-poll windows in production without a
-second container start. Network Services version `5` moves to `v0.8.17`,
+second container start. Network Services version `6` moves to `v0.8.18`,
 rejects malformed per-host subnet labels before applying host firewall rules,
-and preserves routed container source IPs between validated active peers.
+and preserves routed container source IPs between validated active peers. It
+also fixes bidirectional VXLAN traffic when published host ports coexist with
+the overlay. Layer 2 Flat Network version `4` moves to `v0.14.36` so the CNI
+preserves an operator-configured bridge address.
 Restored-data provisioning, complete multi-host
 scheduler lifecycle, and complete project-template upgrade and rollback remain
 release-candidate gates. The two alternative network drivers passed packaged
