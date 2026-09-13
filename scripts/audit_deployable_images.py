@@ -53,14 +53,16 @@ NON_TAIWAN_TERMS = (
 RETAINED_VERSION_LAYOUTS = {
     "ecr-credential-sync": ("2", "3"),
     "healthcheck": ("0", "1"),
-    "ipsec-overlay": ("1", "2", "3", "4", "5", "6", "7", "8"),
+    "ipsec-overlay": ("1", "2", "3", "4", "5", "6", "7", "8", "9"),
+    "layer-2-flat-network": ("2", "3"),
     "network-diagnostics": ("1", "2"),
     "network-policy-manager": ("1", "2"),
-    "network-services": ("1", "2", "3", "4"),
+    "network-services": ("1", "2", "3", "4", "5"),
     "nfs-storage": ("1", "2"),
+    "per-host-subnet-network": ("2", "3"),
     "resource-scheduler": ("1", "2", "3", "4"),
     "secret-volume-driver": ("1", "2"),
-    "vxlan-overlay-network": ("2", "3"),
+    "vxlan-overlay-network": ("2", "3", "4"),
 }
 RETAINED_VERSION_HASHES = {
     "infra-templates/healthcheck/0/README.md": "1b18863d98ba3c042676f81daf6d6fc510c255cd1df275495985ed41f3b13aaa",
