@@ -243,6 +243,25 @@
       }
     },
     {
+      "reference": "ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.36",
+      "manifestDigest": "sha256:50c93f759fd1d2881701ae9d4ef17d91eaaeac715750c1d3ad6f586cd9fd658d",
+      "sourceRepository": "https://github.com/PastureStack/ipsec-vxlan-overlay-network",
+      "sourceCommit": "f754bab6dc63c4e51b849a106fcdc792f644b9ef",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ipsec-vxlan-overlay-network",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, strongSwan, CNI, Weave, and other packages retain their upstream licenses and notices",
+      "reviewedAt": "2026-09-14",
+      "platforms": ["linux/amd64"],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.74.0",
+        "reportCreatedAt": "2026-09-14",
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "secrets": 0
+      }
+    },
+    {
       "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.6.34",
       "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
       "sourceCommit": "b4b61856d38a9410319688144ff635868571e35f",
@@ -314,6 +333,26 @@
       "vulnerabilityScan": {
         "scanner": "Trivy 0.74.0",
         "reportCreatedAt": "2026-09-13",
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0
+      }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.8.18",
+      "manifestDigest": "sha256:1f5d44de03648a771ec9e7bc448e456ef6b21a5fcd4cc51f59f99df96a804822",
+      "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
+      "sourceCommit": "b52eddfa948a3f862c4d9ed78bce0fe1fe5dc22b",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-plugin-manager",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Alpine, Docker CLI, and other packages retain their upstream licenses and notices",
+      "reviewedAt": "2026-09-14",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.74.0",
+        "reportCreatedAt": "2026-09-14",
         "scope": "published runtime image",
         "high": 0,
         "critical": 0
