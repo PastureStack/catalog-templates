@@ -53,7 +53,7 @@ NON_TAIWAN_TERMS = (
 RETAINED_VERSION_LAYOUTS = {
     "ecr-credential-sync": ("2", "3"),
     "healthcheck": ("0", "1"),
-    "ipsec-overlay": ("1", "2", "3", "4", "5", "6", "7", "8", "9"),
+    "ipsec-overlay": ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
     "layer-2-flat-network": ("2", "3"),
     "network-diagnostics": ("1", "2"),
     "network-policy-manager": ("1", "2"),

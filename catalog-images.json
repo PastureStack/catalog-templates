@@ -224,6 +224,25 @@
       }
     },
     {
+      "reference": "ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.35",
+      "manifestDigest": "sha256:452405892045346614eac8e2680b1b715bf6df3913ea4435dbee3550b60c07bb",
+      "sourceRepository": "https://github.com/PastureStack/ipsec-vxlan-overlay-network",
+      "sourceCommit": "bf81eef04ae64fd94155595fde8be7581900f4a8",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ipsec-vxlan-overlay-network",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, strongSwan, CNI, Weave, and other packages retain their upstream licenses and notices",
+      "reviewedAt": "2026-09-14",
+      "platforms": ["linux/amd64"],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.74.0",
+        "reportCreatedAt": "2026-09-14",
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "secrets": 0
+      }
+    },
+    {
       "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.6.34",
       "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
       "sourceCommit": "b4b61856d38a9410319688144ff635868571e35f",
