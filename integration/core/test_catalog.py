@@ -600,7 +600,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     vxlan_docker = vxlan_files['docker-compose.yml.tpl']
     vxlan_platform = vxlan_files['rancher-compose.yml']
     alternative_network_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.26')
+            'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.34')
     assert vxlan_docker.count(
         'image: {}'.format(alternative_network_image)) == 3
     assert '\n  vxlan-network:\n' in vxlan_docker
