@@ -10,7 +10,7 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 Earlier prerelease coordinates are retired from current release references;
 their reviewed source commits remain in Git history. This source tree targets
-the pure numeric coordinate `v0.3.10`; the GitHub tag and Release, rather than
+the pure numeric coordinate `v0.3.11`; the GitHub tag and Release, rather than
 this README, determine when it is published. Product identity is carried by
 the repository, catalog metadata, and provenance rather than the version tag.
 
@@ -68,11 +68,14 @@ health-reporting, and encrypted-workload gates. The scheduler passed source,
 build, security, public distribution, live Metadata, idempotent reservation,
 managed allocation, and restart gates. Version `v0.8.15` additionally remained
 healthy through repeated Metadata long-poll windows in production without a
-second container start. Network Services version `6` moves to `v0.8.18`,
+second container start. Network Services version `7` moves to `v0.8.19`,
 rejects malformed per-host subnet labels before applying host firewall rules,
 and preserves routed container source IPs between validated active peers. It
 also fixes bidirectional VXLAN traffic when published host ports coexist with
-the overlay. Layer 2 Flat Network version `4` moves to `v0.14.36` so the CNI
+the overlay, binds forwarding rules to the exact managed bridge, and protects
+bridge traffic from `route_localnet` loopback routing while preserving and
+restoring the operator's original per-bridge setting. Layer 2 Flat Network
+version `4` moves to `v0.14.36` so the CNI
 preserves an operator-configured bridge address.
 Restored-data provisioning, complete multi-host
 scheduler lifecycle, and complete project-template upgrade and rollback remain
@@ -85,7 +88,7 @@ isolated Ubuntu 26.04.1 / Docker 29.8 hosts, the source-equivalent candidate
 passed bidirectional workload ping and TCP, service DNS, egress, a published
 host port, Docker restart, and both host reboots. The peer was explicitly
 tested with native nftables, iptables-nft, and iptables-legacy, then restored
-to its original native-nft configuration. This does not qualify every
+to its original iptables-legacy configuration. This does not qualify every
 existing deployment's upgrade or rollback path. The
 alternative drivers are not installed automatically by the project template.
 
