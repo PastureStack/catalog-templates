@@ -68,7 +68,14 @@ health-reporting, and encrypted-workload gates. The scheduler passed source,
 build, security, public distribution, live Metadata, idempotent reservation,
 managed allocation, and restart gates. Version `v0.8.15` additionally remained
 healthy through repeated Metadata long-poll windows in production without a
-second container start. Network Services version `8` moves to `v0.8.20`,
+second container start. Network Services version `9` moves to `v0.8.21`,
+keeps the host's actual Docker firewall path, and adds deterministic CNI
+provider selection, exact immutable-container wrapper binding, symlink-safe
+atomic wrapper repair, and a managed-subnet fallback for the short interval
+before Metadata reports a new container address. The fallback accepts exactly
+one address from the selected running container and revalidates its PID before
+installing host-port rules; ambiguity preserves the last known-good rules.
+Version `8` introduced the `v0.8.20` forwarding contract that
 rejects malformed per-host subnet labels before applying host firewall rules,
 and preserves routed container source IPs between validated active peers. It
 also restores bounded inbound forwarding for fixed shared overlay subnets,
@@ -90,7 +97,7 @@ isolated Ubuntu 26.04.1 / Docker 29.8 hosts, the source-equivalent candidate
 passed bidirectional workload ping and TCP, service DNS, egress, a published
 host port, Docker restart, and both host reboots. The peer was explicitly
 tested with native nftables, iptables-nft, and iptables-legacy, then restored
-to its original iptables-legacy configuration. This does not qualify every
+to its pre-test firewall frontend. This does not qualify every
 existing deployment's upgrade or rollback path. The
 alternative drivers are not installed automatically by the project template.
 

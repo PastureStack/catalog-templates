@@ -57,7 +57,7 @@ RETAINED_VERSION_LAYOUTS = {
     "layer-2-flat-network": ("2", "3", "4", "5", "6"),
     "network-diagnostics": ("1", "2"),
     "network-policy-manager": ("1", "2", "3"),
-    "network-services": ("1", "2", "3", "4", "5", "6", "7", "8"),
+    "network-services": ("1", "2", "3", "4", "5", "6", "7", "8", "9"),
     "nfs-storage": ("1", "2"),
     "per-host-subnet-network": ("2", "3", "4"),
     "resource-scheduler": ("1", "2", "3", "4"),
