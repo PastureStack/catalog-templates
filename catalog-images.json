@@ -262,6 +262,25 @@
       }
     },
     {
+      "reference": "ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.37",
+      "manifestDigest": "sha256:1b3451edc5f338e13edb14a434bf68d51febdcfd25dc94de73b9a2421656014f",
+      "sourceRepository": "https://github.com/PastureStack/ipsec-vxlan-overlay-network",
+      "sourceCommit": "20eb898da1b24ed3b8ab2c0ad212d6523adeddeb",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ipsec-vxlan-overlay-network",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, strongSwan, CNI, Weave, and other packages retain their upstream licenses and notices",
+      "reviewedAt": "2026-09-14",
+      "platforms": ["linux/amd64"],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.74.0",
+        "reportCreatedAt": "2026-09-14",
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "secrets": 0
+      }
+    },
+    {
       "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.6.34",
       "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
       "sourceCommit": "b4b61856d38a9410319688144ff635868571e35f",
@@ -363,6 +382,46 @@
       "manifestDigest": "sha256:c5b827c6cfe32a19b7ec0fe7377c81fdbe4ef225af1c2dc13bc74c016e970e67",
       "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
       "sourceCommit": "1cfebba285c74130690cb02121b2f4d9d34fd019",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-plugin-manager",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Alpine, Docker CLI, and other packages retain their upstream licenses and notices",
+      "reviewedAt": "2026-09-14",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.74.0",
+        "reportCreatedAt": "2026-09-14",
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0
+      }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.8.20",
+      "manifestDigest": "sha256:b66e4a7188c52d4ff970d450e2086c726e5895f3c5881599c24f5b020953d337",
+      "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
+      "sourceCommit": "75d7957d36a7f0079b2335c6a9060a592596b72a",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-plugin-manager",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Alpine, Docker CLI, and other packages retain their upstream licenses and notices",
+      "reviewedAt": "2026-09-14",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "vulnerabilityScan": {
+        "scanner": "Trivy 0.74.0",
+        "reportCreatedAt": "2026-09-14",
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0
+      }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.8.21",
+      "manifestDigest": "sha256:aab4c05b0801feeca40fa9cb82a52fbfbfe506c609d3df2024fbc07ef4b968e9",
+      "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
+      "sourceCommit": "2f2418423022264695f90960f4a80b9d20c5826f",
       "sourcePath": "package/Dockerfile",
       "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-plugin-manager",
       "licenseBoundary": "Apache-2.0 source and image; bundled Alpine, Docker CLI, and other packages retain their upstream licenses and notices",

@@ -10,7 +10,7 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 Earlier prerelease coordinates are retired from current release references;
 their reviewed source commits remain in Git history. This source tree targets
-the pure numeric coordinate `v0.3.11`; the GitHub tag and Release, rather than
+the pure numeric coordinate `v0.3.12`; the GitHub tag and Release, rather than
 this README, determine when it is published. Product identity is carried by
 the repository, catalog metadata, and provenance rather than the version tag.
 
@@ -68,15 +68,24 @@ health-reporting, and encrypted-workload gates. The scheduler passed source,
 build, security, public distribution, live Metadata, idempotent reservation,
 managed allocation, and restart gates. Version `v0.8.15` additionally remained
 healthy through repeated Metadata long-poll windows in production without a
-second container start. Network Services version `7` moves to `v0.8.19`,
+second container start. Network Services version `9` moves to `v0.8.21`,
+keeps the host's actual Docker firewall path, and adds deterministic CNI
+provider selection, exact immutable-container wrapper binding, symlink-safe
+atomic wrapper repair, and a managed-subnet fallback for the short interval
+before Metadata reports a new container address. The fallback accepts exactly
+one address from the selected running container and revalidates its PID before
+installing host-port rules; ambiguity preserves the last known-good rules.
+Version `8` introduced the `v0.8.20` forwarding contract that
 rejects malformed per-host subnet labels before applying host firewall rules,
 and preserves routed container source IPs between validated active peers. It
-also fixes bidirectional VXLAN traffic when published host ports coexist with
-the overlay, binds forwarding rules to the exact managed bridge, and protects
-bridge traffic from `route_localnet` loopback routing while preserving and
-restoring the operator's original per-bridge setting. Layer 2 Flat Network
-version `4` moves to `v0.14.36` so the CNI
-preserves an operator-configured bridge address.
+also restores bounded inbound forwarding for fixed shared overlay subnets,
+binds every forwarding rule to the exact configured subnet and managed bridge,
+and protects bridge traffic from `route_localnet` loopback routing while
+preserving and restoring the operator's original per-bridge setting. Layer 2
+Flat Network version `6` moves to `v0.14.37`. Its Flat IPAM keeps an explicitly
+configured host bridge address, but when `bridgeSubnet` is a network prefix it
+deterministically selects the first usable address only if that address is
+actually present. Ambiguous multi-address bridges still fail closed.
 Restored-data provisioning, complete multi-host
 scheduler lifecycle, and complete project-template upgrade and rollback remain
 release-candidate gates. The two alternative network drivers passed packaged
@@ -88,7 +97,7 @@ isolated Ubuntu 26.04.1 / Docker 29.8 hosts, the source-equivalent candidate
 passed bidirectional workload ping and TCP, service DNS, egress, a published
 host port, Docker restart, and both host reboots. The peer was explicitly
 tested with native nftables, iptables-nft, and iptables-legacy, then restored
-to its original iptables-legacy configuration. This does not qualify every
+to its pre-test firewall frontend. This does not qualify every
 existing deployment's upgrade or rollback path. The
 alternative drivers are not installed automatically by the project template.
 
@@ -131,6 +140,13 @@ firewall ownership or backend selection. The image digest is recorded in
 `catalog-images.json`; live Catalog activation and two-host lifecycle remain
 separate acceptance gates.
 
+IPsec Overlay version `11` and VXLAN Overlay Network version `5` explicitly
+declare the fixed shared-subnet ingress contract consumed by Network Plugin
+Manager `v0.8.20`. The rule is limited to traffic whose source and destination
+are both inside the configured `10.42.0.0/16` subnet and whose output interface
+is the exact managed bridge. Overlay routers retain their existing data-plane
+responsibilities and do not take ownership of host firewall chains.
+
 Deployable Compose files use semantic version tags only. A published version
 tag must never be replaced. Manifest digests remain release-verification
 evidence and are not inserted into Catalog, Compose, API, or user-interface
@@ -154,7 +170,7 @@ corresponding current definition. Historical definitions are restored exactly
 from reviewed immutable source snapshots; their original commits and contents
 remain available in Git history without making prerelease tag names part of the
 current operator workflow. Taiwan Traditional Chinese readmes are added without
-changing those workload definitions. The integration gate is configured to resolve all 26
+changing those workload definitions. The integration gate is configured to resolve all 27
 retained and current version IDs through Catalog Service
 so an existing stack cannot regress to a version-detail 404.
 

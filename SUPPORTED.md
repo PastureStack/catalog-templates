@@ -13,7 +13,7 @@ or out-of-scope templates from being presented as deployable software.
 | PastureStack System Image Preloader | Infrastructure image-cache service | v0.3.0 | Public PastureStack GHCR image with an explicit version tag | Mock compatibility API discovery, real Docker pull/cache lifecycle, anonymous distribution, and HIGH/CRITICAL scan passed |
 | PastureStack Amazon ECR Credential Sync | Infrastructure registry service | v3.1.0 | Public PastureStack GHCR image with an explicit version tag | Source tests, anonymous distribution, and credential lifecycle gates passed |
 | Metadata Healthcheck | Infrastructure stack | v0.3.16 | Public PastureStack GHCR image with a non-overwritten version tag | Link-local Metadata integration and stdout/stderr routing passed; production rolling upgrade pending |
-| PastureStack Network Services | Infrastructure system stack | v0.3.2 candidate | Network Plugin Manager v0.8.13 published; official manifest digest, source revision, and release scan recorded; Metadata Service and Internal DNS unchanged | Earlier isolated native-nft VM gates passed; the official image still requires formal multi-host lifecycle verification before catalog publication |
+| PastureStack Network Services | Infrastructure system stack | v0.3.7 candidate | Network Plugin Manager v0.8.21; Metadata Service and Internal DNS unchanged | Two-host Ubuntu 26.04 gates passed native nftables, iptables-nft, and iptables-legacy across all four supported Linux network drivers; the exact official image and both host reboots passed; Catalog activation and removal remain release gates |
 | PastureStack Network Diagnostics | Infrastructure diagnostics service | v0.2.1 | Two public PastureStack GHCR images with explicit version tags | Reproducible builds, anonymous distribution, full snapshot and bundle lifecycle, persistence, localization, and HIGH/CRITICAL scan passed |
 | PastureStack Network Policy Manager | Infrastructure network-policy agent | v0.3.2 | Public PastureStack GHCR image with an explicit version tag | Five consecutive two-host default-deny, directed TCP allow, rollback, cleanup, and zero-restart gates passed |
 | PastureStack IPsec Overlay | Infrastructure network driver | v0.3.2 candidate | v0.14.27 published and manifest digest locked | Isolated VM two-container XFRM and encrypted-packet check passed; formal two-host control-plane lifecycle pending |
@@ -405,35 +405,43 @@ release blockers.
 
 ## PastureStack Network Services evidence
 
-- Network Plugin Manager: `ghcr.io/pasturestack/network-plugin-manager:v0.6.34`
-- Network Plugin Manager source: [`PastureStack/network-plugin-manager@b4b61856d38a9410319688144ff635868571e35f`](https://github.com/PastureStack/network-plugin-manager/tree/b4b61856d38a9410319688144ff635868571e35f)
+- Network Plugin Manager: `ghcr.io/pasturestack/network-plugin-manager:v0.8.21`
+- Network Plugin Manager manifest: `sha256:aab4c05b0801feeca40fa9cb82a52fbfbfe506c609d3df2024fbc07ef4b968e9`
+- Network Plugin Manager source: [`PastureStack/network-plugin-manager@2f2418423022264695f90960f4a80b9d20c5826f`](https://github.com/PastureStack/network-plugin-manager/tree/2f2418423022264695f90960f4a80b9d20c5826f)
 - Metadata Service: `ghcr.io/pasturestack/metadata-service:v0.9.11`
 - Metadata Service source: [`PastureStack/metadata-service@2096eb100a6c900ab70a952483306965c2278fe9`](https://github.com/PastureStack/metadata-service/tree/2096eb100a6c900ab70a952483306965c2278fe9)
 - Internal DNS: `ghcr.io/pasturestack/internal-dns:v0.17.11`
 - Internal DNS source: [`PastureStack/internal-dns@5459f857cb7ead00888e900d77e4dc713107fef1`](https://github.com/PastureStack/internal-dns/tree/5459f857cb7ead00888e900d77e4dc713107fef1)
 - License: Apache-2.0 for each project; Ubuntu, Docker CLI, and bundled packages retain their upstream licenses and notices
-- Reviewed: 2026-07-23
-- Vulnerability gate: all three releases report 0 HIGH and 0 CRITICAL findings with Trivy 0.70.0
+- Reviewed: 2026-09-14
+- Vulnerability gate: Network Plugin Manager source, binary, and image report 0 detected vulnerabilities and 0 image/source secrets with Trivy 0.74.0; govulncheck, CodeQL, race tests, reproducible build, SBOM, checksums, and provenance attestation passed
 
-This is a privileged release candidate. On isolated hosts, credential delivery,
-per-host scheduling, CNI installation, Metadata and DNS access, control-plane
-return traffic, NAT reconciliation, restart, and health reporting passed
-together with Metadata Healthcheck and IPsec Overlay. Multi-host upgrade,
-rollback, and complete infrastructure-stack removal remain required before
-production approval.
+Directory `9` is the Network Services `v0.3.7` candidate. It follows Docker's
+active native nftables, iptables-nft, or iptables-legacy path without switching
+the host, loading legacy modules, or writing both backends. Network Plugin
+Manager alone owns host NAT, forwarding marks, and host-port `CATTLE_*` chains;
+the IPsec, VXLAN, per-host-subnet, and Flat providers retain only their own
+data-plane responsibilities.
 
-The new Network Services `v0.3.2` definition in directory `4` is not yet
-published as a deployable release. It selects one host firewall backend and
-references published Network Plugin Manager `v0.8.13`; its official manifest
-digest, merged source revision, and runtime-image release scan are recorded in
-`catalog-images.json`. Metadata
-Service and Internal DNS are unchanged from directory `3`. The 2026-07-23
-evidence above applies to the earlier released image and must not be presented
-as host lifecycle validation of `v0.8.13`.
-An isolated VM using Docker native nftables has since passed backend detection,
-both watcher readiness checks, host-NAT egress, DNS, HTTPS, and same-bridge and
-cross-bridge host-port checks before and after reboot. This does not replace a
-formal two-host control-plane create, upgrade, rollback, and coexistence gate.
+On two isolated Ubuntu 26.04 / Docker 29.1.3 hosts, the exact official image
+passed bidirectional cross-host workload traffic, published host ports, DNS,
+Metadata, platform egress, and component health for all four Linux network
+drivers. One host used Docker native nftables; the other passed both
+iptables-nft and iptables-legacy with Docker's iptables backend and was restored
+to iptables-nft. Docker restart recovery passed. Both hosts were then rebooted
+one at a time; after each reboot and after both had rebooted, all four drivers
+again passed the complete bidirectional data-path gate. Wrapper content, mode, and
+symbolic-link drift were repaired to the selected provider's exact SHA-256 and
+regular `0700` file without modifying the link target.
+
+The manager binds each wrapper to one eligible immutable provider ID, prefers
+the highest numeric OCI image version, and prevents a nonnumeric development
+label from replacing a numeric release. During the short interval before
+Metadata publishes a container IP, host-port recovery accepts exactly one IPv4
+address in that network's managed subnet and revalidates the same Docker PID;
+missing, ambiguous, or raced state preserves the previous working rules.
+Official Catalog activation, rollback, and complete test-stack removal remain
+gates before this candidate is called production-approved.
 
 ## PastureStack IPsec Overlay evidence
 

@@ -204,17 +204,17 @@ def test_catalog_list():
     assert by_folder[('infra', 'ipsec-overlay')]['name'] == (
         'IPsec Overlay')
     assert by_folder[('infra', 'ipsec-overlay')][
-        'defaultVersion'] == 'v0.3.8'
+        'defaultVersion'] == 'v0.3.9'
     assert by_folder[('infra', 'ipsec-overlay')][
         'links']['defaultVersion'].endswith(
-        ':10')
+        ':11')
     assert by_folder[('infra', 'layer-2-flat-network')]['name'] == (
         'Layer 2 Flat Network')
     assert by_folder[('infra', 'layer-2-flat-network')][
-        'defaultVersion'] == 'v0.3.2'
+        'defaultVersion'] == 'v0.3.4'
     assert by_folder[('infra', 'layer-2-flat-network')][
         'links']['defaultVersion'].endswith(
-        ':4')
+        ':6')
     assert by_folder[('infra', 'network-diagnostics')]['name'] == (
         'Network Diagnostics')
     assert by_folder[('infra', 'network-diagnostics')][
@@ -225,17 +225,17 @@ def test_catalog_list():
     assert by_folder[('infra', 'network-policy-manager')]['name'] == (
         'Network Policy Manager')
     assert by_folder[('infra', 'network-policy-manager')][
-        'defaultVersion'] == 'v0.3.2'
+        'defaultVersion'] == 'v0.3.3'
     assert by_folder[('infra', 'network-policy-manager')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'network-services')]['name'] == (
         'Network Services')
     assert by_folder[('infra', 'network-services')][
-        'defaultVersion'] == 'v0.3.5'
+        'defaultVersion'] == 'v0.3.7'
     assert by_folder[('infra', 'network-services')][
         'links']['defaultVersion'].endswith(
-        ':7')
+        ':9')
     assert by_folder[('infra', 'nfs-storage')][
         'name'] == 'NFS Storage'
     assert by_folder[('infra', 'nfs-storage')][
@@ -260,10 +260,9 @@ def test_catalog_list():
     assert by_folder[('infra', 'per-host-subnet-network')]['name'] == (
         'Per-Host Subnet Network')
     assert by_folder[('infra', 'per-host-subnet-network')][
-        'defaultVersion'] == 'v0.3.1'
+        'defaultVersion'] == 'v0.3.2'
     assert by_folder[('infra', 'per-host-subnet-network')][
-        'links']['defaultVersion'].endswith(
-        ':3')
+        'links']['defaultVersion'].endswith(':4')
     assert by_folder[('infra', 'resource-scheduler')][
         'name'] == 'Resource Scheduler'
     assert by_folder[('infra', 'resource-scheduler')][
@@ -288,10 +287,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'vxlan-overlay-network')]['name'] == (
         'VXLAN Overlay Network')
     assert by_folder[('infra', 'vxlan-overlay-network')][
-        'defaultVersion'] == 'v0.3.2'
+        'defaultVersion'] == 'v0.3.3'
     assert by_folder[('infra', 'vxlan-overlay-network')][
         'links']['defaultVersion'].endswith(
-        ':4')
+        ':5')
     assert by_folder[('infra', 'windows-container-networking')][
         'name'] == 'Windows Container Networking'
     assert by_folder[('infra', 'windows-container-networking')][
@@ -585,6 +584,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     assert 'PASTURESTACK_NETWORK_XFRM_NETNS_PATH' in overlay_docker
     assert 'ipsec-vxlan-connectivity-check' in overlay_docker
     assert 'type: pasture-bridge' in overlay_docker
+    assert 'allowSharedSubnetIngress: true' in overlay_docker
     assert 'type: metadata-cni-ipam' in overlay_docker
     assert 'pasture.internal' in overlay_docker
     assert 'RANCHER_' not in overlay_docker
@@ -611,6 +611,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     assert 'io.rancher.sidekicks: vxlan-router' in vxlan_docker
     assert 'io.rancher.internal.service.vxlan' in vxlan_docker
     assert 'type: pasture-bridge' in vxlan_docker
+    assert 'allowSharedSubnetIngress: true' in vxlan_docker
     assert 'type: metadata-cni-ipam' in vxlan_docker
     assert 'pasture.internal' in vxlan_docker
     assert 'RANCHER_' not in vxlan_docker
@@ -624,7 +625,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     layer_2_docker = layer_2_files['docker-compose.yml.tpl']
     layer_2_platform = layer_2_files['rancher-compose.yml']
     flat_network_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.36')
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.37')
     assert layer_2_docker.count(
         'image: {}'.format(flat_network_image)) == 1
     assert '\n  layer-2-flat-cni:\n' in layer_2_docker
@@ -707,9 +708,9 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     assert 'pid: host' not in policy_docker
     assert '@sha256:' not in policy_docker
     assert 'minimum_rancher_version: v1.6.26-rc1' in policy_platform
-    assert 'request_line: GET /readyz HTTP/1.0' in policy_platform
-    assert 'port: 8092' in policy_platform
-    assert 'strategy: none' in policy_platform
+    assert '--health-listen' in policy_docker
+    assert 'health_check:' not in policy_platform
+    assert 'port: 8092' not in policy_platform
 
     network_version = _get_json(
         by_folder[('infra', 'network-services')]['links']['defaultVersion'])
@@ -717,7 +718,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     network_docker = network_files['docker-compose.yml.tpl']
     network_platform = network_files['rancher-compose.yml']
     network_manager_image = (
-        'ghcr.io/pasturestack/network-plugin-manager:v0.8.19')
+        'ghcr.io/pasturestack/network-plugin-manager:v0.8.21')
     metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.9.11'
     dns_image = 'ghcr.io/pasturestack/internal-dns:v0.17.11'
     assert network_docker.count(
