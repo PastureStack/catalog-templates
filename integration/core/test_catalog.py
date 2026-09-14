@@ -211,10 +211,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'layer-2-flat-network')]['name'] == (
         'Layer 2 Flat Network')
     assert by_folder[('infra', 'layer-2-flat-network')][
-        'defaultVersion'] == 'v0.3.3'
+        'defaultVersion'] == 'v0.3.4'
     assert by_folder[('infra', 'layer-2-flat-network')][
         'links']['defaultVersion'].endswith(
-        ':5')
+        ':6')
     assert by_folder[('infra', 'network-diagnostics')]['name'] == (
         'Network Diagnostics')
     assert by_folder[('infra', 'network-diagnostics')][
@@ -625,7 +625,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     layer_2_docker = layer_2_files['docker-compose.yml.tpl']
     layer_2_platform = layer_2_files['rancher-compose.yml']
     flat_network_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.36')
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.37')
     assert layer_2_docker.count(
         'image: {}'.format(flat_network_image)) == 1
     assert '\n  layer-2-flat-cni:\n' in layer_2_docker

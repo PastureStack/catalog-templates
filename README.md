@@ -74,9 +74,11 @@ and preserves routed container source IPs between validated active peers. It
 also restores bounded inbound forwarding for fixed shared overlay subnets,
 binds every forwarding rule to the exact configured subnet and managed bridge,
 and protects bridge traffic from `route_localnet` loopback routing while
-preserving and restoring the operator's original per-bridge setting. Layer 2 Flat Network
-version `4` moves to `v0.14.36` so the CNI
-preserves an operator-configured bridge address.
+preserving and restoring the operator's original per-bridge setting. Layer 2
+Flat Network version `6` moves to `v0.14.37`. Its Flat IPAM keeps an explicitly
+configured host bridge address, but when `bridgeSubnet` is a network prefix it
+deterministically selects the first usable address only if that address is
+actually present. Ambiguous multi-address bridges still fail closed.
 Restored-data provisioning, complete multi-host
 scheduler lifecycle, and complete project-template upgrade and rollback remain
 release-candidate gates. The two alternative network drivers passed packaged
@@ -161,7 +163,7 @@ corresponding current definition. Historical definitions are restored exactly
 from reviewed immutable source snapshots; their original commits and contents
 remain available in Git history without making prerelease tag names part of the
 current operator workflow. Taiwan Traditional Chinese readmes are added without
-changing those workload definitions. The integration gate is configured to resolve all 26
+changing those workload definitions. The integration gate is configured to resolve all 27
 retained and current version IDs through Catalog Service
 so an existing stack cannot regress to a version-detail 404.
 

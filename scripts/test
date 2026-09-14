@@ -135,6 +135,7 @@ for version_id in \
     secret-volume-driver:2 \
     layer-2-flat-network:4 \
     layer-2-flat-network:5 \
+    layer-2-flat-network:6 \
     per-host-subnet-network:4 \
     vxlan-overlay-network:2 \
     vxlan-overlay-network:3 \
