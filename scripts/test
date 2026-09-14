@@ -121,6 +121,7 @@ for version_id in \
     network-services:4 \
     network-services:5 \
     network-services:6 \
+    network-services:7 \
     nfs-storage:1 \
     nfs-storage:2 \
     resource-scheduler:1 \

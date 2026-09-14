@@ -232,10 +232,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'network-services')]['name'] == (
         'Network Services')
     assert by_folder[('infra', 'network-services')][
-        'defaultVersion'] == 'v0.3.4'
+        'defaultVersion'] == 'v0.3.5'
     assert by_folder[('infra', 'network-services')][
         'links']['defaultVersion'].endswith(
-        ':6')
+        ':7')
     assert by_folder[('infra', 'nfs-storage')][
         'name'] == 'NFS Storage'
     assert by_folder[('infra', 'nfs-storage')][
@@ -717,7 +717,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     network_docker = network_files['docker-compose.yml.tpl']
     network_platform = network_files['rancher-compose.yml']
     network_manager_image = (
-        'ghcr.io/pasturestack/network-plugin-manager:v0.8.18')
+        'ghcr.io/pasturestack/network-plugin-manager:v0.8.19')
     metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.9.11'
     dns_image = 'ghcr.io/pasturestack/internal-dns:v0.17.11'
     assert network_docker.count(
@@ -736,6 +736,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     assert 'io.rancher.sidekicks: dns' in network_docker
     assert 'rancher-cni-driver:/etc/cni' in network_docker
     assert 'rancher-cni-driver:/opt/cni' in network_docker
+    assert '/run:/run' in network_docker
     assert network_docker.count('--firewall-backend') == 1
     assert network_docker.count('${FIREWALL_BACKEND}') == 1
     assert network_platform.count('variable: FIREWALL_BACKEND') == 1
