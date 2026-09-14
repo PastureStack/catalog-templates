@@ -31,6 +31,15 @@ The `PastureStack IPsec Overlay` release candidate keeps the literal `rancher-co
 
 The `PastureStack Network Services` release candidate keeps the same catalog filename and version gate, required `io.rancher.*` orchestration labels, `CATTLE_*` credential fallbacks, `/var/lib/rancher` CA path, and `rancher-cni-driver` shared volume. These values are produced or consumed by the compatible control plane and existing host-network contract. Public service names, image coordinates, executables, primary environment variables, and user-facing metadata use PastureStack-neutral identifiers.
 
+Fixed-subnet IPsec and VXLAN CNI revisions explicitly set
+`allowSharedSubnetIngress: true`. Network Plugin Manager alone consumes that
+metadata and owns the bounded host-forwarding rule: both addresses must be
+inside the configured shared subnet and the output interface must be the exact
+managed bridge. Host-label-based per-host subnets cannot enable this path and
+continue to trust only validated active peer ranges. IPsec owns XFRM and
+routes; VXLAN owns its data-plane namespace; neither may patch the manager's
+host firewall chains merely to make an integration test pass.
+
 The `PastureStack Network Diagnostics` release candidate keeps only the
 catalog filename, version gate, and global scheduling label required by the
 compatible control plane. Its images, services, variables, persisted volume,

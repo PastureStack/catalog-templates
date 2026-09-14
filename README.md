@@ -10,7 +10,7 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 Earlier prerelease coordinates are retired from current release references;
 their reviewed source commits remain in Git history. This source tree targets
-the pure numeric coordinate `v0.3.11`; the GitHub tag and Release, rather than
+the pure numeric coordinate `v0.3.12`; the GitHub tag and Release, rather than
 this README, determine when it is published. Product identity is carried by
 the repository, catalog metadata, and provenance rather than the version tag.
 
@@ -68,13 +68,13 @@ health-reporting, and encrypted-workload gates. The scheduler passed source,
 build, security, public distribution, live Metadata, idempotent reservation,
 managed allocation, and restart gates. Version `v0.8.15` additionally remained
 healthy through repeated Metadata long-poll windows in production without a
-second container start. Network Services version `7` moves to `v0.8.19`,
+second container start. Network Services version `8` moves to `v0.8.20`,
 rejects malformed per-host subnet labels before applying host firewall rules,
 and preserves routed container source IPs between validated active peers. It
-also fixes bidirectional VXLAN traffic when published host ports coexist with
-the overlay, binds forwarding rules to the exact managed bridge, and protects
-bridge traffic from `route_localnet` loopback routing while preserving and
-restoring the operator's original per-bridge setting. Layer 2 Flat Network
+also restores bounded inbound forwarding for fixed shared overlay subnets,
+binds every forwarding rule to the exact configured subnet and managed bridge,
+and protects bridge traffic from `route_localnet` loopback routing while
+preserving and restoring the operator's original per-bridge setting. Layer 2 Flat Network
 version `4` moves to `v0.14.36` so the CNI
 preserves an operator-configured bridge address.
 Restored-data provisioning, complete multi-host
@@ -130,6 +130,13 @@ sidecar's TCP 80 bind retry during a managed upgrade. It does not alter
 firewall ownership or backend selection. The image digest is recorded in
 `catalog-images.json`; live Catalog activation and two-host lifecycle remain
 separate acceptance gates.
+
+IPsec Overlay version `11` and VXLAN Overlay Network version `5` explicitly
+declare the fixed shared-subnet ingress contract consumed by Network Plugin
+Manager `v0.8.20`. The rule is limited to traffic whose source and destination
+are both inside the configured `10.42.0.0/16` subnet and whose output interface
+is the exact managed bridge. Overlay routers retain their existing data-plane
+responsibilities and do not take ownership of host firewall chains.
 
 Deployable Compose files use semantic version tags only. A published version
 tag must never be replaced. Manifest digests remain release-verification

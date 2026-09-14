@@ -47,6 +47,11 @@ def check_cni_ownership(template: str, expected_host_nat: str) -> None:
     cni = compose.split("      cni_config:\n", 1)[1]
     assert f"          hostNat: {expected_host_nat}\n" in cni, template
     assert "ipMasq:" not in cni, template
+    # Catalog boolean answers are rendered through YAML before this embedded
+    # CNI document is parsed. Keep the CNI schema's string field quoted.
+    assert compose.count(
+        "isDebugLevel: '${PASTURESTACK_DEBUG}'"
+    ) == 2, template
 
     if template == "vxlan-overlay-network":
         router = compose.split("  vxlan-router:\n", 1)[1].split(
