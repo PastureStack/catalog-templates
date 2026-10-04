@@ -1,0 +1,10 @@
+{
+  "version": "2",
+  "services": {
+    "qa-probe": {
+      "image": "busybox:1.36.1",
+      "command": ["sleep", "3600"],
+      "labels": {"io.pasturestack.qa.catalog-phase": "B"}
+    }
+  }
+}

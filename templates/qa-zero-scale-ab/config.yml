@@ -1,0 +1,10 @@
+{
+  "name": "QA private Catalog A-B",
+  "description": "Isolated A-B fixture. Launch stopped, normalize the owned service to scale zero before activation. Not an infrastructure template.",
+  "version": "1.0.0",
+  "labels": {
+    "io.rancher.orchestration.supported": "cattle",
+    "io.pasturestack.catalog.name.zh-tw": "QA 私有 Catalog A-B",
+    "io.pasturestack.catalog.description.zh-tw": "隔離 A-B 驗收：先停止建立，再將唯一自有服務原生改為零副本，才啟用。不是基礎設施範本。"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "version": "2",
+  ".catalog": {"name": "QA private Catalog A-B", "version": "1.0.1", "upgrade_from": "=1.0.0", "questions": []},
+  "services": {"qa-probe": {"scale": 0, "start_on_create": false}}
+}
