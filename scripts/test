@@ -112,6 +112,7 @@ for version_id in \
     ipsec-overlay:3 \
     ipsec-overlay:4 \
     ipsec-overlay:11 \
+    ipsec-overlay:12 \
     network-diagnostics:1 \
     network-diagnostics:2 \
     network-policy-manager:1 \
