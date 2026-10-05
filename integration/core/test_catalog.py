@@ -204,10 +204,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'ipsec-overlay')]['name'] == (
         'IPsec Overlay')
     assert by_folder[('infra', 'ipsec-overlay')][
-        'defaultVersion'] == 'v0.3.9'
+        'defaultVersion'] == 'v0.3.10'
     assert by_folder[('infra', 'ipsec-overlay')][
         'links']['defaultVersion'].endswith(
-        ':11')
+        ':12')
     assert by_folder[('infra', 'layer-2-flat-network')]['name'] == (
         'Layer 2 Flat Network')
     assert by_folder[('infra', 'layer-2-flat-network')][
@@ -565,7 +565,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     overlay_docker = overlay_files['docker-compose.yml.tpl']
     overlay_platform = overlay_files['rancher-compose.yml']
     overlay_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.35')
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.38')
     assert overlay_docker.count('image: {}'.format(overlay_image)) == 4
     assert overlay_docker.count(
         "PASTURESTACK_FIREWALL_BACKEND: '${FIREWALL_BACKEND}'") == 1
@@ -592,6 +592,13 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     assert 'minimum_rancher_version: v1.6.19-rc1' in overlay_platform
     assert '\noverlay-network:\n  health_check:' in overlay_platform
     assert 'PSK' not in overlay_platform
+
+    retained_overlay = _get_json(_catalog_url(
+        '/v1-catalog/templateversions/{}:infra*ipsec-overlay:11'.format(
+            _catalog_name())))
+    assert retained_overlay['files']['docker-compose.yml.tpl'].count(
+        'image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.35'
+    ) == 4
 
     vxlan_version = _get_json(
         by_folder[('infra', 'vxlan-overlay-network')][
@@ -1092,3 +1099,45 @@ def test_catalog_commit_is_pinned():
     assert len(data) == 1
     assert data[0]['branch'] == _current_branch()
     assert data[0]['pinnedCommit'] == _catalog_commit()
+
+
+def test_ipsec38_template_preserves_version11_contract():
+    template = 'infra-templates/ipsec-overlay'
+    old_image = 'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.35'
+    image = 'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.38'
+    with open(_file(template + '/11/docker-compose.yml.tpl'),
+              encoding='utf-8') as source:
+        old_compose = source.read()
+    with open(_file(template + '/12/docker-compose.yml.tpl'),
+              encoding='utf-8') as source:
+        compose = source.read()
+    assert old_compose.count('image: ' + old_image) == 4
+    assert compose == old_compose.replace(old_image, image)
+    assert '@sha256:' not in compose
+    with open(_file(template + '/11/rancher-compose.yml'),
+              encoding='utf-8') as source:
+        old_catalog = source.read()
+    with open(_file(template + '/12/rancher-compose.yml'),
+              encoding='utf-8') as source:
+        catalog = source.read()
+    assert catalog == old_catalog.replace(
+        '  version: v0.3.9\n', '  version: v0.3.10\n')
+
+    with open(_file('catalog-images.json'), encoding='utf-8') as source:
+        images = {
+            item['reference']: item for item in json.load(source)['images']
+        }
+    assert images[old_image]['sourceCommit'] == (
+        'bf81eef04ae64fd94155595fde8be7581900f4a8')
+    assert images[old_image]['manifestDigest'] == (
+        'sha256:452405892045346614eac8e2680b1b715'
+        'bf6df3913ea4435dbee3550b60c07bb')
+    assert images[image]['sourceCommit'] == (
+        'c143e9a5f21ba6df2d1c5002340c71777f875c89')
+    assert images[image]['manifestDigest'] == (
+        'sha256:5b29e08dca8a92fc0ecc7f9d0fdae045'
+        '7b89daa9d02b1c1c3257bc9dd617c3ae')
+    assert images[image]['platforms'] == ['linux/amd64']
+    scan = images[image]['vulnerabilityScan']
+    assert scan['scope'] == 'published runtime image'
+    assert scan['high'] == scan['critical'] == scan['secrets'] == 0

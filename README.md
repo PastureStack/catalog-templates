@@ -147,6 +147,22 @@ are both inside the configured `10.42.0.0/16` subnet and whose output interface
 is the exact managed bridge. Overlay routers retain their existing data-plane
 responsibilities and do not take ownership of host firewall chains.
 
+IPsec Overlay version `12` (visible version `v0.3.10`) updates all four service
+image references from `v0.14.35` to the publicly verified
+[`v0.14.38`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/tag/v0.14.38).
+Its signed source commit is `c143e9a5f21ba6df2d1c5002340c71777f875c89` and its
+published manifest digest is
+`sha256:5b29e08dca8a92fc0ecc7f9d0fdae0457b89daa9d02b1c1c3257bc9dd617c3ae`,
+recorded only as verification evidence in `catalog-images.json`. The annotated
+Git tag `v0.14.38` is not signed. Version `12` keeps version `11`'s exact
+firewall choices, XFRM namespace, sidekick relationships and CNI ownership;
+version `11` and its `v0.14.35` inventory are unchanged. Public component
+readback verified the linux/amd64 runtime scan with HIGH, CRITICAL and secrets
+each zero; it does not establish a zero-CVE or builder-clean claim. This Catalog
+candidate still needs its exact-source validation and Catalog API lookup gates.
+QA deployment, the complete firewall-mode/plugin matrix, and managed multi-host
+upgrade, peer restart and rollback are not claimed by that publication evidence.
+
 Deployable Compose files use semantic version tags only. A published version
 tag must never be replaced. Manifest digests remain release-verification
 evidence and are not inserted into Catalog, Compose, API, or user-interface
@@ -170,9 +186,10 @@ corresponding current definition. Historical definitions are restored exactly
 from reviewed immutable source snapshots; their original commits and contents
 remain available in Git history without making prerelease tag names part of the
 current operator workflow. Taiwan Traditional Chinese readmes are added without
-changing those workload definitions. The integration gate is configured to resolve all 27
-retained and current version IDs through Catalog Service
-so an existing stack cannot regress to a version-detail 404.
+changing those workload definitions. The integration gate resolves its explicitly
+listed retained and current version IDs through Catalog Service, including both
+IPsec Overlay `11` and `12`, so an existing stack cannot regress to a
+version-detail 404.
 
 ## Distribution
 
