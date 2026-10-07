@@ -31,6 +31,22 @@ The `PastureStack IPsec Overlay` release candidate keeps the literal `rancher-co
 
 The `PastureStack Network Services` release candidate keeps the same catalog filename and version gate, required `io.rancher.*` orchestration labels, `CATTLE_*` credential fallbacks, `/var/lib/rancher` CA path, and `rancher-cni-driver` shared volume. These values are produced or consumed by the compatible control plane and existing host-network contract. Public service names, image coordinates, executables, primary environment variables, and user-facing metadata use PastureStack-neutral identifiers.
 
+Network Services version `10` (visible version `v0.3.8`) changes only Network
+Plugin Manager from `v0.8.21` to `v0.8.22`. Its runtime must converge the
+historical `10-rancher.conf` and current `10-pasturestack.conf` configuration
+in the existing shared CNI volume so an upgraded host does not invoke the same
+managed network twice. Desired configurations are preflighted and atomically
+written as regular `0600` files before obsolete configuration retirement.
+Retirement accepts only the exact platform name/type/IPAM triplet and preserves
+the original bytes with a `.pasturestack-retired` suffix. A conflicting backup,
+malformed platform configuration, symlink, or unsafe path produces an error;
+unrelated administrator files remain intact. The ownership check works in both
+directions when provider selection changes. The Catalog keeps the shared volume,
+provider values,
+all questions and their defaults, Metadata Service `v0.9.11`, and Internal DNS
+`v0.17.11` unchanged. Version `9` remains available with its original contents;
+it must never be rewritten to obtain the new runtime behavior.
+
 Fixed-subnet IPsec and VXLAN CNI revisions explicitly set
 `allowSharedSubnetIngress: true`. Network Plugin Manager alone consumes that
 metadata and owns the bounded host-forwarding rule: both addresses must be

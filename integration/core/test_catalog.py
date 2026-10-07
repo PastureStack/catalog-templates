@@ -232,10 +232,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'network-services')]['name'] == (
         'Network Services')
     assert by_folder[('infra', 'network-services')][
-        'defaultVersion'] == 'v0.3.7'
+        'defaultVersion'] == 'v0.3.8'
     assert by_folder[('infra', 'network-services')][
         'links']['defaultVersion'].endswith(
-        ':9')
+        ':10')
     assert by_folder[('infra', 'nfs-storage')][
         'name'] == 'NFS Storage'
     assert by_folder[('infra', 'nfs-storage')][
@@ -725,7 +725,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     network_docker = network_files['docker-compose.yml.tpl']
     network_platform = network_files['rancher-compose.yml']
     network_manager_image = (
-        'ghcr.io/pasturestack/network-plugin-manager:v0.8.21')
+        'ghcr.io/pasturestack/network-plugin-manager:v0.8.22')
     metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.9.11'
     dns_image = 'ghcr.io/pasturestack/internal-dns:v0.17.11'
     assert network_docker.count(
@@ -1141,3 +1141,63 @@ def test_ipsec38_template_preserves_version11_contract():
     scan = images[image]['vulnerabilityScan']
     assert scan['scope'] == 'published runtime image'
     assert scan['high'] == scan['critical'] == scan['secrets'] == 0
+
+
+def test_npm22_template_preserves_version9_contract():
+    template = 'infra-templates/network-services'
+    old_image = 'ghcr.io/pasturestack/network-plugin-manager:v0.8.21'
+    image = 'ghcr.io/pasturestack/network-plugin-manager:v0.8.22'
+    with open(_file(template + '/9/docker-compose.yml.tpl'),
+              encoding='utf-8') as source:
+        old_compose = source.read()
+    with open(_file(template + '/10/docker-compose.yml.tpl'),
+              encoding='utf-8') as source:
+        compose = source.read()
+    assert old_compose.count('image: ' + old_image) == 1
+    assert compose == old_compose.replace(old_image, image)
+    assert '@sha256:' not in compose
+    with open(_file(template + '/9/rancher-compose.yml'),
+              encoding='utf-8') as source:
+        old_catalog = source.read()
+    with open(_file(template + '/10/rancher-compose.yml'),
+              encoding='utf-8') as source:
+        catalog = source.read()
+    assert catalog == old_catalog.replace(
+        '  version: v0.3.7\n', '  version: v0.3.8\n')
+
+    with open(_file('catalog-images.json'), encoding='utf-8') as source:
+        images = {
+            item['reference']: item for item in json.load(source)['images']
+        }
+    assert images[old_image]['sourceCommit'] == (
+        '2f2418423022264695f90960f4a80b9d20c5826f')
+    assert images[old_image]['manifestDigest'] == (
+        'sha256:aab4c05b0801feeca40fa9cb82a52fbfb'
+        'fe506c609d3df2024fbc07ef4b968e9')
+    assert images[image]['sourceCommit'] == (
+        '7b0920aa0c8f3b2c009c9c47c94c4d21b77c7077')
+    assert images[image]['manifestDigest'] == (
+        'sha256:63eebc25b5795bd0dce56630841b4d33'
+        'b4aa657f446c63ae8978c37357bb030a')
+    assert images[image]['platforms'] == ['linux/amd64']
+    scan = images[image]['vulnerabilityScan']
+    assert scan['scope'] == 'published runtime image'
+    assert scan['high'] == scan['critical'] == scan['secrets'] == 0
+    assert scan['databaseDownloadedAt'] == '2026-10-07T02:47:02Z'
+
+
+@pytest.mark.parametrize('number,label,image_tag', [
+    ('9', 'v0.3.7', 'v0.8.21'),
+    ('10', 'v0.3.8', 'v0.8.22'),
+])
+def test_network_services_upgrade_versions_remain_available(
+        number, label, image_tag):
+    version = _get_json(_catalog_url(
+        '/v1-catalog/templateversions/{}:infra*network-services:{}'.format(
+            _catalog_name(), number)))
+    files = version['files']
+    assert ('image: ghcr.io/pasturestack/network-plugin-manager:' + image_tag
+            in files['docker-compose.yml.tpl'])
+    assert '  version: ' + label + '\n' in files['rancher-compose.yml']
+    assert 'README.md' in files
+    assert 'README.zh-TW.md' in files
