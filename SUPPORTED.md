@@ -13,7 +13,7 @@ or out-of-scope templates from being presented as deployable software.
 | PastureStack System Image Preloader | Infrastructure image-cache service | v0.3.0 | Public PastureStack GHCR image with an explicit version tag | Mock compatibility API discovery, real Docker pull/cache lifecycle, anonymous distribution, and HIGH/CRITICAL scan passed |
 | PastureStack Amazon ECR Credential Sync | Infrastructure registry service | v3.1.0 | Public PastureStack GHCR image with an explicit version tag | Source tests, anonymous distribution, and credential lifecycle gates passed |
 | Metadata Healthcheck | Infrastructure stack | v0.3.16 | Public PastureStack GHCR image with a non-overwritten version tag | Link-local Metadata integration and stdout/stderr routing passed; production rolling upgrade pending |
-| PastureStack Network Services | Infrastructure system stack | v0.3.7 candidate | Network Plugin Manager v0.8.21; Metadata Service and Internal DNS unchanged | Two-host Ubuntu 26.04 gates passed native nftables, iptables-nft, and iptables-legacy across all four supported Linux network drivers; the exact official image and both host reboots passed; Catalog activation and removal remain release gates |
+| PastureStack Network Services | Infrastructure system stack | v0.3.8 candidate | Published Network Plugin Manager v0.8.22; Metadata Service v0.9.11 and Internal DNS v0.17.11 unchanged | Formal component Release and fresh-DB all-severity runtime/secret scan passed; exact-image QA upgrade and rollback remain required; the previous two-host evidence below belongs to v0.8.21 |
 | PastureStack Network Diagnostics | Infrastructure diagnostics service | v0.2.1 | Two public PastureStack GHCR images with explicit version tags | Reproducible builds, anonymous distribution, full snapshot and bundle lifecycle, persistence, localization, and HIGH/CRITICAL scan passed |
 | PastureStack Network Policy Manager | Infrastructure network-policy agent | v0.3.2 | Public PastureStack GHCR image with an explicit version tag | Five consecutive two-host default-deny, directed TCP allow, rollback, cleanup, and zero-restart gates passed |
 | PastureStack IPsec Overlay | Infrastructure network driver | v0.3.2 candidate | v0.14.27 published and manifest digest locked | Isolated VM two-container XFRM and encrypted-packet check passed; formal two-host control-plane lifecycle pending |
@@ -404,6 +404,26 @@ multi-host upgrade, rollback, and complete infrastructure-stack removal remain
 release blockers.
 
 ## PastureStack Network Services evidence
+
+Directory `10` is the Network Services `v0.3.8` candidate and changes only
+Network Plugin Manager to published `v0.8.22` for legacy/current CNI configuration
+convergence. Metadata Service `v0.9.11`, Internal DNS `v0.17.11`, every Catalog
+question, firewall selection, shared volume, and sidekick relationship are
+identical to directory `9`. Its official
+[`Release run`](https://github.com/PastureStack/network-plugin-manager/actions/runs/37563498266)
+published manifest
+`sha256:63eebc25b5795bd0dce56630841b4d33b4aa657f446c63ae8978c37357bb030a`
+from source commit `7b0920aa0c8f3b2c009c9c47c94c4d21b77c7077`. The
+SSH-signed annotated tag is GitHub-verified. Anonymous registry readback and
+the checksummed official image SBOM agree on that source and the linux/amd64
+image. Trivy `0.74.0` downloaded its vulnerability DB at
+`2026-10-07T02:47:02Z`; the actual runtime log reports zero Alpine and Go
+binary vulnerabilities, with the all-severity and secret gate passing.
+CycloneDX generation separately disables security scanning, so an empty SBOM
+vulnerability array is not the scan evidence. The database's built `UpdatedAt`
+was not published; only its observed download time is recorded. Exact-image
+managed QA upgrade and rollback remain separate gates. The evidence below
+remains the record for immutable directory `9`.
 
 - Network Plugin Manager: `ghcr.io/pasturestack/network-plugin-manager:v0.8.21`
 - Network Plugin Manager manifest: `sha256:aab4c05b0801feeca40fa9cb82a52fbfbfe506c609d3df2024fbc07ef4b968e9`

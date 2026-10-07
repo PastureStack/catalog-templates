@@ -10,7 +10,7 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 Earlier prerelease coordinates are retired from current release references;
 their reviewed source commits remain in Git history. This source tree targets
-the pure numeric coordinate `v0.3.12`; the GitHub tag and Release, rather than
+the pure numeric coordinate `v0.3.13`; the GitHub tag and Release, rather than
 this README, determine when it is published. Product identity is carried by
 the repository, catalog metadata, and provenance rather than the version tag.
 
@@ -75,6 +75,18 @@ atomic wrapper repair, and a managed-subnet fallback for the short interval
 before Metadata reports a new container address. The fallback accepts exactly
 one address from the selected running container and revalidates its PID before
 installing host-port rules; ambiguity preserves the last known-good rules.
+Network Services version `10` (visible version `v0.3.8`) uses the published
+Network Plugin Manager `v0.8.22` to converge the legacy `10-rancher.conf` and current
+`10-pasturestack.conf` CNI configuration during an infrastructure upgrade.
+It changes only the manager image; Metadata Service `v0.9.11`, Internal DNS
+`v0.17.11`, firewall choices, questions, sidekicks, and shared volumes retain
+version `9`'s contract. The SSH-signed annotated component tag points to source
+commit `7b0920aa0c8f3b2c009c9c47c94c4d21b77c7077`; the published manifest and
+actual runtime scan evidence are recorded in `catalog-images.json`. Its
+official Release run downloaded the vulnerability database at
+`2026-10-07T02:47:02Z` and the all-severity runtime and secret gate passed.
+This publication evidence does not qualify the managed QA upgrade or rollback.
+Version `9` remains immutable and available for installed stacks.
 Version `8` introduced the `v0.8.20` forwarding contract that
 rejects malformed per-host subnet labels before applying host firewall rules,
 and preserves routed container source IPs between validated active peers. It
@@ -188,7 +200,8 @@ remain available in Git history without making prerelease tag names part of the
 current operator workflow. Taiwan Traditional Chinese readmes are added without
 changing those workload definitions. The integration gate resolves its explicitly
 listed retained and current version IDs through Catalog Service, including both
-IPsec Overlay `11` and `12`, so an existing stack cannot regress to a
+IPsec Overlay `11` and `12`, and Network Services `9` and `10`, so an existing
+stack cannot regress to a
 version-detail 404.
 
 ## Distribution
