@@ -60,7 +60,7 @@ RETAINED_VERSION_LAYOUTS = {
     "network-services": ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
     "nfs-storage": ("1", "2"),
     "per-host-subnet-network": ("2", "3", "4"),
-    "resource-scheduler": ("1", "2", "3", "4"),
+    "resource-scheduler": ("1", "2", "3", "4", "5"),
     "secret-volume-driver": ("1", "2"),
     "vxlan-overlay-network": ("2", "3", "4", "5"),
 }
