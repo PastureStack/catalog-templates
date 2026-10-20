@@ -21,7 +21,7 @@ or out-of-scope templates from being presented as deployable software.
 | PastureStack Windows Network Services | Windows infrastructure Metadata and DNS stack | v0.3.0 | Two public PastureStack GHCR Windows images with explicit version tags | Source tests, cross-compilation, PE, license, anonymous distribution, and vulnerability gates passed; Windows-host runtime pending |
 | PastureStack Windows Container Networking | Windows NAT and transparent network-driver definition | v0.1.0 | Reviewed selector-only placeholder image with an explicit version tag | Catalog rendering and compatibility-boundary review passed; Windows-host network-driver lifecycle pending |
 | PastureStack Layer 2 Flat Network | Optional infrastructure network driver | v0.3.0 | Reviewed network image with a semantic version tag; bridge setup is opt-in | Packaged Flat CNI ADD/DEL and isolated physical-bridge setup passed |
-| Resource Scheduler | Infrastructure scheduling agent | v0.8.17 | Public PastureStack GHCR image with an explicit version tag | Production timeout fix, managed allocation, idempotent retry, and restart stability passed |
+| Resource Scheduler | Infrastructure scheduling agent | v0.8.19 candidate | Published component v0.8.19, manifest digest and verified SBOM provenance recorded | Formal component release, reproducible builds, all-severity runtime gate, and isolated packaged-health CI passed; these checks do not qualify managed-system upgrade or rollback |
 | PastureStack Route 53 DNS Sync | Infrastructure external-DNS agent | v0.8.0 | Public PastureStack GHCR image with an explicit version tag | Route 53 create, update, restart, removal, health, secret, and vulnerability gates passed |
 | PastureStack Amazon EBS Storage | Infrastructure block-storage driver | v0.10.0 | Public PastureStack GHCR image with an explicit version tag | Existing-volume contract, safe opt-in provisioning boundary, anonymous distribution, and HIGH/CRITICAL scan passed; live AWS lifecycle pending |
 | PastureStack Amazon EFS Storage | Infrastructure shared-storage driver | v0.10.0 | Public PastureStack GHCR image with an explicit version tag | Existing-filesystem contract, controlled mount-target provisioning boundary, anonymous distribution, and HIGH/CRITICAL scan passed; live AWS lifecycle pending |
@@ -136,13 +136,19 @@ credentials, or secret input.
 
 ## Resource Scheduler evidence
 
-- Image: `ghcr.io/pasturestack/resource-scheduler:v0.8.15`
-- Source: [`PastureStack/resource-scheduler@0423c1d2af3859cc1145fe2c5ed2407b312a5bb9`](https://github.com/PastureStack/resource-scheduler/tree/0423c1d2af3859cc1145fe2c5ed2407b312a5bb9)
-- Release: [`v0.8.15`](https://github.com/PastureStack/resource-scheduler/releases/tag/v0.8.15)
+- Image: `ghcr.io/pasturestack/resource-scheduler:v0.8.19`, Catalog version `5`
+- Source: [`PastureStack/resource-scheduler@d1720ddb65a285ed615f1461ccb44e50c2ad67a7`](https://github.com/PastureStack/resource-scheduler/tree/d1720ddb65a285ed615f1461ccb44e50c2ad67a7)
+- Release: [`v0.8.19`](https://github.com/PastureStack/resource-scheduler/releases/tag/v0.8.19)
 - License: Apache-2.0 for the project; Ubuntu and bundled dependencies retain their upstream licenses and notices
-- Reviewed: 2026-07-24
-- Vulnerability gate: 0 HIGH and 0 CRITICAL findings with Trivy 0.72.0
-- Runtime gate: the production service remained healthy for more than four minutes with `start_count=1`; the replaced build had reached `start_count=110`
+- Reviewed: 2026-10-20
+- Vulnerability gate: Trivy 0.74.0, 0 HIGH/CRITICAL, 0 vendor-fixed findings, 0 secrets; 4 LOW and 47 MEDIUM findings remain vendor-unfixed and `under_investigation`
+- Provenance: official release SHA256SUMS, SBOM and runtime image GitHub attestations verified against the exact release commit, tag, and release workflow; manifest and SBOM hashes are recorded in `catalog-images.json`
+- Packaged-health gate: UID/GID `10001:10001`, port 80 capability, readiness 200, dependency failure 503, liveness 200, and zero container restarts using run-owned CI fixtures without volumes
+
+This publication evidence does not qualify a managed-system upgrade or rollback.
+Historical `v0.8.15` production evidence remains specific to that version: it
+stayed healthy for more than four minutes with `start_count=1`; the replaced
+build had reached `start_count=110`.
 
 The functional runtime passed race-enabled tests, source and license gates,
 reproducible binary and image builds, non-root execution, public version-tag

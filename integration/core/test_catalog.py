@@ -266,10 +266,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'resource-scheduler')][
         'name'] == 'Resource Scheduler'
     assert by_folder[('infra', 'resource-scheduler')][
-        'defaultVersion'] == 'v0.8.18'
+        'defaultVersion'] == 'v0.8.19'
     assert by_folder[('infra', 'resource-scheduler')][
         'links']['defaultVersion'].endswith(
-        ':4')
+        ':5')
     assert by_folder[('infra', 'route53-dns-sync')][
         'name'] == 'Route 53 DNS Sync'
     assert by_folder[('infra', 'route53-dns-sync')][
@@ -920,7 +920,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     scheduler_files = scheduler_version['files']
     scheduler_docker = scheduler_files['docker-compose.yml']
     scheduler_platform = scheduler_files['rancher-compose.yml']
-    scheduler_image = 'ghcr.io/pasturestack/resource-scheduler:v0.8.18'
+    scheduler_image = 'ghcr.io/pasturestack/resource-scheduler:v0.8.19'
     assert scheduler_docker.count(
         'image: {}'.format(scheduler_image)) == 1
     assert '\n  resource-scheduler:\n' in scheduler_docker
@@ -1199,5 +1199,87 @@ def test_network_services_upgrade_versions_remain_available(
     assert ('image: ghcr.io/pasturestack/network-plugin-manager:' + image_tag
             in files['docker-compose.yml.tpl'])
     assert '  version: ' + label + '\n' in files['rancher-compose.yml']
+    assert 'README.md' in files
+    assert 'README.zh-TW.md' in files
+
+
+def test_scheduler19_template_preserves_version4_contract():
+    template = 'infra-templates/resource-scheduler'
+    old_image = 'ghcr.io/pasturestack/resource-scheduler:v0.8.18'
+    image = 'ghcr.io/pasturestack/resource-scheduler:v0.8.19'
+    with open(_file(template + '/4/docker-compose.yml'),
+              encoding='utf-8') as source:
+        old_compose = source.read()
+    with open(_file(template + '/5/docker-compose.yml'),
+              encoding='utf-8') as source:
+        compose = source.read()
+    assert old_compose.count('image: ' + old_image) == 1
+    assert compose == old_compose.replace(old_image, image)
+    assert '@sha256:' not in compose
+    with open(_file(template + '/4/rancher-compose.yml'),
+              encoding='utf-8') as source:
+        old_catalog = source.read()
+    with open(_file(template + '/5/rancher-compose.yml'),
+              encoding='utf-8') as source:
+        catalog = source.read()
+    assert catalog == old_catalog.replace(
+        '  version: v0.8.18\n', '  version: v0.8.19\n')
+
+    with open(_file('catalog-images.json'), encoding='utf-8') as source:
+        images = {
+            item['reference']: item for item in json.load(source)['images']
+        }
+    assert images[old_image]['sourceCommit'] == (
+        '033f0f4fb9b13b7524216accd5d9bab804a3b69b')
+    release = images[image]
+    assert release['sourceCommit'] == (
+        'd1720ddb65a285ed615f1461ccb44e50c2ad67a7')
+    assert release['platforms'] == ['linux/amd64']
+    assert release['manifestDigest'] == (
+        'sha256:46dfecc72fc1fceab5c66f881f464498'
+        '74b6a084a208f59c6ef1184a0d15c3f9')
+    scan = release['vulnerabilityScan']
+    assert scan['scope'] == 'published runtime image'
+    assert scan['high'] == scan['critical'] == scan['secrets'] == 0
+    assert scan['fixedAvailable'] == scan['actionable'] == 0
+    assert scan['low'] + scan['medium'] == scan['vendorUnfixedLowMedium']
+    assert scan['disposition'] == 'under_investigation'
+    sbom = release['sbom']
+    assert sbom['format'] == 'CycloneDX'
+    assert sbom['sha256'] == (
+        '1ffbad2e58a5eaa5b7d72c83f8d8586f9'
+        'f0eda337aacc41eb8d05a106951dc6e')
+    assert sbom['url'].endswith(
+        '/v0.8.19/resource-scheduler-0.8.19-image.cdx.json')
+    provenance = sbom['provenance']
+    assert provenance['verified'] is True
+    assert provenance['sourceCommit'] == release['sourceCommit']
+    assert provenance['sourceRef'] == 'refs/tags/v0.8.19'
+    assert provenance['predicateType'] == 'https://slsa.dev/provenance/v1'
+    assert provenance['signerWorkflow'] == (
+        'PastureStack/resource-scheduler/.github/workflows/release.yml')
+    with open(_file('catalog-provenance.json'), encoding='utf-8') as source:
+        maintained = json.load(source)['entries'][
+            'resource-scheduler']['maintainedRelease']
+    assert maintained['reference'] == image
+    assert maintained['sourceCommit'] == release['sourceCommit']
+    assert maintained['manifestDigest'] == release['manifestDigest']
+    assert maintained['sbom'] == sbom
+
+
+@pytest.mark.parametrize('number,image_tag', [
+    ('4', 'v0.8.18'),
+    ('5', 'v0.8.19'),
+])
+def test_scheduler_upgrade_versions_remain_available(number, image_tag):
+    version = _get_json(_catalog_url(
+        '/v1-catalog/templateversions/{}:infra*resource-scheduler:{}'.format(
+            _catalog_name(), number)))
+    files = version['files']
+    assert ('image: ghcr.io/pasturestack/resource-scheduler:' + image_tag
+            in files['docker-compose.yml'])
+    assert '  version: ' + image_tag + '\n' in files['rancher-compose.yml']
+    assert 'request_line: GET /healthcheck HTTP/1.0' in (
+        files['rancher-compose.yml'])
     assert 'README.md' in files
     assert 'README.zh-TW.md' in files

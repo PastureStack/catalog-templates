@@ -59,7 +59,27 @@
     },
     "resource-scheduler": {
       "sourcePath": "infra-templates/scheduler",
-      "originStatus": "supported"
+      "originStatus": "supported",
+      "maintainedRelease": {
+        "reference": "ghcr.io/pasturestack/resource-scheduler:v0.8.19",
+        "releaseTag": "v0.8.19",
+        "releaseUrl": "https://github.com/PastureStack/resource-scheduler/releases/tag/v0.8.19",
+        "sourceRepository": "https://github.com/PastureStack/resource-scheduler",
+        "sourceCommit": "d1720ddb65a285ed615f1461ccb44e50c2ad67a7",
+        "manifestDigest": "sha256:46dfecc72fc1fceab5c66f881f46449874b6a084a208f59c6ef1184a0d15c3f9",
+        "sbom": {
+          "format": "CycloneDX",
+          "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.19/resource-scheduler-0.8.19-image.cdx.json",
+          "sha256": "1ffbad2e58a5eaa5b7d72c83f8d8586f9f0eda337aacc41eb8d05a106951dc6e",
+          "provenance": {
+            "verified": true,
+            "predicateType": "https://slsa.dev/provenance/v1",
+            "signerWorkflow": "PastureStack/resource-scheduler/.github/workflows/release.yml",
+            "sourceRef": "refs/tags/v0.8.19",
+            "sourceCommit": "d1720ddb65a285ed615f1461ccb44e50c2ad67a7"
+          }
+        }
+      }
     },
     "route53-dns-sync": {
       "sourcePath": "infra-templates/route53",

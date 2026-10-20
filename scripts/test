@@ -134,6 +134,7 @@ for version_id in \
     resource-scheduler:2 \
     resource-scheduler:3 \
     resource-scheduler:4 \
+    resource-scheduler:5 \
     secret-volume-driver:1 \
     secret-volume-driver:2 \
     layer-2-flat-network:4 \

@@ -186,6 +186,26 @@ GitHub CodeQL independently scans the Actions and Python sources. A Server
 release pins the Catalog only after those gates pass; none of these checks is a
 production-readiness claim.
 
+## Resource Scheduler 0.8.19
+
+Catalog version `5` selects the published Resource Scheduler `v0.8.19`.
+It changes only the image and visible version; questions, credentials,
+commands, scheduling labels, and port-80 liveness checks retain version `4`'s
+contract. Versions `1` through `4` remain unchanged for installed stacks.
+The official release's all-severity runtime scan has 0 High/Critical,
+0 vendor-fixed findings, and 0 secrets; 4 Low and 47 Medium vendor-unfixed
+findings remain `under_investigation`, not resolved. The published manifest,
+source commit, checksum-verified CycloneDX SBOM, and verified GitHub build
+provenance are recorded in `catalog-images.json` and the scheduler entry in
+`catalog-provenance.json`.
+
+The component passed reproducible builds, reachable Go vulnerability analysis,
+and an isolated packaged-health fixture (non-root port 80, readiness 200,
+dependency failure 503, liveness 200, zero restarts). This publication and
+Catalog evidence does not qualify a managed-system upgrade or rollback.
+Builder-only kernel-header applicability is recorded separately from its raw
+findings and does not assess any deployed host kernel.
+
 ## Version retention contract
 
 A numeric template version becomes immutable after a Server release or a live
