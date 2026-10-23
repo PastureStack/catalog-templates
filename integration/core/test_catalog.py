@@ -232,10 +232,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'network-services')]['name'] == (
         'Network Services')
     assert by_folder[('infra', 'network-services')][
-        'defaultVersion'] == 'v0.3.9'
+        'defaultVersion'] == 'v0.3.10'
     assert by_folder[('infra', 'network-services')][
         'links']['defaultVersion'].endswith(
-        ':11')
+        ':12')
     assert by_folder[('infra', 'nfs-storage')][
         'name'] == 'NFS Storage'
     assert by_folder[('infra', 'nfs-storage')][
@@ -725,7 +725,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     network_docker = network_files['docker-compose.yml.tpl']
     network_platform = network_files['rancher-compose.yml']
     network_manager_image = (
-        'ghcr.io/pasturestack/network-plugin-manager:v0.8.23')
+        'ghcr.io/pasturestack/network-plugin-manager:v0.8.24')
     metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.10.5'
     dns_image = 'ghcr.io/pasturestack/internal-dns:v0.17.13'
     assert network_docker.count(
@@ -1145,6 +1145,15 @@ def test_catalog_compose_shapes_are_runtime_compatible():
                 (
                     'pod-pause-image:v3.0.2',
                     'pod-pause-image:v3.0.5',
+                ),
+            ],
+        ),
+        (
+            'network-services', '11', '12',
+            'v0.3.9', 'v0.3.10', [
+                (
+                    'network-plugin-manager:v0.8.23',
+                    'network-plugin-manager:v0.8.24',
                 ),
             ],
         ),

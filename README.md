@@ -8,7 +8,7 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 ## Project status
 
-This source tree provides Catalog `v0.3.14`; its GitHub tag and Release determine
+This source tree provides Catalog `v0.3.15`; its GitHub tag and Release determine
 when it is published. It exposes one Native project template and twenty-one
 reviewed infrastructure entries. See [SUPPORTED.md](SUPPORTED.md) for the
 current versions and [catalog-provenance.json](catalog-provenance.json) for

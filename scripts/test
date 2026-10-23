@@ -128,6 +128,8 @@ for version_id in \
     network-services:8 \
     network-services:9 \
     network-services:10 \
+    network-services:11 \
+    network-services:12 \
     nfs-storage:1 \
     nfs-storage:2 \
     resource-scheduler:1 \

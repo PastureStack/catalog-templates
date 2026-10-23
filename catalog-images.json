@@ -1458,6 +1458,42 @@
         "sha256": "a448ff8fcdaf1d124c04a9787552077d3b9b1467548586dcd297d55258e7dc77",
         "url": "https://github.com/PastureStack/ecr-credential-sync/releases/download/v3.1.6/ecr-credential-sync-3.1.6-image.cdx.json"
       }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-plugin-manager",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Alpine, Docker CLI, and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.8.24",
+      "sourceCommit": "f34bbca219ddd84b94f4b3f833e04d67b9c8ce03",
+      "manifestDigest": "sha256:c588d1ad06b1d756a16fd7f16230803c6dee69809ab4367034706325d0080738",
+      "reviewedAt": "2026-10-24",
+      "vulnerabilityScan": {
+        "scope": "published runtime image; complete severity gate",
+        "high": 0,
+        "critical": 0,
+        "low": 0,
+        "medium": 0,
+        "unknown": 0,
+        "secrets": 0,
+        "fixedAvailable": 0,
+        "actionable": 0,
+        "evidence": "https://github.com/PastureStack/network-plugin-manager/actions/runs/40006260651"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/network-plugin-manager/actions/runs/40006260651",
+        "sourceCommit": "f34bbca219ddd84b94f4b3f833e04d67b9c8ce03",
+        "anonymousReadback": true
+      },
+      "sbom": {
+        "format": "CycloneDX",
+        "sha256": "64605ff6d32f9f6b7c3bf20185d2cefead78b0e79b8395e3bc4523594e9af88b",
+        "url": "https://github.com/PastureStack/network-plugin-manager/releases/download/v0.8.24/network-plugin-manager-0.8.24-image.cdx.json"
+      }
     }
   ]
 }
