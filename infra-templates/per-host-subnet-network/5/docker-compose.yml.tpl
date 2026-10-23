@@ -3,7 +3,7 @@ version: '2'
 
 services:
   per-host-subnet-controller:
-    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.39
+    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40
     command: per-host-subnet
     privileged: true
     network_mode: host
@@ -25,7 +25,7 @@ services:
         max-file: '2'
 
   per-host-subnet-cni:
-    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.39
+    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40
     command: start-cni-driver.sh
     privileged: true
     network_mode: host

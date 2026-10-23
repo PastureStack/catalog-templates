@@ -1262,19 +1262,33 @@
       "platforms": [
         "linux/amd64"
       ],
-      "reference": "ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.39",
-      "sourceCommit": "db0780394644c70c4756b33301d8b9d75d0149ca",
-      "manifestDigest": "sha256:72a9fec50190c25ff8b2cdbf954b22a58a93087d64ff15b3d2d9d2ca9526cbfe",
+      "reference": "ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40",
+      "sourceCommit": "4711833178a05e5d225e364cce856bd108bdc707",
+      "manifestDigest": "sha256:1d39becf00ea540355cb60b430d5d379d38451c1b633ce0d704ef046f44f2c07",
       "reviewedAt": "2026-10-23",
       "vulnerabilityScan": {
-        "scope": "published runtime image",
+        "scope": "published runtime image, full severity",
         "high": 0,
         "critical": 0,
-        "evidence": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/39963426128"
+        "evidence": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/39971594096",
+        "low": 7,
+        "medium": 47,
+        "unknown": 0,
+        "secrets": 0,
+        "fixedAvailable": 0,
+        "actionable": 0,
+        "vendorUnfixedLowMedium": 54,
+        "disposition": "under_investigation",
+        "reportSha256": "6f68e630aadc863c6453ee71e22d1bd9e8dfed96f296f0ea5a17a6ec566444fe"
       },
       "publicationVerification": {
         "source": "component owner verified anonymous manifest/config readback",
-        "workflowRun": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/39963426128"
+        "workflowRun": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/39971594096"
+      },
+      "sbom": {
+        "format": "CycloneDX",
+        "url": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/download/v0.14.40/image-sbom.cdx.json",
+        "sha256": "6fb46040ae011434d88b732591e68d102d5cce7aa18d54b9e8026e92aa600c4e"
       }
     },
     {

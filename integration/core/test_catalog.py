@@ -565,7 +565,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     overlay_docker = overlay_files['docker-compose.yml.tpl']
     overlay_platform = overlay_files['rancher-compose.yml']
     overlay_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.39')
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40')
     assert overlay_docker.count('image: {}'.format(overlay_image)) == 4
     assert overlay_docker.count(
         "PASTURESTACK_FIREWALL_BACKEND: '${FIREWALL_BACKEND}'") == 1
@@ -607,7 +607,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     vxlan_docker = vxlan_files['docker-compose.yml.tpl']
     vxlan_platform = vxlan_files['rancher-compose.yml']
     alternative_network_image = (
-            'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.39')
+            'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40')
     assert vxlan_docker.count(
         'image: {}'.format(alternative_network_image)) == 3
     assert '\n  vxlan-network:\n' in vxlan_docker
@@ -632,7 +632,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     layer_2_docker = layer_2_files['docker-compose.yml.tpl']
     layer_2_platform = layer_2_files['rancher-compose.yml']
     flat_network_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.39')
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40')
     assert layer_2_docker.count(
         'image: {}'.format(flat_network_image)) == 1
     assert '\n  layer-2-flat-cni:\n' in layer_2_docker
@@ -1206,7 +1206,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
             'v0.3.10', 'v0.3.11', [
                 (
                     'ipsec-vxlan-overlay-network:v0.14.38',
-                    'ipsec-vxlan-overlay-network:v0.14.39',
+                    'ipsec-vxlan-overlay-network:v0.14.40',
                 ),
             ],
         ),
@@ -1215,7 +1215,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
             'v0.3.4', 'v0.3.5', [
                 (
                     'ipsec-vxlan-overlay-network:v0.14.37',
-                    'ipsec-vxlan-overlay-network:v0.14.39',
+                    'ipsec-vxlan-overlay-network:v0.14.40',
                 ),
             ],
         ),
@@ -1224,7 +1224,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
             'v0.3.2', 'v0.3.3', [
                 (
                     'ipsec-vxlan-overlay-network:v0.14.34',
-                    'ipsec-vxlan-overlay-network:v0.14.39',
+                    'ipsec-vxlan-overlay-network:v0.14.40',
                 ),
             ],
         ),
@@ -1233,7 +1233,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
             'v0.3.3', 'v0.3.4', [
                 (
                     'ipsec-vxlan-overlay-network:v0.14.34',
-                    'ipsec-vxlan-overlay-network:v0.14.39',
+                    'ipsec-vxlan-overlay-network:v0.14.40',
                 ),
             ],
         ),

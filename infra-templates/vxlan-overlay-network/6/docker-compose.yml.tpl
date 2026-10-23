@@ -3,7 +3,7 @@ version: '2'
 
 services:
   vxlan-network:
-    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.39
+    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40
     command:
     - /bin/bash
     - -c
@@ -27,7 +27,7 @@ services:
         max-file: '2'
 
   vxlan-router:
-    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.39
+    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40
     command: start-vxlan.sh
     cap_add:
     - NET_ADMIN
@@ -44,7 +44,7 @@ services:
       net.ipv4.conf.default.send_redirects: '0'
 
   cni-driver:
-    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.39
+    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40
     command: start-cni-driver.sh
     privileged: true
     network_mode: host

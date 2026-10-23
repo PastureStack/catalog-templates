@@ -3,7 +3,7 @@ version: '2'
 
 services:
   layer-2-flat-cni:
-    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.39
+    image: ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40
     privileged: true
     network_mode: host
     pid: host
