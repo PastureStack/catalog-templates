@@ -1358,7 +1358,7 @@ def test_ipsec38_template_preserves_version11_contract():
               encoding='utf-8') as source:
         catalog = source.read()
     assert catalog == old_catalog.replace(
-        '  version: v0.3.9\n', '  version: v0.3.20\n')
+        '  version: v0.3.9\n', '  version: v0.3.10\n')
 
     with open(_file('catalog-images.json'), encoding='utf-8') as source:
         images = {
