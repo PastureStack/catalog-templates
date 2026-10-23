@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: MIT -->
 
-# PastureStack System Image Preloader v0.3.0
+# PastureStack System Image Preloader v0.3.2
 
 This global, start-once infrastructure service discovers the images used by
 compatible system stacks and asks each host Docker daemon to cache images that
@@ -8,11 +8,11 @@ are not already present.
 
 ## Reviewed image
 
-- Image: `ghcr.io/pasturestack/system-image-preloader:v0.3.0`
-- Source: [`PastureStack/system-image-preloader@150c78dbdb3f487a7003c83339cca5b76dde97f4`](https://github.com/PastureStack/system-image-preloader/tree/150c78dbdb3f487a7003c83339cca5b76dde97f4)
+- Image: `ghcr.io/pasturestack/system-image-preloader:v0.3.2`
+- Source: [`PastureStack/system-image-preloader@bcd89e7fb6baafea381de380c256e4e8d62f1df2`](https://github.com/PastureStack/system-image-preloader/tree/bcd89e7fb6baafea381de380c256e4e8d62f1df2)
 - Source license: Apache-2.0; Ubuntu, Docker CLI, `yq`, `gomplate`, and their
   dependencies retain their upstream licenses and notices
-- Security gate: Trivy HIGH 0 and CRITICAL 0
+- Security gate: full-severity scan, no available fix, no unreviewed finding or secret
 - Distribution gate: public GHCR and anonymous version-tag manifest access
   passed
 
@@ -35,7 +35,7 @@ are protocol identifiers, not PastureStack branding.
 ## Validation
 
 The release passed offline retry and URL-contract tests, container help and
-version smoke tests, OCI metadata and license checks, a current HIGH/CRITICAL
+version smoke tests, OCI metadata and license checks, a full-severity
 vulnerability scan, and an isolated end-to-end lifecycle test. The lifecycle
 test used mock metadata, environment, and Catalog APIs and verified that the
 runtime discovered a Compose image and cached its semantic tag through a real

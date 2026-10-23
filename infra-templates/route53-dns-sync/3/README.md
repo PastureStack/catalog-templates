@@ -5,8 +5,8 @@
 This infrastructure template synchronizes service addresses from one compatible
 environment to an existing Amazon Route 53 hosted zone.
 
-- Image: `ghcr.io/pasturestack/external-dns-sync:v0.8.0`
-- Source: [`PastureStack/external-dns-sync@v0.8.0`](https://github.com/PastureStack/external-dns-sync/tree/v0.8.0)
+- Image: `ghcr.io/pasturestack/external-dns-sync:v0.8.1`
+- Source: [`PastureStack/external-dns-sync@v0.8.1`](https://github.com/PastureStack/external-dns-sync/tree/v0.8.1)
 - Upstream: [`rancher-archives/external-dns`](https://github.com/rancher-archives/external-dns)
 
 The image reference always uses the semantic release tag. Published Catalog

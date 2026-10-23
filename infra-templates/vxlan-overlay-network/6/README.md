@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: MIT -->
 
-# PastureStack VXLAN Overlay Network 0.3.3
+# PastureStack VXLAN Overlay Network 0.3.4
 
 This optional infrastructure template installs an unencrypted VXLAN data
 plane across managed hosts. It publishes UDP port `4789`, runs one router
@@ -9,9 +9,9 @@ eligible host.
 
 ## Reviewed image
 
-- Image: `ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.34`
+- Image: `ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40`
 - Template version `5` explicitly declares `allowSharedSubnetIngress: true` for the fixed `10.42.0.0/16` CNI network. Network Plugin Manager `v0.8.20` uses this bounded contract for cross-host workload forwarding; version `4` remains available for existing stacks.
-- Source: [`PastureStack/ipsec-vxlan-overlay-network@db5a506346f521c6947b21a1a60cef6dd546f983`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/tree/db5a506346f521c6947b21a1a60cef6dd546f983)
+- Source: [`PastureStack/ipsec-vxlan-overlay-network@4711833178a05e5d225e364cce856bd108bdc707`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/tree/4711833178a05e5d225e364cce856bd108bdc707)
 - Source license: Apache-2.0; Ubuntu, CNI, Weave, and bundled dependencies retain their upstream licenses and notices
 - Security gate: Trivy HIGH 0, CRITICAL 0, image secrets 0, and personal-marker scan passed
 - Runtime gate: the earlier version passed isolated two-node VXLAN forwarding; repeat the managed lifecycle gate for this new image before treating it as production-ready

@@ -10,7 +10,7 @@ through an isolated in-memory filesystem.
 ## Security boundary
 
 The service uses
-`ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.1.1`. The Catalog and user
+`ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.1`. The Catalog and user
 interface intentionally use the semantic version tag without a manifest
 digest.
 

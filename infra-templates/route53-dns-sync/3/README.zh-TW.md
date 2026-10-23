@@ -6,9 +6,9 @@
 此基礎架構範本會把相容環境的服務位址同步到既有的 Amazon Route 53
 託管區域。
 
-- 映像：`ghcr.io/pasturestack/external-dns-sync:v0.8.0`
+- 映像：`ghcr.io/pasturestack/external-dns-sync:v0.8.1`
 - 原始碼：
-  [`PastureStack/external-dns-sync@v0.8.0`](https://github.com/PastureStack/external-dns-sync/tree/v0.8.0)
+  [`PastureStack/external-dns-sync@v0.8.1`](https://github.com/PastureStack/external-dns-sync/tree/v0.8.1)
 - 上游：
   [`rancher-archives/external-dns`](https://github.com/rancher-archives/external-dns)
 

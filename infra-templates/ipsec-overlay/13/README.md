@@ -1,19 +1,16 @@
 <!-- SPDX-License-Identifier: MIT -->
 
-# PastureStack IPsec Overlay 0.3.10
+# PastureStack IPsec Overlay 0.3.11
 
-This infrastructure template is a candidate for the IPsec overlay data plane on every eligible host. A network-holder service owns the managed namespace, the router applies host XFRM and route state, the connectivity sidecar exposes the control-plane health contract, and the CNI sidecar supplies the bridge and address-management executables.
+This infrastructure template deploys the IPsec overlay data plane on every eligible host. A network-holder service owns the managed namespace, the router applies host XFRM and route state, the connectivity sidecar exposes the control-plane health contract, and the CNI sidecar supplies the bridge and address-management executables.
 
-## Candidate template — published image
+## Published image
 
-- Image: [`ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.38`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/tag/v0.14.38) was publicly verified on 2026-10-05. Its manifest digest is `sha256:5b29e08dca8a92fc0ecc7f9d0fdae0457b89daa9d02b1c1c3257bc9dd617c3ae`, recorded only as verification evidence in `catalog-images.json`.
-- Source: [`c143e9a5f21ba6df2d1c5002340c71777f875c89`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/tree/c143e9a5f21ba6df2d1c5002340c71777f875c89), with a verified commit signature. The annotated Git tag `v0.14.38` is not signed.
-- Version `12` updates all four services to the published `v0.14.38` image. It retains version `11`'s namespace, sidekick, XFRM, firewall-selection and CNI-ownership contracts unchanged. Version `11` and its original `v0.14.35` inventory remain available for existing stacks.
-- Version `11` explicitly declares `allowSharedSubnetIngress: true` for the fixed `10.42.0.0/16` CNI network. Network Plugin Manager `v0.8.20` uses that contract to restore cross-host workload forwarding without granting traffic outside the configured subnet or managed bridge. Version `10` remains available for existing stacks.
-- Version `10` gives the connectivity-check sidecar a bounded TCP 80 handoff during rolling upgrades. It waits only when the prior sidecar still owns its listener and fails clearly after 90 seconds or on another bind error; firewall rules and router port 8111 remain under their existing owners. Version `9` remains available for existing stacks.
-- Version `9` updates the bundled CNI host-label adapter to the control plane's plain-text `/self/host/labels/<key>` contract. This lets per-host subnet workloads receive the host-specific bridge and IPAM ranges instead of failing CNI setup. Version `8` remains available for existing stacks.
-- Version `8` retains the port-8111 handoff and peer-retry behavior. It lets the IPsec module, rather than strongSwan's CHILD close action, own missing-SA recovery. After a quiet period it removes only a zero-traffic established duplicate when one other installed SA for the same managed peer has traffic; ambiguous pairs remain untouched. Version `7` remains available for existing stacks but did not converge after a live rolling upgrade.
-- Source license: Apache-2.0; Ubuntu, strongSwan, CNI, Weave, and bundled dependencies retain their upstream licenses and notices.
+- Image: [`ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/tag/v0.14.40).
+- Source: [`4711833178a05e5d225e364cce856bd108bdc707`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/tree/4711833178a05e5d225e364cce856bd108bdc707), with a verified signed tag.
+- Revision 13 preserves revision 12's namespaces, sidekicks, XFRM, firewall selection and CNI ownership. Existing numeric revisions remain unchanged.
+- The full runtime scan has no available fix, High/Critical finding, unknown severity or secret. The 54 officially unfixed Low/Medium findings remain tracked, not resolved; the SBOM, digest and report are recorded in `catalog-images.json`.
+- Source license: Apache-2.0; bundled dependencies retain their upstream licenses and notices.
 
 ## Privilege and secret boundary
 
@@ -31,6 +28,6 @@ The host firewall backend is selected explicitly or left at `auto`. The four sup
 
 The Native project definition lists Network Services before IPsec, but list order alone does not establish a health dependency. Before creating or upgrading this overlay, apply the matching Network Services version and wait until Network Plugin Manager is healthy on every target host. In native `nftables` mode, first satisfy that template's Docker firewall-backend, bridge-accept-fwmark, and persistent IPv4-forwarding prerequisites; an IPsec router alone cannot provide the manager-owned forwarding and NAT rules.
 
-## Release boundary
+## Deployment boundary
 
-Public readback verified the `v0.14.38` image manifest and config, version and source labels, and its linux/amd64 runtime scan with HIGH, CRITICAL and secrets each zero. This runtime-only result is not a zero-CVE or builder-clean claim. Catalog version `12` is still a candidate: its exact-source Catalog validation and API version lookup remain separate gates. No QA deployment or complete firewall-mode/plugin matrix is claimed. Isolated native nftables, iptables-nft and iptables-legacy checks, managed upgrade, peer restart and rollback must be accepted separately; a successful CNI address allocation alone does not prove the encrypted multi-host lifecycle.
+Published runtime and Catalog validation are separate from managed deployment acceptance. Verify the selected firewall backend, peer restart, upgrade and rollback on isolated hosts before applying the stack to an existing environment. A successful CNI address allocation alone does not prove the encrypted multi-host lifecycle.

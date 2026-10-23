@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: MIT -->
 
-# Resource Scheduler v0.8.19
+# Resource Scheduler v0.8.20
 
 This template deploys the functional PastureStack resource scheduler as the
 control plane's scheduling agent. It consumes the established control-plane

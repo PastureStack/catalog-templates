@@ -15,13 +15,13 @@ io.pasturestack.network.per-host-subnet.subnet=10.50.1.0/24
 `io.pasturestack.network.per-host-subnet.override-agent-ip`。
 
 此範本使用
-`ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.34`。
+`ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40`。
 映像原始碼位於
-[`PastureStack/ipsec-vxlan-overlay-network@db5a506346f521c6947b21a1a60cef6dd546f983`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/tree/db5a506346f521c6947b21a1a60cef6dd546f983)，
+[`PastureStack/ipsec-vxlan-overlay-network@4711833178a05e5d225e364cce856bd108bdc707`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/tree/4711833178a05e5d225e364cce856bd108bdc707)，
 隨附控制器來自
-[`PastureStack/per-host-subnet@babe7d7f2b7f67a18883b9ed99d17483c8854315`](https://github.com/PastureStack/per-host-subnet/tree/babe7d7f2b7f67a18883b9ed99d17483c8854315)，
+[`PastureStack/per-host-subnet@v0.2.5`](https://github.com/PastureStack/per-host-subnet/releases/tag/v0.2.5)，
 隨附 IPAM 執行檔來自
-[`PastureStack/host-local-cni-ipam@e79e1721f78a9579145cd89d8ad5083ae24633f5`](https://github.com/PastureStack/host-local-cni-ipam/tree/e79e1721f78a9579145cd89d8ad5083ae24633f5)。
+[`PastureStack/host-local-cni-ipam@v0.1.6`](https://github.com/PastureStack/host-local-cni-ipam/releases/tag/v0.1.6)。
 
 範本檔案與圖示採 MIT 授權；執行專案採 Apache-2.0 授權。作業系統
 套件及隨附元件保留各自的上游授權及聲明。

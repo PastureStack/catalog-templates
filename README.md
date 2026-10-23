@@ -8,229 +8,47 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 ## Project status
 
-Earlier prerelease coordinates are retired from current release references;
-their reviewed source commits remain in Git history. This source tree targets
-the pure numeric coordinate `v0.3.14`; the GitHub tag and Release, rather than
-this README, determine when it is published. Product identity is carried by
-the repository, catalog metadata, and provenance rather than the version tag.
+This source tree provides Catalog `v0.3.14`; its GitHub tag and Release determine
+when it is published. It exposes one Native project template and twenty-one
+reviewed infrastructure entries. See [SUPPORTED.md](SUPPORTED.md) for the
+current versions and [catalog-provenance.json](catalog-provenance.json) for
+preserved upstream origins. General third-party application examples and the
+obsolete Rancher-era Kubernetes stack are not deployable entries.
 
-The current tree is a deliberately small release candidate. It contains only
-templates whose image source, semantic version tag, license boundary, and
-vulnerability result are recorded in
-[catalog-images.json](catalog-images.json). Historical upstream templates and
-unreviewed migration work remain available through the preserved Git history,
-but they are not exposed as deployable catalog entries. Previously published
-PastureStack template versions remain in their original numeric version
-directories when an installed system stack can still reference them; the
-current reviewed version remains the default.
+New template revisions consume published PastureStack runtime artifacts built
+from verified upstream inputs. Image tags, producer commits, manifest digests,
+licenses and runtime evidence are recorded in [catalog-images.json](catalog-images.json).
+Deployable Compose definitions use numeric release tags, not digest suffixes.
+Available fixes and unreviewed findings block the current security release gate.
+Officially unfixed Low/Medium findings remain tracked, not resolved; narrowly
+scoped VEX decisions require product-specific evidence and retain the raw scan.
+A clean gate is not a claim that every dependency has zero reported CVEs.
 
-The supported set contains the `PastureStack Native` project template and
-twenty-one infrastructure entries selected from the preserved upstream
-first-party catalog: `PastureStack Container Schedule`,
-`PastureStack Amazon ECR Credential Sync`, `PastureStack System Image
-Preloader`, `Metadata Healthcheck`, `PastureStack Network Services`,
-`PastureStack Network Diagnostics`, `PastureStack Network Policy Manager`,
-`PastureStack IPsec Overlay`,
-`PastureStack Windows ECR Credential Sync`,
-`PastureStack Windows Network Services`,
-`PastureStack Windows Container Networking`,
-`Resource Scheduler`, `PastureStack Amazon EBS Storage`,
-`PastureStack Amazon EFS Storage`, `PastureStack NFS Storage`,
-`PastureStack Secret Volume`, `PastureStack Vault Volume`, and
-`PastureStack Route 53 DNS Sync`, together
-with the alternative
-`PastureStack Layer 2 Flat Network`, `PastureStack Per-Host Subnet Network`,
-and `PastureStack VXLAN Overlay Network` drivers. General third-party
-application examples are intentionally excluded.
-The source path and historical upstream status of every enabled
-infrastructure entry are recorded in
-[catalog-provenance.json](catalog-provenance.json). These provenance records
-describe the source tree at the preserved boundary; they do not claim current
-vendor certification, endorsement, or support for the PastureStack revisions.
-The former Rancher-era Kubernetes entry is no longer deployable from this
-catalog. Its Kubernetes 1.12, etcd 2.3, Docker-shim, and Helm 2 contracts cannot
-be upgraded by replacing an image tag. The historical templates remain in Git;
-new clusters must use a current Kubernetes provisioning path and the separately
-maintained `kubernetes-package` component bundle where appropriate.
-The three Windows entries restore the official upstream ECR, Metadata/DNS, and
-NAT/transparent-networking intents with PastureStack-owned semantic image
-tags. Their source tests, Windows cross-compilation, PE inspection, license
-files, anonymous distribution, and vulnerability gates passed. No Windows
-container host was available for an end-to-end runtime gate, so these entries
-remain explicitly identified as release candidates and schedule only to
-compatible Windows Server 2022 hosts.
-These entries
-passed clean project-template provisioning on an isolated VM: the node agent
-became active, all four system stacks became healthy, and all six system images
-were verified. The network, overlay, and health entries also passed multi-host
-managed-network, Metadata, DNS, control-plane return-traffic, firewall,
-health-reporting, and encrypted-workload gates. The scheduler passed source,
-build, security, public distribution, live Metadata, idempotent reservation,
-managed allocation, and restart gates. Version `v0.8.15` additionally remained
-healthy through repeated Metadata long-poll windows in production without a
-second container start. Network Services version `9` moves to `v0.8.21`,
-keeps the host's actual Docker firewall path, and adds deterministic CNI
-provider selection, exact immutable-container wrapper binding, symlink-safe
-atomic wrapper repair, and a managed-subnet fallback for the short interval
-before Metadata reports a new container address. The fallback accepts exactly
-one address from the selected running container and revalidates its PID before
-installing host-port rules; ambiguity preserves the last known-good rules.
-Network Services version `10` (visible version `v0.3.8`) uses the published
-Network Plugin Manager `v0.8.22` to converge the legacy `10-rancher.conf` and current
-`10-pasturestack.conf` CNI configuration during an infrastructure upgrade.
-It changes only the manager image; Metadata Service `v0.9.11`, Internal DNS
-`v0.17.11`, firewall choices, questions, sidekicks, and shared volumes retain
-version `9`'s contract. The SSH-signed annotated component tag points to source
-commit `7b0920aa0c8f3b2c009c9c47c94c4d21b77c7077`; the published manifest and
-actual runtime scan evidence are recorded in `catalog-images.json`. Its
-official Release run downloaded the vulnerability database at
-`2026-10-07T02:47:02Z` and the all-severity runtime and secret gate passed.
-This publication evidence does not qualify the managed QA upgrade or rollback.
-Version `9` remains immutable and available for installed stacks.
-Version `8` introduced the `v0.8.20` forwarding contract that
-rejects malformed per-host subnet labels before applying host firewall rules,
-and preserves routed container source IPs between validated active peers. It
-also restores bounded inbound forwarding for fixed shared overlay subnets,
-binds every forwarding rule to the exact configured subnet and managed bridge,
-and protects bridge traffic from `route_localnet` loopback routing while
-preserving and restoring the operator's original per-bridge setting. Layer 2
-Flat Network version `6` moves to `v0.14.37`. Its Flat IPAM keeps an explicitly
-configured host bridge address, but when `bridgeSubnet` is a network prefix it
-deterministically selects the first usable address only if that address is
-actually present. Ambiguous multi-address bridges still fail closed.
-Restored-data provisioning, complete multi-host
-scheduler lifecycle, and complete project-template upgrade and rollback remain
-release-candidate gates. The two alternative network drivers passed packaged
-CNI address allocation and cleanup in isolated Linux network namespaces.
-Layer 2 bridge setup and the Per-Host controller's marked routes and dedicated
-IP set also passed without changing a production host interface. Per-Host
-version `3` uses the control plane's plain-text host-label endpoint. On two
-isolated Ubuntu 26.04.1 / Docker 29.8 hosts, the source-equivalent candidate
-passed bidirectional workload ping and TCP, service DNS, egress, a published
-host port, Docker restart, and both host reboots. The peer was explicitly
-tested with native nftables, iptables-nft, and iptables-legacy, then restored
-to its pre-test firewall frontend. This does not qualify every
-existing deployment's upgrade or rollback path. The
-alternative drivers are not installed automatically by the project template.
+Catalog validation covers template structure, retained versions, Traditional
+Chinese labels, exact image references and Catalog Service API lookups. CI uses
+Python `3.14.9`, hash-locked dependencies, the explicitly downstream
+`pip 26.2.2+pasturestack.1` wheel and official certifi `2026.10.19`. The shared
+pip rebuild changes only released urllib3 to `2.8.0`, preserving other vendored
+files, licenses and RECORD integrity. Streaming and trusted/untrusted TLS tests
+run in an isolated environment, not the runner's global Python installation.
 
-Firewall acceptance keeps module ownership intact: Network Plugin Manager
-alone manages host NAT, forwarding marks, and host-port `CATTLE_*` chains;
-IPsec Overlay manages XFRM and routes without patching those host chains;
-Network Policy Manager manages only its own nftables policy table. The bridge
-CNI templates pass `hostNat` to Network Plugin Manager and never enable the
-CNI binary's separate `ipMasq` host-NAT path. VXLAN's local MASQUERADE rule is
-confined to the overlay container's network namespace. Host-chain writers
-must follow the host's active Docker backend, including iptables-nft or
-iptables-legacy on a new Ubuntu release, and must fail on a mismatch without
-silently switching backends; the policy manager's independent nftables table
-coexists with all three modes. The three-backend isolated rule tests do not
-replace the coupled two-host service, workload egress/DNS, restart, and
-rollback gates before the new Catalog versions become deployable.
-
-IPsec Overlay template version `6` targets `v0.14.31`, retaining version `5`'s
-bounded port handoff. It retries a temporarily offline peer through the
-existing health reconciliation without restarting the shared charon daemon or
-changing Network Plugin Manager's host-firewall ownership. The exact image
-digest, security result, and two-host peer-restart evidence are separate
-publication gates; earlier template versions remain unchanged.
-
-IPsec Overlay template version `7` targets `v0.14.32` for the same managed
-network contract. A live two-host upgrade exposed two long-lived established
-IKE SAs for one peer, so version `7` is retained only for existing stacks and
-is not the recommended update. Version `8` targets `v0.14.33`: the IPsec
-module alone handles peer-SA recovery and conservative cleanup of an idle
-duplicate, while Network Plugin Manager retains sole ownership of host NAT,
-forwarding marks, and host ports. The three-backend firewall selection is
-unchanged. Version `9` uses `v0.14.34` and corrects the bundled CNI host-label
-adapter for the per-host driver. Image digests and live upgrade evidence are
-separate gates; neither package source tests nor one-host allocation prove the
-encrypted two-host lifecycle.
-
-Version `10` uses the published `v0.14.35` image and bounds the connectivity
-sidecar's TCP 80 bind retry during a managed upgrade. It does not alter
-firewall ownership or backend selection. The image digest is recorded in
-`catalog-images.json`; live Catalog activation and two-host lifecycle remain
-separate acceptance gates.
-
-IPsec Overlay version `11` and VXLAN Overlay Network version `5` explicitly
-declare the fixed shared-subnet ingress contract consumed by Network Plugin
-Manager `v0.8.20`. The rule is limited to traffic whose source and destination
-are both inside the configured `10.42.0.0/16` subnet and whose output interface
-is the exact managed bridge. Overlay routers retain their existing data-plane
-responsibilities and do not take ownership of host firewall chains.
-
-IPsec Overlay version `12` (visible version `v0.3.10`) updates all four service
-image references from `v0.14.35` to the publicly verified
-[`v0.14.38`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/tag/v0.14.38).
-Its signed source commit is `c143e9a5f21ba6df2d1c5002340c71777f875c89` and its
-published manifest digest is
-`sha256:5b29e08dca8a92fc0ecc7f9d0fdae0457b89daa9d02b1c1c3257bc9dd617c3ae`,
-recorded only as verification evidence in `catalog-images.json`. The annotated
-Git tag `v0.14.38` is not signed. Version `12` keeps version `11`'s exact
-firewall choices, XFRM namespace, sidekick relationships and CNI ownership;
-version `11` and its `v0.14.35` inventory are unchanged. Public component
-readback verified the linux/amd64 runtime scan with HIGH, CRITICAL and secrets
-each zero; it does not establish a zero-CVE or builder-clean claim. This Catalog
-candidate still needs its exact-source validation and Catalog API lookup gates.
-QA deployment, the complete firewall-mode/plugin matrix, and managed multi-host
-upgrade, peer restart and rollback are not claimed by that publication evidence.
-
-Deployable Compose files use semantic version tags only. A published version
-tag must never be replaced. Manifest digests remain release-verification
-evidence and are not inserted into Catalog, Compose, API, or user-interface
-image references. No automatic deployment or publishing trigger is enabled.
-The manually dispatched compatibility workflow uses Python `3.14.9`, verifies
-every Python dependency against its SHA-256, including the explicitly internal
-pip `26.2.2+pasturestack.1` rebuild and official certifi `2026.10.19`.
-The frozen shared helper rebuilds official pip source with upstream vendoring,
-changing only released urllib3 to `2.8.0`; all inputs, licenses, RECORD hashes,
-and the resulting wheel SHA-256 are verified. CI uses an isolated environment,
-checks streaming regression and trusted/untrusted TLS behavior, and never
-modifies the runner's global Python installation.
-It reads back both external and pip-bundled certifi and
-runs flake8, pytest, the
-Catalog audit, and Catalog Service API gates against the exact selected commit.
-GitHub CodeQL independently scans the Actions and Python sources. A Server
-release pins the Catalog only after those gates pass; none of these checks is a
-production-readiness claim.
-
-## Resource Scheduler 0.8.20
-
-Catalog version `6` selects the published Resource Scheduler `v0.8.20`.
-It changes only the image and visible version; questions, credentials,
-commands, scheduling labels, and port-80 liveness checks retain version `5`'s
-contract. Versions `1` through `5` remain unchanged for installed stacks.
-The official release's all-severity runtime scan has 0 High/Critical,
-0 vendor-fixed findings, and 0 secrets; 4 Low and 47 Medium vendor-unfixed
-findings remain `under_investigation`, not resolved. The published manifest,
-source commit, checksum-verified CycloneDX SBOM, and verified GitHub build
-provenance are recorded in `catalog-images.json` and the scheduler entry in
-`catalog-provenance.json`.
-
-The component passed reproducible builds, reachable Go vulnerability analysis,
-and an isolated packaged-health fixture (non-root port 80, readiness 200,
-dependency failure 503, liveness 200, zero restarts). This publication and
-Catalog evidence does not qualify a managed-system upgrade or rollback.
-Builder-only kernel-header applicability is recorded separately from its raw
-findings and does not assess any deployed host kernel.
+Published artifacts and successful Catalog checks do not replace environment
+acceptance. Verify managed upgrades, rollback and the selected host firewall
+backend on isolated hosts before changing an existing installation. Network
+Plugin Manager owns host NAT and host-port rules; IPsec owns XFRM and routes;
+Network Policy Manager owns only its policy table. Templates do not silently
+switch the host's Docker firewall backend. Windows definitions retain their
+existing platform restrictions; a Windows-host runtime matrix is not claimed.
+No automatic deployment is performed by this repository.
 
 ## Version retention contract
 
-A numeric template version becomes immutable after a Server release or a live
-stack can reference it. It must not be deleted, renumbered, or silently replaced
-when a later version is added. This repository therefore retains every version
-still referenced by the reviewed deployment: Metadata Healthcheck `0`;
-IPsec Overlay, Network Services, NFS Storage, Resource Scheduler, Network
-Diagnostics, Network Policy Manager, and Secret Volume Driver `1`; and each
-corresponding current definition. Historical definitions are restored exactly
-from reviewed immutable source snapshots; their original commits and contents
-remain available in Git history without making prerelease tag names part of the
-current operator workflow. Taiwan Traditional Chinese readmes are added without
-changing those workload definitions. The integration gate resolves its explicitly
-listed retained and current version IDs through Catalog Service, including both
-IPsec Overlay `11` and `12`, and Network Services `9` and `10`, so an existing
-stack cannot regress to a
-version-detail 404.
+Published numeric template directories are immutable: do not delete, renumber
+or silently replace a revision that a Server release or installed stack can
+reference. This release adds new directories and updates defaults while keeping
+the previously published definitions unchanged. The integration gate resolves
+both retained and current version IDs through Catalog Service so existing
+stacks do not regress to a version-detail 404.
 
 ## Distribution
 
@@ -262,7 +80,7 @@ Enabled templates may additionally expose user-interface translations through
 `io.pasturestack.catalog.name.<locale>` and
 `io.pasturestack.catalog.description.<locale>` labels. The compatible Web
 Console selects an exact locale label and falls back to the canonical English
-value when a translation is absent. The current twenty-three entries include Taiwan
+value when a translation is absent. The current twenty-two entries include Taiwan
 Traditional Chinese (`zh-tw`) labels. Runtime configuration keys, Compose
 fields, image names, and third-party content are not translated because doing
 so would break interoperability or alter upstream material.

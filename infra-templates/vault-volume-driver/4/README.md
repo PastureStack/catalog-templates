@@ -52,12 +52,12 @@ bridge to revoke the child-token accessor and erases the memory-backed volume.
 ## Security boundary
 
 The bridge uses
-`ghcr.io/pasturestack/vault-secrets-bridge:v0.1.1`. It runs as UID 65532,
+`ghcr.io/pasturestack/vault-secrets-bridge:v0.1.2`. It runs as UID 65532,
 drops all Linux capabilities, uses a read-only root filesystem, and persists
 only an encrypted accessor record in its dedicated state volume.
 
 The driver uses
-`ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.0`. It drops all
+`ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.1`. It drops all
 capabilities before adding only `SYS_ADMIN`, `CHOWN`, and `FOWNER` for the
 isolated `tmpfs` lifecycle and requested read-only ownership. It does not use
 privileged mode, host networking, the host PID namespace, or a

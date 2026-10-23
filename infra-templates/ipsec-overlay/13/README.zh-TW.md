@@ -1,40 +1,19 @@
 <!-- SPDX-License-Identifier: MIT -->
 
-# PastureStack IPsec 加密網路 0.3.10
+# PastureStack IPsec 加密網路 0.3.11
 
-此候選基礎架構範本預計在每台符合條件的主機上安裝 IPsec 加密
+此基礎架構範本會在每台符合條件的主機上安裝 IPsec 加密
 網路資料平面。網路持有服務負責受管命名空間；路由器套用主機 XFRM
 與路由狀態；連線檢查相關容器提供控制平面健康狀態契約；CNI 相關
 容器則提供網橋與位址管理執行檔。
 
-## 候選範本：映像已發布
+## 正式發布映像
 
-- [映像 `ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.38`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/tag/v0.14.38)
-  已於 2026-10-05 完成公開發布讀回。真實 manifest digest 為
-  `sha256:5b29e08dca8a92fc0ecc7f9d0fdae0457b89daa9d02b1c1c3257bc9dd617c3ae`，
-  僅作為 `catalog-images.json` 中的驗證證據，不加入部署映像引用。
-- [來源 `c143e9a5f21ba6df2d1c5002340c71777f875c89`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/tree/c143e9a5f21ba6df2d1c5002340c71777f875c89)
-  的 commit 簽章已驗證；Git tag `v0.14.38` 為 annotated tag，但未簽章。
-- 第 `12` 版將四個服務更新至已發布的 `v0.14.38` 映像，完整保留
-  第 `11` 版的命名空間、相關容器、XFRM、防火牆選擇與 CNI 責任契約。
-  第 `11` 版及其原有 `v0.14.35` inventory 仍供既有堆疊使用。
-- 第 `11` 版為固定的 `10.42.0.0/16` CNI 網路明確設定
-  `allowSharedSubnetIngress: true`。網路外掛管理器 `v0.8.20` 依此契約
-  恢復跨主機工作負載轉送，且不放行設定子網路或受管網橋以外的流量。
-  第 `10` 版仍供既有堆疊使用。
-- 第 `10` 版在滾動升級時，若舊版連線檢查容器尚占用 TCP 80，
-  新版只對此埠占用情況等待，最多 90 秒；其他監聽錯誤或逾時仍會
-  明確失敗。此處不更動防火牆規則或路由器的 8111 連接埠責任。
-  第 `9` 版仍供既有堆疊使用。
-- 第 `8` 版保留對等主機重試與 8111 連接埠交接。IPsec 模組統一負責
-  缺失 SA 的重建；超過觀察期間且同一對等主機恰有一條已使用的健康
-  SA 時，才清除另一條零流量的重複 SA。無法明確判斷的連線不動。
-  第 `7` 版仍供既有堆疊參照，但真機滾動升級後曾留下兩條已建立 SA。
-- 第 `9` 版將隨附 CNI 的主機標籤查詢改為控制平面實際提供的純文字
-  `/self/host/labels/<key>` 契約，讓每主機子網路可正確取得網橋與 IPAM
-  位址範圍。第 `8` 版仍供既有堆疊使用。
-- 原始碼採 Apache-2.0 授權；Ubuntu、strongSwan、CNI、Weave 與
-  隨附相依套件保留各自的上游授權及聲明。
+- [映像 `ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/tag/v0.14.40)。
+- [來源 `4711833178a05e5d225e364cce856bd108bdc707`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/tree/4711833178a05e5d225e364cce856bd108bdc707)，簽署版本標籤已驗證。
+- 第 13 版保留第 12 版的命名空間、相關容器、XFRM、防火牆選擇與 CNI 責任；既有數字版目錄內容不變。
+- 完整執行映像掃描沒有可用修補、High/Critical、未知嚴重度或機密資料；54 筆官方尚無修補的 Low/Medium 持續追蹤，不視為已解決。SBOM、摘要與報告記錄於 `catalog-images.json`。
+- 原始碼採 Apache-2.0 授權；隨附相依套件保留各自的上游授權及聲明。
 
 ## 權限與機密資料界線
 
@@ -81,15 +60,6 @@ Native 專案定義將 Network Services 排在 IPsec 前面，但清單順序
 防火牆後端、`bridge-accept-fwmark` 與持久 IPv4 轉送前置設定；
 只有 IPsec 路由器無法提供管理器負責的轉送及 NAT 規則。
 
-## 發布界線
+## 部署界線
 
-公開讀回已確認 `v0.14.38` 映像的 manifest、config、版本與來源標籤，
-以及 linux/amd64 執行映像掃描的 HIGH、CRITICAL 與 secrets 均為零。
-這只代表執行映像的結果，不是零 CVE 或建置映像無風險的宣告。
-第 `12` 版 Catalog 範本仍為候選；精確來源的 Catalog 驗證及 API
-版本查詢是分開的驗收關卡，尚未宣告 QA 部署或完整防火牆模式／外掛矩陣通過。
-原生 nftables、iptables-nft 與 iptables-legacy 的隔離檢查、受管升級、
-對等主機重啟及回復須另行驗收。仍須確認暫時離線的主機不拆掉其他
-健康連線、同一對等主機收斂為一條可用 IKE SA、新路由器等待 8111
-埠釋放，且不越界修改網路外掛管理器的防火牆規則。
-單純完成 CNI 位址分配不能代替加密跨主機生命週期驗收。
+正式執行映像與 Catalog 驗證不同於受管部署驗收。套用既有環境前，須於隔離主機驗證所選防火牆後端、對端重啟、升級及回復。單純完成 CNI 位址分配不能代替加密跨主機生命週期驗收。

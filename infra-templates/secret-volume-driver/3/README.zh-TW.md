@@ -7,7 +7,7 @@
 
 ## 安全性界線
 
-服務使用 `ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.1.1`。
+服務使用 `ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.1`。
 商店與使用者介面只顯示語意化版本標籤，不顯示映像摘要。
 
 容器：

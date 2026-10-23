@@ -48,12 +48,12 @@ volumes:
 ## 安全界線
 
 橋接服務使用
-`ghcr.io/pasturestack/vault-secrets-bridge:v0.1.1`。程序以 UID 65532
+`ghcr.io/pasturestack/vault-secrets-bridge:v0.1.2`。程序以 UID 65532
 執行、移除全部 Linux capabilities、使用唯讀根檔案系統，且只在專用狀態
 磁碟區保存加密後的 Accessor 紀錄。
 
 驅動程式使用
-`ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.0`。程序先移除全部
+`ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.1`。程序先移除全部
 capabilities，再僅加入隔離 `tmpfs` 生命週期及指定唯讀擁有權所需的
 `SYS_ADMIN`、`CHOWN` 與 `FOWNER`。它不使用特權模式、主機網路、主機
 PID 命名空間或容器引擎 Socket。

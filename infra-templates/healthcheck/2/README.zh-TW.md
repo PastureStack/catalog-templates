@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: MIT -->
 
-# 中繼資料健康檢查 v0.3.16
+# 中繼資料健康檢查 v0.3.17
 
 此基礎架構堆疊會在每台符合條件的主機上執行一個健康檢查代理程式。
 代理程式從既有的連結本機中繼資料端點讀取健康狀態宣告、管理自己的
@@ -8,9 +8,9 @@ HAProxy 處理程序，並把穩定的狀態變更回報給相容控制 API。
 
 ## 已審核映像
 
-- 映像：`ghcr.io/pasturestack/metadata-healthcheck:v0.3.16`
+- 映像：`ghcr.io/pasturestack/metadata-healthcheck:v0.3.17`
 - 原始碼：
-  [`PastureStack/metadata-healthcheck@df38ca1c4712ba4919c73fb329d87a1940b6970f`](https://github.com/PastureStack/metadata-healthcheck/tree/df38ca1c4712ba4919c73fb329d87a1940b6970f)
+  [`PastureStack/metadata-healthcheck@410993d3b3b2493bbd84a36f7d67cfefb8dd6705`](https://github.com/PastureStack/metadata-healthcheck/tree/410993d3b3b2493bbd84a36f7d67cfefb8dd6705)
 - 原始碼採 Apache-2.0 授權；作業系統套件保留各自的上游授權。
 - Trivy 結果為 HIGH 0、CRITICAL 0，映像及原始碼的機密資料掃描均為 0。
 - 公開 GHCR 與未登入拉取版本標籤的驗證已通過。
@@ -32,6 +32,6 @@ Socket、不要求特權模式，也不新增 Linux Capability。
 中繼資料 DNS 別名；一般生命週期訊息會寫入標準輸出，只有實際失敗
 才會寫入標準錯誤。較早的商店部署也驗證過登入資訊注入、相容名稱
 映射、全域排程、就緒狀態、重新啟動、雙常駐程式回報及移除流程。
-在 v0.3.16 於隔離 VM 快照完成新的多主機升級、回復及完整基礎架構
-堆疊移除測試前，此範本仍屬候選版本。請勿使用此範本直接變更既有的
+多主機升級、回復及完整基礎架構堆疊移除仍須在隔離 VM 快照完成
+部署驗收。請勿使用此範本直接變更既有的
 正式控制平面。

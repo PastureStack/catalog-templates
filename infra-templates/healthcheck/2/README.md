@@ -1,13 +1,13 @@
 <!-- SPDX-License-Identifier: MIT -->
 
-# Metadata Healthcheck v0.3.16
+# Metadata Healthcheck v0.3.17
 
 This infrastructure stack runs one healthcheck agent on every eligible host. The agent reads health declarations from the established link-local Metadata endpoint, manages its private HAProxy process, and reports stable state changes to the compatible control API.
 
 ## Reviewed image
 
-- Image: `ghcr.io/pasturestack/metadata-healthcheck:v0.3.16`
-- Source: [`PastureStack/metadata-healthcheck@df38ca1c4712ba4919c73fb329d87a1940b6970f`](https://github.com/PastureStack/metadata-healthcheck/tree/df38ca1c4712ba4919c73fb329d87a1940b6970f)
+- Image: `ghcr.io/pasturestack/metadata-healthcheck:v0.3.17`
+- Source: [`PastureStack/metadata-healthcheck@410993d3b3b2493bbd84a36f7d67cfefb8dd6705`](https://github.com/PastureStack/metadata-healthcheck/tree/410993d3b3b2493bbd84a36f7d67cfefb8dd6705)
 - Source license: Apache-2.0; bundled operating-system packages retain their upstream licenses
 - Security gate: Trivy HIGH 0, CRITICAL 0, image secrets 0, and source secrets 0
 - Distribution gate: public GHCR and unauthenticated version-tag pull passed
@@ -20,4 +20,4 @@ The compatible control plane requires the literal `rancher-compose.yml` filename
 
 ## Release boundary
 
-The image-level integration gate passed with the default link-local address, without a neutral Metadata DNS alias, and with routine lifecycle messages on standard output while actual failures remain on standard error. Earlier Catalog-created deployments verified credential injection, compatibility mapping, global scheduling, readiness, restart, two-daemon reporting, and removal. The stack remains a release candidate until v0.3.16 passes a fresh multi-host upgrade, rollback, and complete infrastructure-stack removal on isolated VM snapshots. Do not use this template to modify an existing production control plane.
+The image-level integration gate passed with the default link-local address, without a neutral Metadata DNS alias, and with routine lifecycle messages on standard output while actual failures remain on standard error. Earlier Catalog-created deployments verified credential injection, compatibility mapping, global scheduling, readiness, restart, two-daemon reporting, and removal. Managed multi-host upgrade, rollback, and complete infrastructure-stack removal remain separate deployment acceptance checks. Do not use this template to modify an existing production control plane.

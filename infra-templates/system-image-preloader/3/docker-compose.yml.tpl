@@ -2,7 +2,7 @@
 version: '2'
 services:
   system-image-preloader:
-    image: ghcr.io/pasturestack/system-image-preloader:v0.3.1
+    image: ghcr.io/pasturestack/system-image-preloader:v0.3.2
     {{ if eq .Values.PRIVILEGED "true"}}
     privileged: true
     {{ end}}

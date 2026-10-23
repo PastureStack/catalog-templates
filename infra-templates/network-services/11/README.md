@@ -2,7 +2,7 @@
 
 # PastureStack Network Services
 
-Version 10 (visible version `v0.3.8`) uses the published Network Plugin Manager `v0.8.22` for CNI configuration convergence during an upgrade from the historical runtime. It retains single-backend selection, Metadata Service `v0.9.11`, Internal DNS `v0.17.11`, all Catalog questions, and version 9's forwarding and host-port contracts. Version 9 remains immutable. The image's official release provenance, manifest digest, and actual runtime scan evidence are recorded in `catalog-images.json`.
+Version 11 (visible version `v0.3.9`) uses the published Network Plugin Manager `v0.8.23`, Metadata Service `v0.10.5`, and Internal DNS `v0.17.13`. This dependency update retains version 10's firewall ownership, CNI convergence, Catalog questions, sidekicks and shared volumes. Earlier numeric revisions remain unchanged. Published source, image digests and runtime scan evidence are recorded in `catalog-images.json`.
 
 ## CNI configuration convergence
 
@@ -10,7 +10,7 @@ The manager preflights all desired CNI configurations and writes each through an
 
 Retirement renames the obsolete file with a `.pasturestack-retired` suffix, preserving its original bytes outside the CNI `.conf` / `.json` execution set. An existing retirement backup must be byte-identical; a conflicting backup causes an error. Unrelated administrator configurations are preserved. Malformed or partially matching platform configurations, symlinks, and unsafe metadata paths cause an explicit error. The manager never sweeps the configuration directory or removes CNI binary aliases as part of this migration.
 
-The official `v0.8.22` Release passed its all-severity runtime and secret gate with Trivy `0.74.0` after downloading the vulnerability database at `2026-10-07T02:47:02Z`. The published image and its SBOM both identify source commit `7b0920aa0c8f3b2c009c9c47c94c4d21b77c7077`. This revision still requires an exact-image managed upgrade check; component publication does not establish that an existing infrastructure stack has completed its upgrade.
+Each component is a published security rebuild. Full-severity evidence is recorded separately from deployment acceptance; publication does not establish that an existing infrastructure stack has completed its managed upgrade.
 
 ## Provider and lifecycle convergence
 

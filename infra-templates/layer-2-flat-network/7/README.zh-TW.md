@@ -9,12 +9,12 @@
 若要啟用自動設定，請先確認具備頻外主控台存取方式。
 
 此範本使用
-`ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.37`，
+`ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40`，
 其中包含經審核的 `pasture-bridge` 與 `flat-cni-ipam` 執行檔。
 映像原始碼位於
-[`PastureStack/ipsec-vxlan-overlay-network@20eb898da1b24ed3b8ab2c0ad212d6523adeddeb`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/tree/20eb898da1b24ed3b8ab2c0ad212d6523adeddeb)，
+[`PastureStack/ipsec-vxlan-overlay-network@4711833178a05e5d225e364cce856bd108bdc707`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/tree/4711833178a05e5d225e364cce856bd108bdc707)，
 Flat CNI IPAM 原始碼位於
-[`PastureStack/flat-cni-ipam@4676b320a03fec53ae68899fdf18c7e7f7340356`](https://github.com/PastureStack/flat-cni-ipam/tree/4676b320a03fec53ae68899fdf18c7e7f7340356)。
+[`PastureStack/flat-cni-ipam@v0.1.6`](https://github.com/PastureStack/flat-cni-ipam/releases/tag/v0.1.6)。
 
 範本檔案與圖示採 MIT 授權；執行專案採 Apache-2.0 授權。作業系統
 套件及隨附元件保留各自的上游授權及聲明。

@@ -1,18 +1,18 @@
 <!-- SPDX-License-Identifier: MIT -->
 
-# PastureStack 系統映像預先下載 v0.3.0
+# PastureStack 系統映像預先下載 v0.3.2
 
 此全域、只執行一次的基礎架構服務會找出相容系統堆疊使用的映像，並
 要求每台主機的 Docker 常駐程式預先快取尚未存在的映像。
 
 ## 已審核映像
 
-- 映像：`ghcr.io/pasturestack/system-image-preloader:v0.3.0`
+- 映像：`ghcr.io/pasturestack/system-image-preloader:v0.3.2`
 - 原始碼：
-  [`PastureStack/system-image-preloader@150c78dbdb3f487a7003c83339cca5b76dde97f4`](https://github.com/PastureStack/system-image-preloader/tree/150c78dbdb3f487a7003c83339cca5b76dde97f4)
+  [`PastureStack/system-image-preloader@bcd89e7fb6baafea381de380c256e4e8d62f1df2`](https://github.com/PastureStack/system-image-preloader/tree/bcd89e7fb6baafea381de380c256e4e8d62f1df2)
 - 原始碼採 Apache-2.0 授權；Ubuntu、Docker CLI、`yq`、`gomplate`
   及相依套件保留各自的上游授權及聲明。
-- Trivy 掃描結果為 HIGH 0、CRITICAL 0。
+- 完整嚴重度掃描沒有可用修補、未審核項目或機密資料；官方尚無修補的 Low/Medium 持續追蹤。
 - 公開 GHCR 與未登入存取版本標籤的驗證已通過。
 
 ## 安全性界線

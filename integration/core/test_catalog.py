@@ -280,7 +280,7 @@ def test_catalog_list():
     assert by_folder[('infra', 'system-image-preloader')]['name'] == (
         'System Image Preloader')
     assert by_folder[('infra', 'system-image-preloader')][
-        'defaultVersion'] == 'v0.3.1'
+        'defaultVersion'] == 'v0.3.2'
     assert by_folder[('infra', 'system-image-preloader')][
         'links']['defaultVersion'].endswith(
         ':3')
@@ -968,7 +968,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     preloader_docker = preloader_files['docker-compose.yml.tpl']
     preloader_platform = preloader_files['rancher-compose.yml']
     preloader_image = (
-        'ghcr.io/pasturestack/system-image-preloader:v0.3.1')
+        'ghcr.io/pasturestack/system-image-preloader:v0.3.2')
     assert preloader_docker.count(
         'image: {}'.format(preloader_image)) == 1
     assert '\n  system-image-preloader:\n' in preloader_docker
@@ -982,7 +982,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     assert '{{- if' not in preloader_docker
     assert '{{- end' not in preloader_docker
     assert '@sha256:' not in preloader_docker
-    assert 'ghcr.io/pasturestack/system-image-preloader:v0.3.1' in (
+    assert 'ghcr.io/pasturestack/system-image-preloader:v0.3.2' in (
         preloader_docker)
     assert 'default: v1.6.282' in preloader_platform
     assert 'default: false' in preloader_platform
@@ -1176,10 +1176,10 @@ def test_catalog_compose_shapes_are_runtime_compatible():
         ),
         (
             'system-image-preloader', '2', '3',
-            'v0.3.0', 'v0.3.1', [
+            'v0.3.0', 'v0.3.2', [
                 (
                     'system-image-preloader:v0.3.0',
-                    'system-image-preloader:v0.3.1',
+                    'system-image-preloader:v0.3.2',
                 ),
             ],
         ),
@@ -1289,7 +1289,7 @@ def test_october_security_revisions_preserve_contract(
         with open(_file(prefix + new_number + '/' + filename),
                   encoding='utf-8') as source:
             assert source.read() == expected
-    for filename in ('rancher-compose.yml', 'README.md', 'README.zh-TW.md'):
+    for filename in ('rancher-compose.yml',):
         with open(_file(prefix + old_number + '/' + filename),
                   encoding='utf-8') as source:
             expected = source.read()
@@ -1300,6 +1300,20 @@ def test_october_security_revisions_preserve_contract(
         with open(_file(prefix + new_number + '/' + filename),
                   encoding='utf-8') as source:
             assert source.read() == expected
+    # Documentation follows the new published inputs; runtime definitions above
+    # remain byte-identical apart from the reviewed image/version replacements.
+    for filename in ('README.md', 'README.zh-TW.md'):
+        with open(_file(prefix + old_number + '/' + filename),
+                  encoding='utf-8') as source:
+            old_doc = source.read()
+        with open(_file(prefix + new_number + '/' + filename),
+                  encoding='utf-8') as source:
+            new_doc = source.read()
+        assert new_doc.strip()
+        for old_image, new_image in replacements:
+            if old_image in old_doc:
+                assert new_image in new_doc
+                assert old_image not in new_doc
     for number in (old_number, new_number):
         retained = _get_json(_catalog_url(
             '/v1-catalog/templateversions/{}:infra*{}:{}'.format(
@@ -1335,7 +1349,7 @@ def test_ipsec38_template_preserves_version11_contract():
               encoding='utf-8') as source:
         catalog = source.read()
     assert catalog == old_catalog.replace(
-        '  version: v0.3.9\n', '  version: v0.3.10\n')
+        '  version: v0.3.9\n', '  version: v0.3.20\n')
 
     with open(_file('catalog-images.json'), encoding='utf-8') as source:
         images = {

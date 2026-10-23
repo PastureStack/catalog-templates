@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: MIT -->
 
-# PastureStack VXLAN 覆疊網路 0.3.3
+# PastureStack VXLAN 覆疊網路 0.3.4
 
 此選用基礎架構範本會在受管主機間安裝未加密的 VXLAN 資料平面。
 範本會公開 UDP `4789`、為每個網路持有服務執行一個路由相關容器，
@@ -8,12 +8,12 @@
 
 ## 已審核映像
 
-- 映像：`ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.34`
+- 映像：`ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40`
 - 第 `5` 版為固定的 `10.42.0.0/16` CNI 網路明確設定
   `allowSharedSubnetIngress: true`。網路外掛管理器 `v0.8.20` 依此有限
   契約處理跨主機工作負載轉送；第 `4` 版仍供既有堆疊使用。
 - 原始碼：
-  [`PastureStack/ipsec-vxlan-overlay-network@db5a506346f521c6947b21a1a60cef6dd546f983`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/tree/db5a506346f521c6947b21a1a60cef6dd546f983)
+  [`PastureStack/ipsec-vxlan-overlay-network@4711833178a05e5d225e364cce856bd108bdc707`](https://github.com/PastureStack/ipsec-vxlan-overlay-network/tree/4711833178a05e5d225e364cce856bd108bdc707)
 - 原始碼採 Apache-2.0 授權；Ubuntu、CNI、Weave 及隨附相依套件
   保留各自的上游授權及聲明。
 - Trivy 結果為 HIGH 0、CRITICAL 0，映像機密資料與個人識別標記

@@ -1193,19 +1193,37 @@
       "platforms": [
         "linux/amd64"
       ],
-      "reference": "ghcr.io/pasturestack/system-image-preloader:v0.3.1",
-      "sourceCommit": "24e175a679540a99ee93696338affeee7c2d332b",
-      "manifestDigest": "sha256:09e9ad1e70546aacb87ef843e39cd31aff9463ca04a0ada70654f153f07930b9",
+      "reference": "ghcr.io/pasturestack/system-image-preloader:v0.3.2",
+      "sourceCommit": "bcd89e7fb6baafea381de380c256e4e8d62f1df2",
+      "manifestDigest": "sha256:a8468db6579e8a49f2e56218c3010ac775e3b56a0f188e53a01f4002fe45b9b3",
       "reviewedAt": "2026-10-23",
       "vulnerabilityScan": {
-        "scope": "published runtime image",
+        "scope": "published runtime image, full severity and exact OpenVEX",
         "high": 0,
         "critical": 0,
-        "evidence": "https://github.com/PastureStack/system-image-preloader/actions/runs/39958486019"
+        "evidence": "https://github.com/PastureStack/system-image-preloader/actions/runs/39973323966",
+        "low": 4,
+        "medium": 57,
+        "unknown": 0,
+        "secrets": 0,
+        "fixedAvailable": 0,
+        "actionable": 0,
+        "rawFindings": 62,
+        "effectiveFindings": 61,
+        "vendorUnfixedLowMedium": 61,
+        "disposition": "under_investigation",
+        "reportSha256": "e943e42f8b2c690659b20c8637f0d73bb4f1f500cc39be5201dbe80d35c18428",
+        "effectiveReportSha256": "42813d711ceb797d8e42ff8de76d10c40607e28e52df2159bac09ee4d5341f0e",
+        "openVexSha256": "d5b93f4d9b549805cde16dc077d26ac74c568eae9afa305bfa9d58dd37988761"
       },
       "publicationVerification": {
         "source": "component owner verified anonymous manifest/config readback",
-        "workflowRun": "https://github.com/PastureStack/system-image-preloader/actions/runs/39958486019"
+        "workflowRun": "https://github.com/PastureStack/system-image-preloader/actions/runs/39973323966"
+      },
+      "sbom": {
+        "format": "CycloneDX",
+        "url": "https://github.com/PastureStack/system-image-preloader/releases/download/v0.3.2/system-image-preloader-sbom.cdx.json",
+        "sha256": "43edb541dd9e4c86d78435645798361aad89be579ce7fad8accca608bc6c0b7b"
       }
     },
     {

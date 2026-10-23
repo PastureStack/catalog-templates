@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: MIT -->
 
-# PastureStack Container Schedule v0.6.0
+# PastureStack Container Schedule v0.6.1
 
 This infrastructure service watches Docker container events and runs scheduled
 `start`, `stop`, or `restart` actions. A managed workload opts in with these
@@ -13,8 +13,8 @@ labels:
 
 ## Reviewed image
 
-- Image: `ghcr.io/pasturestack/container-cron:v0.6.0`
-- Source: [`PastureStack/container-cron@8645472791ebbc9f78628af716e061139554fb38`](https://github.com/PastureStack/container-cron/tree/8645472791ebbc9f78628af716e061139554fb38)
+- Image: `ghcr.io/pasturestack/container-cron:v0.6.1`
+- Source: [`PastureStack/container-cron@2cce2cc80f2590239d5ef758a21c54a3f1e0f2b9`](https://github.com/PastureStack/container-cron/tree/2cce2cc80f2590239d5ef758a21c54a3f1e0f2b9)
 - Source license: Apache-2.0; Ubuntu and bundled Go dependencies retain their
   upstream licenses
 - Security gate: Trivy HIGH 0 and CRITICAL 0 for the operating system and Go
@@ -38,7 +38,7 @@ protocol identifiers, not PastureStack branding.
 
 The release passed race-enabled unit tests, static analysis, image metadata and
 license checks, a current HIGH/CRITICAL vulnerability scan, and an isolated
-Docker 29.4 lifecycle test. The test created one stopped workload and one
+Docker lifecycle test. The test created one stopped workload and one
 running workload, then verified that the service started the first and stopped
 the second on schedule. All test containers were removed afterward.
 

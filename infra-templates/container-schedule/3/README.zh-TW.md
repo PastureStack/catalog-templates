@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: MIT -->
 
-# PastureStack 容器定時排程 v0.6.0
+# PastureStack 容器定時排程 v0.6.1
 
 此基礎架構服務會監看 Docker 容器事件，並依排程執行 `start`、
 `stop` 或 `restart`。受管工作負載可使用下列標籤啟用排程：
@@ -12,9 +12,9 @@
 
 ## 已審核映像
 
-- 映像：`ghcr.io/pasturestack/container-cron:v0.6.0`
+- 映像：`ghcr.io/pasturestack/container-cron:v0.6.1`
 - 原始碼：
-  [`PastureStack/container-cron@8645472791ebbc9f78628af716e061139554fb38`](https://github.com/PastureStack/container-cron/tree/8645472791ebbc9f78628af716e061139554fb38)
+  [`PastureStack/container-cron@2cce2cc80f2590239d5ef758a21c54a3f1e0f2b9`](https://github.com/PastureStack/container-cron/tree/2cce2cc80f2590239d5ef758a21c54a3f1e0f2b9)
 - 原始碼採 Apache-2.0 授權；Ubuntu 與內含的 Go 相依套件保留各自的
   上游授權。
 - Trivy 掃描結果為 HIGH 0、CRITICAL 0。
@@ -34,7 +34,7 @@ Docker Socket 權限等同主機管理者權限，因此只能將此範本當成
 ## 驗證
 
 此版本已通過啟用競爭偵測的單元測試、靜態分析、映像中繼資料與授權
-檢查、弱點掃描，以及 Docker 29.4 隔離環境生命週期測試。測試確認
+檢查、弱點掃描，以及 Docker 隔離環境生命週期測試。測試確認
 服務能依排程啟動一個已停止的工作負載，並停止另一個執行中的工作負載；
 測試資源已精確移除。
 
