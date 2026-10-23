@@ -54,7 +54,7 @@ RETAINED_VERSION_LAYOUTS = {
     "amazon-efs-storage": ("2", "3"),
     "amazon-ebs-storage": ("2", "3"),
     "container-schedule": ("2", "3"),
-    "ecr-credential-sync": ("2", "3"),
+    "ecr-credential-sync": ("2", "3", "4"),
     "healthcheck": ("0", "1", "2"),
     "ipsec-overlay": ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"),
     "layer-2-flat-network": ("2", "3", "4", "5", "6", "7"),

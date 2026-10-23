@@ -19,7 +19,8 @@ New template revisions consume published PastureStack runtime artifacts built
 from verified upstream inputs. Image tags, producer commits, manifest digests,
 licenses and runtime evidence are recorded in [catalog-images.json](catalog-images.json).
 Deployable Compose definitions use numeric release tags, not digest suffixes.
-Available fixes and unreviewed findings block the current security release gate.
+New default runtime versions are accepted after their component security gates.
+Available fixes and unreviewed findings block those component gates.
 Officially unfixed Low/Medium findings remain tracked, not resolved; narrowly
 scoped VEX decisions require product-specific evidence and retain the raw scan.
 A clean gate is not a claim that every dependency has zero reported CVEs.

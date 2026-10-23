@@ -190,10 +190,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'ecr-credential-sync')][
         'name'] == 'Amazon ECR Credential Sync'
     assert by_folder[('infra', 'ecr-credential-sync')][
-        'defaultVersion'] == 'v3.1.5'
+        'defaultVersion'] == 'v3.1.6'
     assert by_folder[('infra', 'ecr-credential-sync')][
         'links']['defaultVersion'].endswith(
-        ':3')
+        ':4')
     assert by_folder[('infra', 'healthcheck')][
         'name'] == 'Metadata Healthcheck'
     assert by_folder[('infra', 'healthcheck')][
@@ -521,7 +521,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     ecr_files = ecr_version['files']
     ecr_docker = ecr_files['docker-compose.yml.tpl']
     ecr_platform = ecr_files['rancher-compose.yml']
-    ecr_image = 'ghcr.io/pasturestack/ecr-credential-sync:v3.1.5'
+    ecr_image = 'ghcr.io/pasturestack/ecr-credential-sync:v3.1.6'
     assert ecr_docker.count('image: {}'.format(ecr_image)) == 1
     assert '\n  ecr-credential-sync:\n' in ecr_docker
     assert '$${PLATFORM_URL:-$${CATTLE_URL:-}}' in ecr_docker
@@ -1270,6 +1270,15 @@ def test_catalog_compose_shapes_are_runtime_compatible():
                 (
                     'resource-scheduler:v0.8.19',
                     'resource-scheduler:v0.8.20',
+                ),
+            ],
+        ),
+        (
+            'ecr-credential-sync', '3', '4',
+            'v3.1.5', 'v3.1.6', [
+                (
+                    'ecr-credential-sync:v3.1.5',
+                    'ecr-credential-sync:v3.1.6',
                 ),
             ],
         ),

@@ -1420,6 +1420,44 @@
           "sourceCommit": "35d3a67c62df4b22d7167da3d73dd9dbc4905e66"
         }
       }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/ecr-credential-sync",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ecr-credential-sync",
+      "licenseBoundary": "Apache-2.0 source and image; bundled runtime and vendored Go dependencies retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/ecr-credential-sync:v3.1.6",
+      "sourceCommit": "f59e103a4c5759519318d290a0c63f7b0614991c",
+      "manifestDigest": "sha256:ec59763343440bccfaa15640d526e1082d0d2da35e86b939890dfa25c4bee6a0",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/ecr-credential-sync/actions/runs/39978735904",
+        "low": 0,
+        "medium": 0,
+        "unknown": 0,
+        "secrets": 0,
+        "fixedAvailable": 0,
+        "actionable": 0,
+        "rawSha256": "03116ab10ec38db3b5fa234e6d955d84a3d16b246991315637d49c0eb31f0786"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/ecr-credential-sync/actions/runs/39978735904",
+        "sourceCommit": "f59e103a4c5759519318d290a0c63f7b0614991c",
+        "anonymousReadback": true,
+        "attestationVerified": true
+      },
+      "sbom": {
+        "format": "CycloneDX",
+        "sha256": "a448ff8fcdaf1d124c04a9787552077d3b9b1467548586dcd297d55258e7dc77",
+        "url": "https://github.com/PastureStack/ecr-credential-sync/releases/download/v3.1.6/ecr-credential-sync-3.1.6-image.cdx.json"
+      }
     }
   ]
 }
