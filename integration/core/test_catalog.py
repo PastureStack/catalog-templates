@@ -232,10 +232,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'network-services')]['name'] == (
         'Network Services')
     assert by_folder[('infra', 'network-services')][
-        'defaultVersion'] == 'v0.3.10'
+        'defaultVersion'] == 'v0.3.11'
     assert by_folder[('infra', 'network-services')][
         'links']['defaultVersion'].endswith(
-        ':12')
+        ':13')
     assert by_folder[('infra', 'nfs-storage')][
         'name'] == 'NFS Storage'
     assert by_folder[('infra', 'nfs-storage')][
@@ -725,8 +725,8 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     network_docker = network_files['docker-compose.yml.tpl']
     network_platform = network_files['rancher-compose.yml']
     network_manager_image = (
-        'ghcr.io/pasturestack/network-plugin-manager:v0.8.24')
-    metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.10.5'
+        'ghcr.io/pasturestack/network-plugin-manager:v0.8.25')
+    metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.10.6'
     dns_image = 'ghcr.io/pasturestack/internal-dns:v0.17.13'
     assert network_docker.count(
         'image: {}'.format(network_manager_image)) == 1
@@ -1149,6 +1149,19 @@ def test_catalog_compose_shapes_are_runtime_compatible():
             ],
         ),
         (
+            'network-services', '12', '13',
+            'v0.3.10', 'v0.3.11', [
+                (
+                    'network-plugin-manager:v0.8.24',
+                    'network-plugin-manager:v0.8.25',
+                ),
+                (
+                    'metadata-service:v0.10.5',
+                    'metadata-service:v0.10.6',
+                ),
+            ],
+        ),
+        (
             'network-services', '11', '12',
             'v0.3.9', 'v0.3.10', [
                 (
@@ -1345,6 +1358,74 @@ def test_catalog_commit_is_pinned():
     assert len(data) == 1
     assert data[0]['branch'] == _current_branch()
     assert data[0]['pinnedCommit'] == _catalog_commit()
+
+
+def test_network_services13_preserves_contract_and_published_identities():
+    template = 'infra-templates/network-services'
+    old_image = 'ghcr.io/pasturestack/network-plugin-manager:v0.8.24'
+    image = 'ghcr.io/pasturestack/network-plugin-manager:v0.8.25'
+    with open(_file(template + '/12/docker-compose.yml.tpl'),
+              encoding='utf-8') as source:
+        old_compose = source.read()
+    with open(_file(template + '/13/docker-compose.yml.tpl'),
+              encoding='utf-8') as source:
+        compose = source.read()
+    assert old_compose.count('image: ' + old_image) == 1
+    assert compose == old_compose.replace(old_image, image).replace(
+        'metadata-service:v0.10.5', 'metadata-service:v0.10.6')
+    with open(_file(template + '/12/rancher-compose.yml'),
+              encoding='utf-8') as source:
+        old_catalog = source.read()
+    with open(_file(template + '/13/rancher-compose.yml'),
+              encoding='utf-8') as source:
+        catalog = source.read()
+    assert catalog == old_catalog.replace(
+        '  version: v0.3.10\n', '  version: v0.3.11\n')
+    with open(_file('catalog-images.json'), encoding='utf-8') as source:
+        images = {
+            item['reference']: item for item in json.load(source)['images']
+        }
+    assert images[old_image]['sourceCommit'] == (
+        'f34bbca219ddd84b94f4b3f833e04d67b9c8ce03')
+    assert images[image]['sourceCommit'] == (
+        '461182e1fcd09527509359f5c551704303689c04')
+    assert images[image]['manifestDigest'] == (
+        'sha256:9a66894138dc6dded756c5e4b80e6d23'
+        '5698d911031641f6c45763ad9b32d94e')
+    assert images[image]['sbom']['sha256'] == (
+        '91f7cce56e1755e9625e2c6bfd0c6f0c'
+        '9f73d9158b887037520abca7930186b2')
+    scan = images[image]['vulnerabilityScan']
+    assert all(scan[level] == 0 for level in (
+        'high', 'critical', 'low', 'medium', 'unknown', 'secrets'))
+    publication = images[image]['publicationVerification']
+    assert publication['sourceCommit'] == images[image]['sourceCommit']
+    assert publication['workflowRun'] == (
+        'https://github.com/PastureStack/network-plugin-manager/actions/runs/'
+        '40013313015')
+    assert publication['anonymousReadback'] is True
+    assert publication['githubReleaseImmutable'] is False
+    assert publication['provenancePredicateType'] == (
+        'https://slsa.dev/provenance/v1')
+    metadata = images['ghcr.io/pasturestack/metadata-service:v0.10.6']
+    assert metadata['sourceCommit'] == (
+        '3db2e1cd53530a04282f5c2448426334ea4d92a8')
+    assert metadata['manifestDigest'] == (
+        'sha256:88267d800365d354f06519014a3e4f7ce'
+        '967d05d4805e5a705944980e30449ff')
+    assert metadata['sbom']['sha256'] == (
+        '35fd5be38787438350e0eeea87eaf2eab'
+        '6e64575fef895103c44570523e5db4a')
+    scan = metadata['vulnerabilityScan']
+    assert scan['rawFindings'] == scan['reviewedUnfixedOccurrences'] == 44
+    assert (scan['medium'], scan['low']) == (38, 6)
+    assert all(scan[level] == 0 for level in (
+        'high', 'critical', 'unknown', 'secrets', 'fixedAvailable'))
+    publication = metadata['publicationVerification']
+    assert publication['githubReleaseImmutable'] is False
+    assert publication['workflowRun'] == (
+        'https://github.com/PastureStack/metadata-service/actions/runs/'
+        '40016315561')
 
 
 def test_ipsec38_template_preserves_version11_contract():

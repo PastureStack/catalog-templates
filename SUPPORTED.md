@@ -13,7 +13,7 @@ or out-of-scope templates from being presented as deployable software.
 | PastureStack System Image Preloader | Infrastructure image-cache service | v0.3.2 | Public PastureStack GHCR image with an explicit version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
 | PastureStack Amazon ECR Credential Sync | Infrastructure registry service | v3.1.6 | Public PastureStack GHCR image with an explicit version tag | Published component; full runtime raw scan has zero findings; Catalog integration and environment acceptance remain distinct |
 | Metadata Healthcheck | Infrastructure stack | v0.3.17 | Public PastureStack GHCR image with a non-overwritten version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
-| PastureStack Network Services | Infrastructure system stack | v0.3.10 | Network Plugin Manager v0.8.24; Metadata Service v0.10.5 and Internal DNS v0.17.13 unchanged from revision 11 | Exact publication evidence is in catalog-images.json; environment upgrade/rollback remains separate |
+| PastureStack Network Services | Infrastructure system stack | v0.3.11 | Network Plugin Manager v0.8.25; Metadata Service v0.10.6; Internal DNS v0.17.13 unchanged from revision 12 | OCI digest/SBOM evidence is in catalog-images.json; both runtime GitHub Releases report immutable=false, not locked; Metadata106 retains 44 reviewed unfixed Low/Medium raw findings; environment upgrade/rollback remains separate |
 | PastureStack Network Diagnostics | Infrastructure diagnostics service | v0.2.2 | Two public PastureStack GHCR images with explicit version tags | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
 | PastureStack Network Policy Manager | Infrastructure network-policy agent | v0.3.4 | Public PastureStack GHCR image with an explicit version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
 | PastureStack IPsec Overlay | Infrastructure network driver | v0.3.11 | Public PastureStack GHCR image with an explicit version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
@@ -417,6 +417,12 @@ multi-host upgrade, rollback, and complete infrastructure-stack removal remain
 release blockers.
 
 ## PastureStack Network Services evidence
+
+The current directory is `13` (`v0.3.11`), using NPM `v0.8.25`, Metadata
+`v0.10.6`, and the retained DNS `v0.17.13`. Exact new identities and raw scan
+counts are recorded above and in `catalog-images.json`; GitHub release
+`immutable=false` is distinct from the recorded OCI digest. The directory
+`9`/`10` evidence below is historical and is not acceptance of directory `13`.
 
 Directory `10` is the Network Services `v0.3.8` candidate and changes only
 Network Plugin Manager to published `v0.8.22` for legacy/current CNI configuration
