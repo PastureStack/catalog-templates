@@ -37,8 +37,8 @@ jobs:
 
       - name: Validate images, schema, and localized metadata
         env:
-          CATALOG_SERVICE_VERSION: 0.20.11
-          CATALOG_SERVICE_SHA256: b44bc4d337ea3b54d5a5febca2060ce23e3b988c298c2fb926227fea3c228d3d
+          CATALOG_SERVICE_VERSION: 0.20.15
+          CATALOG_SERVICE_SHA256: 7c059101265d897e4b176f503a9217b112946d37d91daa0c40f421fb16e4bb6b
           PASTURESTACK_CATALOG_ALLOWED_LOCAL_ROOTS: /tmp
           TMPDIR: /tmp
           SOURCE_SHA: ${{ github.sha }}
@@ -60,12 +60,21 @@ jobs:
           test "$(cat .python-version)" = '3.14.9'
           test "$(python -c 'import platform; print(platform.python_version())')" = \
             '3.14.9'
+          python tools/pip-security-overlay/build-pip-overlay.py \
+            --work "$work_root/pip-build" --output "$work_root/pip-dist"
+          python -m venv --without-pip "$work_root/python-env"
+          export PATH="$work_root/python-env/bin:$PATH"
+          PYTHONPATH="$work_root/pip-dist/pip-26.2.2+pasturestack.1-py3-none-any.whl" \
+            python -m pip install --no-index --no-deps \
+            "$work_root/pip-dist/pip-26.2.2+pasturestack.1-py3-none-any.whl"
           python -m pip install \
             --disable-pip-version-check \
             --require-hashes \
             --only-binary=:all: \
+            --find-links "$work_root/pip-dist" \
             --requirement integration/requirements.lock
-          python -c "import pip, certifi, pip._vendor.certifi as bundled; assert pip.__version__ == '26.2.2'; assert certifi.__version__ == '2026.10.19'; assert bundled.__version__ == '2026.10.19'; print(pip.__version__, certifi.__version__, bundled.__version__)"
+          python -c "import pip, certifi, pip._vendor.certifi as bundled; assert pip.__version__ == '26.2.2+pasturestack.1'; assert certifi.__version__ == '2026.10.19'; assert bundled.__version__ == '2026.10.19'; print(pip.__version__, certifi.__version__, bundled.__version__)"
+          python tools/pip-security-overlay/test-pip-overlay.py
           python -m flake8 integration/core
 
           bash scripts/audit-deployable-images

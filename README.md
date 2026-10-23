@@ -180,8 +180,14 @@ tag must never be replaced. Manifest digests remain release-verification
 evidence and are not inserted into Catalog, Compose, API, or user-interface
 image references. No automatic deployment or publishing trigger is enabled.
 The manually dispatched compatibility workflow uses Python `3.14.9`, verifies
-every Python dependency against its PyPI SHA-256, including pip `26.2.2` and
-certifi `2026.10.19`. It reads back both external and pip-bundled certifi and
+every Python dependency against its SHA-256, including the explicitly internal
+pip `26.2.2+pasturestack.1` rebuild and official certifi `2026.10.19`.
+The frozen shared helper rebuilds official pip source with upstream vendoring,
+changing only released urllib3 to `2.8.0`; all inputs, licenses, RECORD hashes,
+and the resulting wheel SHA-256 are verified. CI uses an isolated environment,
+checks streaming regression and trusted/untrusted TLS behavior, and never
+modifies the runner's global Python installation.
+It reads back both external and pip-bundled certifi and
 runs flake8, pytest, the
 Catalog audit, and Catalog Service API gates against the exact selected commit.
 GitHub CodeQL independently scans the Actions and Python sources. A Server
