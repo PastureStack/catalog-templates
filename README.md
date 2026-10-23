@@ -10,7 +10,7 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 Earlier prerelease coordinates are retired from current release references;
 their reviewed source commits remain in Git history. This source tree targets
-the pure numeric coordinate `v0.3.13`; the GitHub tag and Release, rather than
+the pure numeric coordinate `v0.3.14`; the GitHub tag and Release, rather than
 this README, determine when it is published. Product identity is carried by
 the repository, catalog metadata, and provenance rather than the version tag.
 
@@ -179,8 +179,10 @@ Deployable Compose files use semantic version tags only. A published version
 tag must never be replaced. Manifest digests remain release-verification
 evidence and are not inserted into Catalog, Compose, API, or user-interface
 image references. No automatic deployment or publishing trigger is enabled.
-The manually dispatched compatibility workflow uses Python `3.14.6`, verifies
-every Python dependency against its PyPI SHA-256, and runs flake8, pytest, the
+The manually dispatched compatibility workflow uses Python `3.14.9`, verifies
+every Python dependency against its PyPI SHA-256, including pip `26.2.2` and
+certifi `2026.10.19`. It reads back both external and pip-bundled certifi and
+runs flake8, pytest, the
 Catalog audit, and Catalog Service API gates against the exact selected commit.
 GitHub CodeQL independently scans the Actions and Python sources. A Server
 release pins the Catalog only after those gates pass; none of these checks is a
