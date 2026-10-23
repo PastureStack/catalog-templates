@@ -8,7 +8,7 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 ## Project status
 
-This source tree provides Catalog `v0.3.15`; its GitHub tag and Release determine
+This source tree provides Catalog `v0.3.16`; its GitHub tag and Release determine
 when it is published. It exposes one Native project template and twenty-one
 reviewed infrastructure entries. See [SUPPORTED.md](SUPPORTED.md) for the
 current versions and [catalog-provenance.json](catalog-provenance.json) for
@@ -24,6 +24,12 @@ Available fixes and unreviewed findings block those component gates.
 Officially unfixed Low/Medium findings remain tracked, not resolved; narrowly
 scoped VEX decisions require product-specific evidence and retain the raw scan.
 A clean gate is not a claim that every dependency has zero reported CVEs.
+
+Network Services revision 13 uses NPM `v0.8.25` and Metadata `v0.10.6`.
+Both runtime GitHub Releases report `immutable: false`; the recorded OCI
+manifest digests identify verified content, not a GitHub release lock.
+Metadata106 retains 44 reviewed unfixed raw findings (38 Medium, 6 Low),
+tracked separately from publication and environment acceptance.
 
 Catalog validation covers template structure, retained versions, Traditional
 Chinese labels, exact image references and Catalog Service API lookups. CI uses

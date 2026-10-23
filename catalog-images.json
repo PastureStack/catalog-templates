@@ -1140,6 +1140,45 @@
       }
     },
     {
+      "sourceRepository": "https://github.com/PastureStack/metadata-service",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/metadata-service",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/metadata-service:v0.10.6",
+      "sourceCommit": "3db2e1cd53530a04282f5c2448426334ea4d92a8",
+      "manifestDigest": "sha256:88267d800365d354f06519014a3e4f7ce967d05d4805e5a705944980e30449ff",
+      "reviewedAt": "2026-10-24",
+      "vulnerabilityScan": {
+        "scope": "published runtime image; complete severity raw report",
+        "rawFindings": 44,
+        "high": 0,
+        "critical": 0,
+        "low": 6,
+        "medium": 38,
+        "unknown": 0,
+        "secrets": 0,
+        "fixedAvailable": 0,
+        "reviewedUnfixedOccurrences": 44,
+        "evidence": "https://github.com/PastureStack/metadata-service/actions/runs/40016315561"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback and OCI SLSA provenance",
+        "workflowRun": "https://github.com/PastureStack/metadata-service/actions/runs/40016315561",
+        "sourceCommit": "3db2e1cd53530a04282f5c2448426334ea4d92a8",
+        "anonymousReadback": true,
+        "githubReleaseImmutable": false,
+        "provenancePredicateType": "https://slsa.dev/provenance/v1"
+      },
+      "sbom": {
+        "format": "CycloneDX",
+        "sha256": "35fd5be38787438350e0eeea87eaf2eab6e64575fef895103c44570523e5db4a",
+        "url": "https://github.com/PastureStack/metadata-service/releases/download/v0.10.6/image.cdx.json"
+      }
+    },
+    {
       "sourceRepository": "https://github.com/PastureStack/internal-dns",
       "sourcePath": "package/linux/amd64/Dockerfile",
       "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/internal-dns",
@@ -1493,6 +1532,44 @@
         "format": "CycloneDX",
         "sha256": "64605ff6d32f9f6b7c3bf20185d2cefead78b0e79b8395e3bc4523594e9af88b",
         "url": "https://github.com/PastureStack/network-plugin-manager/releases/download/v0.8.24/network-plugin-manager-0.8.24-image.cdx.json"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-plugin-manager",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Alpine, Docker CLI, and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.8.25",
+      "sourceCommit": "461182e1fcd09527509359f5c551704303689c04",
+      "manifestDigest": "sha256:9a66894138dc6dded756c5e4b80e6d235698d911031641f6c45763ad9b32d94e",
+      "reviewedAt": "2026-10-24",
+      "vulnerabilityScan": {
+        "scope": "published runtime image; complete severity gate",
+        "high": 0,
+        "critical": 0,
+        "low": 0,
+        "medium": 0,
+        "unknown": 0,
+        "secrets": 0,
+        "fixedAvailable": 0,
+        "actionable": 0,
+        "evidence": "https://github.com/PastureStack/network-plugin-manager/actions/runs/40013313015"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback and SLSA provenance for the OCI image and image-SBOM file",
+        "workflowRun": "https://github.com/PastureStack/network-plugin-manager/actions/runs/40013313015",
+        "sourceCommit": "461182e1fcd09527509359f5c551704303689c04",
+        "anonymousReadback": true,
+        "githubReleaseImmutable": false,
+        "provenancePredicateType": "https://slsa.dev/provenance/v1"
+      },
+      "sbom": {
+        "format": "CycloneDX",
+        "sha256": "91f7cce56e1755e9625e2c6bfd0c6f0c9f73d9158b887037520abca7930186b2",
+        "url": "https://github.com/PastureStack/network-plugin-manager/releases/download/v0.8.25/network-plugin-manager-0.8.25-image.cdx.json"
       }
     }
   ]
