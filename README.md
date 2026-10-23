@@ -194,12 +194,12 @@ GitHub CodeQL independently scans the Actions and Python sources. A Server
 release pins the Catalog only after those gates pass; none of these checks is a
 production-readiness claim.
 
-## Resource Scheduler 0.8.19
+## Resource Scheduler 0.8.20
 
-Catalog version `5` selects the published Resource Scheduler `v0.8.19`.
+Catalog version `6` selects the published Resource Scheduler `v0.8.20`.
 It changes only the image and visible version; questions, credentials,
-commands, scheduling labels, and port-80 liveness checks retain version `4`'s
-contract. Versions `1` through `4` remain unchanged for installed stacks.
+commands, scheduling labels, and port-80 liveness checks retain version `5`'s
+contract. Versions `1` through `5` remain unchanged for installed stacks.
 The official release's all-severity runtime scan has 0 High/Critical,
 0 vendor-fixed findings, and 0 secrets; 4 Low and 47 Medium vendor-unfixed
 findings remain `under_investigation`, not resolved. The published manifest,

@@ -51,6 +51,8 @@ NON_TAIWAN_TERMS = (
     "配置文件",
 )
 RETAINED_VERSION_LAYOUTS = {
+    "amazon-efs-storage": ("2", "3"),
+    "amazon-ebs-storage": ("2", "3"),
     "container-schedule": ("2", "3"),
     "ecr-credential-sync": ("2", "3"),
     "healthcheck": ("0", "1", "2"),
@@ -59,10 +61,10 @@ RETAINED_VERSION_LAYOUTS = {
     "network-diagnostics": ("1", "2", "3"),
     "network-policy-manager": ("1", "2", "3", "4"),
     "network-services": ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"),
-    "nfs-storage": ("1", "2"),
+    "nfs-storage": ("1", "2", "3"),
     "per-host-subnet-network": ("2", "3", "4", "5"),
     "route53-dns-sync": ("2", "3"),
-    "resource-scheduler": ("1", "2", "3", "4", "5"),
+    "resource-scheduler": ("1", "2", "3", "4", "5", "6"),
     "secret-volume-driver": ("1", "2", "3"),
     "system-image-preloader": ("2", "3"),
     "vault-volume-driver": ("3", "4"),

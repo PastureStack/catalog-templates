@@ -169,17 +169,17 @@ def test_catalog_list():
     assert by_folder[('infra', 'amazon-ebs-storage')][
         'name'] == 'Amazon EBS Storage'
     assert by_folder[('infra', 'amazon-ebs-storage')][
-        'defaultVersion'] == 'v0.10.0'
+        'defaultVersion'] == 'v0.11.1'
     assert by_folder[('infra', 'amazon-ebs-storage')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'amazon-efs-storage')][
         'name'] == 'Amazon EFS Storage'
     assert by_folder[('infra', 'amazon-efs-storage')][
-        'defaultVersion'] == 'v0.10.0'
+        'defaultVersion'] == 'v0.11.1'
     assert by_folder[('infra', 'amazon-efs-storage')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'container-schedule')][
         'name'] == 'Container Schedule'
     assert by_folder[('infra', 'container-schedule')][
@@ -239,10 +239,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'nfs-storage')][
         'name'] == 'NFS Storage'
     assert by_folder[('infra', 'nfs-storage')][
-        'defaultVersion'] == 'v0.10.0'
+        'defaultVersion'] == 'v0.11.1'
     assert by_folder[('infra', 'nfs-storage')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'secret-volume-driver')][
         'name'] == 'Secret Volume'
     assert by_folder[('infra', 'secret-volume-driver')][
@@ -266,10 +266,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'resource-scheduler')][
         'name'] == 'Resource Scheduler'
     assert by_folder[('infra', 'resource-scheduler')][
-        'defaultVersion'] == 'v0.8.19'
+        'defaultVersion'] == 'v0.8.20'
     assert by_folder[('infra', 'resource-scheduler')][
         'links']['defaultVersion'].endswith(
-        ':5')
+        ':6')
     assert by_folder[('infra', 'route53-dns-sync')][
         'name'] == 'Route 53 DNS Sync'
     assert by_folder[('infra', 'route53-dns-sync')][
@@ -437,7 +437,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     ebs_files = ebs_version['files']
     ebs_docker = ebs_files['docker-compose.yml']
     ebs_platform = ebs_files['rancher-compose.yml']
-    ebs_image = 'ghcr.io/pasturestack/ebs-storage-driver:v0.10.0'
+    ebs_image = 'ghcr.io/pasturestack/ebs-storage-driver:v0.11.1'
     assert ebs_docker.count('image: {}'.format(ebs_image)) == 1
     assert '\n  amazon-ebs-storage-driver:\n' in ebs_docker
     assert 'privileged: true' in ebs_docker
@@ -465,7 +465,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     efs_files = efs_version['files']
     efs_docker = efs_files['docker-compose.yml']
     efs_platform = efs_files['rancher-compose.yml']
-    efs_image = 'ghcr.io/pasturestack/efs-storage-driver:v0.10.0'
+    efs_image = 'ghcr.io/pasturestack/efs-storage-driver:v0.11.1'
     assert efs_docker.count('image: {}'.format(efs_image)) == 1
     assert '\n  amazon-efs-storage-driver:\n' in efs_docker
     assert 'privileged: true' in efs_docker
@@ -765,7 +765,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     nfs_files = nfs_version['files']
     nfs_docker = nfs_files['docker-compose.yml']
     nfs_platform = nfs_files['rancher-compose.yml']
-    nfs_image = 'ghcr.io/pasturestack/nfs-storage-driver:v0.10.0'
+    nfs_image = 'ghcr.io/pasturestack/nfs-storage-driver:v0.11.1'
     assert nfs_docker.count('image: {}'.format(nfs_image)) == 1
     assert '\n  nfs-storage-driver:\n' in nfs_docker
     assert 'privileged: true' in nfs_docker
@@ -920,7 +920,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     scheduler_files = scheduler_version['files']
     scheduler_docker = scheduler_files['docker-compose.yml']
     scheduler_platform = scheduler_files['rancher-compose.yml']
-    scheduler_image = 'ghcr.io/pasturestack/resource-scheduler:v0.8.19'
+    scheduler_image = 'ghcr.io/pasturestack/resource-scheduler:v0.8.20'
     assert scheduler_docker.count(
         'image: {}'.format(scheduler_image)) == 1
     assert '\n  resource-scheduler:\n' in scheduler_docker
@@ -1237,6 +1237,42 @@ def test_catalog_compose_shapes_are_runtime_compatible():
                 ),
             ],
         ),
+        (
+            'nfs-storage', '2', '3',
+            'v0.10.0', 'v0.11.1', [
+                (
+                    'nfs-storage-driver:v0.10.0',
+                    'nfs-storage-driver:v0.11.1',
+                ),
+            ],
+        ),
+        (
+            'amazon-ebs-storage', '2', '3',
+            'v0.10.0', 'v0.11.1', [
+                (
+                    'ebs-storage-driver:v0.10.0',
+                    'ebs-storage-driver:v0.11.1',
+                ),
+            ],
+        ),
+        (
+            'amazon-efs-storage', '2', '3',
+            'v0.10.0', 'v0.11.1', [
+                (
+                    'efs-storage-driver:v0.10.0',
+                    'efs-storage-driver:v0.11.1',
+                ),
+            ],
+        ),
+        (
+            'resource-scheduler', '5', '6',
+            'v0.8.19', 'v0.8.20', [
+                (
+                    'resource-scheduler:v0.8.19',
+                    'resource-scheduler:v0.8.20',
+                ),
+            ],
+        ),
     ])
 def test_october_security_revisions_preserve_contract(
         template, old_number, new_number, old_version, new_version,
@@ -1438,16 +1474,39 @@ def test_scheduler19_template_preserves_version4_contract():
         'PastureStack/resource-scheduler/.github/workflows/release.yml')
     with open(_file('catalog-provenance.json'), encoding='utf-8') as source:
         maintained = json.load(source)['entries'][
-            'resource-scheduler']['maintainedRelease']
+            'resource-scheduler']['retainedReleases']['v0.8.19']
     assert maintained['reference'] == image
     assert maintained['sourceCommit'] == release['sourceCommit']
     assert maintained['manifestDigest'] == release['manifestDigest']
     assert maintained['sbom'] == sbom
 
 
+def test_scheduler20_published_provenance_matches_current_image():
+    image = 'ghcr.io/pasturestack/resource-scheduler:v0.8.20'
+    with open(_file('catalog-images.json'), encoding='utf-8') as source:
+        release = next(item for item in json.load(source)['images']
+                       if item['reference'] == image)
+    with open(_file('catalog-provenance.json'), encoding='utf-8') as source:
+        maintained = json.load(source)['entries'][
+            'resource-scheduler']['maintainedRelease']
+    assert maintained['reference'] == image
+    assert maintained['sourceCommit'] == release['sourceCommit'] == (
+        '35d3a67c62df4b22d7167da3d73dd9dbc4905e66')
+    assert maintained['manifestDigest'] == release['manifestDigest'] == (
+        'sha256:e5a389273344585fca5c4513060e5289b'
+        '30ca13046d8ec286b8563952f1325d4')
+    assert maintained['sbom'] == release['sbom']
+    assert release['sbom']['sha256'] == (
+        '56de083886f393483d988c210d307d71a0b'
+        '9252b5d25a36095b2161bbab15e91')
+    assert release['sbom']['provenance']['sourceRef'] == 'refs/tags/v0.8.20'
+    assert release['vulnerabilityScan']['fixedAvailable'] == 0
+
+
 @pytest.mark.parametrize('number,image_tag', [
     ('4', 'v0.8.18'),
     ('5', 'v0.8.19'),
+    ('6', 'v0.8.20'),
 ])
 def test_scheduler_upgrade_versions_remain_available(number, image_tag):
     version = _get_json(_catalog_url(

@@ -1276,6 +1276,118 @@
         "source": "component owner verified anonymous manifest/config readback",
         "workflowRun": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/39963426128"
       }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/storage-plugins",
+      "sourcePath": "runtime/nfs/image/nfs/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/nfs-storage-driver",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, NFS client, and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/nfs-storage-driver:v0.11.1",
+      "sourceCommit": "a1ea8a0b483c9f8755cd23a4040cac06eafbb474",
+      "manifestDigest": "sha256:5b2a9f7d5a65c824ef00c134553b6fb8cb440b5da0cd91c837a0c1844590ec13",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/storage-plugins/actions/runs/39964036727"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/storage-plugins/actions/runs/39964036727"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/storage-plugins",
+      "sourcePath": "runtime/nfs/image/ebs/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ebs-storage-driver",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, AWS CLI, filesystem tools, and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/ebs-storage-driver:v0.11.1",
+      "sourceCommit": "a1ea8a0b483c9f8755cd23a4040cac06eafbb474",
+      "manifestDigest": "sha256:f9b804a4fa3b6e54ce8f18b4becf526b5d48e0117aa2a8e0c690573f57c369ad",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/storage-plugins/actions/runs/39964036727"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/storage-plugins/actions/runs/39964036727"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/storage-plugins",
+      "sourcePath": "runtime/nfs/image/efs/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/efs-storage-driver",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, AWS CLI, NFS client, and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/efs-storage-driver:v0.11.1",
+      "sourceCommit": "a1ea8a0b483c9f8755cd23a4040cac06eafbb474",
+      "manifestDigest": "sha256:acd786fa4052b3469242c3071320e72fb8a2cb1b863e51074585c04affb72747",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/storage-plugins/actions/runs/39964036727"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/storage-plugins/actions/runs/39964036727"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/resource-scheduler",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/resource-scheduler",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/resource-scheduler:v0.8.20",
+      "sourceCommit": "35d3a67c62df4b22d7167da3d73dd9dbc4905e66",
+      "manifestDigest": "sha256:e5a389273344585fca5c4513060e5289b30ca13046d8ec286b8563952f1325d4",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "low": 4,
+        "medium": 47,
+        "secrets": 0,
+        "fixedAvailable": 0,
+        "actionable": 0,
+        "vendorUnfixedLowMedium": 51,
+        "disposition": "under_investigation",
+        "evidence": "https://github.com/PastureStack/resource-scheduler/actions/runs/39961862641",
+        "reportSha256": "c37fb24919c5984fec1024e43a5845f1edb59f272e4f072bf55c85c1084fb175"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/resource-scheduler/actions/runs/39961862641"
+      },
+      "sbom": {
+        "format": "CycloneDX",
+        "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.20/resource-scheduler-0.8.20-image.cdx.json",
+        "sha256": "56de083886f393483d988c210d307d71a0b9252b5d25a36095b2161bbab15e91",
+        "provenance": {
+          "verified": true,
+          "predicateType": "https://slsa.dev/provenance/v1",
+          "signerWorkflow": "PastureStack/resource-scheduler/.github/workflows/release.yml",
+          "sourceRef": "refs/tags/v0.8.20",
+          "sourceCommit": "35d3a67c62df4b22d7167da3d73dd9dbc4905e66"
+        }
+      }
     }
   ]
 }
