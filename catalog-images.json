@@ -1207,6 +1207,29 @@
         "source": "component owner verified anonymous manifest/config readback",
         "workflowRun": "https://github.com/PastureStack/system-image-preloader/actions/runs/39958486019"
       }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/external-dns-sync",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/external-dns-sync",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and vendored Go dependencies retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/external-dns-sync:v0.8.1",
+      "sourceCommit": "7ff253bd84c13fd6748b9ca9737370de9ff5535f",
+      "manifestDigest": "sha256:0dd0a346573f1661abf920a0d87a153a312515882b16a8ef5983614fa725c751",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/external-dns-sync/actions/runs/39960962858"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/external-dns-sync/actions/runs/39960962858"
+      }
     }
   ]
 }

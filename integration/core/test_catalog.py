@@ -273,10 +273,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'route53-dns-sync')][
         'name'] == 'Route 53 DNS Sync'
     assert by_folder[('infra', 'route53-dns-sync')][
-        'defaultVersion'] == 'v0.8.0'
+        'defaultVersion'] == 'v0.8.1'
     assert by_folder[('infra', 'route53-dns-sync')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'system-image-preloader')]['name'] == (
         'System Image Preloader')
     assert by_folder[('infra', 'system-image-preloader')][
@@ -938,7 +938,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     route53_files = route53_version['files']
     route53_docker = route53_files['docker-compose.yml.tpl']
     route53_platform = route53_files['rancher-compose.yml']
-    route53_image = 'ghcr.io/pasturestack/external-dns-sync:v0.8.0'
+    route53_image = 'ghcr.io/pasturestack/external-dns-sync:v0.8.1'
     assert route53_docker.count(
         'image: {}'.format(route53_image)) == 1
     assert '\n  route53-dns-sync:\n' in route53_docker
@@ -1163,6 +1163,15 @@ def test_catalog_compose_shapes_are_runtime_compatible():
                 (
                     'system-image-preloader:v0.3.0',
                     'system-image-preloader:v0.3.1',
+                ),
+            ],
+        ),
+        (
+            'route53-dns-sync', '2', '3',
+            'v0.8.0', 'v0.8.1', [
+                (
+                    'external-dns-sync:v0.8.0',
+                    'external-dns-sync:v0.8.1',
                 ),
             ],
         ),

@@ -60,6 +60,7 @@ RETAINED_VERSION_LAYOUTS = {
     "network-services": ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"),
     "nfs-storage": ("1", "2"),
     "per-host-subnet-network": ("2", "3", "4"),
+    "route53-dns-sync": ("2", "3"),
     "resource-scheduler": ("1", "2", "3", "4", "5"),
     "secret-volume-driver": ("1", "2", "3"),
     "system-image-preloader": ("2", "3"),
