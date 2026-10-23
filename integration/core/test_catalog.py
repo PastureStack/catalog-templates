@@ -183,10 +183,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'container-schedule')][
         'name'] == 'Container Schedule'
     assert by_folder[('infra', 'container-schedule')][
-        'defaultVersion'] == 'v0.6.0'
+        'defaultVersion'] == 'v0.6.1'
     assert by_folder[('infra', 'container-schedule')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'ecr-credential-sync')][
         'name'] == 'Amazon ECR Credential Sync'
     assert by_folder[('infra', 'ecr-credential-sync')][
@@ -204,17 +204,17 @@ def test_catalog_list():
     assert by_folder[('infra', 'ipsec-overlay')]['name'] == (
         'IPsec Overlay')
     assert by_folder[('infra', 'ipsec-overlay')][
-        'defaultVersion'] == 'v0.3.10'
+        'defaultVersion'] == 'v0.3.11'
     assert by_folder[('infra', 'ipsec-overlay')][
         'links']['defaultVersion'].endswith(
-        ':12')
+        ':13')
     assert by_folder[('infra', 'layer-2-flat-network')]['name'] == (
         'Layer 2 Flat Network')
     assert by_folder[('infra', 'layer-2-flat-network')][
-        'defaultVersion'] == 'v0.3.4'
+        'defaultVersion'] == 'v0.3.5'
     assert by_folder[('infra', 'layer-2-flat-network')][
         'links']['defaultVersion'].endswith(
-        ':6')
+        ':7')
     assert by_folder[('infra', 'network-diagnostics')]['name'] == (
         'Network Diagnostics')
     assert by_folder[('infra', 'network-diagnostics')][
@@ -260,9 +260,9 @@ def test_catalog_list():
     assert by_folder[('infra', 'per-host-subnet-network')]['name'] == (
         'Per-Host Subnet Network')
     assert by_folder[('infra', 'per-host-subnet-network')][
-        'defaultVersion'] == 'v0.3.2'
+        'defaultVersion'] == 'v0.3.3'
     assert by_folder[('infra', 'per-host-subnet-network')][
-        'links']['defaultVersion'].endswith(':4')
+        'links']['defaultVersion'].endswith(':5')
     assert by_folder[('infra', 'resource-scheduler')][
         'name'] == 'Resource Scheduler'
     assert by_folder[('infra', 'resource-scheduler')][
@@ -287,10 +287,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'vxlan-overlay-network')]['name'] == (
         'VXLAN Overlay Network')
     assert by_folder[('infra', 'vxlan-overlay-network')][
-        'defaultVersion'] == 'v0.3.3'
+        'defaultVersion'] == 'v0.3.4'
     assert by_folder[('infra', 'vxlan-overlay-network')][
         'links']['defaultVersion'].endswith(
-        ':5')
+        ':6')
     assert by_folder[('infra', 'windows-container-networking')][
         'name'] == 'Windows Container Networking'
     assert by_folder[('infra', 'windows-container-networking')][
@@ -499,7 +499,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     container_schedule_platform = container_schedule_files[
         'rancher-compose.yml']
     container_schedule_image = (
-        'ghcr.io/pasturestack/container-cron:v0.6.0')
+        'ghcr.io/pasturestack/container-cron:v0.6.1')
     assert container_schedule_docker.count(
         'image: {}'.format(container_schedule_image)) == 1
     assert '\n  container-schedule:\n' in container_schedule_docker
@@ -565,7 +565,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     overlay_docker = overlay_files['docker-compose.yml.tpl']
     overlay_platform = overlay_files['rancher-compose.yml']
     overlay_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.38')
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.39')
     assert overlay_docker.count('image: {}'.format(overlay_image)) == 4
     assert overlay_docker.count(
         "PASTURESTACK_FIREWALL_BACKEND: '${FIREWALL_BACKEND}'") == 1
@@ -607,7 +607,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     vxlan_docker = vxlan_files['docker-compose.yml.tpl']
     vxlan_platform = vxlan_files['rancher-compose.yml']
     alternative_network_image = (
-            'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.34')
+            'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.39')
     assert vxlan_docker.count(
         'image: {}'.format(alternative_network_image)) == 3
     assert '\n  vxlan-network:\n' in vxlan_docker
@@ -632,7 +632,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     layer_2_docker = layer_2_files['docker-compose.yml.tpl']
     layer_2_platform = layer_2_files['rancher-compose.yml']
     flat_network_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.37')
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.39')
     assert layer_2_docker.count(
         'image: {}'.format(flat_network_image)) == 1
     assert '\n  layer-2-flat-cni:\n' in layer_2_docker
@@ -1149,6 +1149,23 @@ def test_catalog_compose_shapes_are_runtime_compatible():
             ],
         ),
         (
+            'network-services', '10', '11',
+            'v0.3.8', 'v0.3.9', [
+                (
+                    'network-plugin-manager:v0.8.22',
+                    'network-plugin-manager:v0.8.23',
+                ),
+                (
+                    'metadata-service:v0.9.11',
+                    'metadata-service:v0.10.5',
+                ),
+                (
+                    'internal-dns:v0.17.11',
+                    'internal-dns:v0.17.13',
+                ),
+            ],
+        ),
+        (
             'network-policy-manager', '3', '4',
             'v0.3.3', 'v0.3.4', [
                 (
@@ -1176,19 +1193,47 @@ def test_catalog_compose_shapes_are_runtime_compatible():
             ],
         ),
         (
-            'network-services', '10', '11',
-            'v0.3.8', 'v0.3.9', [
+            'container-schedule', '2', '3',
+            'v0.6.0', 'v0.6.1', [
                 (
-                    'network-plugin-manager:v0.8.22',
-                    'network-plugin-manager:v0.8.23',
+                    'container-cron:v0.6.0',
+                    'container-cron:v0.6.1',
                 ),
+            ],
+        ),
+        (
+            'ipsec-overlay', '12', '13',
+            'v0.3.10', 'v0.3.11', [
                 (
-                    'metadata-service:v0.9.11',
-                    'metadata-service:v0.10.5',
+                    'ipsec-vxlan-overlay-network:v0.14.38',
+                    'ipsec-vxlan-overlay-network:v0.14.39',
                 ),
+            ],
+        ),
+        (
+            'layer-2-flat-network', '6', '7',
+            'v0.3.4', 'v0.3.5', [
                 (
-                    'internal-dns:v0.17.11',
-                    'internal-dns:v0.17.13',
+                    'ipsec-vxlan-overlay-network:v0.14.37',
+                    'ipsec-vxlan-overlay-network:v0.14.39',
+                ),
+            ],
+        ),
+        (
+            'per-host-subnet-network', '4', '5',
+            'v0.3.2', 'v0.3.3', [
+                (
+                    'ipsec-vxlan-overlay-network:v0.14.34',
+                    'ipsec-vxlan-overlay-network:v0.14.39',
+                ),
+            ],
+        ),
+        (
+            'vxlan-overlay-network', '5', '6',
+            'v0.3.3', 'v0.3.4', [
+                (
+                    'ipsec-vxlan-overlay-network:v0.14.34',
+                    'ipsec-vxlan-overlay-network:v0.14.39',
                 ),
             ],
         ),

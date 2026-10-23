@@ -1230,6 +1230,52 @@
         "source": "component owner verified anonymous manifest/config readback",
         "workflowRun": "https://github.com/PastureStack/external-dns-sync/actions/runs/39960962858"
       }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/container-cron",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/container-cron",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and Go dependencies retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/container-cron:v0.6.1",
+      "sourceCommit": "2cce2cc80f2590239d5ef758a21c54a3f1e0f2b9",
+      "manifestDigest": "sha256:ea2790f2a3e32eb6e3266eb175ee0a69c4a854463c22a74604f69855da5c6829",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/container-cron/actions/runs/39960497907"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/container-cron/actions/runs/39960497907"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/ipsec-vxlan-overlay-network",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ipsec-vxlan-overlay-network",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, strongSwan, CNI, Weave, and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.39",
+      "sourceCommit": "db0780394644c70c4756b33301d8b9d75d0149ca",
+      "manifestDigest": "sha256:72a9fec50190c25ff8b2cdbf954b22a58a93087d64ff15b3d2d9d2ca9526cbfe",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/39963426128"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/39963426128"
+      }
     }
   ]
 }

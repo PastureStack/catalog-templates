@@ -51,21 +51,22 @@ NON_TAIWAN_TERMS = (
     "配置文件",
 )
 RETAINED_VERSION_LAYOUTS = {
+    "container-schedule": ("2", "3"),
     "ecr-credential-sync": ("2", "3"),
     "healthcheck": ("0", "1", "2"),
-    "ipsec-overlay": ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"),
-    "layer-2-flat-network": ("2", "3", "4", "5", "6"),
+    "ipsec-overlay": ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"),
+    "layer-2-flat-network": ("2", "3", "4", "5", "6", "7"),
     "network-diagnostics": ("1", "2", "3"),
     "network-policy-manager": ("1", "2", "3", "4"),
     "network-services": ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"),
     "nfs-storage": ("1", "2"),
-    "per-host-subnet-network": ("2", "3", "4"),
+    "per-host-subnet-network": ("2", "3", "4", "5"),
     "route53-dns-sync": ("2", "3"),
     "resource-scheduler": ("1", "2", "3", "4", "5"),
     "secret-volume-driver": ("1", "2", "3"),
     "system-image-preloader": ("2", "3"),
     "vault-volume-driver": ("3", "4"),
-    "vxlan-overlay-network": ("2", "3", "4", "5"),
+    "vxlan-overlay-network": ("2", "3", "4", "5", "6"),
     "windows-container-networking": ("2", "3"),
 }
 RETAINED_VERSION_HASHES = {
