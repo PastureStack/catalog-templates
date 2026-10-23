@@ -232,7 +232,9 @@
       "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ipsec-vxlan-overlay-network",
       "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, strongSwan, CNI, Weave, and other packages retain their upstream licenses and notices",
       "reviewedAt": "2026-09-14",
-      "platforms": ["linux/amd64"],
+      "platforms": [
+        "linux/amd64"
+      ],
       "vulnerabilityScan": {
         "scanner": "Trivy 0.74.0",
         "reportCreatedAt": "2026-09-14",
@@ -251,7 +253,9 @@
       "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ipsec-vxlan-overlay-network",
       "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, strongSwan, CNI, Weave, and other packages retain their upstream licenses and notices",
       "reviewedAt": "2026-09-14",
-      "platforms": ["linux/amd64"],
+      "platforms": [
+        "linux/amd64"
+      ],
       "vulnerabilityScan": {
         "scanner": "Trivy 0.74.0",
         "reportCreatedAt": "2026-09-14",
@@ -270,7 +274,9 @@
       "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ipsec-vxlan-overlay-network",
       "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, strongSwan, CNI, Weave, and other packages retain their upstream licenses and notices",
       "reviewedAt": "2026-09-14",
-      "platforms": ["linux/amd64"],
+      "platforms": [
+        "linux/amd64"
+      ],
       "vulnerabilityScan": {
         "scanner": "Trivy 0.74.0",
         "reportCreatedAt": "2026-09-14",
@@ -289,7 +295,9 @@
       "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ipsec-vxlan-overlay-network",
       "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, strongSwan, CNI, Weave, and other packages retain their upstream licenses and notices",
       "reviewedAt": "2026-10-05",
-      "platforms": ["linux/amd64"],
+      "platforms": [
+        "linux/amd64"
+      ],
       "vulnerabilityScan": {
         "scanner": "Trivy 0.74.0",
         "reportCreatedAt": "2026-10-05T05:24:38.357634363Z",
@@ -945,6 +953,259 @@
         "high": 0,
         "critical": 0,
         "secrets": 0
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/network-diagnostics-agent",
+      "sourcePath": "Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-diagnostics-agent",
+      "licenseBoundary": "Inherited Apache-2.0 source and image; Go toolchain material retains its upstream license and notice",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/network-diagnostics-agent:v0.2.1",
+      "sourceCommit": "b837685df0c99b3e2ffe28ee927b82d5d7a5592d",
+      "manifestDigest": "sha256:974a045632eb3010eb315ada26aa820b59b5527bcd237487cf036702b66a01f1",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/network-diagnostics-agent/actions/runs/39958312029"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/network-diagnostics-agent/actions/runs/39958312029"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/network-diagnostics-service",
+      "sourcePath": "Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-diagnostics-service",
+      "licenseBoundary": "Apache-2.0 applies only to the new PastureStack root commit and image; historical unlicensed upstream source and history are excluded",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/network-diagnostics-service:v0.2.1",
+      "sourceCommit": "166b95cd98bdf8a362221ce032c72d9159d02b36",
+      "manifestDigest": "sha256:7ba5dbb413aadfa289589f18bbfd11ac4ecad3e79bc04a14c86b2d32029b4b49",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/network-diagnostics-service/actions/runs/39958562655"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/network-diagnostics-service/actions/runs/39958562655"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/metadata-healthcheck",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/metadata-healthcheck",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and HAProxy packages retain their upstream licenses",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/metadata-healthcheck:v0.3.17",
+      "sourceCommit": "410993d3b3b2493bbd84a36f7d67cfefb8dd6705",
+      "manifestDigest": "sha256:1d7d7705f400c37d7087ba379657fe25f81019b97c3672e7633a36cfcc2725a1",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/metadata-healthcheck/actions/runs/39957352204"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/metadata-healthcheck/actions/runs/39957352204"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/secrets-flexvolume-plugin",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/secrets-flexvolume-plugin",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, Go toolchain, and CA certificate packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.1",
+      "sourceCommit": "258a591302093503c33ec9bdaf26ad4e9ad17b5a",
+      "manifestDigest": "sha256:42c0102f96948882d4c62006ccbcf2e09ed8d5806f6b5356edd6d523e569a3de",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/secrets-flexvolume-plugin/actions/runs/39957288813"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/secrets-flexvolume-plugin/actions/runs/39957288813"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/vault-secrets-bridge",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/vault-secrets-bridge",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, Go toolchain, and CA certificate packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/vault-secrets-bridge:v0.1.2",
+      "sourceCommit": "dd5b0db64c87b0b20cdca7c6b93f4311b5e0aa56",
+      "manifestDigest": "sha256:73692de6f293923f86ba55211f3c90c00c177b25b2c6bc02c0068b2b0baabe40",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/vault-secrets-bridge/actions/runs/39956267852"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/vault-secrets-bridge/actions/runs/39956267852"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/pod-pause-image",
+      "sourcePath": "Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/pod-pause-image",
+      "licenseBoundary": "Apache-2.0 source and image; the pinned Ubuntu base and build packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/pod-pause-image:v3.0.5",
+      "sourceCommit": "769c9aefdb45d50df9ac1aa48805a9d01b11c77f",
+      "manifestDigest": "sha256:edb454ffa5de459a01d33df386d423093d64e11dd28caeb4ab89fb2a5d1e454e",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/pod-pause-image/actions/runs/39958231883"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/pod-pause-image/actions/runs/39958231883"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/network-plugin-manager",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-plugin-manager",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Alpine, Docker CLI, and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/network-plugin-manager:v0.8.23",
+      "sourceCommit": "c7f6bf7f6ff76ca9730d918738f4eb20bc6659a6",
+      "manifestDigest": "sha256:09e2e1c13972f2859aa5e738558bee05a73a9280824375d7d3e966dc4b7133df",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/network-plugin-manager/actions/runs/39954592863"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/network-plugin-manager/actions/runs/39954592863"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/metadata-service",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/metadata-service",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/metadata-service:v0.10.5",
+      "sourceCommit": "9aa4b97c7907493f0c5a5ccf5ca2b708e7bce9f7",
+      "manifestDigest": "sha256:31f72a3c737a3b67bd1fb7d3c98d1ce728c84c52cad94f1884872f153efc4a01",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/metadata-service/actions/runs/39959381046"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/metadata-service/actions/runs/39959381046"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/internal-dns",
+      "sourcePath": "package/linux/amd64/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/internal-dns",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/internal-dns:v0.17.13",
+      "sourceCommit": "8bd6b18c44957d08ee1570fe2391ed2299987ea7",
+      "manifestDigest": "sha256:ee75f485b1781378360e1baed6dca4e7de79c933ab80b27cc01c0ad723e093e5",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/internal-dns/actions/runs/39957348074"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/internal-dns/actions/runs/39957348074"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/network-policy-manager",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-policy-manager",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, nftables, and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/network-policy-manager:v0.3.2",
+      "sourceCommit": "44deaefcad4e2b806edbf0ec9f560ff57796cef2",
+      "manifestDigest": "sha256:6e4984bb831369a39f48ddc448ca9bb8b3d8c5ed1e5e0efe06261f59324d7b88",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/network-policy-manager/actions/runs/39958239844"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/network-policy-manager/actions/runs/39958239844"
+      }
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/system-image-preloader",
+      "sourcePath": "Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/system-image-preloader",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, Docker CLI, yq, gomplate, and other dependencies retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/system-image-preloader:v0.3.1",
+      "sourceCommit": "24e175a679540a99ee93696338affeee7c2d332b",
+      "manifestDigest": "sha256:09e9ad1e70546aacb87ef843e39cd31aff9463ca04a0ada70654f153f07930b9",
+      "reviewedAt": "2026-10-23",
+      "vulnerabilityScan": {
+        "scope": "published runtime image",
+        "high": 0,
+        "critical": 0,
+        "evidence": "https://github.com/PastureStack/system-image-preloader/actions/runs/39958486019"
+      },
+      "publicationVerification": {
+        "source": "component owner verified anonymous manifest/config readback",
+        "workflowRun": "https://github.com/PastureStack/system-image-preloader/actions/runs/39958486019"
       }
     }
   ]

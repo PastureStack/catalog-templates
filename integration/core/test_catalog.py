@@ -197,10 +197,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'healthcheck')][
         'name'] == 'Metadata Healthcheck'
     assert by_folder[('infra', 'healthcheck')][
-        'defaultVersion'] == 'v0.3.16'
+        'defaultVersion'] == 'v0.3.17'
     assert by_folder[('infra', 'healthcheck')][
         'links']['defaultVersion'].endswith(
-        ':1')
+        ':2')
     assert by_folder[('infra', 'ipsec-overlay')]['name'] == (
         'IPsec Overlay')
     assert by_folder[('infra', 'ipsec-overlay')][
@@ -218,24 +218,24 @@ def test_catalog_list():
     assert by_folder[('infra', 'network-diagnostics')]['name'] == (
         'Network Diagnostics')
     assert by_folder[('infra', 'network-diagnostics')][
-        'defaultVersion'] == 'v0.2.1'
+        'defaultVersion'] == 'v0.2.2'
     assert by_folder[('infra', 'network-diagnostics')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'network-policy-manager')]['name'] == (
         'Network Policy Manager')
     assert by_folder[('infra', 'network-policy-manager')][
-        'defaultVersion'] == 'v0.3.3'
+        'defaultVersion'] == 'v0.3.4'
     assert by_folder[('infra', 'network-policy-manager')][
         'links']['defaultVersion'].endswith(
-        ':3')
+        ':4')
     assert by_folder[('infra', 'network-services')]['name'] == (
         'Network Services')
     assert by_folder[('infra', 'network-services')][
-        'defaultVersion'] == 'v0.3.8'
+        'defaultVersion'] == 'v0.3.9'
     assert by_folder[('infra', 'network-services')][
         'links']['defaultVersion'].endswith(
-        ':10')
+        ':11')
     assert by_folder[('infra', 'nfs-storage')][
         'name'] == 'NFS Storage'
     assert by_folder[('infra', 'nfs-storage')][
@@ -246,17 +246,17 @@ def test_catalog_list():
     assert by_folder[('infra', 'secret-volume-driver')][
         'name'] == 'Secret Volume'
     assert by_folder[('infra', 'secret-volume-driver')][
-        'defaultVersion'] == 'v0.1.2'
+        'defaultVersion'] == 'v0.1.3'
     assert by_folder[('infra', 'secret-volume-driver')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'vault-volume-driver')][
         'name'] == 'Vault Volume'
     assert by_folder[('infra', 'vault-volume-driver')][
-        'defaultVersion'] == 'v0.2.1'
+        'defaultVersion'] == 'v0.2.2'
     assert by_folder[('infra', 'vault-volume-driver')][
         'links']['defaultVersion'].endswith(
-        ':3')
+        ':4')
     assert by_folder[('infra', 'per-host-subnet-network')]['name'] == (
         'Per-Host Subnet Network')
     assert by_folder[('infra', 'per-host-subnet-network')][
@@ -280,10 +280,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'system-image-preloader')]['name'] == (
         'System Image Preloader')
     assert by_folder[('infra', 'system-image-preloader')][
-        'defaultVersion'] == 'v0.3.0'
+        'defaultVersion'] == 'v0.3.1'
     assert by_folder[('infra', 'system-image-preloader')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'vxlan-overlay-network')]['name'] == (
         'VXLAN Overlay Network')
     assert by_folder[('infra', 'vxlan-overlay-network')][
@@ -294,10 +294,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'windows-container-networking')][
         'name'] == 'Windows Container Networking'
     assert by_folder[('infra', 'windows-container-networking')][
-        'defaultVersion'] == 'v0.1.0'
+        'defaultVersion'] == 'v0.1.1'
     assert by_folder[('infra', 'windows-container-networking')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'windows-ecr-credential-sync')][
         'name'] == 'Windows ECR Credential Sync'
     assert by_folder[('infra', 'windows-ecr-credential-sync')][
@@ -547,7 +547,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     health_files = health_version['files']
     health_docker = health_files['docker-compose.yml']
     health_platform = health_files['rancher-compose.yml']
-    health_image = 'ghcr.io/pasturestack/metadata-healthcheck:v0.3.16'
+    health_image = 'ghcr.io/pasturestack/metadata-healthcheck:v0.3.17'
     assert "version: '2'\nservices:\n  healthcheck:" in health_docker
     assert health_docker.count('image: {}'.format(health_image)) == 1
     assert (
@@ -658,9 +658,9 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     diagnostics_docker = diagnostics_files['docker-compose.yml.tpl']
     diagnostics_platform = diagnostics_files['rancher-compose.yml']
     diagnostics_agent_image = (
-        'ghcr.io/pasturestack/network-diagnostics-agent:v0.2.0')
+        'ghcr.io/pasturestack/network-diagnostics-agent:v0.2.1')
     diagnostics_service_image = (
-        'ghcr.io/pasturestack/network-diagnostics-service:v0.2.0')
+        'ghcr.io/pasturestack/network-diagnostics-service:v0.2.1')
     assert diagnostics_docker.count(
         'image: {}'.format(diagnostics_agent_image)) == 1
     assert diagnostics_docker.count(
@@ -697,7 +697,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     policy_docker = policy_files['docker-compose.yml']
     policy_platform = policy_files['rancher-compose.yml']
     policy_image = (
-        'ghcr.io/pasturestack/network-policy-manager:v0.3.1')
+        'ghcr.io/pasturestack/network-policy-manager:v0.3.2')
     assert policy_docker.count(
         'image: {}'.format(policy_image)) == 1
     assert '\n  network-policy-manager:\n' in policy_docker
@@ -725,9 +725,9 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     network_docker = network_files['docker-compose.yml.tpl']
     network_platform = network_files['rancher-compose.yml']
     network_manager_image = (
-        'ghcr.io/pasturestack/network-plugin-manager:v0.8.22')
-    metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.9.11'
-    dns_image = 'ghcr.io/pasturestack/internal-dns:v0.17.11'
+        'ghcr.io/pasturestack/network-plugin-manager:v0.8.23')
+    metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.10.5'
+    dns_image = 'ghcr.io/pasturestack/internal-dns:v0.17.13'
     assert network_docker.count(
         'image: {}'.format(network_manager_image)) == 1
     assert network_docker.count('image: {}'.format(metadata_image)) == 1
@@ -790,7 +790,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     secret_docker = secret_files['docker-compose.yml']
     secret_platform = secret_files['rancher-compose.yml']
     secret_image = (
-        'ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.1.1')
+        'ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.1')
     assert secret_docker.count('image: {}'.format(secret_image)) == 1
     assert '\n  secret-volume-driver:\n' in secret_docker
     assert 'privileged:' not in secret_docker
@@ -843,9 +843,9 @@ def test_catalog_compose_shapes_are_runtime_compatible():
         'issuing_token_secret.label.zh-tw'
     ] == 'Vault 發行用權杖機密資料'
     vault_bridge_image = (
-        'ghcr.io/pasturestack/vault-secrets-bridge:v0.1.1')
+        'ghcr.io/pasturestack/vault-secrets-bridge:v0.1.2')
     vault_driver_image = (
-        'ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.0')
+        'ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.1')
     assert vault_docker.count(
         'image: {}'.format(vault_bridge_image)) == 1
     assert vault_docker.count(
@@ -968,7 +968,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     preloader_docker = preloader_files['docker-compose.yml.tpl']
     preloader_platform = preloader_files['rancher-compose.yml']
     preloader_image = (
-        'ghcr.io/pasturestack/system-image-preloader:v0.3.0')
+        'ghcr.io/pasturestack/system-image-preloader:v0.3.1')
     assert preloader_docker.count(
         'image: {}'.format(preloader_image)) == 1
     assert '\n  system-image-preloader:\n' in preloader_docker
@@ -982,7 +982,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     assert '{{- if' not in preloader_docker
     assert '{{- end' not in preloader_docker
     assert '@sha256:' not in preloader_docker
-    assert 'ghcr.io/pasturestack/system-image-preloader:v0.3.0' in (
+    assert 'ghcr.io/pasturestack/system-image-preloader:v0.3.1' in (
         preloader_docker)
     assert 'default: v1.6.282' in preloader_platform
     assert 'default: false' in preloader_platform
@@ -1062,7 +1062,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
         windows_container_network_files['rancher-compose.yml'])
     selector_image = (
         'ghcr.io/pasturestack/pod-pause-image:'
-        'v3.0.2')
+        'v3.0.5')
     assert windows_container_network_docker.count(
         'image: {}'.format(selector_image)) == 2
     assert windows_container_network_docker.count(
@@ -1091,6 +1091,130 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     assert "templateId: 'pasturestack:infra*resource-scheduler'" in project
     assert "templateId: 'pasturestack:infra*healthcheck'" in project
     assert '.catalog:\n  name: PastureStack Native' in project_platform
+
+
+@pytest.mark.parametrize(
+    'template,old_number,new_number,old_version,new_version,replacements', [
+        (
+            'network-diagnostics', '2', '3',
+            'v0.2.1', 'v0.2.2', [
+                (
+                    'network-diagnostics-agent:v0.2.0',
+                    'network-diagnostics-agent:v0.2.1',
+                ),
+                (
+                    'network-diagnostics-service:v0.2.0',
+                    'network-diagnostics-service:v0.2.1',
+                ),
+            ],
+        ),
+        (
+            'healthcheck', '1', '2',
+            'v0.3.16', 'v0.3.17', [
+                (
+                    'metadata-healthcheck:v0.3.16',
+                    'metadata-healthcheck:v0.3.17',
+                ),
+            ],
+        ),
+        (
+            'secret-volume-driver', '2', '3',
+            'v0.1.2', 'v0.1.3', [
+                (
+                    'secrets-flexvolume-plugin:v0.1.1',
+                    'secrets-flexvolume-plugin:v0.2.1',
+                ),
+            ],
+        ),
+        (
+            'vault-volume-driver', '3', '4',
+            'v0.2.1', 'v0.2.2', [
+                (
+                    'vault-secrets-bridge:v0.1.1',
+                    'vault-secrets-bridge:v0.1.2',
+                ),
+                (
+                    'secrets-flexvolume-plugin:v0.2.0',
+                    'secrets-flexvolume-plugin:v0.2.1',
+                ),
+            ],
+        ),
+        (
+            'windows-container-networking', '2', '3',
+            'v0.1.0', 'v0.1.1', [
+                (
+                    'pod-pause-image:v3.0.2',
+                    'pod-pause-image:v3.0.5',
+                ),
+            ],
+        ),
+        (
+            'network-policy-manager', '3', '4',
+            'v0.3.3', 'v0.3.4', [
+                (
+                    'network-policy-manager:v0.3.1',
+                    'network-policy-manager:v0.3.2',
+                ),
+            ],
+        ),
+        (
+            'system-image-preloader', '2', '3',
+            'v0.3.0', 'v0.3.1', [
+                (
+                    'system-image-preloader:v0.3.0',
+                    'system-image-preloader:v0.3.1',
+                ),
+            ],
+        ),
+        (
+            'network-services', '10', '11',
+            'v0.3.8', 'v0.3.9', [
+                (
+                    'network-plugin-manager:v0.8.22',
+                    'network-plugin-manager:v0.8.23',
+                ),
+                (
+                    'metadata-service:v0.9.11',
+                    'metadata-service:v0.10.5',
+                ),
+                (
+                    'internal-dns:v0.17.11',
+                    'internal-dns:v0.17.13',
+                ),
+            ],
+        ),
+    ])
+def test_october_security_revisions_preserve_contract(
+        template, old_number, new_number, old_version, new_version,
+        replacements):
+    prefix = 'infra-templates/' + template + '/'
+    for filename in ('docker-compose.yml', 'docker-compose.yml.tpl'):
+        old_path = _file(prefix + old_number + '/' + filename)
+        if not os.path.isfile(old_path):
+            continue
+        with open(old_path, encoding='utf-8') as source:
+            expected = source.read()
+        for old_image, new_image in replacements:
+            expected = expected.replace(old_image, new_image)
+        with open(_file(prefix + new_number + '/' + filename),
+                  encoding='utf-8') as source:
+            assert source.read() == expected
+    for filename in ('rancher-compose.yml', 'README.md', 'README.zh-TW.md'):
+        with open(_file(prefix + old_number + '/' + filename),
+                  encoding='utf-8') as source:
+            expected = source.read()
+        if filename == 'rancher-compose.yml':
+            expected = expected.replace(
+                '  version: ' + old_version + '\n',
+                '  version: ' + new_version + '\n')
+        with open(_file(prefix + new_number + '/' + filename),
+                  encoding='utf-8') as source:
+            assert source.read() == expected
+    for number in (old_number, new_number):
+        retained = _get_json(_catalog_url(
+            '/v1-catalog/templateversions/{}:infra*{}:{}'.format(
+                _catalog_name(), template, number)))
+        assert 'rancher-compose.yml' in retained['files']
 
 
 def test_catalog_commit_is_pinned():
