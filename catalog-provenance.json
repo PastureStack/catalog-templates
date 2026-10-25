@@ -61,22 +61,23 @@
       "sourcePath": "infra-templates/scheduler",
       "originStatus": "supported",
       "maintainedRelease": {
-        "reference": "ghcr.io/pasturestack/resource-scheduler:v0.8.20",
-        "releaseTag": "v0.8.20",
-        "releaseUrl": "https://github.com/PastureStack/resource-scheduler/releases/tag/v0.8.20",
+        "reference": "ghcr.io/pasturestack/resource-scheduler:v0.8.21",
+        "releaseTag": "v0.8.21",
+        "releaseUrl": "https://github.com/PastureStack/resource-scheduler/releases/tag/v0.8.21",
         "sourceRepository": "https://github.com/PastureStack/resource-scheduler",
-        "sourceCommit": "35d3a67c62df4b22d7167da3d73dd9dbc4905e66",
-        "manifestDigest": "sha256:e5a389273344585fca5c4513060e5289b30ca13046d8ec286b8563952f1325d4",
+        "sourceCommit": "b9f0c18d2318a5ccd6c6d0a2ace27715bec6e8a6",
+        "manifestDigest": "sha256:0818b05b49d73bb789b83932a91df3bf6a09d78fab3b370a7afe51f5c2ec2bdf",
         "sbom": {
+          "status": "published",
           "format": "CycloneDX",
-          "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.20/resource-scheduler-0.8.20-image.cdx.json",
-          "sha256": "56de083886f393483d988c210d307d71a0b9252b5d25a36095b2161bbab15e91",
+          "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.21/resource-scheduler-0.8.21-image.cdx.json",
+          "sha256": "18f6caa7d3400b93808bfdfe8dd6a2107ae7752a1d1bd6c08c88eea518fcb032",
           "provenance": {
             "verified": true,
             "predicateType": "https://slsa.dev/provenance/v1",
             "signerWorkflow": "PastureStack/resource-scheduler/.github/workflows/release.yml",
-            "sourceRef": "refs/tags/v0.8.20",
-            "sourceCommit": "35d3a67c62df4b22d7167da3d73dd9dbc4905e66"
+            "sourceRef": "refs/tags/v0.8.21",
+            "sourceCommit": "b9f0c18d2318a5ccd6c6d0a2ace27715bec6e8a6"
           }
         }
       },
@@ -98,6 +99,26 @@
               "signerWorkflow": "PastureStack/resource-scheduler/.github/workflows/release.yml",
               "sourceRef": "refs/tags/v0.8.19",
               "sourceCommit": "d1720ddb65a285ed615f1461ccb44e50c2ad67a7"
+            }
+          }
+        },
+        "v0.8.20": {
+          "reference": "ghcr.io/pasturestack/resource-scheduler:v0.8.20",
+          "releaseTag": "v0.8.20",
+          "releaseUrl": "https://github.com/PastureStack/resource-scheduler/releases/tag/v0.8.20",
+          "sourceRepository": "https://github.com/PastureStack/resource-scheduler",
+          "sourceCommit": "35d3a67c62df4b22d7167da3d73dd9dbc4905e66",
+          "manifestDigest": "sha256:e5a389273344585fca5c4513060e5289b30ca13046d8ec286b8563952f1325d4",
+          "sbom": {
+            "format": "CycloneDX",
+            "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.20/resource-scheduler-0.8.20-image.cdx.json",
+            "sha256": "56de083886f393483d988c210d307d71a0b9252b5d25a36095b2161bbab15e91",
+            "provenance": {
+              "verified": true,
+              "predicateType": "https://slsa.dev/provenance/v1",
+              "signerWorkflow": "PastureStack/resource-scheduler/.github/workflows/release.yml",
+              "sourceRef": "refs/tags/v0.8.20",
+              "sourceCommit": "35d3a67c62df4b22d7167da3d73dd9dbc4905e66"
             }
           }
         }

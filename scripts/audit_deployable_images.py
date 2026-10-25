@@ -35,6 +35,7 @@ VERSION_TAG_PATTERN = re.compile(
     r"v?\d+\.\d+\.\d+$"
 )
 COMMIT_PATTERN = re.compile(r"^[0-9a-f]{40}$")
+DIGEST_PATTERN = re.compile(r"^sha256:[0-9a-f]{64}$")
 EXPECTED_INFRA_TEMPLATE_COUNT = 21
 EXPECTED_QUESTION_COUNT = 142
 NON_TAIWAN_TERMS = (
@@ -53,23 +54,23 @@ NON_TAIWAN_TERMS = (
 RETAINED_VERSION_LAYOUTS = {
     "amazon-efs-storage": ("2", "3"),
     "amazon-ebs-storage": ("2", "3"),
-    "container-schedule": ("2", "3"),
+    "container-schedule": ("2", "3", "4"),
     "ecr-credential-sync": ("2", "3", "4"),
-    "healthcheck": ("0", "1", "2"),
-    "ipsec-overlay": ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"),
-    "layer-2-flat-network": ("2", "3", "4", "5", "6", "7"),
+    "healthcheck": ("0", "1", "2", "3"),
+    "ipsec-overlay": ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"),
+    "layer-2-flat-network": ("2", "3", "4", "5", "6", "7", "8"),
     "network-diagnostics": ("1", "2", "3"),
-    "network-policy-manager": ("1", "2", "3", "4"),
-    "network-services": ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"),
+    "network-policy-manager": ("1", "2", "3", "4", "5"),
+    "network-services": ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"),
     "nfs-storage": ("1", "2", "3"),
-    "per-host-subnet-network": ("2", "3", "4", "5"),
+    "per-host-subnet-network": ("2", "3", "4", "5", "6"),
     "route53-dns-sync": ("2", "3"),
-    "resource-scheduler": ("1", "2", "3", "4", "5", "6"),
-    "secret-volume-driver": ("1", "2", "3"),
-    "system-image-preloader": ("2", "3"),
-    "vault-volume-driver": ("3", "4"),
-    "vxlan-overlay-network": ("2", "3", "4", "5", "6"),
-    "windows-container-networking": ("2", "3"),
+    "resource-scheduler": ("1", "2", "3", "4", "5", "6", "7"),
+    "secret-volume-driver": ("1", "2", "3", "4"),
+    "system-image-preloader": ("2", "3", "4"),
+    "vault-volume-driver": ("3", "4", "5"),
+    "vxlan-overlay-network": ("2", "3", "4", "5", "6", "7"),
+    "windows-container-networking": ("2", "3", "4"),
 }
 RETAINED_VERSION_HASHES = {
     "infra-templates/healthcheck/0/README.md": "1b18863d98ba3c042676f81daf6d6fc510c255cd1df275495985ed41f3b13aaa",
@@ -149,6 +150,12 @@ def main() -> int:
             blocker(f"only semantic version tags are permitted: {reference}", failures)
         if not COMMIT_PATTERN.fullmatch(str(item.get("sourceCommit", ""))):
             blocker(f"sourceCommit must be a full SHA for: {reference}", failures)
+        digest = item.get("manifestDigest")
+        if digest is not None and not DIGEST_PATTERN.fullmatch(str(digest)):
+            blocker(
+                f"manifestDigest must be an immutable SHA-256 for: {reference}",
+                failures,
+            )
         if not str(item.get("sourceRepository", "")).startswith("https://github.com/"):
             blocker(f"sourceRepository must be an HTTPS GitHub URL for: {reference}", failures)
         scan = item.get("vulnerabilityScan", {})

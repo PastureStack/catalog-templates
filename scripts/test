@@ -146,7 +146,20 @@ for version_id in \
     per-host-subnet-network:4 \
     vxlan-overlay-network:2 \
     vxlan-overlay-network:3 \
-    vxlan-overlay-network:5; do
+    vxlan-overlay-network:5 \
+    container-schedule:4 \
+    healthcheck:3 \
+    ipsec-overlay:14 \
+    layer-2-flat-network:8 \
+    network-policy-manager:5 \
+    network-services:14 \
+    per-host-subnet-network:6 \
+    resource-scheduler:7 \
+    secret-volume-driver:4 \
+    system-image-preloader:4 \
+    vault-volume-driver:5 \
+    vxlan-overlay-network:7 \
+    windows-container-networking:4; do
     version_url="http://localhost:8088/v1-catalog/templateversions/library:infra*${version_id}"
     if ! curl -fsS "$version_url" >/dev/null; then
         echo "catalog-service version lookup failed: ${version_id} (${version_url}), pinned commit ${source_commit}" >&2
