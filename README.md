@@ -8,10 +8,10 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 ## Project status
 
-Catalog `v0.3.17` includes thirteen new numeric template revisions that consume
-qualified Ubuntu security backports in the corresponding component images.
-Only packages already installed in each runtime are updated; configuration,
-the coreutils provider and the established plugin ownership boundaries remain
+Catalog `v0.3.18` adds eight numeric template revisions using published
+System Image Preloader `v0.3.4`, Metadata Healthcheck `v0.3.19`, Internal DNS
+`v0.17.15`, Resource Scheduler `v0.8.22` and IPsec `v0.14.42` images. Existing
+questions, resource parameters, firewall choices and plugin ownership remain
 unchanged. Previously published numeric revisions remain available.
 
 The catalog exposes one Native project template and twenty-one
@@ -30,8 +30,8 @@ Officially unfixed Low/Medium findings remain tracked, not resolved; narrowly
 scoped VEX decisions require product-specific evidence and retain the raw scan.
 A clean gate is not a claim that every dependency has zero reported CVEs.
 
-Network Services revision 14 uses Network Plugin Manager `v0.8.25`, Metadata
-`v0.10.7` and Internal DNS `v0.17.14`. The recorded OCI manifest digests identify
+Network Services revision 15 uses Network Plugin Manager `v0.8.25`, Metadata
+`v0.10.7` and Internal DNS `v0.17.15`. The recorded OCI manifest digests identify
 verified image content; they do not imply that GitHub has locked a release.
 Runtime SBOMs, raw and interpreted findings, producer commits and publication
 receipts are recorded per image in `catalog-images.json`. Remaining findings
