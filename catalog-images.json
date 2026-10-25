@@ -2179,6 +2179,427 @@
         "workflowRun": "https://github.com/PastureStack/resource-scheduler/actions/runs/40144768957"
       },
       "reviewedAt": "2026-10-25"
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/metadata-healthcheck",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/metadata-healthcheck",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and HAProxy packages retain their upstream licenses",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/metadata-healthcheck:v0.3.19",
+      "publicationStatus": "published",
+      "sourceCommit": "6fd1fa81623dc9061d6b72a7a4d4b1c5d3b5fc37",
+      "manifestDigest": "sha256:cb0ac0b0bf40bac5122035d2386ccd193ba33dd493779a8708465c7fe3981672",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.19/image.cdx.json",
+        "sha256": "b96d520c6a87a4cedc739ea435314f92295f3befac0cba1eff8b4e8d33a5eef4"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "rawFindings": 51,
+        "remainingFindings": 16,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95209",
+          "CVE-2026-95210"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.19/image-security.json",
+          "sha256": "42e4216985a9ffe240e3a67d4028e25145a2f205b4a0599b87dc322b9cd3e951"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.19/image-security.effective.json",
+          "sha256": "1c3060f344686d267fcd6158f769568b12ed1d18b096303185ecddf803a31872"
+        },
+        "evidence": "https://github.com/PastureStack/metadata-healthcheck/actions/runs/40176354360"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config, byte-equal public assets, exact source identity and checksum-bound consumer guard",
+        "workflowRun": "https://github.com/PastureStack/metadata-healthcheck/actions/runs/40176354360",
+        "nativeImageProvenanceVerified": true,
+        "fileSbomAttestationProvidedByWorkflow": false,
+        "fileSbomAttestationVerified": false
+      },
+      "ubuntuBackports": {
+        "bundle": "ghcr.io/pasturestack/ubuntu-security-backports:v0.1.1@sha256:45d6b507b63a18459ae5cf76afd4d9731f8ef43b9c40e4c3dbb01899e1752b19",
+        "evidence": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.19/ubuntu-backports-evidence.tar",
+          "sha256": "2effe218692578e8f1aed8e6b3a1dd03850b554fe4af99e87c53c83e35b7b434"
+        },
+        "consumerVerification": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.19/ubuntu-backports-validation.json",
+          "sha256": "830709803d4464e14578faee8eadbe3d77c24b4ff6a782c213b21cd673cf7a44"
+        },
+        "selectedPackages": [
+          "libbrotli1",
+          "libc-bin",
+          "libc-gconv-modules-extra",
+          "libc6",
+          "libp11-kit0",
+          "libpcre2-8-0",
+          "rust-coreutils"
+        ],
+        "qualifiedFixedVexPairs": 83,
+        "qualifiedCodeAbsentVexPairs": 3
+      },
+      "reviewedAt": "2026-10-25"
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/internal-dns",
+      "sourcePath": "package/linux/amd64/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/internal-dns",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/internal-dns:v0.17.15",
+      "publicationStatus": "published",
+      "sourceCommit": "49eba633ceeaf9282ef35a04448dce34141ed220",
+      "manifestDigest": "sha256:0eefa43952598c28b37a1195df8d854a3ad55f83a897732aae85106280fc3c86",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/internal-dns/releases/download/v0.17.15/image.cdx.json",
+        "sha256": "efad8ab6e66c1ac2028c29364ed7593d73724784d40119e1db49682bd050ddf9"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "rawFindings": 51,
+        "remainingFindings": 16,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95209",
+          "CVE-2026-95210"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/internal-dns/releases/download/v0.17.15/image-security.json",
+          "sha256": "35625341cd7c7bef2d3cfaf9c2ff2f303092465e5b02a661ad3b9ab4bd5d249a"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/internal-dns/releases/download/v0.17.15/image-security.effective.json",
+          "sha256": "a50f073c3f3965eee00abd00e1b3f855d3791af07d42edbdd400da72740689b6"
+        },
+        "evidence": "https://github.com/PastureStack/internal-dns/actions/runs/40176343793"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config, byte-equal public assets, exact source identity and checksum-bound consumer guard",
+        "workflowRun": "https://github.com/PastureStack/internal-dns/actions/runs/40176343793",
+        "nativeImageProvenanceVerified": true,
+        "fileSbomAttestationProvidedByWorkflow": false,
+        "fileSbomAttestationVerified": false
+      },
+      "ubuntuBackports": {
+        "bundle": "ghcr.io/pasturestack/ubuntu-security-backports:v0.1.1@sha256:45d6b507b63a18459ae5cf76afd4d9731f8ef43b9c40e4c3dbb01899e1752b19",
+        "evidence": {
+          "url": "https://github.com/PastureStack/internal-dns/releases/download/v0.17.15/ubuntu-backports-evidence.tar",
+          "sha256": "e44c918dc7d0cb9e7979ac43740f5cfdc6a11c62f5584ff33ddbcb5caa1ec2d6"
+        },
+        "consumerVerification": {
+          "url": "https://github.com/PastureStack/internal-dns/releases/download/v0.17.15/ubuntu-backports-validation.json",
+          "sha256": "830709803d4464e14578faee8eadbe3d77c24b4ff6a782c213b21cd673cf7a44"
+        },
+        "selectedPackages": [
+          "libbrotli1",
+          "libc-bin",
+          "libc-gconv-modules-extra",
+          "libc6",
+          "libp11-kit0",
+          "libpcre2-8-0",
+          "rust-coreutils"
+        ],
+        "qualifiedFixedVexPairs": 83,
+        "qualifiedCodeAbsentVexPairs": 3
+      },
+      "reviewedAt": "2026-10-25"
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/system-image-preloader",
+      "sourcePath": "Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/system-image-preloader",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, Docker CLI, yq, gomplate, and other dependencies retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/system-image-preloader:v0.3.4",
+      "publicationStatus": "published",
+      "sourceCommit": "624a45cd001a92cdf5132f487ba14e161dff40d2",
+      "manifestDigest": "sha256:d5a48e9705613c752d0a92abab307d87b986f573efcc57e291b10f3bd10f7f4f",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/system-image-preloader/releases/download/v0.3.4/system-image-preloader-sbom.cdx.json",
+        "sha256": "9875c77c53c009b72d074744e3671fd85081a0a9c61b088bb04fc9d79325224a"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "rawFindings": 62,
+        "remainingFindings": 16,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95209",
+          "CVE-2026-95210"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/system-image-preloader/releases/download/v0.3.4/system-image-preloader-security.json",
+          "sha256": "8c433ea53973c0625da8c61e8586695a0f959ccbf8238387df8735b70ae77ec9"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/system-image-preloader/releases/download/v0.3.4/system-image-preloader-security-effective.json",
+          "sha256": "2c49a92b10123db689c815e90aaba49ecac2d58baf1310095eab442dcca2c84f"
+        },
+        "evidence": "https://github.com/PastureStack/system-image-preloader/actions/runs/40176624910"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config, byte-equal public assets, exact source identity and checksum-bound consumer guard",
+        "workflowRun": "https://github.com/PastureStack/system-image-preloader/actions/runs/40176624910",
+        "nativeImageProvenanceVerified": false,
+        "fileSbomAttestationProvidedByWorkflow": false,
+        "fileSbomAttestationVerified": false
+      },
+      "ubuntuBackports": {
+        "bundle": "ghcr.io/pasturestack/ubuntu-security-backports:v0.1.1@sha256:45d6b507b63a18459ae5cf76afd4d9731f8ef43b9c40e4c3dbb01899e1752b19",
+        "evidence": {
+          "url": "https://github.com/PastureStack/system-image-preloader/releases/download/v0.3.4/ubuntu-backports-evidence.tar",
+          "sha256": "7b69497456a1c2e76e0b7b5f108423e02b7a543d8aef9f5e94e9683c4d3531cb"
+        },
+        "consumerVerification": {
+          "url": "https://github.com/PastureStack/system-image-preloader/releases/download/v0.3.4/ubuntu-backports-validation.json",
+          "sha256": "528d25a3eff6c3f8482922a28af52921a287e115ed32beeb14214b22fc2d1cdd"
+        },
+        "selectedPackages": [
+          "jq",
+          "libbrotli1",
+          "libc-bin",
+          "libc-gconv-modules-extra",
+          "libc6",
+          "libjq1",
+          "libp11-kit0",
+          "libpcre2-8-0",
+          "rust-coreutils"
+        ],
+        "qualifiedFixedVexPairs": 83,
+        "qualifiedCodeAbsentVexPairs": 3
+      },
+      "reviewedAt": "2026-10-25"
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/resource-scheduler",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/resource-scheduler",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/resource-scheduler:v0.8.22",
+      "publicationStatus": "published",
+      "sourceCommit": "902b453fb06a8b2dd73e1bf6de85c7554a7d5c12",
+      "manifestDigest": "sha256:fbd4b6604b6963be64a804e26b747037413f7c61dac909e739b2a44be2604e05",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.22/resource-scheduler-0.8.22-image.cdx.json",
+        "sha256": "bb518ed28b9bc911805250b3f18a28bfd88bfae6c6bb9dfc0c60a6d362a1a3a5"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "rawFindings": 51,
+        "remainingFindings": 16,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95209",
+          "CVE-2026-95210"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.22/resource-scheduler-0.8.22-security.json",
+          "sha256": "9481c6b984bca92469f84e859ef38fc2452b9714e2f2149a083829737d01cac2"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.22/resource-scheduler-0.8.22-security.effective.json",
+          "sha256": "bebdcb1d471267b3e74f9d73f18beb67cf8ff76c074db63d170b62fe8329ad8a"
+        },
+        "evidence": "https://github.com/PastureStack/resource-scheduler/actions/runs/40177309291"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config, byte-equal public assets, exact source identity and checksum-bound consumer guard",
+        "workflowRun": "https://github.com/PastureStack/resource-scheduler/actions/runs/40177309291",
+        "nativeImageProvenanceVerified": null,
+        "fileSbomAttestationProvidedByWorkflow": true,
+        "fileSbomAttestationVerified": true
+      },
+      "ubuntuBackports": {
+        "bundle": "ghcr.io/pasturestack/ubuntu-security-backports:v0.1.1@sha256:45d6b507b63a18459ae5cf76afd4d9731f8ef43b9c40e4c3dbb01899e1752b19",
+        "evidence": {
+          "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.22/ubuntu-backports-evidence.tar",
+          "sha256": "288b82936914d472c1b3acc5c64fd7bc96ac9177e8a031e9d65591dc41dce7b5"
+        },
+        "consumerVerification": {
+          "status": "verified",
+          "inputEvidence": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.22/ubuntu-backports-evidence.tar",
+          "workflowRun": "https://github.com/PastureStack/resource-scheduler/actions/runs/40177309291"
+        },
+        "selectedPackages": [
+          "libbrotli1",
+          "libc-bin",
+          "libc-gconv-modules-extra",
+          "libc6",
+          "libp11-kit0",
+          "libpcre2-8-0",
+          "rust-coreutils"
+        ],
+        "qualifiedFixedVexPairs": 83,
+        "qualifiedCodeAbsentVexPairs": 3
+      },
+      "reviewedAt": "2026-10-25"
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/ipsec-vxlan-overlay-network",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ipsec-vxlan-overlay-network",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, strongSwan, CNI, Weave, and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.42",
+      "publicationStatus": "published",
+      "sourceCommit": "9500770cb74817666aba2ce198ab1b4e064b3c88",
+      "manifestDigest": "sha256:fe97cba5afd5699e25a686bd4525bd4ad1b60b638b300b82c39e2db7b714cdfc",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/download/v0.14.42/image-sbom.cdx.json",
+        "sha256": "7decd797f3e95eb7cbb2863238093d962aa3d87150c3479d1d0df8a509d45aaa"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "rawFindings": 54,
+        "remainingFindings": 19,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2025-1352",
+          "CVE-2025-1376",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95209",
+          "CVE-2026-95210"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/download/v0.14.42/runtime-security.json",
+          "sha256": "ff0bd963c919ef4d402044b1c88eccff3762902d3057922ef9f7c8438231f30a"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/download/v0.14.42/runtime-security.effective.json",
+          "sha256": "62422bc5aae8654ebe331adfcc6b4f773ddd61d16f4bfd50247804581a52e49c"
+        },
+        "evidence": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/40177327704"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config, byte-equal public assets, exact source identity and checksum-bound consumer guard",
+        "workflowRun": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/40177327704",
+        "nativeImageProvenanceVerified": null,
+        "fileSbomAttestationProvidedByWorkflow": true,
+        "fileSbomAttestationVerified": true
+      },
+      "ubuntuBackports": {
+        "bundle": "ghcr.io/pasturestack/ubuntu-security-backports:v0.1.1@sha256:45d6b507b63a18459ae5cf76afd4d9731f8ef43b9c40e4c3dbb01899e1752b19",
+        "evidence": {
+          "url": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/download/v0.14.42/ubuntu-backports-evidence.tar",
+          "sha256": "c65012dbf40238c5274a6ce7134a5701cd41f1f5c8952dd9fc121e9fb2574fc3"
+        },
+        "consumerVerification": {
+          "status": "verified",
+          "inputEvidence": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/download/v0.14.42/ubuntu-backports-evidence.tar",
+          "workflowRun": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/40177327704"
+        },
+        "selectedPackages": [
+          "libbrotli1",
+          "libc-bin",
+          "libc-gconv-modules-extra",
+          "libc6",
+          "libp11-kit0",
+          "libpcre2-8-0",
+          "rust-coreutils"
+        ],
+        "qualifiedFixedVexPairs": 83,
+        "qualifiedCodeAbsentVexPairs": 3
+      },
+      "reviewedAt": "2026-10-25"
     }
   ]
 }
