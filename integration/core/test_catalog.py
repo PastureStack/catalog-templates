@@ -1619,7 +1619,8 @@ def test_scheduler_published_provenance_matches_current_and_retained_image(
         maintained = (entry['maintainedRelease'] if tag == 'v0.8.21'
                       else entry['retainedReleases'][tag])
     assert maintained['reference'] == image
-    assert maintained['sourceCommit'] == release['sourceCommit'] == source_commit
+    assert maintained['sourceCommit'] == release['sourceCommit'] == (
+        source_commit)
     assert maintained['manifestDigest'] == release['manifestDigest'] == (
         manifest_digest)
     assert maintained['sbom'] == release['sbom']
