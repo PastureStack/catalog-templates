@@ -183,10 +183,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'container-schedule')][
         'name'] == 'Container Schedule'
     assert by_folder[('infra', 'container-schedule')][
-        'defaultVersion'] == 'v0.6.1'
+        'defaultVersion'] == 'v0.6.2'
     assert by_folder[('infra', 'container-schedule')][
         'links']['defaultVersion'].endswith(
-        ':3')
+        ':4')
     assert by_folder[('infra', 'ecr-credential-sync')][
         'name'] == 'Amazon ECR Credential Sync'
     assert by_folder[('infra', 'ecr-credential-sync')][
@@ -197,24 +197,24 @@ def test_catalog_list():
     assert by_folder[('infra', 'healthcheck')][
         'name'] == 'Metadata Healthcheck'
     assert by_folder[('infra', 'healthcheck')][
-        'defaultVersion'] == 'v0.3.17'
+        'defaultVersion'] == 'v0.3.18'
     assert by_folder[('infra', 'healthcheck')][
         'links']['defaultVersion'].endswith(
-        ':2')
+        ':3')
     assert by_folder[('infra', 'ipsec-overlay')]['name'] == (
         'IPsec Overlay')
     assert by_folder[('infra', 'ipsec-overlay')][
-        'defaultVersion'] == 'v0.3.11'
+        'defaultVersion'] == 'v0.3.12'
     assert by_folder[('infra', 'ipsec-overlay')][
         'links']['defaultVersion'].endswith(
-        ':13')
+        ':14')
     assert by_folder[('infra', 'layer-2-flat-network')]['name'] == (
         'Layer 2 Flat Network')
     assert by_folder[('infra', 'layer-2-flat-network')][
-        'defaultVersion'] == 'v0.3.5'
+        'defaultVersion'] == 'v0.3.6'
     assert by_folder[('infra', 'layer-2-flat-network')][
         'links']['defaultVersion'].endswith(
-        ':7')
+        ':8')
     assert by_folder[('infra', 'network-diagnostics')]['name'] == (
         'Network Diagnostics')
     assert by_folder[('infra', 'network-diagnostics')][
@@ -225,17 +225,17 @@ def test_catalog_list():
     assert by_folder[('infra', 'network-policy-manager')]['name'] == (
         'Network Policy Manager')
     assert by_folder[('infra', 'network-policy-manager')][
-        'defaultVersion'] == 'v0.3.4'
+        'defaultVersion'] == 'v0.3.5'
     assert by_folder[('infra', 'network-policy-manager')][
         'links']['defaultVersion'].endswith(
-        ':4')
+        ':5')
     assert by_folder[('infra', 'network-services')]['name'] == (
         'Network Services')
     assert by_folder[('infra', 'network-services')][
-        'defaultVersion'] == 'v0.3.11'
+        'defaultVersion'] == 'v0.3.12'
     assert by_folder[('infra', 'network-services')][
         'links']['defaultVersion'].endswith(
-        ':13')
+        ':14')
     assert by_folder[('infra', 'nfs-storage')][
         'name'] == 'NFS Storage'
     assert by_folder[('infra', 'nfs-storage')][
@@ -246,30 +246,30 @@ def test_catalog_list():
     assert by_folder[('infra', 'secret-volume-driver')][
         'name'] == 'Secret Volume'
     assert by_folder[('infra', 'secret-volume-driver')][
-        'defaultVersion'] == 'v0.1.3'
+        'defaultVersion'] == 'v0.1.4'
     assert by_folder[('infra', 'secret-volume-driver')][
         'links']['defaultVersion'].endswith(
-        ':3')
+        ':4')
     assert by_folder[('infra', 'vault-volume-driver')][
         'name'] == 'Vault Volume'
     assert by_folder[('infra', 'vault-volume-driver')][
-        'defaultVersion'] == 'v0.2.2'
+        'defaultVersion'] == 'v0.2.3'
     assert by_folder[('infra', 'vault-volume-driver')][
         'links']['defaultVersion'].endswith(
-        ':4')
+        ':5')
     assert by_folder[('infra', 'per-host-subnet-network')]['name'] == (
         'Per-Host Subnet Network')
     assert by_folder[('infra', 'per-host-subnet-network')][
-        'defaultVersion'] == 'v0.3.3'
+        'defaultVersion'] == 'v0.3.4'
     assert by_folder[('infra', 'per-host-subnet-network')][
-        'links']['defaultVersion'].endswith(':5')
+        'links']['defaultVersion'].endswith(':6')
     assert by_folder[('infra', 'resource-scheduler')][
         'name'] == 'Resource Scheduler'
     assert by_folder[('infra', 'resource-scheduler')][
-        'defaultVersion'] == 'v0.8.20'
+        'defaultVersion'] == 'v0.8.21'
     assert by_folder[('infra', 'resource-scheduler')][
         'links']['defaultVersion'].endswith(
-        ':6')
+        ':7')
     assert by_folder[('infra', 'route53-dns-sync')][
         'name'] == 'Route 53 DNS Sync'
     assert by_folder[('infra', 'route53-dns-sync')][
@@ -280,24 +280,24 @@ def test_catalog_list():
     assert by_folder[('infra', 'system-image-preloader')]['name'] == (
         'System Image Preloader')
     assert by_folder[('infra', 'system-image-preloader')][
-        'defaultVersion'] == 'v0.3.2'
+        'defaultVersion'] == 'v0.3.3'
     assert by_folder[('infra', 'system-image-preloader')][
         'links']['defaultVersion'].endswith(
-        ':3')
+        ':4')
     assert by_folder[('infra', 'vxlan-overlay-network')]['name'] == (
         'VXLAN Overlay Network')
     assert by_folder[('infra', 'vxlan-overlay-network')][
-        'defaultVersion'] == 'v0.3.4'
+        'defaultVersion'] == 'v0.3.5'
     assert by_folder[('infra', 'vxlan-overlay-network')][
         'links']['defaultVersion'].endswith(
-        ':6')
+        ':7')
     assert by_folder[('infra', 'windows-container-networking')][
         'name'] == 'Windows Container Networking'
     assert by_folder[('infra', 'windows-container-networking')][
-        'defaultVersion'] == 'v0.1.1'
+        'defaultVersion'] == 'v0.1.2'
     assert by_folder[('infra', 'windows-container-networking')][
         'links']['defaultVersion'].endswith(
-        ':3')
+        ':4')
     assert by_folder[('infra', 'windows-ecr-credential-sync')][
         'name'] == 'Windows ECR Credential Sync'
     assert by_folder[('infra', 'windows-ecr-credential-sync')][
@@ -499,7 +499,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     container_schedule_platform = container_schedule_files[
         'rancher-compose.yml']
     container_schedule_image = (
-        'ghcr.io/pasturestack/container-cron:v0.6.1')
+        'ghcr.io/pasturestack/container-cron:v0.6.2')
     assert container_schedule_docker.count(
         'image: {}'.format(container_schedule_image)) == 1
     assert '\n  container-schedule:\n' in container_schedule_docker
@@ -547,7 +547,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     health_files = health_version['files']
     health_docker = health_files['docker-compose.yml']
     health_platform = health_files['rancher-compose.yml']
-    health_image = 'ghcr.io/pasturestack/metadata-healthcheck:v0.3.17'
+    health_image = 'ghcr.io/pasturestack/metadata-healthcheck:v0.3.18'
     assert "version: '2'\nservices:\n  healthcheck:" in health_docker
     assert health_docker.count('image: {}'.format(health_image)) == 1
     assert (
@@ -565,7 +565,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     overlay_docker = overlay_files['docker-compose.yml.tpl']
     overlay_platform = overlay_files['rancher-compose.yml']
     overlay_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40')
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.41')
     assert overlay_docker.count('image: {}'.format(overlay_image)) == 4
     assert overlay_docker.count(
         "PASTURESTACK_FIREWALL_BACKEND: '${FIREWALL_BACKEND}'") == 1
@@ -607,7 +607,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     vxlan_docker = vxlan_files['docker-compose.yml.tpl']
     vxlan_platform = vxlan_files['rancher-compose.yml']
     alternative_network_image = (
-            'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40')
+            'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.41')
     assert vxlan_docker.count(
         'image: {}'.format(alternative_network_image)) == 3
     assert '\n  vxlan-network:\n' in vxlan_docker
@@ -632,7 +632,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     layer_2_docker = layer_2_files['docker-compose.yml.tpl']
     layer_2_platform = layer_2_files['rancher-compose.yml']
     flat_network_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.40')
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.41')
     assert layer_2_docker.count(
         'image: {}'.format(flat_network_image)) == 1
     assert '\n  layer-2-flat-cni:\n' in layer_2_docker
@@ -697,7 +697,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     policy_docker = policy_files['docker-compose.yml']
     policy_platform = policy_files['rancher-compose.yml']
     policy_image = (
-        'ghcr.io/pasturestack/network-policy-manager:v0.3.2')
+        'ghcr.io/pasturestack/network-policy-manager:v0.3.3')
     assert policy_docker.count(
         'image: {}'.format(policy_image)) == 1
     assert '\n  network-policy-manager:\n' in policy_docker
@@ -726,8 +726,8 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     network_platform = network_files['rancher-compose.yml']
     network_manager_image = (
         'ghcr.io/pasturestack/network-plugin-manager:v0.8.25')
-    metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.10.6'
-    dns_image = 'ghcr.io/pasturestack/internal-dns:v0.17.13'
+    metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.10.7'
+    dns_image = 'ghcr.io/pasturestack/internal-dns:v0.17.14'
     assert network_docker.count(
         'image: {}'.format(network_manager_image)) == 1
     assert network_docker.count('image: {}'.format(metadata_image)) == 1
@@ -790,7 +790,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     secret_docker = secret_files['docker-compose.yml']
     secret_platform = secret_files['rancher-compose.yml']
     secret_image = (
-        'ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.1')
+        'ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.2')
     assert secret_docker.count('image: {}'.format(secret_image)) == 1
     assert '\n  secret-volume-driver:\n' in secret_docker
     assert 'privileged:' not in secret_docker
@@ -843,9 +843,9 @@ def test_catalog_compose_shapes_are_runtime_compatible():
         'issuing_token_secret.label.zh-tw'
     ] == 'Vault 發行用權杖機密資料'
     vault_bridge_image = (
-        'ghcr.io/pasturestack/vault-secrets-bridge:v0.1.2')
+        'ghcr.io/pasturestack/vault-secrets-bridge:v0.1.3')
     vault_driver_image = (
-        'ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.1')
+        'ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.2')
     assert vault_docker.count(
         'image: {}'.format(vault_bridge_image)) == 1
     assert vault_docker.count(
@@ -920,7 +920,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     scheduler_files = scheduler_version['files']
     scheduler_docker = scheduler_files['docker-compose.yml']
     scheduler_platform = scheduler_files['rancher-compose.yml']
-    scheduler_image = 'ghcr.io/pasturestack/resource-scheduler:v0.8.20'
+    scheduler_image = 'ghcr.io/pasturestack/resource-scheduler:v0.8.21'
     assert scheduler_docker.count(
         'image: {}'.format(scheduler_image)) == 1
     assert '\n  resource-scheduler:\n' in scheduler_docker
@@ -968,7 +968,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     preloader_docker = preloader_files['docker-compose.yml.tpl']
     preloader_platform = preloader_files['rancher-compose.yml']
     preloader_image = (
-        'ghcr.io/pasturestack/system-image-preloader:v0.3.2')
+        'ghcr.io/pasturestack/system-image-preloader:v0.3.3')
     assert preloader_docker.count(
         'image: {}'.format(preloader_image)) == 1
     assert '\n  system-image-preloader:\n' in preloader_docker
@@ -982,7 +982,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     assert '{{- if' not in preloader_docker
     assert '{{- end' not in preloader_docker
     assert '@sha256:' not in preloader_docker
-    assert 'ghcr.io/pasturestack/system-image-preloader:v0.3.2' in (
+    assert 'ghcr.io/pasturestack/system-image-preloader:v0.3.3' in (
         preloader_docker)
     assert 'default: v1.6.282' in preloader_platform
     assert 'default: false' in preloader_platform
@@ -1062,7 +1062,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
         windows_container_network_files['rancher-compose.yml'])
     selector_image = (
         'ghcr.io/pasturestack/pod-pause-image:'
-        'v3.0.5')
+        'v3.0.6')
     assert windows_container_network_docker.count(
         'image: {}'.format(selector_image)) == 2
     assert windows_container_network_docker.count(
@@ -1594,25 +1594,38 @@ def test_scheduler19_template_preserves_version4_contract():
     assert maintained['sbom'] == sbom
 
 
-def test_scheduler20_published_provenance_matches_current_image():
-    image = 'ghcr.io/pasturestack/resource-scheduler:v0.8.20'
+@pytest.mark.parametrize('tag,source_commit,manifest_digest,sbom_sha', [
+    ('v0.8.20',
+     '35d3a67c62df4b22d7167da3d73dd9dbc4905e66',
+     'sha256:e5a389273344585fca5c4513060e5289b'
+     '30ca13046d8ec286b8563952f1325d4',
+     '56de083886f393483d988c210d307d71a0b'
+     '9252b5d25a36095b2161bbab15e91'),
+    ('v0.8.21',
+     'b9f0c18d2318a5ccd6c6d0a2ace27715bec6e8a6',
+     'sha256:0818b05b49d73bb789b83932a91df3bf6'
+     'a09d78fab3b370a7afe51f5c2ec2bdf',
+     '18f6caa7d3400b93808bfdfe8dd6a2107'
+     'ae7752a1d1bd6c08c88eea518fcb032'),
+])
+def test_scheduler_published_provenance_matches_current_and_retained_image(
+        tag, source_commit, manifest_digest, sbom_sha):
+    image = 'ghcr.io/pasturestack/resource-scheduler:' + tag
     with open(_file('catalog-images.json'), encoding='utf-8') as source:
         release = next(item for item in json.load(source)['images']
                        if item['reference'] == image)
     with open(_file('catalog-provenance.json'), encoding='utf-8') as source:
-        maintained = json.load(source)['entries'][
-            'resource-scheduler']['maintainedRelease']
+        entry = json.load(source)['entries']['resource-scheduler']
+        maintained = (entry['maintainedRelease'] if tag == 'v0.8.21'
+                      else entry['retainedReleases'][tag])
     assert maintained['reference'] == image
     assert maintained['sourceCommit'] == release['sourceCommit'] == (
-        '35d3a67c62df4b22d7167da3d73dd9dbc4905e66')
+        source_commit)
     assert maintained['manifestDigest'] == release['manifestDigest'] == (
-        'sha256:e5a389273344585fca5c4513060e5289b'
-        '30ca13046d8ec286b8563952f1325d4')
+        manifest_digest)
     assert maintained['sbom'] == release['sbom']
-    assert release['sbom']['sha256'] == (
-        '56de083886f393483d988c210d307d71a0b'
-        '9252b5d25a36095b2161bbab15e91')
-    assert release['sbom']['provenance']['sourceRef'] == 'refs/tags/v0.8.20'
+    assert release['sbom']['sha256'] == sbom_sha
+    assert release['sbom']['provenance']['sourceRef'] == 'refs/tags/' + tag
     assert release['vulnerabilityScan']['fixedAvailable'] == 0
 
 
@@ -1633,3 +1646,129 @@ def test_scheduler_upgrade_versions_remain_available(number, image_tag):
         files['rancher-compose.yml'])
     assert 'README.md' in files
     assert 'README.zh-TW.md' in files
+
+
+@pytest.mark.parametrize(
+    "template,old_number,new_number,old_version,new_version,replacements",
+    [('container-schedule',
+      '3',
+      '4',
+      'v0.6.1',
+      'v0.6.2',
+      [('container-cron:v0.6.1', 'container-cron:v0.6.2')]),
+     ('healthcheck',
+      '2',
+      '3',
+      'v0.3.17',
+      'v0.3.18',
+      [('metadata-healthcheck:v0.3.17', 'metadata-healthcheck:v0.3.18')]),
+     ('ipsec-overlay',
+      '13',
+      '14',
+      'v0.3.11',
+      'v0.3.12',
+      [('ipsec-vxlan-overlay-network:v0.14.40',
+        'ipsec-vxlan-overlay-network:v0.14.41')]),
+     ('layer-2-flat-network',
+      '7',
+      '8',
+      'v0.3.5',
+      'v0.3.6',
+      [('ipsec-vxlan-overlay-network:v0.14.40',
+        'ipsec-vxlan-overlay-network:v0.14.41')]),
+     ('network-policy-manager',
+      '4',
+      '5',
+      'v0.3.4',
+      'v0.3.5',
+      [('network-policy-manager:v0.3.2',
+        'network-policy-manager:v0.3.3')]),
+     ('network-services',
+      '13',
+      '14',
+      'v0.3.11',
+      'v0.3.12',
+      [('metadata-service:v0.10.6', 'metadata-service:v0.10.7'),
+       ('internal-dns:v0.17.13', 'internal-dns:v0.17.14')]),
+     ('per-host-subnet-network',
+      '5',
+      '6',
+      'v0.3.3',
+      'v0.3.4',
+      [('ipsec-vxlan-overlay-network:v0.14.40',
+        'ipsec-vxlan-overlay-network:v0.14.41')]),
+     ('resource-scheduler',
+      '6',
+      '7',
+      'v0.8.20',
+      'v0.8.21',
+      [('resource-scheduler:v0.8.20', 'resource-scheduler:v0.8.21')]),
+     ('secret-volume-driver',
+      '3',
+      '4',
+      'v0.1.3',
+      'v0.1.4',
+      [('secrets-flexvolume-plugin:v0.2.1',
+        'secrets-flexvolume-plugin:v0.2.2')]),
+     ('system-image-preloader',
+      '3',
+      '4',
+      'v0.3.2',
+      'v0.3.3',
+      [('system-image-preloader:v0.3.2',
+        'system-image-preloader:v0.3.3')]),
+     ('vault-volume-driver',
+      '4',
+      '5',
+      'v0.2.2',
+      'v0.2.3',
+      [('vault-secrets-bridge:v0.1.2', 'vault-secrets-bridge:v0.1.3'),
+       ('secrets-flexvolume-plugin:v0.2.1',
+        'secrets-flexvolume-plugin:v0.2.2')]),
+     ('vxlan-overlay-network',
+      '6',
+      '7',
+      'v0.3.4',
+      'v0.3.5',
+      [('ipsec-vxlan-overlay-network:v0.14.40',
+        'ipsec-vxlan-overlay-network:v0.14.41')]),
+     ('windows-container-networking',
+      '3',
+      '4',
+      'v0.1.1',
+      'v0.1.2',
+      [('pod-pause-image:v3.0.5', 'pod-pause-image:v3.0.6')])]
+)
+def test_qualified_backport_source_contract(
+        template, old_number, new_number, old_version, new_version,
+        replacements):
+    """Only image/version changes; no Catalog Service or runtime required."""
+    prefix = "infra-templates/" + template + "/"
+    for filename in ("docker-compose.yml", "docker-compose.yml.tpl"):
+        old_path = _file(prefix + old_number + "/" + filename)
+        if not os.path.isfile(old_path):
+            continue
+        with open(old_path, encoding="utf-8") as source:
+            expected = source.read()
+        for old_image, new_image in replacements:
+            expected = expected.replace(old_image, new_image)
+        with open(_file(prefix + new_number + "/" + filename),
+                  encoding="utf-8") as source:
+            assert source.read() == expected
+    with open(_file(prefix + old_number + "/rancher-compose.yml"),
+              encoding="utf-8") as source:
+        expected = source.read().replace(
+            "  version: " + old_version + "\n",
+            "  version: " + new_version + "\n")
+    with open(_file(prefix + new_number + "/rancher-compose.yml"),
+              encoding="utf-8") as source:
+        assert source.read() == expected
+    with open(_file(prefix + "config.yml"), encoding="utf-8") as source:
+        assert "\nversion: " + new_version + "\n" in source.read()
+    for filename in ("README.md", "README.zh-TW.md"):
+        with open(_file(prefix + new_number + "/" + filename),
+                  encoding="utf-8") as source:
+            doc = source.read()
+        assert doc.strip()
+        for old_image, new_image in replacements:
+            assert old_image in doc and new_image in doc

@@ -9,32 +9,39 @@ or out-of-scope templates from being presented as deployable software.
 | Entry | Type | Version | Image policy | Release state |
 |---|---|---|---|---|
 | PastureStack Native | Project template | v0.3.0 | Composes only reviewed, semantic-versioned infrastructure entries | Clean single-host provisioning and restart passed; restored-data validation pending |
-| PastureStack Container Schedule | Infrastructure scheduling service | v0.6.1 | Public PastureStack GHCR image with an explicit version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
-| PastureStack System Image Preloader | Infrastructure image-cache service | v0.3.2 | Public PastureStack GHCR image with an explicit version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
+| PastureStack Container Schedule | Infrastructure scheduling service | v0.6.2 | container-cron:v0.6.2 with qualified Ubuntu runtime backports | Exact publication and runtime evidence is in catalog-images.json; managed-host upgrade and rollback remain separate |
+| PastureStack System Image Preloader | Infrastructure image-cache service | v0.3.3 | system-image-preloader:v0.3.3 with qualified Ubuntu runtime backports | Exact publication and runtime evidence is in catalog-images.json; managed-host upgrade and rollback remain separate |
 | PastureStack Amazon ECR Credential Sync | Infrastructure registry service | v3.1.6 | Public PastureStack GHCR image with an explicit version tag | Published component; full runtime raw scan has zero findings; Catalog integration and environment acceptance remain distinct |
-| Metadata Healthcheck | Infrastructure stack | v0.3.17 | Public PastureStack GHCR image with a non-overwritten version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
-| PastureStack Network Services | Infrastructure system stack | v0.3.11 | Network Plugin Manager v0.8.25; Metadata Service v0.10.6; Internal DNS v0.17.13 unchanged from revision 12 | OCI digest/SBOM evidence is in catalog-images.json; both runtime GitHub Releases report immutable=false, not locked; Metadata106 retains 44 reviewed unfixed Low/Medium raw findings; environment upgrade/rollback remains separate |
+| Metadata Healthcheck | Infrastructure stack | v0.3.18 | metadata-healthcheck:v0.3.18 with qualified Ubuntu runtime backports | Exact publication and runtime evidence is in catalog-images.json; managed-host upgrade and rollback remain separate |
+| PastureStack Network Services | Infrastructure system stack | v0.3.12 | metadata-service:v0.10.7 and internal-dns:v0.17.14; Network Plugin Manager remains v0.8.25 | Exact publication and runtime evidence is in catalog-images.json; managed-host upgrade and rollback remain separate |
 | PastureStack Network Diagnostics | Infrastructure diagnostics service | v0.2.2 | Two public PastureStack GHCR images with explicit version tags | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
-| PastureStack Network Policy Manager | Infrastructure network-policy agent | v0.3.4 | Public PastureStack GHCR image with an explicit version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
-| PastureStack IPsec Overlay | Infrastructure network driver | v0.3.11 | Public PastureStack GHCR image with an explicit version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
+| PastureStack Network Policy Manager | Infrastructure network-policy agent | v0.3.5 | network-policy-manager:v0.3.3 with qualified Ubuntu runtime backports | Exact publication and runtime evidence is in catalog-images.json; managed-host upgrade and rollback remain separate |
+| PastureStack IPsec Overlay | Infrastructure network driver | v0.3.12 | ipsec-vxlan-overlay-network:v0.14.41 with qualified Ubuntu runtime backports | Exact publication and runtime evidence is in catalog-images.json; managed-host upgrade and rollback remain separate |
 | PastureStack Windows ECR Credential Sync | Windows infrastructure registry service | v3.1.2 | Public PastureStack GHCR Windows image with an explicit version tag | Source tests, cross-compilation, PE, license, anonymous distribution, and vulnerability gates passed; Windows-host runtime pending |
 | PastureStack Windows Network Services | Windows infrastructure Metadata and DNS stack | v0.3.0 | Two public PastureStack GHCR Windows images with explicit version tags | Source tests, cross-compilation, PE, license, anonymous distribution, and vulnerability gates passed; Windows-host runtime pending |
-| PastureStack Windows Container Networking | Windows NAT and transparent network-driver definition | v0.1.1 | Reviewed selector-only placeholder image with an explicit version tag | Catalog rendering and compatibility-boundary review passed; Windows-host network-driver lifecycle pending |
-| PastureStack Layer 2 Flat Network | Optional infrastructure network driver | v0.3.5 | Reviewed network image with a semantic version tag; bridge setup is opt-in | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
-| Resource Scheduler | Infrastructure scheduling agent | v0.8.20 | Public PastureStack GHCR image with an explicit version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
+| PastureStack Windows Container Networking | Windows NAT and transparent network-driver definition | v0.1.2 | pod-pause-image:v3.0.6 for its existing Linux sandbox role; Windows restrictions remain | Exact publication evidence is in catalog-images.json; this does not qualify a new Windows-host runtime matrix |
+| PastureStack Layer 2 Flat Network | Optional infrastructure network driver | v0.3.6 | ipsec-vxlan-overlay-network:v0.14.41 with qualified Ubuntu runtime backports | Exact publication and runtime evidence is in catalog-images.json; managed-host upgrade and rollback remain separate |
+| Resource Scheduler | Infrastructure scheduling agent | v0.8.21 | resource-scheduler:v0.8.21 with qualified Ubuntu runtime backports | Exact publication and runtime evidence is in catalog-images.json; managed-host upgrade and rollback remain separate |
 | PastureStack Route 53 DNS Sync | Infrastructure external-DNS agent | v0.8.1 | Public PastureStack GHCR image with an explicit version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
 | PastureStack Amazon EBS Storage | Infrastructure block-storage driver | v0.11.1 | Public PastureStack GHCR image with an explicit version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
 | PastureStack Amazon EFS Storage | Infrastructure shared-storage driver | v0.11.1 | Public PastureStack GHCR image with an explicit version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
 | PastureStack NFS Storage | Infrastructure storage driver | v0.11.1 | Public PastureStack GHCR image with an explicit version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
-| PastureStack Secret Volume | Infrastructure secret-volume driver | v0.1.3 | Public PastureStack GHCR image with an explicit version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
-| PastureStack Vault Volume | Infrastructure Vault token-volume driver | v0.2.2 | Two public PastureStack GHCR images with explicit version tags | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
-| PastureStack Per-Host Subnet Network | Optional infrastructure network driver | v0.3.3 | Reviewed network image with a semantic version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
-| PastureStack VXLAN Overlay Network | Optional infrastructure network driver | v0.3.4 | Reviewed network image with a semantic version tag | Published component; exact runtime evidence is in catalog-images.json; environment upgrade/rollback remains separate |
+| PastureStack Secret Volume | Infrastructure secret-volume driver | v0.1.4 | secrets-flexvolume-plugin:v0.2.2 with qualified Ubuntu runtime backports | Exact publication and runtime evidence is in catalog-images.json; managed-host upgrade and rollback remain separate |
+| PastureStack Vault Volume | Infrastructure Vault token-volume driver | v0.2.3 | vault-secrets-bridge:v0.1.3 and secrets-flexvolume-plugin:v0.2.2 with qualified Ubuntu runtime backports | Exact publication and runtime evidence is in catalog-images.json; managed-host upgrade and rollback remain separate |
+| PastureStack Per-Host Subnet Network | Optional infrastructure network driver | v0.3.4 | ipsec-vxlan-overlay-network:v0.14.41 with qualified Ubuntu runtime backports | Exact publication and runtime evidence is in catalog-images.json; managed-host upgrade and rollback remain separate |
+| PastureStack VXLAN Overlay Network | Optional infrastructure network driver | v0.3.5 | ipsec-vxlan-overlay-network:v0.14.41 with qualified Ubuntu runtime backports | Exact publication and runtime evidence is in catalog-images.json; managed-host upgrade and rollback remain separate |
 
 Deployable image references contain semantic version tags only. A published
 version tag must never be replaced. Manifest digests are retained only in the
 corresponding GitHub Release verification evidence; they are not placed in
 Catalog, Compose, API, or user-interface values.
+
+Catalog `v0.3.17` adds the numeric revisions listed above and preserves all
+previously published revisions. Each updated image has its own producer,
+manifest digest, runtime SBOM and vulnerability evidence in `catalog-images.json`.
+Component publication and Catalog validation are distinct from managed-host
+upgrade and rollback acceptance; the historical evidence below retains its
+original version and scope.
 
 ## Historical acceptance evidence
 
@@ -94,8 +101,8 @@ Catalog card never exposes a manifest digest.
 ## PastureStack Network Diagnostics evidence
 
 Catalog version `1` remains available for already-installed stacks and retains
-the reviewed `v0.2.0` agent and service image tags. Version `2` is the current
-default and adds localized question metadata without changing those image tags.
+the reviewed `v0.2.0` agent and service image tags. At that review, version `2`
+became the default and added localized questions without changing those tags.
 
 - Agent image: `ghcr.io/pasturestack/network-diagnostics-agent:v0.2.0`
 - Agent source: [`PastureStack/network-diagnostics-agent@01f8eefa4db9735a084e6470d814aaef4722e924`](https://github.com/PastureStack/network-diagnostics-agent/tree/01f8eefa4db9735a084e6470d814aaef4722e924)
@@ -119,8 +126,8 @@ Catalog publishes port `8091` by default to avoid the control-plane port.
 ## PastureStack Network Policy Manager evidence
 
 Catalog version `1` remains available for already-installed stacks and retains
-the reviewed `v0.3.1` image tag. Version `2` is the current default metadata
-revision.
+the reviewed `v0.3.1` image tag. Version `2` was the default metadata revision
+at the time of that validation.
 
 - Image: `ghcr.io/pasturestack/network-policy-manager:v0.3.1`
 - Source: [`PastureStack/network-policy-manager@dfcfc9e22126208587176130d9e6279245d502ba`](https://github.com/PastureStack/network-policy-manager/tree/dfcfc9e22126208587176130d9e6279245d502ba)
@@ -253,8 +260,8 @@ Complete multi-host upgrade and rollback remain release-candidate gates.
 ## PastureStack Secret Volume evidence
 
 Catalog version `1` remains available for already-installed stacks and retains
-the reviewed `v0.1.1` image tag. Version `2` is the current default metadata
-revision.
+the reviewed `v0.1.1` image tag. Version `2` was the default metadata revision
+at the time of that validation.
 
 - Image: `ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.1.1`
 - Source: [`PastureStack/secrets-flexvolume-plugin@6f0d6ed72a37ad9b8169a355e9bcb99472acb7fe`](https://github.com/PastureStack/secrets-flexvolume-plugin/tree/6f0d6ed72a37ad9b8169a355e9bcb99472acb7fe)
@@ -410,19 +417,19 @@ release-candidate gates.
 - Distribution gate: public GHCR and unauthenticated semantic-version-tag pull passed
 - Component integration: link-local Metadata, long polling, HAProxy configuration and socket, credential compatibility, event reporting, TCP readiness, and stdout/stderr stream separation passed
 
-This entry remains a release candidate. Version `v0.3.16` keeps the established
-link-local default from `v0.3.15` and routes routine lifecycle messages to
+At that review, this entry was a release candidate. Version `v0.3.16` kept the
+established link-local default from `v0.3.15` and routed lifecycle messages to
 standard output while reserving standard error for actual failures. A fresh
-multi-host upgrade, rollback, and complete infrastructure-stack removal remain
-release blockers.
+multi-host upgrade, rollback, and complete infrastructure-stack removal had not
+yet been accepted for that version.
 
 ## PastureStack Network Services evidence
 
-The current directory is `13` (`v0.3.11`), using NPM `v0.8.25`, Metadata
-`v0.10.6`, and the retained DNS `v0.17.13`. Exact new identities and raw scan
+The current directory is `14` (`v0.3.12`), using NPM `v0.8.25`, Metadata
+`v0.10.7`, and DNS `v0.17.14`. Exact new identities and raw scan
 counts are recorded above and in `catalog-images.json`; GitHub release
 `immutable=false` is distinct from the recorded OCI digest. The directory
-`9`/`10` evidence below is historical and is not acceptance of directory `13`.
+`9`/`10` evidence below is historical and is not acceptance of directory `14`.
 
 Directory `10` is the Network Services `v0.3.8` candidate and changes only
 Network Plugin Manager to published `v0.8.22` for legacy/current CNI configuration
@@ -502,7 +509,7 @@ validate or authorize deployment of directory `4`.
 - Vulnerability gate: 0 HIGH, 0 CRITICAL, and 0 detected image secrets with Trivy 0.70.0
 - Runtime gates: encrypted two-host IPsec traffic, managed CNI, Metadata, DNS, published host ports, daemon restart recovery, rolling replacement, native upgrade, and rollback passed
 
-This entry remains a privileged release candidate. Managed workloads exchanged
+That version was reviewed as a privileged release candidate. Managed workloads exchanged
 bidirectional HTTP and ICMP traffic through AES-GCM XFRM state, resolved service
 DNS, reached Metadata, and published the same host port on both isolated hosts.
 Complete infrastructure-stack removal and a clean multi-VM acceptance run

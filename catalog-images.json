@@ -1571,6 +1571,614 @@
         "sha256": "91f7cce56e1755e9625e2c6bfd0c6f0c9f73d9158b887037520abca7930186b2",
         "url": "https://github.com/PastureStack/network-plugin-manager/releases/download/v0.8.25/network-plugin-manager-0.8.25-image.cdx.json"
       }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/internal-dns:v0.17.14",
+      "sourceRepository": "https://github.com/PastureStack/internal-dns",
+      "sourcePath": "package/linux/amd64/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/internal-dns",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "publicationStatus": "published",
+      "sourceCommit": "5ad61af813e7361a19c0d50f4d8926533776c4c3",
+      "manifestDigest": "sha256:526e1f6b5128cc07df555e641a31f3737a614695589bfcae6a76ae34fa6d7061",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/internal-dns/releases/download/v0.17.14/image.cdx.json",
+        "sha256": "ca3ab94c230224fda405d1e2c8d7e73f3acc5807f9ed6d8641c4bcf536c415e3"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "remainingFindings": 16,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95209",
+          "CVE-2026-95210"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/internal-dns/releases/download/v0.17.14/image-security.json",
+          "sha256": "6ddba7297538edbcae1f0d8fd34b8f39b7c098f0f6b4285bb7af9399d9c5e6b4"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/internal-dns/releases/download/v0.17.14/image-security.effective.json",
+          "sha256": "b0b53281c37adb601fe0b7520cae2b42619f328d6b8abe2dc29b145ca76f2a48"
+        },
+        "evidence": "https://github.com/PastureStack/internal-dns/actions/runs/40141480861"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config and SHA-256-checked published SBOM, scans and installation receipts",
+        "workflowRun": "https://github.com/PastureStack/internal-dns/actions/runs/40141480861"
+      },
+      "reviewedAt": "2026-10-25"
+    },
+    {
+      "reference": "ghcr.io/pasturestack/metadata-healthcheck:v0.3.18",
+      "sourceRepository": "https://github.com/PastureStack/metadata-healthcheck",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/metadata-healthcheck",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and HAProxy packages retain their upstream licenses",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "publicationStatus": "published",
+      "sourceCommit": "c1ec40205e290646141b299d34591d0fdfcc7c02",
+      "manifestDigest": "sha256:7c081b446f4675c73d38f79198491e64fdd59bea0e5931085639e876803b92b5",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.18/image.cdx.json",
+        "sha256": "e28e552805f5d21a9fca1ac5b6901245ebae722636f233344c1185df34cafc69"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "remainingFindings": 16,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95209",
+          "CVE-2026-95210"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.18/image-security.json",
+          "sha256": "f61a2b30d3111cb2c1130dfa623a4f5439b70f5057142add16351080f932a4fb"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.18/image-security.effective.json",
+          "sha256": "9d1488870735d11f22586f1953ec837d23a784b1a2a1ab4e88ec082d73e43fed"
+        },
+        "evidence": "https://github.com/PastureStack/metadata-healthcheck/actions/runs/40141487886"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config and SHA-256-checked published SBOM, scans and installation receipts",
+        "workflowRun": "https://github.com/PastureStack/metadata-healthcheck/actions/runs/40141487886"
+      },
+      "reviewedAt": "2026-10-25"
+    },
+    {
+      "reference": "ghcr.io/pasturestack/metadata-service:v0.10.7",
+      "sourceRepository": "https://github.com/PastureStack/metadata-service",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/metadata-service",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "publicationStatus": "published",
+      "sourceCommit": "e5b0473d8daabff3bf7b3d02237441f5b4b3a2ba",
+      "manifestDigest": "sha256:b0a45fce30552f522673e0c84c4feaf3ec9f1a4e4cd688cc04e192a170a68a87",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/metadata-service/releases/download/v0.10.7/image.cdx.json",
+        "sha256": "e98063a5d1f4ccd9b6596c96fe1562cbe04eef2ee395462d6a8e5b6ba9cd1b7a"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "remainingFindings": 10,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2025-1352",
+          "CVE-2025-1376",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/metadata-service/releases/download/v0.10.7/image-security.json",
+          "sha256": "763abb61cc95126a3da36e5fc1408b946e5000b06050fc54a1ded9e4cbd3c59a"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/metadata-service/releases/download/v0.10.7/image-security.effective.json",
+          "sha256": "a546b0a342e85b3c6572480359b6582b5990ff4a2ec2bfa8a6b34740932bde2f"
+        },
+        "evidence": "https://github.com/PastureStack/metadata-service/actions/runs/40141494386"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config and SHA-256-checked published SBOM, scans and installation receipts",
+        "workflowRun": "https://github.com/PastureStack/metadata-service/actions/runs/40141494386"
+      },
+      "reviewedAt": "2026-10-25"
+    },
+    {
+      "reference": "ghcr.io/pasturestack/network-policy-manager:v0.3.3",
+      "sourceRepository": "https://github.com/PastureStack/network-policy-manager",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-policy-manager",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, nftables, and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "publicationStatus": "published",
+      "sourceCommit": "22ae03cbc38683ad1be08bf202672d175ed568d6",
+      "manifestDigest": "sha256:efc77b837959af49ea5b80058b07e53deccc5defba2e98888685836eb2547eb8",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/network-policy-manager/releases/download/v0.3.3/image.cdx.json",
+        "sha256": "65d288089f76c37cd30f9e06a3e03fe8e05f6ba613911c23b706986f8c75c02d"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "remainingFindings": 8,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/network-policy-manager/releases/download/v0.3.3/image-security.json",
+          "sha256": "869865202237c702560ffb5f9ac7c57567f88eb25e25fc56dcf01c4d96201377"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/network-policy-manager/releases/download/v0.3.3/image-security.effective.json",
+          "sha256": "01d484b84565ec211488de1feff50b7820005cd110daab0c64a8a0c8d966cd1e"
+        },
+        "evidence": "https://github.com/PastureStack/network-policy-manager/actions/runs/40141500698"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config and SHA-256-checked published SBOM, scans and installation receipts",
+        "workflowRun": "https://github.com/PastureStack/network-policy-manager/actions/runs/40141500698"
+      },
+      "reviewedAt": "2026-10-25"
+    },
+    {
+      "reference": "ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.41",
+      "sourceRepository": "https://github.com/PastureStack/ipsec-vxlan-overlay-network",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ipsec-vxlan-overlay-network",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, strongSwan, CNI, Weave, and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "publicationStatus": "published",
+      "sourceCommit": "87ad41dabf802c49a1c2111cc46650a43adeace3",
+      "manifestDigest": "sha256:ab0165d2289910ebbc283c41ce76ec52f36feeaad7483a59400bdf5cef8fee97",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/download/v0.14.41/image-sbom.cdx.json",
+        "sha256": "c215e0ae3e8432f6eb0a0b98cb8472a49cd76670a3a7120482edb8a609e975a8"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "remainingFindings": 19,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2025-1352",
+          "CVE-2025-1376",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95209",
+          "CVE-2026-95210"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/download/v0.14.41/runtime-security.json",
+          "sha256": "194401c9c4e827507bd1050d6a3e58dd323ddae17413a82e16867a848bdd896b"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/download/v0.14.41/runtime-security.effective.json",
+          "sha256": "0c4e7d5373591ed27cba8d077e3f3f88e531165b003676c31d6a309991520273"
+        },
+        "evidence": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/40144779932"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config and SHA-256-checked published SBOM, scans and installation receipts",
+        "workflowRun": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/40144779932"
+      },
+      "reviewedAt": "2026-10-25"
+    },
+    {
+      "reference": "ghcr.io/pasturestack/pod-pause-image:v3.0.6",
+      "sourceRepository": "https://github.com/PastureStack/pod-pause-image",
+      "sourcePath": "Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/pod-pause-image",
+      "licenseBoundary": "Apache-2.0 source and image; the pinned Ubuntu base and build packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "publicationStatus": "published",
+      "sourceCommit": "24cb33a2ac1f7d3bae0faf4e8a7dfd19401362be",
+      "manifestDigest": "sha256:b0c284a56412dbb22bf15919332da18d519ae0965654f4d8b9a595de1804afea",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/pod-pause-image/releases/download/v3.0.6/runtime.cdx.json",
+        "sha256": "e5887e9b9f8016cbc314b7703a8bbe89c2f89d4bba0ca4a9f5d83a717c09d791"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "remainingFindings": 8,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/pod-pause-image/releases/download/v3.0.6/runtime-security-raw.json",
+          "sha256": "f1b94ec8f4fca947e59a0485d86708547d1443e98ecc588996428579036659e2"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/pod-pause-image/releases/download/v3.0.6/runtime-security.json",
+          "sha256": "3f85d185e67ccd5fa005f71b6a9fb34c4ca3f9860da8a5804f47073548760e69"
+        },
+        "evidence": "https://github.com/PastureStack/pod-pause-image/actions/runs/40140946513"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config and SHA-256-checked published SBOM, scans and installation receipts",
+        "workflowRun": "https://github.com/PastureStack/pod-pause-image/actions/runs/40140946513"
+      },
+      "reviewedAt": "2026-10-25"
+    },
+    {
+      "reference": "ghcr.io/pasturestack/container-cron:v0.6.2",
+      "sourceRepository": "https://github.com/PastureStack/container-cron",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/container-cron",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and Go dependencies retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "publicationStatus": "published",
+      "sourceCommit": "5ed8566ff366573a31b18fbffcc7030cc5b82917",
+      "manifestDigest": "sha256:0eaabd6eb7d407f97c1411ceb146c6b72e2a51a1db8e2bb4f83309b7bd249c8a",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/container-cron/releases/download/v0.6.2/runtime.cdx.json",
+        "sha256": "d9aaa74d63acbc1d3612a16fcec41b993993aad7050c0bf4011133a403b512d1"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "remainingFindings": 8,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/container-cron/releases/download/v0.6.2/runtime-security-raw.json",
+          "sha256": "92313277fd5df0cc8363893db761ae3110034e8dc7a3bb5e1ee985be9122136d"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/container-cron/releases/download/v0.6.2/runtime-security.json",
+          "sha256": "990540b6e5fca8e67988358095f9e653b2e6b0a7deb9f29120a6787b3f88d437"
+        },
+        "evidence": "https://github.com/PastureStack/container-cron/actions/runs/40144617903"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config and SHA-256-checked published SBOM, scans and installation receipts",
+        "workflowRun": "https://github.com/PastureStack/container-cron/actions/runs/40144617903"
+      },
+      "reviewedAt": "2026-10-25"
+    },
+    {
+      "reference": "ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.2",
+      "sourceRepository": "https://github.com/PastureStack/secrets-flexvolume-plugin",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/secrets-flexvolume-plugin",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, Go toolchain, and CA certificate packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "publicationStatus": "published",
+      "sourceCommit": "b7f4c9a36c0f45680cafcf575e57dbcb6f32f11b",
+      "manifestDigest": "sha256:6b19ea27d1af2c2abb6382b643fae24690fb96bfea314702e8ffb57f128f43f9",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/secrets-flexvolume-plugin/releases/download/v0.2.2/secrets-flexvolume-plugin-sbom.cdx.json",
+        "sha256": "421b4df2cf136f013fa83f9954d324117a3abdaa32a8447cb08489ff9c4279af"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "remainingFindings": 8,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/secrets-flexvolume-plugin/releases/download/v0.2.2/secrets-flexvolume-plugin-security-raw.json",
+          "sha256": "4fcf0e77e7d97714da65a9b964329dc8f1ee33541958360d47c13649a56e8965"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/secrets-flexvolume-plugin/releases/download/v0.2.2/secrets-flexvolume-plugin-security.json",
+          "sha256": "84ce297d8bf5ae2dcc9c9b0c6a5c44fa5af920b790196f673999623b76b4e36e"
+        },
+        "evidence": "https://github.com/PastureStack/secrets-flexvolume-plugin/actions/runs/40140965006"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config and SHA-256-checked published SBOM, scans and installation receipts",
+        "workflowRun": "https://github.com/PastureStack/secrets-flexvolume-plugin/actions/runs/40140965006"
+      },
+      "reviewedAt": "2026-10-25"
+    },
+    {
+      "reference": "ghcr.io/pasturestack/system-image-preloader:v0.3.3",
+      "sourceRepository": "https://github.com/PastureStack/system-image-preloader",
+      "sourcePath": "Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/system-image-preloader",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, Docker CLI, yq, gomplate, and other dependencies retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "publicationStatus": "published",
+      "sourceCommit": "1dd8646ac431514a0e1d7ec0ab92f73cb099042c",
+      "manifestDigest": "sha256:5baad75c4d82d0096be64c6db22351518f0ff9bc7cd5d0268eb88f09f532e2e0",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/system-image-preloader/releases/download/v0.3.3/system-image-preloader-sbom.cdx.json",
+        "sha256": "8806345410e3ed130146d2b34e8633b4ad0d65ac164d130a6341a7e2b31672dc"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "original verified runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "remainingFindings": 16,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95209",
+          "CVE-2026-95210"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/system-image-preloader/releases/download/v0.3.3/system-image-preloader-security.json",
+          "sha256": "cd49187fbb22847573c3c501a3aa96280704e7781be754d5c747e227d84c8348"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/system-image-preloader/releases/download/v0.3.3/system-image-preloader-security-effective.json",
+          "sha256": "ccf4ad37bc78a90c0c878e8d618a9f0ed3b57b6fe18b270032a873c528a44a95"
+        },
+        "evidence": "https://github.com/PastureStack/system-image-preloader/releases/download/v0.3.3/publication-completion.json"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "original verified producer files completed without rebuilding, retagging or replacing published bytes",
+        "workflowRun": "https://github.com/PastureStack/system-image-preloader/actions/runs/40141464002",
+        "originalPublishConclusion": "failure",
+        "completion": {
+          "url": "https://github.com/PastureStack/system-image-preloader/releases/download/v0.3.3/publication-completion.json",
+          "sha256": "db99750381b8bb2eb79fc965b3a595d72832e5ce254f0b16687929e4813273fa"
+        }
+      },
+      "reviewedAt": "2026-10-25"
+    },
+    {
+      "reference": "ghcr.io/pasturestack/vault-secrets-bridge:v0.1.3",
+      "sourceRepository": "https://github.com/PastureStack/vault-secrets-bridge",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/vault-secrets-bridge",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, Go toolchain, and CA certificate packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "publicationStatus": "published",
+      "sourceCommit": "51fefe19eedb91d41f292ea1c82c4b5fb7067ae8",
+      "manifestDigest": "sha256:2ac43747b3aaee851ef6c1c94d2a9e29ccb7b40aaf577ec96cf20127a3c087f8",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/vault-secrets-bridge/releases/download/v0.1.3/vault-secrets-bridge-sbom.cdx.json",
+        "sha256": "79b0f46af9e6cd800f86d575746f07af06e9b86d657ceb30582d2df9677cacba"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "original verified runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "remainingFindings": 8,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/vault-secrets-bridge/releases/download/v0.1.3/vault-secrets-bridge-security.json",
+          "sha256": "a8882cab72178da4b30b6cff13ef5b5c420f8f18034bb25d074b1e9700c038fb"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/vault-secrets-bridge/releases/download/v0.1.3/vault-secrets-bridge-security-backports.json",
+          "sha256": "9a2c912b4e62c14d40f8cc98a88b950038b93bece2921a4fbf097ae1e4a479c9"
+        },
+        "evidence": "https://github.com/PastureStack/vault-secrets-bridge/releases/download/v0.1.3/publication-completion.json"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "original verified producer files completed without rebuilding, retagging or replacing published bytes",
+        "workflowRun": "https://github.com/PastureStack/vault-secrets-bridge/actions/runs/40141474402",
+        "originalPublishConclusion": "failure",
+        "completion": {
+          "url": "https://github.com/PastureStack/vault-secrets-bridge/releases/download/v0.1.3/publication-completion.json",
+          "sha256": "6e2f95c381ca80448d581e1544e610fde141694f6b428a6490dc6a2d7714c809"
+        }
+      },
+      "reviewedAt": "2026-10-25"
+    },
+    {
+      "reference": "ghcr.io/pasturestack/resource-scheduler:v0.8.21",
+      "sourceRepository": "https://github.com/PastureStack/resource-scheduler",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/resource-scheduler",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "publicationStatus": "published",
+      "sourceCommit": "b9f0c18d2318a5ccd6c6d0a2ace27715bec6e8a6",
+      "manifestDigest": "sha256:0818b05b49d73bb789b83932a91df3bf6a09d78fab3b370a7afe51f5c2ec2bdf",
+      "sbom": {
+        "status": "published",
+        "format": "CycloneDX",
+        "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.21/resource-scheduler-0.8.21-image.cdx.json",
+        "sha256": "18f6caa7d3400b93808bfdfe8dd6a2107ae7752a1d1bd6c08c88eea518fcb032",
+        "provenance": {
+          "verified": true,
+          "predicateType": "https://slsa.dev/provenance/v1",
+          "signerWorkflow": "PastureStack/resource-scheduler/.github/workflows/release.yml",
+          "sourceRef": "refs/tags/v0.8.21",
+          "sourceCommit": "b9f0c18d2318a5ccd6c6d0a2ace27715bec6e8a6"
+        }
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "remainingFindings": 16,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95209",
+          "CVE-2026-95210"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.21/resource-scheduler-0.8.21-security.json",
+          "sha256": "786e01b5c43c062c3ead2f2d6a485ed7ec4e86f0db74a2528257452415d98a69"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.21/resource-scheduler-0.8.21-security.effective.json",
+          "sha256": "2493d22410837ac6e38078c975d479a3adcf9e6725f29c4fafd5ce329feb649a"
+        },
+        "evidence": "https://github.com/PastureStack/resource-scheduler/actions/runs/40144768957",
+        "fixedAvailable": 0
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config, published SHA-256 receipts and native SBOM provenance against the exact tag, source and workflow invocation",
+        "workflowRun": "https://github.com/PastureStack/resource-scheduler/actions/runs/40144768957"
+      },
+      "reviewedAt": "2026-10-25"
     }
   ]
 }

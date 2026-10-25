@@ -8,8 +8,13 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 
 ## Project status
 
-This source tree provides Catalog `v0.3.16`; its GitHub tag and Release determine
-when it is published. It exposes one Native project template and twenty-one
+Catalog `v0.3.17` includes thirteen new numeric template revisions that consume
+qualified Ubuntu security backports in the corresponding component images.
+Only packages already installed in each runtime are updated; configuration,
+the coreutils provider and the established plugin ownership boundaries remain
+unchanged. Previously published numeric revisions remain available.
+
+The catalog exposes one Native project template and twenty-one
 reviewed infrastructure entries. See [SUPPORTED.md](SUPPORTED.md) for the
 current versions and [catalog-provenance.json](catalog-provenance.json) for
 preserved upstream origins. General third-party application examples and the
@@ -25,11 +30,12 @@ Officially unfixed Low/Medium findings remain tracked, not resolved; narrowly
 scoped VEX decisions require product-specific evidence and retain the raw scan.
 A clean gate is not a claim that every dependency has zero reported CVEs.
 
-Network Services revision 13 uses NPM `v0.8.25` and Metadata `v0.10.6`.
-Both runtime GitHub Releases report `immutable: false`; the recorded OCI
-manifest digests identify verified content, not a GitHub release lock.
-Metadata106 retains 44 reviewed unfixed raw findings (38 Medium, 6 Low),
-tracked separately from publication and environment acceptance.
+Network Services revision 14 uses Network Plugin Manager `v0.8.25`, Metadata
+`v0.10.7` and Internal DNS `v0.17.14`. The recorded OCI manifest digests identify
+verified image content; they do not imply that GitHub has locked a release.
+Runtime SBOMs, raw and interpreted findings, producer commits and publication
+receipts are recorded per image in `catalog-images.json`. Remaining findings
+are tracked separately from publication and environment acceptance.
 
 Catalog validation covers template structure, retained versions, Traditional
 Chinese labels, exact image references and Catalog Service API lookups. CI uses
