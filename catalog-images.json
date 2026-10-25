@@ -2169,7 +2169,8 @@
           "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.21/resource-scheduler-0.8.21-security.effective.json",
           "sha256": "2493d22410837ac6e38078c975d479a3adcf9e6725f29c4fafd5ce329feb649a"
         },
-        "evidence": "https://github.com/PastureStack/resource-scheduler/actions/runs/40144768957"
+        "evidence": "https://github.com/PastureStack/resource-scheduler/actions/runs/40144768957",
+        "fixedAvailable": 0
       },
       "publicationVerification": {
         "status": "verified",
