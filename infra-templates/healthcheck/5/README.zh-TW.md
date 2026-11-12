@@ -4,7 +4,7 @@
 
 修訂 5 使用已發行的 `ghcr.io/pasturestack/metadata-healthcheck:v0.3.20`，
 包含 Ubuntu HAProxy 3.2.25-0ubuntu0.26.04.2 及 Perl、CA、APT 官方更新。
-修訂 4 可供回復。
+回復時可使用修訂 4 的 `ghcr.io/pasturestack/metadata-healthcheck:v0.3.19`。
 
 代理從連結本機的 Metadata 端點讀取健康檢查設定，
 並使用權限受限的代理憑證回報狀態。TCP 42 仍為容器就緒端點。

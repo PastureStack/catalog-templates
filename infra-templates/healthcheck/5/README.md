@@ -4,7 +4,8 @@
 
 Revision 5 uses the published `ghcr.io/pasturestack/metadata-healthcheck:v0.3.20`
 image with Ubuntu HAProxy 3.2.25-0ubuntu0.26.04.2 and the official Perl,
-CA and APT updates. Revision 4 remains available for rollback.
+CA and APT updates. Revision 4 remains available for rollback with
+`ghcr.io/pasturestack/metadata-healthcheck:v0.3.19`.
 
 The agent reads workload health declarations from the link-local Metadata
 endpoint and sends health reports using the scoped agent credentials.
