@@ -2264,6 +2264,90 @@
       "reviewedAt": "2026-10-25"
     },
     {
+      "sourceRepository": "https://github.com/PastureStack/metadata-healthcheck",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/metadata-healthcheck",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and HAProxy packages retain their upstream licenses",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/metadata-healthcheck:v0.3.20",
+      "publicationStatus": "published",
+      "sourceCommit": "32409b23bcb4b6d77ceb4da8f5d58c9cd051e5dc",
+      "manifestDigest": "sha256:44a72d6560fa7b635870975a34fdbe85b86c0dc4c0e1386d0374ef0c4afd8728",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.20/image.cdx.json",
+        "sha256": "1f2b70342215c28b4ff3f1dbdbf4402a937efda969a772125aca0d2b561b812f"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "rawFindings": 36,
+        "remainingFindings": 24,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-78408",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95210",
+          "CVE-2026-9538"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.20/image-security.json",
+          "sha256": "9eb8382f0f99bd0703fce53e841908f409d330f13dd6c148e2d1cef3bb00e395"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.20/image-security.effective.json",
+          "sha256": "3000c94ac04f583d9f240b0babaa33d44037b4ea9a0dd515cd406fd0fcbf0e35"
+        },
+        "evidence": "https://github.com/PastureStack/metadata-healthcheck/actions/runs/43189567841"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest/config, byte-equal public assets, exact source identity and checksum-bound consumer guard",
+        "workflowRun": "https://github.com/PastureStack/metadata-healthcheck/actions/runs/43189567841",
+        "nativeImageProvenanceVerified": true,
+        "fileSbomAttestationProvidedByWorkflow": false,
+        "fileSbomAttestationVerified": false
+      },
+      "ubuntuBackports": {
+        "bundle": "ghcr.io/pasturestack/ubuntu-security-backports:v0.1.1@sha256:45d6b507b63a18459ae5cf76afd4d9731f8ef43b9c40e4c3dbb01899e1752b19",
+        "evidence": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.20/ubuntu-backports-evidence.tar",
+          "sha256": "4c90c8c04029f12f1acb74daca48747f2bf5c41e1d9cb4841771ee05014818bd"
+        },
+        "consumerVerification": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.20/ubuntu-backports-validation.json",
+          "sha256": "830709803d4464e14578faee8eadbe3d77c24b4ff6a782c213b21cd673cf7a44"
+        },
+        "selectedPackages": [
+          "libbrotli1",
+          "libc-bin",
+          "libc-gconv-modules-extra",
+          "libc6",
+          "libp11-kit0",
+          "libpcre2-8-0",
+          "rust-coreutils"
+        ],
+        "qualifiedFixedVexPairs": 83,
+        "qualifiedCodeAbsentVexPairs": 3
+      },
+      "reviewedAt": "2026-11-12"
+    },
+    {
       "sourceRepository": "https://github.com/PastureStack/internal-dns",
       "sourcePath": "package/linux/amd64/Dockerfile",
       "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/internal-dns",
