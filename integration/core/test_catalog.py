@@ -225,17 +225,17 @@ def test_catalog_list():
     assert by_folder[('infra', 'network-policy-manager')]['name'] == (
         'Network Policy Manager')
     assert by_folder[('infra', 'network-policy-manager')][
-        'defaultVersion'] == 'v0.3.5'
+        'defaultVersion'] == 'v0.3.6'
     assert by_folder[('infra', 'network-policy-manager')][
         'links']['defaultVersion'].endswith(
-        ':5')
+        ':6')
     assert by_folder[('infra', 'network-services')]['name'] == (
         'Network Services')
     assert by_folder[('infra', 'network-services')][
-        'defaultVersion'] == 'v0.3.13'
+        'defaultVersion'] == 'v0.3.14'
     assert by_folder[('infra', 'network-services')][
         'links']['defaultVersion'].endswith(
-        ':15')
+        ':16')
     assert by_folder[('infra', 'nfs-storage')][
         'name'] == 'NFS Storage'
     assert by_folder[('infra', 'nfs-storage')][
@@ -246,17 +246,17 @@ def test_catalog_list():
     assert by_folder[('infra', 'secret-volume-driver')][
         'name'] == 'Secret Volume'
     assert by_folder[('infra', 'secret-volume-driver')][
-        'defaultVersion'] == 'v0.1.4'
+        'defaultVersion'] == 'v0.1.5'
     assert by_folder[('infra', 'secret-volume-driver')][
         'links']['defaultVersion'].endswith(
-        ':4')
+        ':5')
     assert by_folder[('infra', 'vault-volume-driver')][
         'name'] == 'Vault Volume'
     assert by_folder[('infra', 'vault-volume-driver')][
-        'defaultVersion'] == 'v0.2.3'
+        'defaultVersion'] == 'v0.2.4'
     assert by_folder[('infra', 'vault-volume-driver')][
         'links']['defaultVersion'].endswith(
-        ':5')
+        ':6')
     assert by_folder[('infra', 'per-host-subnet-network')]['name'] == (
         'Per-Host Subnet Network')
     assert by_folder[('infra', 'per-host-subnet-network')][
@@ -697,7 +697,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     policy_docker = policy_files['docker-compose.yml']
     policy_platform = policy_files['rancher-compose.yml']
     policy_image = (
-        'ghcr.io/pasturestack/network-policy-manager:v0.3.3')
+        'ghcr.io/pasturestack/network-policy-manager:v0.3.4')
     assert policy_docker.count(
         'image: {}'.format(policy_image)) == 1
     assert '\n  network-policy-manager:\n' in policy_docker
@@ -726,8 +726,8 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     network_platform = network_files['rancher-compose.yml']
     network_manager_image = (
         'ghcr.io/pasturestack/network-plugin-manager:v0.8.25')
-    metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.10.7'
-    dns_image = 'ghcr.io/pasturestack/internal-dns:v0.17.15'
+    metadata_image = 'ghcr.io/pasturestack/metadata-service:v0.10.8'
+    dns_image = 'ghcr.io/pasturestack/internal-dns:v0.17.16'
     assert network_docker.count(
         'image: {}'.format(network_manager_image)) == 1
     assert network_docker.count('image: {}'.format(metadata_image)) == 1
@@ -790,7 +790,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     secret_docker = secret_files['docker-compose.yml']
     secret_platform = secret_files['rancher-compose.yml']
     secret_image = (
-        'ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.2')
+        'ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.3')
     assert secret_docker.count('image: {}'.format(secret_image)) == 1
     assert '\n  secret-volume-driver:\n' in secret_docker
     assert 'privileged:' not in secret_docker
@@ -845,7 +845,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     vault_bridge_image = (
         'ghcr.io/pasturestack/vault-secrets-bridge:v0.1.3')
     vault_driver_image = (
-        'ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.2')
+        'ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.3')
     assert vault_docker.count(
         'image: {}'.format(vault_bridge_image)) == 1
     assert vault_docker.count(
@@ -1746,6 +1746,20 @@ def test_scheduler_upgrade_versions_remain_available(number, image_tag):
       [('metadata-healthcheck:v0.3.20', 'metadata-healthcheck:v0.3.21')]),
      ('network-services', '14', '15', 'v0.3.12', 'v0.3.13',
       [('internal-dns:v0.17.14', 'internal-dns:v0.17.15')]),
+     ('network-services', '15', '16', 'v0.3.13', 'v0.3.14',
+      [('metadata-service:v0.10.7',
+        'metadata-service:v0.10.8'),
+       ('internal-dns:v0.17.15',
+        'internal-dns:v0.17.16')]),
+     ('network-policy-manager', '5', '6', 'v0.3.5', 'v0.3.6',
+      [('network-policy-manager:v0.3.3',
+        'network-policy-manager:v0.3.4')]),
+     ('secret-volume-driver', '4', '5', 'v0.1.4', 'v0.1.5',
+      [('secrets-flexvolume-plugin:v0.2.2',
+        'secrets-flexvolume-plugin:v0.2.3')]),
+     ('vault-volume-driver', '5', '6', 'v0.2.3', 'v0.2.4',
+      [('secrets-flexvolume-plugin:v0.2.2',
+        'secrets-flexvolume-plugin:v0.2.3')]),
      ('system-image-preloader', '4', '5', 'v0.3.3', 'v0.3.4',
       [('system-image-preloader:v0.3.3',
         'system-image-preloader:v0.3.4')]),

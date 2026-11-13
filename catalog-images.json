@@ -2776,6 +2776,196 @@
         }
       },
       "reviewedAt": "2026-11-13"
+    },
+    {
+      "reference": "ghcr.io/pasturestack/internal-dns:v0.17.16",
+      "sourceRepository": "https://github.com/PastureStack/internal-dns",
+      "sourceCommit": "cfbe8c1e214f0b203dcefd070e5c0202f3868192",
+      "sourcePath": "package/linux/amd64/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/internal-dns",
+      "licenseBoundary": "Apache-2.0 source and image; Ubuntu packages and bundled dependencies retain their upstream licenses",
+      "reviewedAt": "2026-11-13",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "manifestDigest": "sha256:ae7ea6c6454d14a0060402654ab89bdad4930f95a06ae672d14b36fef4a87351",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/internal-dns/releases/download/v0.17.16/image.cdx.json",
+        "sha256": "59ba7a9c920def2569c3d43b82c0a84f462746b091dbee613df7e6dd41a2ba4d"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "rawFindings": 36,
+        "remainingFindings": 24,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-78408",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95210",
+          "CVE-2026-9538"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/internal-dns/releases/download/v0.17.16/image-security.json",
+          "sha256": "4fca61f23b34d468b2fb1c9014fcaa60cf1bf02c014f1b1a4017eebf98e2720e"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/internal-dns/releases/download/v0.17.16/image-security.effective.json",
+          "sha256": "913337b451d2688d74f03b1ae15678dba9811a4635707d4750ffaf37626a5212"
+        },
+        "evidence": "https://github.com/PastureStack/internal-dns/actions/runs/43349700246"
+      }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/metadata-service:v0.10.8",
+      "sourceRepository": "https://github.com/PastureStack/metadata-service",
+      "sourceCommit": "73a897758873a6745fce74e4a9b04b297547070d",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/metadata-service",
+      "licenseBoundary": "Apache-2.0 source and image; Ubuntu packages and bundled dependencies retain their upstream licenses",
+      "reviewedAt": "2026-11-13",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "manifestDigest": "sha256:460e69e2b56b6e8f662c9b5f781788333737bc7623cfa8de7c67c1bb64c7471a",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/metadata-service/releases/download/v0.10.8/image.cdx.json",
+        "sha256": "5211b07b59df552e80c43479ca803d88c72537a7047b55f2c087b9f8fd65fabf"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "rawFindings": 27,
+        "remainingFindings": 17,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-78408",
+          "CVE-2026-9538"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/metadata-service/releases/download/v0.10.8/image-security.json",
+          "sha256": "3474bae094574f5157d52c64a6a8670bb623ad5d79015c802604de69eef1ee15"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/metadata-service/releases/download/v0.10.8/image-security.effective.json",
+          "sha256": "5695b967bf315f292810449cb8aa3c649d0d8c8abb8847db6f97e1b7489132ac"
+        },
+        "evidence": "https://github.com/PastureStack/metadata-service/actions/runs/43349752164"
+      }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/network-policy-manager:v0.3.4",
+      "sourceRepository": "https://github.com/PastureStack/network-policy-manager",
+      "sourceCommit": "882dae01e715bb1ddce9bd4204cb9f1c022bb6be",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/network-policy-manager",
+      "licenseBoundary": "Apache-2.0 source and image; Ubuntu packages and bundled dependencies retain their upstream licenses",
+      "reviewedAt": "2026-11-13",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "manifestDigest": "sha256:fe1404a878576aa7b3fdf5cabc3fe89e6278cec0180624363a3e97544a75efcf",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/network-policy-manager/releases/download/v0.3.4/image.cdx.json",
+        "sha256": "27a3b24e16f4b6f1bf13b1e7796b204018b0b6b31b2a3bb62bd327b3fe99011d"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "rawFindings": 27,
+        "remainingFindings": 17,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-78408",
+          "CVE-2026-9538"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/network-policy-manager/releases/download/v0.3.4/image-security.json",
+          "sha256": "c8b602056b02c21a202461667df84c5ab8e5ab998d39f5e441cc87e917a6cda7"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/network-policy-manager/releases/download/v0.3.4/image-security.effective.json",
+          "sha256": "f395d6a5e1183553e66d89ea18722e38dbb52af1d859aa82440d02c58a1644cd"
+        },
+        "evidence": "https://github.com/PastureStack/network-policy-manager/actions/runs/43348577238"
+      }
+    },
+    {
+      "reference": "ghcr.io/pasturestack/secrets-flexvolume-plugin:v0.2.3",
+      "sourceRepository": "https://github.com/PastureStack/secrets-flexvolume-plugin",
+      "sourceCommit": "3b0bf03b28db9656cd8699951ef5db6cdf5d904a",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/secrets-flexvolume-plugin",
+      "licenseBoundary": "Apache-2.0 source and image; Ubuntu packages and bundled dependencies retain their upstream licenses",
+      "reviewedAt": "2026-11-13",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "manifestDigest": "sha256:524b7c36b4fce087c78421097388ca1718423f4fd6bc0529ccec9b35933a4b5a",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/secrets-flexvolume-plugin/releases/download/v0.2.3/secrets-flexvolume-plugin-sbom.cdx.json",
+        "sha256": "4be74cc245942a989afe544ccb2a912e4baae504a144dafd9c60c709602cf7d1"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "rawFindings": 27,
+        "remainingFindings": 17,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-78408",
+          "CVE-2026-9538"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/secrets-flexvolume-plugin/releases/download/v0.2.3/secrets-flexvolume-plugin-security-raw.json",
+          "sha256": "aaa2b53f265e2459c910f397ec4cf762a2577180221f423d33977d268d908841"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/secrets-flexvolume-plugin/releases/download/v0.2.3/secrets-flexvolume-plugin-security.json",
+          "sha256": "3abf675326224a22c6407ca58c1c2e58cff4005ed1146514ea82d4f2518ed2ab"
+        },
+        "evidence": "https://github.com/PastureStack/secrets-flexvolume-plugin/actions/runs/43349712338"
+      }
     }
   ]
 }

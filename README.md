@@ -9,7 +9,7 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 ## Project status
 
 Current infrastructure revisions use System Image Preloader `v0.3.4`,
-Metadata Healthcheck `v0.3.21`, Internal DNS `v0.17.15`, Resource Scheduler
+Metadata Healthcheck `v0.3.21`, Internal DNS `v0.17.16`, Resource Scheduler
 `v0.8.22` and IPsec `v0.14.42`. Previously published numeric revisions
 remain available for rollback.
 
@@ -29,8 +29,8 @@ Officially unfixed Low/Medium findings remain tracked, not resolved; narrowly
 scoped VEX decisions require product-specific evidence and retain the raw scan.
 A clean gate is not a claim that every dependency has zero reported CVEs.
 
-Network Services revision 15 uses Network Plugin Manager `v0.8.25`, Metadata
-`v0.10.7` and Internal DNS `v0.17.15`. The recorded OCI manifest digests identify
+Network Services revision 16 uses Network Plugin Manager `v0.8.25`, Metadata
+`v0.10.8` and Internal DNS `v0.17.16`. The recorded OCI manifest digests identify
 verified image content; they do not imply that GitHub has locked a release.
 Runtime SBOMs, raw and interpreted findings, producer commits and publication
 receipts are recorded per image in `catalog-images.json`. Remaining findings
