@@ -2684,6 +2684,98 @@
         "qualifiedCodeAbsentVexPairs": 3
       },
       "reviewedAt": "2026-10-25"
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/metadata-healthcheck",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/metadata-healthcheck",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and HAProxy packages retain their upstream licenses",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/metadata-healthcheck:v0.3.21",
+      "publicationStatus": "published",
+      "sourceCommit": "e4bb1c51039ffd986eb5155b8edc0665f83ab501",
+      "manifestDigest": "sha256:6fad95aa8f70502255610173c1c5bd4d1d0d5790e48cbab15c681e2cbbcb3852",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.21/image.cdx.json",
+        "sha256": "1d239087bed96105aff98bca173cb102316ac1d31b8227d46801a1dee11ec722"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "rawFindings": 36,
+        "remainingFindings": 24,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-78408",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95210",
+          "CVE-2026-9538"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.21/image-security.json",
+          "sha256": "575f9f80fbca50208efdc237df10af5752b237789a998d0534674d38c619632d"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.21/image-security.effective.json",
+          "sha256": "b6e707f922025bbc4ac583cb900497c242293d102a9186e1eb8b637c5e30d655"
+        },
+        "evidence": "https://github.com/PastureStack/metadata-healthcheck/actions/runs/43342775691"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "Registry manifest, native image provenance, public SHA-256 assets, and pre-replacement qualified backport SBOM",
+        "workflowRun": "https://github.com/PastureStack/metadata-healthcheck/actions/runs/43342775691",
+        "nativeImageProvenanceVerified": true,
+        "fileSbomAttestationProvidedByWorkflow": false,
+        "fileSbomAttestationVerified": false
+      },
+      "ubuntuBackports": {
+        "bundle": "ghcr.io/pasturestack/ubuntu-security-backports:v0.1.1@sha256:45d6b507b63a18459ae5cf76afd4d9731f8ef43b9c40e4c3dbb01899e1752b19",
+        "evidence": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.21/ubuntu-backports-evidence.tar",
+          "sha256": "4ad595c8e1c1889000012dc372c9be80c70c3e2f6b516aca911a6bded289f77c"
+        },
+        "consumerVerification": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.21/ubuntu-backports-validation.json",
+          "sha256": "830709803d4464e14578faee8eadbe3d77c24b4ff6a782c213b21cd673cf7a44"
+        },
+        "selectedPackages": [
+          "libbrotli1",
+          "libc-bin",
+          "libc-gconv-modules-extra",
+          "libc6",
+          "libp11-kit0",
+          "libpcre2-8-0",
+          "rust-coreutils"
+        ],
+        "qualifiedFixedVexPairs": 83,
+        "qualifiedCodeAbsentVexPairs": 3,
+        "officialReplacement": {
+          "source": "glibc",
+          "version": "2.43-2ubuntu2.7",
+          "receipt": {
+            "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.21/glibc-runtime.txt",
+            "sha256": "9fa91032dd9e60c1ab12bd48b050228c69b688fff8cc573e244ecff71b3c61f8"
+          }
+        }
+      },
+      "reviewedAt": "2026-11-13"
     }
   ]
 }

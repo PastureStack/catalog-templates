@@ -197,7 +197,7 @@ def test_catalog_list():
     assert by_folder[('infra', 'healthcheck')][
         'name'] == 'Metadata Healthcheck'
     assert by_folder[('infra', 'healthcheck')][
-        'defaultVersion'] == 'v0.3.20'
+        'defaultVersion'] == 'v0.3.21'
     assert by_folder[('infra', 'healthcheck')][
         'links']['defaultVersion'].endswith(
         ':5')
@@ -547,7 +547,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     health_files = health_version['files']
     health_docker = health_files['docker-compose.yml']
     health_platform = health_files['rancher-compose.yml']
-    health_image = 'ghcr.io/pasturestack/metadata-healthcheck:v0.3.20'
+    health_image = 'ghcr.io/pasturestack/metadata-healthcheck:v0.3.21'
     assert "version: '2'\nservices:\n  healthcheck:" in health_docker
     assert health_docker.count('image: {}'.format(health_image)) == 1
     assert (
@@ -1742,6 +1742,8 @@ def test_scheduler_upgrade_versions_remain_available(number, image_tag):
       [('metadata-healthcheck:v0.3.18', 'metadata-healthcheck:v0.3.19')]),
      ('healthcheck', '4', '5', 'v0.3.19', 'v0.3.20',
       [('metadata-healthcheck:v0.3.19', 'metadata-healthcheck:v0.3.20')]),
+     ('healthcheck', '5', '6', 'v0.3.20', 'v0.3.21',
+      [('metadata-healthcheck:v0.3.20', 'metadata-healthcheck:v0.3.21')]),
      ('network-services', '14', '15', 'v0.3.12', 'v0.3.13',
       [('internal-dns:v0.17.14', 'internal-dns:v0.17.15')]),
      ('system-image-preloader', '4', '5', 'v0.3.3', 'v0.3.4',
