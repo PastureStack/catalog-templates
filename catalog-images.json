@@ -3136,6 +3136,271 @@
         "qualifiedCodeAbsentVexPairs": 3
       },
       "reviewedAt": "2026-11-13"
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/metadata-healthcheck",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/metadata-healthcheck",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and HAProxy packages retain their upstream licenses",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/metadata-healthcheck:v0.3.22",
+      "publicationStatus": "published",
+      "sourceCommit": "156b5f6c8cb62cc39614c0d4c8b85a12ed16c79f",
+      "manifestDigest": "sha256:818a31a7876cb13ea15689f7394a470b30272ee338f387d7313498a92a0cfa8d",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.22/image.cdx.json",
+        "sha256": "24ca095c21e12527c4d23173ff12deda54000f8f4c2dd862960a1a98a372a3b5"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "rawFindings": 37,
+        "remainingFindings": 26,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-121876",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-78408",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95210",
+          "CVE-2026-9538"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.22/image-security.json",
+          "sha256": "24ed88c9c15cb4a582ae3f588d338d5bbc92b581690b74e4dafca334fe3b9e77"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.22/image-security.effective.json",
+          "sha256": "64894d72e6bcd97d3b2d4cac59349c4e7cb4482a4d2723d6a41e169f6fc5f310"
+        },
+        "evidence": "https://github.com/PastureStack/metadata-healthcheck/actions/runs/43701750145"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest and config, checksum-verified release assets and signed attestations",
+        "workflowRun": "https://github.com/PastureStack/metadata-healthcheck/actions/runs/43701750145",
+        "nativeImageProvenanceVerified": true,
+        "fileSbomAttestationProvidedByWorkflow": true,
+        "fileSbomAttestationVerified": true
+      },
+      "ubuntuBackports": {
+        "bundle": "ghcr.io/pasturestack/ubuntu-security-backports:v0.1.1@sha256:45d6b507b63a18459ae5cf76afd4d9731f8ef43b9c40e4c3dbb01899e1752b19",
+        "evidence": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.22/ubuntu-backports-evidence.tar",
+          "sha256": "f6b2811a1b6e07fcf3ff89fb7bce169d2d2e621cd68d56d8e71b69bf640da3db"
+        },
+        "consumerVerification": {
+          "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.22/ubuntu-backports-validation.json",
+          "sha256": "830709803d4464e14578faee8eadbe3d77c24b4ff6a782c213b21cd673cf7a44"
+        },
+        "selectedPackages": [
+          "libbrotli1",
+          "libc-bin",
+          "libc-gconv-modules-extra",
+          "libc6",
+          "libp11-kit0",
+          "libpcre2-8-0",
+          "rust-coreutils"
+        ],
+        "qualifiedFixedVexPairs": 83,
+        "qualifiedCodeAbsentVexPairs": 3,
+        "officialReplacement": {
+          "source": "glibc",
+          "version": "2.43-2ubuntu2.7",
+          "receipt": {
+            "url": "https://github.com/PastureStack/metadata-healthcheck/releases/download/v0.3.22/glibc-runtime.txt",
+            "sha256": "9fa91032dd9e60c1ab12bd48b050228c69b688fff8cc573e244ecff71b3c61f8"
+          }
+        }
+      },
+      "reviewedAt": "2026-11-15"
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/ipsec-vxlan-overlay-network",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/ipsec-vxlan-overlay-network",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu, strongSwan, CNI, Weave, and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.44",
+      "publicationStatus": "published",
+      "sourceCommit": "7b7f8721a0238a583134af247a72d23e82f43152",
+      "manifestDigest": "sha256:9c0bb9075e1eb97e4e16e0da119104ec0c8c0d01de38408c7e8a9262af90de91",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/download/v0.14.44/image-sbom.cdx.json",
+        "sha256": "3492c4313f7539ea6f66742c92958de299b88d7b3bb3d5b700f460a23d3eb3b5"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "rawFindings": 42,
+        "remainingFindings": 31,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-121876",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-78408",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95210",
+          "CVE-2026-9538"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/download/v0.14.44/runtime-security.json",
+          "sha256": "062b0ed5de46ef35b058bea936a91b78cc2b6bac9763ae496955c1d4ce3f474c"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/download/v0.14.44/runtime-security.effective.json",
+          "sha256": "4eadfa4f262e8fbcc648327272a47a21d0494f96a83304114abac51484583684"
+        },
+        "evidence": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/43709322649"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest and config, checksum-verified release assets and signed attestations",
+        "workflowRun": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/43709322649",
+        "nativeImageProvenanceVerified": true,
+        "fileSbomAttestationProvidedByWorkflow": true,
+        "fileSbomAttestationVerified": true
+      },
+      "ubuntuBackports": {
+        "bundle": "ghcr.io/pasturestack/ubuntu-security-backports:v0.1.1@sha256:45d6b507b63a18459ae5cf76afd4d9731f8ef43b9c40e4c3dbb01899e1752b19",
+        "evidence": {
+          "url": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/download/v0.14.44/ubuntu-backports-evidence.tar",
+          "sha256": "dcb3c402b66cdf12be1fbb5789843db681673260d1df535e62539ae2d9ca53f6"
+        },
+        "consumerVerification": {
+          "status": "verified",
+          "inputEvidence": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/releases/download/v0.14.44/ubuntu-backports-evidence.tar",
+          "workflowRun": "https://github.com/PastureStack/ipsec-vxlan-overlay-network/actions/runs/43709322649"
+        },
+        "selectedPackages": [
+          "libbrotli1",
+          "libc-bin",
+          "libc-gconv-modules-extra",
+          "libc6",
+          "libp11-kit0",
+          "libpcre2-8-0",
+          "rust-coreutils"
+        ],
+        "qualifiedFixedVexPairs": 83,
+        "qualifiedCodeAbsentVexPairs": 3
+      },
+      "reviewedAt": "2026-11-15"
+    },
+    {
+      "sourceRepository": "https://github.com/PastureStack/resource-scheduler",
+      "sourcePath": "package/Dockerfile",
+      "registryPage": "https://github.com/orgs/PastureStack/packages/container/package/resource-scheduler",
+      "licenseBoundary": "Apache-2.0 source and image; bundled Ubuntu and other packages retain their upstream licenses and notices",
+      "platforms": [
+        "linux/amd64"
+      ],
+      "reference": "ghcr.io/pasturestack/resource-scheduler:v0.8.24",
+      "publicationStatus": "published",
+      "sourceCommit": "fc2ad06968fae82e3c2090d7e06cb07016d70371",
+      "manifestDigest": "sha256:a67d2e90c6eaf4f1c33f31a26b3f29a4762a473b7655a63a8ba957bf6cb269d0",
+      "sbom": {
+        "status": "published",
+        "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.24/resource-scheduler-0.8.24-image.cdx.json",
+        "sha256": "f7607b7925f041ecb364da86278051f8cbcf46b4acd1c434d3d2d93c47351cf1"
+      },
+      "vulnerabilityScan": {
+        "status": "passed-with-tracked-unfixed-findings",
+        "scope": "published runtime; exact-package qualified VEX; original raw scan retained",
+        "critical": 0,
+        "high": 0,
+        "secrets": 0,
+        "rawFindings": 37,
+        "remainingFindings": 26,
+        "remainingCves": [
+          "CVE-2024-56433",
+          "CVE-2026-102473",
+          "CVE-2026-102474",
+          "CVE-2026-107161",
+          "CVE-2026-121876",
+          "CVE-2026-18477",
+          "CVE-2026-18508",
+          "CVE-2026-40228",
+          "CVE-2026-67693",
+          "CVE-2026-78408",
+          "CVE-2026-88647",
+          "CVE-2026-88648",
+          "CVE-2026-95184",
+          "CVE-2026-95210",
+          "CVE-2026-9538"
+        ],
+        "raw": {
+          "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.24/resource-scheduler-0.8.24-security.json",
+          "sha256": "f499ca1e3c1fba7d36b2ed100b9423fbc4e643c84a1e797211d404cb3a46938e"
+        },
+        "effective": {
+          "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.24/resource-scheduler-0.8.24-security.effective.json",
+          "sha256": "d0f17ff610b0c37206edcf5fab70ec9d8d53a4fd413a06eadbf7e01ba87b2566"
+        },
+        "evidence": "https://github.com/PastureStack/resource-scheduler/actions/runs/43709616956"
+      },
+      "publicationVerification": {
+        "status": "verified",
+        "anonymousReadback": true,
+        "source": "anonymous OCI manifest and config, checksum-verified release assets and signed attestations",
+        "workflowRun": "https://github.com/PastureStack/resource-scheduler/actions/runs/43709616956",
+        "nativeImageProvenanceVerified": true,
+        "fileSbomAttestationProvidedByWorkflow": true,
+        "fileSbomAttestationVerified": true
+      },
+      "ubuntuBackports": {
+        "bundle": "ghcr.io/pasturestack/ubuntu-security-backports:v0.1.1@sha256:45d6b507b63a18459ae5cf76afd4d9731f8ef43b9c40e4c3dbb01899e1752b19",
+        "evidence": {
+          "url": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.24/ubuntu-backports-evidence.tar",
+          "sha256": "088291edd3adaa173921ceea532cc84c5fbf35500ab96aa1aec97a4af2724720"
+        },
+        "consumerVerification": {
+          "status": "verified",
+          "inputEvidence": "https://github.com/PastureStack/resource-scheduler/releases/download/v0.8.24/ubuntu-backports-evidence.tar",
+          "workflowRun": "https://github.com/PastureStack/resource-scheduler/actions/runs/43709616956"
+        },
+        "selectedPackages": [
+          "libbrotli1",
+          "libc-bin",
+          "libc-gconv-modules-extra",
+          "libc6",
+          "libp11-kit0",
+          "libpcre2-8-0",
+          "rust-coreutils"
+        ],
+        "qualifiedFixedVexPairs": 83,
+        "qualifiedCodeAbsentVexPairs": 3
+      },
+      "reviewedAt": "2026-11-15"
     }
   ]
 }

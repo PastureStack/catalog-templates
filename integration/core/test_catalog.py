@@ -197,24 +197,24 @@ def test_catalog_list():
     assert by_folder[('infra', 'healthcheck')][
         'name'] == 'Metadata Healthcheck'
     assert by_folder[('infra', 'healthcheck')][
-        'defaultVersion'] == 'v0.3.21'
+        'defaultVersion'] == 'v0.3.22'
     assert by_folder[('infra', 'healthcheck')][
         'links']['defaultVersion'].endswith(
-        ':6')
+        ':7')
     assert by_folder[('infra', 'ipsec-overlay')]['name'] == (
         'IPsec Overlay')
     assert by_folder[('infra', 'ipsec-overlay')][
-        'defaultVersion'] == 'v0.3.14'
+        'defaultVersion'] == 'v0.3.15'
     assert by_folder[('infra', 'ipsec-overlay')][
         'links']['defaultVersion'].endswith(
-        ':16')
+        ':17')
     assert by_folder[('infra', 'layer-2-flat-network')]['name'] == (
         'Layer 2 Flat Network')
     assert by_folder[('infra', 'layer-2-flat-network')][
-        'defaultVersion'] == 'v0.3.8'
+        'defaultVersion'] == 'v0.3.9'
     assert by_folder[('infra', 'layer-2-flat-network')][
         'links']['defaultVersion'].endswith(
-        ':10')
+        ':11')
     assert by_folder[('infra', 'network-diagnostics')]['name'] == (
         'Network Diagnostics')
     assert by_folder[('infra', 'network-diagnostics')][
@@ -260,16 +260,16 @@ def test_catalog_list():
     assert by_folder[('infra', 'per-host-subnet-network')]['name'] == (
         'Per-Host Subnet Network')
     assert by_folder[('infra', 'per-host-subnet-network')][
-        'defaultVersion'] == 'v0.3.6'
+        'defaultVersion'] == 'v0.3.7'
     assert by_folder[('infra', 'per-host-subnet-network')][
-        'links']['defaultVersion'].endswith(':8')
+        'links']['defaultVersion'].endswith(':9')
     assert by_folder[('infra', 'resource-scheduler')][
         'name'] == 'Resource Scheduler'
     assert by_folder[('infra', 'resource-scheduler')][
-        'defaultVersion'] == 'v0.8.23'
+        'defaultVersion'] == 'v0.8.24'
     assert by_folder[('infra', 'resource-scheduler')][
         'links']['defaultVersion'].endswith(
-        ':9')
+        ':10')
     assert by_folder[('infra', 'route53-dns-sync')][
         'name'] == 'Route 53 DNS Sync'
     assert by_folder[('infra', 'route53-dns-sync')][
@@ -287,10 +287,10 @@ def test_catalog_list():
     assert by_folder[('infra', 'vxlan-overlay-network')]['name'] == (
         'VXLAN Overlay Network')
     assert by_folder[('infra', 'vxlan-overlay-network')][
-        'defaultVersion'] == 'v0.3.7'
+        'defaultVersion'] == 'v0.3.8'
     assert by_folder[('infra', 'vxlan-overlay-network')][
         'links']['defaultVersion'].endswith(
-        ':9')
+        ':10')
     assert by_folder[('infra', 'windows-container-networking')][
         'name'] == 'Windows Container Networking'
     assert by_folder[('infra', 'windows-container-networking')][
@@ -547,7 +547,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     health_files = health_version['files']
     health_docker = health_files['docker-compose.yml']
     health_platform = health_files['rancher-compose.yml']
-    health_image = 'ghcr.io/pasturestack/metadata-healthcheck:v0.3.21'
+    health_image = 'ghcr.io/pasturestack/metadata-healthcheck:v0.3.22'
     assert "version: '2'\nservices:\n  healthcheck:" in health_docker
     assert health_docker.count('image: {}'.format(health_image)) == 1
     assert (
@@ -565,7 +565,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     overlay_docker = overlay_files['docker-compose.yml.tpl']
     overlay_platform = overlay_files['rancher-compose.yml']
     overlay_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.43')
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.44')
     assert overlay_docker.count('image: {}'.format(overlay_image)) == 4
     assert overlay_docker.count(
         "PASTURESTACK_FIREWALL_BACKEND: '${FIREWALL_BACKEND}'") == 1
@@ -607,7 +607,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     vxlan_docker = vxlan_files['docker-compose.yml.tpl']
     vxlan_platform = vxlan_files['rancher-compose.yml']
     alternative_network_image = (
-            'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.43')
+            'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.44')
     assert vxlan_docker.count(
         'image: {}'.format(alternative_network_image)) == 3
     assert '\n  vxlan-network:\n' in vxlan_docker
@@ -632,7 +632,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     layer_2_docker = layer_2_files['docker-compose.yml.tpl']
     layer_2_platform = layer_2_files['rancher-compose.yml']
     flat_network_image = (
-        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.43')
+        'ghcr.io/pasturestack/ipsec-vxlan-overlay-network:v0.14.44')
     assert layer_2_docker.count(
         'image: {}'.format(flat_network_image)) == 1
     assert '\n  layer-2-flat-cni:\n' in layer_2_docker
@@ -920,7 +920,7 @@ def test_catalog_compose_shapes_are_runtime_compatible():
     scheduler_files = scheduler_version['files']
     scheduler_docker = scheduler_files['docker-compose.yml']
     scheduler_platform = scheduler_files['rancher-compose.yml']
-    scheduler_image = 'ghcr.io/pasturestack/resource-scheduler:v0.8.23'
+    scheduler_image = 'ghcr.io/pasturestack/resource-scheduler:v0.8.24'
     assert scheduler_docker.count(
         'image: {}'.format(scheduler_image)) == 1
     assert '\n  resource-scheduler:\n' in scheduler_docker
@@ -1792,7 +1792,23 @@ def test_scheduler_upgrade_versions_remain_available(number, image_tag):
         'ipsec-vxlan-overlay-network:v0.14.43')]),
      ('resource-scheduler', '8', '9', 'v0.8.22', 'v0.8.23',
       [('resource-scheduler:v0.8.22',
-        'resource-scheduler:v0.8.23')])]
+        'resource-scheduler:v0.8.23')]),
+     ('healthcheck', '6', '7', 'v0.3.21', 'v0.3.22',
+      [('metadata-healthcheck:v0.3.21', 'metadata-healthcheck:v0.3.22')]),
+     ('ipsec-overlay', '16', '17', 'v0.3.14', 'v0.3.15',
+      [('ipsec-vxlan-overlay-network:v0.14.43',
+        'ipsec-vxlan-overlay-network:v0.14.44')]),
+     ('vxlan-overlay-network', '9', '10', 'v0.3.7', 'v0.3.8',
+      [('ipsec-vxlan-overlay-network:v0.14.43',
+        'ipsec-vxlan-overlay-network:v0.14.44')]),
+     ('layer-2-flat-network', '10', '11', 'v0.3.8', 'v0.3.9',
+      [('ipsec-vxlan-overlay-network:v0.14.43',
+        'ipsec-vxlan-overlay-network:v0.14.44')]),
+     ('per-host-subnet-network', '8', '9', 'v0.3.6', 'v0.3.7',
+      [('ipsec-vxlan-overlay-network:v0.14.43',
+        'ipsec-vxlan-overlay-network:v0.14.44')]),
+     ('resource-scheduler', '9', '10', 'v0.8.23', 'v0.8.24',
+      [('resource-scheduler:v0.8.23', 'resource-scheduler:v0.8.24')])]
 )
 def test_qualified_backport_source_contract(
         template, old_number, new_number, old_version, new_version,
