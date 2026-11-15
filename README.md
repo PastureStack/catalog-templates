@@ -9,8 +9,8 @@ PastureStack is an independent community effort to preserve, audit, and moderniz
 ## Project status
 
 Current infrastructure revisions use System Image Preloader `v0.3.4`,
-Metadata Healthcheck `v0.3.21`, Internal DNS `v0.17.16`, Resource Scheduler
-`v0.8.23` and IPsec `v0.14.43`. Previously published numeric revisions
+Metadata Healthcheck `v0.3.22`, Internal DNS `v0.17.16`, Resource Scheduler
+`v0.8.24` and IPsec `v0.14.44`. Previously published numeric revisions
 remain available for rollback.
 
 The catalog exposes one Native project template and twenty-one
