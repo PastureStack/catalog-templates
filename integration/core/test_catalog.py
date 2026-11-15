@@ -1793,12 +1793,22 @@ def test_scheduler_upgrade_versions_remain_available(number, image_tag):
      ('resource-scheduler', '8', '9', 'v0.8.22', 'v0.8.23',
       [('resource-scheduler:v0.8.22',
         'resource-scheduler:v0.8.23')]),
-     ('healthcheck', '6', '7', 'v0.3.21', 'v0.3.22', [('metadata-healthcheck:v0.3.21', 'metadata-healthcheck:v0.3.22')]),
-     ('ipsec-overlay', '16', '17', 'v0.3.14', 'v0.3.15', [('ipsec-vxlan-overlay-network:v0.14.43', 'ipsec-vxlan-overlay-network:v0.14.44')]),
-     ('vxlan-overlay-network', '9', '10', 'v0.3.7', 'v0.3.8', [('ipsec-vxlan-overlay-network:v0.14.43', 'ipsec-vxlan-overlay-network:v0.14.44')]),
-     ('layer-2-flat-network', '10', '11', 'v0.3.8', 'v0.3.9', [('ipsec-vxlan-overlay-network:v0.14.43', 'ipsec-vxlan-overlay-network:v0.14.44')]),
-     ('per-host-subnet-network', '8', '9', 'v0.3.6', 'v0.3.7', [('ipsec-vxlan-overlay-network:v0.14.43', 'ipsec-vxlan-overlay-network:v0.14.44')]),
-     ('resource-scheduler', '9', '10', 'v0.8.23', 'v0.8.24', [('resource-scheduler:v0.8.23', 'resource-scheduler:v0.8.24')])]
+     ('healthcheck', '6', '7', 'v0.3.21', 'v0.3.22',
+      [('metadata-healthcheck:v0.3.21', 'metadata-healthcheck:v0.3.22')]),
+     ('ipsec-overlay', '16', '17', 'v0.3.14', 'v0.3.15',
+      [('ipsec-vxlan-overlay-network:v0.14.43',
+        'ipsec-vxlan-overlay-network:v0.14.44')]),
+     ('vxlan-overlay-network', '9', '10', 'v0.3.7', 'v0.3.8',
+      [('ipsec-vxlan-overlay-network:v0.14.43',
+        'ipsec-vxlan-overlay-network:v0.14.44')]),
+     ('layer-2-flat-network', '10', '11', 'v0.3.8', 'v0.3.9',
+      [('ipsec-vxlan-overlay-network:v0.14.43',
+        'ipsec-vxlan-overlay-network:v0.14.44')]),
+     ('per-host-subnet-network', '8', '9', 'v0.3.6', 'v0.3.7',
+      [('ipsec-vxlan-overlay-network:v0.14.43',
+        'ipsec-vxlan-overlay-network:v0.14.44')]),
+     ('resource-scheduler', '9', '10', 'v0.8.23', 'v0.8.24',
+      [('resource-scheduler:v0.8.23', 'resource-scheduler:v0.8.24')])]
 )
 def test_qualified_backport_source_contract(
         template, old_number, new_number, old_version, new_version,
