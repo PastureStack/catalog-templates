@@ -4,6 +4,21 @@
   "allowedRegistryPrefixes": [
     "ghcr.io/pasturestack/"
   ],
+  "legacyImages": [
+    {
+      "reference": "rancher/container-crontab:v0.5.0",
+      "templatePath": "infra-templates/container-crontab/3/docker-compose.yml",
+      "sourceRepository": "https://github.com/rancher/rancher-catalog",
+      "sourceCommit": "52a5850bc49247eadd84045da890deaeaeddb9a4",
+      "sourcePath": "infra-templates/container-crontab/3/docker-compose.yml",
+      "templateSha256": "5f08572688e0a080008572063eea55eeabc56273e05538194d17b148e48c6ab6",
+      "usage": "installed-version-history-and-rollback-only",
+      "defaultForNewInstall": false,
+      "vulnerabilityScan": {
+        "status": "unassessed-legacy"
+      }
+    }
+  ],
   "images": [
     {
       "reference": "ghcr.io/pasturestack/container-cron:v0.6.0",

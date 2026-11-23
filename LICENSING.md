@@ -10,6 +10,9 @@ PastureStack-authored portions of the current maintenance commit are licensed
 under the MIT License in `LICENSES/MIT.txt`. This scope includes the repository
 governance and compatibility documents, image inventory metadata, audit and
 integration tooling, and the current `infra-templates/container-schedule`,
+the newly authored `infra-templates/container-crontab` compatibility metadata,
+revision 4, Traditional Chinese documentation and reused PastureStack icon
+(excluding the byte-preserved upstream revision 3 files),
 `infra-templates/healthcheck`,
 `infra-templates/network-services`, `infra-templates/ipsec-overlay`,
 `infra-templates/layer-2-flat-network`,

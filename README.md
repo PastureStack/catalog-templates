@@ -19,6 +19,18 @@ current versions and [catalog-provenance.json](catalog-provenance.json) for
 preserved upstream origins. General third-party application examples and the
 obsolete Rancher-era Kubernetes stack are not deployable entries.
 
+The hidden `container-crontab` compatibility entry additionally resolves an
+installed legacy revision 3 and upgrades it to the published Container Cron
+`v0.6.2` at revision 4. It preserves the existing service name and the
+`metrics`/`debug` answers, and stops the old scheduler before starting its
+replacement. Normal Stack upgrade/finish/rollback actions retain the original
+Catalog namespace; no direct Stack identifier or database rewrite is required.
+Its original Rancher image is recorded separately as unassessed legacy rollback
+material, never a new-install default. See the
+[compatibility upgrade contract](infra-templates/container-crontab/4/README.md).
+The compatibility resolver and hidden-list contract require Catalog Service
+`v0.20.20` or later; CI verifies the published `v0.20.20` archive by SHA-256.
+
 New template revisions consume published PastureStack runtime artifacts built
 from verified upstream inputs. Image tags, producer commits, manifest digests,
 licenses and runtime evidence are recorded in [catalog-images.json](catalog-images.json).
@@ -81,7 +93,7 @@ bash scripts/audit-deployable-images
 CATALOG_SERVICE_BIN=/path/to/reviewed/catalog-service bash scripts/test
 ```
 
-The integration test never downloads its service dependency. Supply a locally reviewed binary through `CATALOG_SERVICE_BIN`. Its test configuration uses the repository branch together with the exact current commit as `pinnedCommit`.
+The integration test never downloads its service dependency. Supply a locally reviewed binary through `CATALOG_SERVICE_BIN`. Its fixture keeps the reviewed HTTPS Catalog URL and `main` branch, loads the exact current commit from a self-contained Git bundle, and verifies that bundle in an independent receiver before starting Catalog Service. The source checkout must include complete Git history.
 
 Templates use established compatibility filenames and schema keys. See [COMPATIBILITY.md](COMPATIBILITY.md), [SECURITY.md](SECURITY.md), [ORIGIN.md](ORIGIN.md), and [LICENSING.md](LICENSING.md).
 

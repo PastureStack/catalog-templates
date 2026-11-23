@@ -17,6 +17,10 @@
       "sourcePath": "infra-templates/efs",
       "originStatus": "experimental"
     },
+    "container-crontab": {
+      "sourcePath": "infra-templates/container-crontab",
+      "originStatus": "first-party"
+    },
     "container-schedule": {
       "sourcePath": "infra-templates/container-crontab",
       "originStatus": "first-party"

@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: MIT
+.catalog:
+  name: PastureStack Container Crontab Compatibility
+  version: v0.6.2
+  description: Upgrade the existing Container Crontab service in place using the published Container Cron runtime.
+  minimum_rancher_version: v1.6.15-rc1
+  upgrade_from: '>=v0.5.0 <v0.6.2'
+  labels:
+    io.pasturestack.catalog.question.metrics.label.zh-tw: '啟用指標端點'
+    io.pasturestack.catalog.question.metrics.description.zh-tw: '在容器連接埠 9191 提供 Prometheus 工作執行次數。'
+    io.pasturestack.catalog.question.debug.label.zh-tw: '啟用除錯日誌'
+    io.pasturestack.catalog.question.debug.description.zh-tw: '記錄較詳細的事件與排程診斷資訊。'
+  questions:
+    - variable: metrics
+      label: Enable the metrics endpoint
+      description: Expose Prometheus job counts on container port 9191.
+      type: enum
+      default: false
+      options:
+        - true
+        - false
+    - variable: debug
+      label: Enable debug logging
+      description: Write detailed event and scheduling diagnostics.
+      type: enum
+      default: false
+      options:
+        - true
+        - false
+
+container-crontab:
+  scale: 1
+  start_on_create: true
+  upgrade_strategy:
+    start_first: false

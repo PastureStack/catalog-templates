@@ -37,8 +37,8 @@ jobs:
 
       - name: Validate images, schema, and localized metadata
         env:
-          CATALOG_SERVICE_VERSION: 0.20.15
-          CATALOG_SERVICE_SHA256: 7c059101265d897e4b176f503a9217b112946d37d91daa0c40f421fb16e4bb6b
+          CATALOG_SERVICE_VERSION: 0.20.20
+          CATALOG_SERVICE_SHA256: 6bce527300205aeb0d589b67f4b38e037be3bdb8e6da5ea04f7357d287eedf6d
           PASTURESTACK_CATALOG_ALLOWED_LOCAL_ROOTS: /tmp
           TMPDIR: /tmp
           SOURCE_SHA: ${{ github.sha }}
@@ -80,6 +80,7 @@ jobs:
           bash scripts/audit-deployable-images
           python scripts/check-catalog-version-labels.py
           python scripts/check-firewall-backend-contract.py
+          python scripts/check-cron-compatibility-contract.py
           asset="$work_root/catalog-service.tar.xz"
           curl \
             --proto '=https' \
@@ -99,22 +100,18 @@ jobs:
           catalog_service="$work_root/catalog-service-sqlite"
           test "$("$catalog_service" --version)" = "v${CATALOG_SERVICE_VERSION}"
 
-          branch="validation-${SOURCE_SHA}"
-          git branch -f "$branch" "$SOURCE_SHA"
-          source_repo="$work_root/catalog-source"
-          git clone --quiet --no-hardlinks --single-branch \
-            --branch "$branch" "$GITHUB_WORKSPACE" "$source_repo"
-          test "$(git -C "$source_repo" rev-parse HEAD)" = "$SOURCE_SHA"
-          test -z "$(git -C "$source_repo" status --porcelain)"
-          jq -n \
-            --arg url "$source_repo" \
-            --arg branch "$branch" \
-            --arg commit "$SOURCE_SHA" \
-            '{catalogs:{pasturestack:{url:$url,branch:$branch,pinnedCommit:$commit}}}' \
-            >"$work_root/repo.json"
+          # Complete the trusted candidate history before producing the same
+          # self-contained operator bundle consumed by the released product.
+          if [ "$(git rev-parse --is-shallow-repository)" = true ]; then
+            git fetch --unshallow origin "$SOURCE_SHA"
+          fi
+          bash scripts/prepare-catalog-test-source \
+            "$GITHUB_WORKSPACE" "$work_root" "$SOURCE_SHA"
+          source_repo="$work_root/repo"
 
           "$catalog_service" \
             --config "$work_root/repo.json" \
+            --bundled-sources "$work_root/bundled-sources.json" \
             --cache "$work_root/validate-cache" \
             --validate \
             --sqlite \
@@ -122,6 +119,7 @@ jobs:
 
           "$catalog_service" \
             --config "$work_root/repo.json" \
+            --bundled-sources "$work_root/bundled-sources.json" \
             --cache "$work_root/service-cache" \
             --sqlite \
             --refresh-interval 7200 \
@@ -246,7 +244,9 @@ jobs:
 
           CATALOG_SERVICE_BIN="$catalog_service" \
           CATALOG_TEST_REPO="$source_repo" \
-          CATALOG_TEST_BRANCH="$branch" \
+          CATALOG_TEST_BRANCH=main \
+          CATALOG_TEST_SOURCE_URL='https://github.com/PastureStack/catalog-templates.git' \
+          CATALOG_TEST_BUNDLED_SOURCES="$work_root/bundled-sources.json" \
           CATALOG_TEST_COMMIT="$SOURCE_SHA" \
           CATALOG_TEST_BASE_URL='http://127.0.0.1:18088' \
           CATALOG_TEST_NAME='pasturestack' \

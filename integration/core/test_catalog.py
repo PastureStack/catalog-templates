@@ -94,8 +94,9 @@ def _catalog_commit():
 def _catalog_config():
     data = {
         'catalogs': {
-            'library': {
-                'url': _catalog_repo(),
+            _catalog_name(): {
+                'url': os.environ.get(
+                    'CATALOG_TEST_SOURCE_URL', _catalog_repo()),
                 'branch': _current_branch(),
                 'pinnedCommit': _catalog_commit(),
             },
@@ -118,12 +119,14 @@ def test_validate_exits_normal(catalog_service):
     config = _catalog_config()
     with tempfile.TemporaryDirectory(
             prefix='pasturestack-catalog-validate-') as cache:
-        catalog_service.assert_retcode(
-            0,
+        args = [
             '--config', config,
             '--cache', cache,
-            '--validate', '--sqlite', '--port', '18088',
-            cwd=cache)
+            '--validate', '--sqlite', '--port', '18088']
+        bundled = os.environ.get('CATALOG_TEST_BUNDLED_SOURCES')
+        if bundled:
+            args.extend(['--bundled-sources', bundled])
+        catalog_service.assert_retcode(0, *args, cwd=cache)
     os.remove(config)
 
 
@@ -393,9 +396,12 @@ def test_catalog_list():
     with open(_file('catalog-provenance.json'), encoding='utf-8') as source:
         provenance = json.load(source)
     assert provenance['classification'] == 'upstream-first-party'
-    assert len(provenance['entries']) == 21
+    assert len(provenance['entries']) == 22
     localized_question_count = 0
     for folder, origin in provenance['entries'].items():
+        if folder == 'container-crontab':
+            assert ('infra', folder) not in by_folder
+            continue
         template = by_folder[('infra', folder)]
         labels = template['labels']
         assert labels[
@@ -1358,6 +1364,60 @@ def test_catalog_commit_is_pinned():
     assert len(data) == 1
     assert data[0]['branch'] == _current_branch()
     assert data[0]['pinnedCommit'] == _catalog_commit()
+
+
+def test_cron_compatibility_source_contract():
+    subprocess.check_call(
+        [sys.executable,
+         _file('scripts/check-cron-compatibility-contract.py')])
+
+
+def test_legacy_cron_version_alias_preserves_upgrade_identity():
+    # An explicit compatibility view is readable but absent from new launches.
+    folders = {item['folderName'] for item in _get_json(
+        _catalog_url('/v1-catalog/templates')).get('data', [])}
+    assert 'container-schedule' in folders
+    assert 'container-crontab' not in folders
+    namespaces = sorted({_catalog_name(), 'library'})
+    resources = {}
+    for namespace in namespaces:
+        template_id = '{}:infra*container-crontab'.format(namespace)
+        template = _get_json(_catalog_url(
+            '/v1-catalog/templates/' + template_id))
+        assert template['id'] == template_id
+        assert template['labels'][
+            'io.pasturestack.catalog.compatibility-only'] == 'true'
+        assert template['defaultTemplateVersionId'] == template_id + ':4'
+        for revision, display in (('3', 'v0.5.0'), ('4', 'v0.6.2')):
+            version_id = template_id + ':' + revision
+            for route in ('templates', 'templateversions'):
+                version = _get_json(_catalog_url(
+                    '/v1-catalog/{}/{}'.format(route, version_id)))
+                assert version['id'] == version_id
+                assert version['templateId'] == template_id
+                assert version['version'] == display
+                assert version['links']['template'].endswith(template_id)
+                assert [q['variable'] for q in version['questions']] == [
+                    'metrics', 'debug']
+                compose_name = ('docker-compose.yml' if revision == '3'
+                                else 'docker-compose.yml.tpl')
+                for name in (compose_name, 'rancher-compose.yml'):
+                    with open(_file(
+                            'infra-templates/container-crontab/{}/{}'.format(
+                                revision, name)), encoding='utf-8') as source:
+                        assert version['files'][name] == source.read()
+                resources[(namespace, revision)] = version
+            if revision == '3':
+                assert version['upgradeVersionLinks'][
+                    'v0.6.2'].endswith(template_id + ':4')
+                assert version['links']['defaultUpgradeVersion'].endswith(
+                    template_id + ':4')
+            else:
+                assert not version['upgradeVersionLinks']
+    if _catalog_name() != 'library':
+        for revision in ('3', '4'):
+            assert resources[('library', revision)]['files'] == resources[
+                (_catalog_name(), revision)]['files']
 
 
 def test_network_services13_preserves_contract_and_published_identities():
