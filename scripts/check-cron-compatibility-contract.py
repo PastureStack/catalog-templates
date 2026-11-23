@@ -41,6 +41,9 @@ def main():
     assert platform.count("        - true\n        - false\n") == 2
     assert '.Values.metrics "true"' in compose
     assert '.Values.debug "true"' in compose
+    # Preserve the historical --rancher-mode service-state checks using the
+    # maintained runtime's equivalent flag rather than changing execution mode.
+    assert "    command: container-cron --metadata-mode{{" in compose
     for removed in ("--rancher-mode", "DOCKER_API_VERSION", "privileged: true"):
         assert removed not in compose, removed
 

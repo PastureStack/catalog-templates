@@ -20,8 +20,10 @@
 由 `:3` 前進至 `:4`，不直接改寫命名空間或資料庫。
 
 新版本保留全主機部署、Docker socket 掛載、持續重新啟動與容器名稱主機名稱。
-執行模式沿用現行 Container Cron 的 Docker 事件模式；移除舊版專用的
-`--rancher-mode` 與過時 Docker API 覆寫。工作負載本身的 `cron.schedule`、
+舊版 `--rancher-mode` 正式對應至維護版的 `--metadata-mode`，保留中繼資料
+服務狀態檢查：受管工作負載僅在服務為 `active` 時執行排程，服務停用或
+等待升級確認時暫停排程。過時 Docker API 覆寫仍移除。
+工作負載本身的 `cron.schedule`、
 `cron.action`、`cron.restart_timeout`、時區標籤、`TZ` 環境值與其他選項
 必須維持原值；此版本未新增 `cron.timezone` 的解讀功能。
 

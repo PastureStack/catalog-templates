@@ -4,7 +4,7 @@ services:
   container-crontab:
     image: ghcr.io/pasturestack/container-cron:v0.6.2
     restart: always
-    command: container-cron{{- if eq .Values.debug "true" }} --debug{{- end }}{{- if eq .Values.metrics "true" }} --metrics{{- end }}
+    command: container-cron --metadata-mode{{- if eq .Values.debug "true" }} --debug{{- end }}{{- if eq .Values.metrics "true" }} --metrics{{- end }}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     expose:

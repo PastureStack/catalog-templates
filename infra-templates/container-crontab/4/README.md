@@ -23,9 +23,12 @@ The stored identifier advances normally from `:3` to `:4` in its original
 namespace. Resolving the alias alone does not edit an installed Stack.
 
 The service runs globally and retains Docker socket access, an always-restart
-policy, and container-name hostname assignment. The new runtime uses its normal
-Docker event mode. It does not pass the removed `--rancher-mode` switch or retain
-the obsolete Docker API version override. Managed workload labels, including
+policy, and container-name hostname assignment. The historical `--rancher-mode`
+switch maps to the maintained runtime's `--metadata-mode` flag. This preserves
+the Metadata service-state checks: managed workload jobs run only while their
+service is `active` and are deactivated while the service is inactive or waiting
+for upgrade confirmation. The obsolete Docker API version override is removed.
+Managed workload labels, including
 `cron.schedule`, `cron.action`, `cron.restart_timeout`, and any existing timezone
 labels or `TZ` environment values, belong to the workload and must remain
 unchanged. This revision does not introduce a `cron.timezone` interpretation.
