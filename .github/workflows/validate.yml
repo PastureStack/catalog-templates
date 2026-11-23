@@ -37,8 +37,8 @@ jobs:
 
       - name: Validate images, schema, and localized metadata
         env:
-          CATALOG_SERVICE_VERSION: 0.20.15
-          CATALOG_SERVICE_SHA256: 7c059101265d897e4b176f503a9217b112946d37d91daa0c40f421fb16e4bb6b
+          CATALOG_SERVICE_VERSION: 0.20.20
+          CATALOG_SERVICE_SHA256: 6bce527300205aeb0d589b67f4b38e037be3bdb8e6da5ea04f7357d287eedf6d
           PASTURESTACK_CATALOG_ALLOWED_LOCAL_ROOTS: /tmp
           TMPDIR: /tmp
           SOURCE_SHA: ${{ github.sha }}

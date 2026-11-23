@@ -28,6 +28,8 @@ Catalog namespace; no direct Stack identifier or database rewrite is required.
 Its original Rancher image is recorded separately as unassessed legacy rollback
 material, never a new-install default. See the
 [compatibility upgrade contract](infra-templates/container-crontab/4/README.md).
+The compatibility resolver and hidden-list contract require Catalog Service
+`v0.20.20` or later; CI verifies the published `v0.20.20` archive by SHA-256.
 
 New template revisions consume published PastureStack runtime artifacts built
 from verified upstream inputs. Image tags, producer commits, manifest digests,
