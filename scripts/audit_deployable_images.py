@@ -36,8 +36,13 @@ VERSION_TAG_PATTERN = re.compile(
 )
 COMMIT_PATTERN = re.compile(r"^[0-9a-f]{40}$")
 DIGEST_PATTERN = re.compile(r"^sha256:[0-9a-f]{64}$")
-EXPECTED_INFRA_TEMPLATE_COUNT = 21
-EXPECTED_QUESTION_COUNT = 142
+EXPECTED_INFRA_TEMPLATE_COUNT = 22
+EXPECTED_QUESTION_COUNT = 144
+# This immutable upstream definition is readable only for installed-version
+# history and rollback. It must never weaken the current-image security gate.
+LEGACY_IMAGE_PATH = "infra-templates/container-crontab/3/docker-compose.yml"
+LEGACY_IMAGE_REFERENCE = "rancher/container-crontab:v0.5.0"
+LEGACY_IMAGE_SOURCE_COMMIT = "52a5850bc49247eadd84045da890deaeaeddb9a4"
 NON_TAIWAN_TERMS = (
     "審計",
     "日志",
@@ -52,6 +57,7 @@ NON_TAIWAN_TERMS = (
     "配置文件",
 )
 RETAINED_VERSION_LAYOUTS = {
+    "container-crontab": ("3", "4"),
     "amazon-efs-storage": ("2", "3"),
     "amazon-ebs-storage": ("2", "3"),
     "container-schedule": ("2", "3", "4"),
@@ -73,6 +79,9 @@ RETAINED_VERSION_LAYOUTS = {
     "windows-container-networking": ("2", "3", "4"),
 }
 RETAINED_VERSION_HASHES = {
+    "infra-templates/container-crontab/3/README.md": "80ebbc61def63a890dfcc6249fb80819da307550b513d5879a4d8e1c91f7d49a",
+    "infra-templates/container-crontab/3/docker-compose.yml": "5f08572688e0a080008572063eea55eeabc56273e05538194d17b148e48c6ab6",
+    "infra-templates/container-crontab/3/rancher-compose.yml": "f869674f102b775ea981a57353a157f8c30959bf1cd1430a0cb21227b53f998f",
     "infra-templates/healthcheck/0/README.md": "1b18863d98ba3c042676f81daf6d6fc510c255cd1df275495985ed41f3b13aaa",
     "infra-templates/healthcheck/0/docker-compose.yml": "7706d9ed46c0cfcac2e29b6b4dc95e8f6f4c771e8da772541791261ee8030f53",
     "infra-templates/healthcheck/0/rancher-compose.yml": "38c775ce54a9d3ad366d7be40a792f3e40838153ab10c93b51faaadc53dc2183",
@@ -135,6 +144,21 @@ def main() -> int:
     if not allowed_prefixes:
         blocker("catalog-images.json must define allowedRegistryPrefixes", failures)
 
+    legacy = data.get("legacyImages", [])
+    expected_legacy = [{
+        "reference": LEGACY_IMAGE_REFERENCE,
+        "templatePath": LEGACY_IMAGE_PATH,
+        "sourceRepository": "https://github.com/rancher/rancher-catalog",
+        "sourceCommit": LEGACY_IMAGE_SOURCE_COMMIT,
+        "sourcePath": LEGACY_IMAGE_PATH,
+        "templateSha256": RETAINED_VERSION_HASHES[LEGACY_IMAGE_PATH],
+        "usage": "installed-version-history-and-rollback-only",
+        "defaultForNewInstall": False,
+        "vulnerabilityScan": {"status": "unassessed-legacy"},
+    }]
+    if legacy != expected_legacy:
+        blocker("legacyImages must retain only the exact upstream Container Crontab revision 3", failures)
+
     locked: dict[str, dict[str, object]] = {}
     for item in data.get("images", ()):
         reference = item.get("reference", "")
@@ -182,6 +206,9 @@ def main() -> int:
                     continue
                 reference = match.group(2)
                 discovered.append((relative, line_number, reference))
+                if (relative.as_posix() == LEGACY_IMAGE_PATH
+                        and reference == LEGACY_IMAGE_REFERENCE):
+                    continue
                 if not VERSION_TAG_PATTERN.fullmatch(reference):
                     blocker(f"image must use a semantic version tag at {relative}:{line_number}: {reference}", failures)
                 elif reference not in locked:

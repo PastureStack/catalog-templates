@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: MIT
+name: Container Crontab Compatibility
+description: Upgrade an installed legacy Container Crontab service without creating a second scheduler.
+version: v0.6.2
+category: System
+maintainer: PastureStack contributors
+license: MIT maintenance; retained upstream revision and image licenses remain independent
+project_url: https://github.com/PastureStack/container-cron
+labels:
+  io.pasturestack.catalog.origin: upstream-first-party
+  io.pasturestack.catalog.origin-template: container-crontab
+  io.pasturestack.catalog.origin-status: first-party
+  io.pasturestack.catalog.compatibility-only: 'true'
+  io.rancher.orchestration.supported: 'cattle'
+  io.pasturestack.catalog.name.zh-tw: '舊版容器定時排程相容升級'
+  io.pasturestack.catalog.description.zh-tw: '保留既有服務與目錄識別碼，升級舊版容器定時排程，避免同時執行兩套排程服務。'

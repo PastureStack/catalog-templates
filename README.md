@@ -19,6 +19,16 @@ current versions and [catalog-provenance.json](catalog-provenance.json) for
 preserved upstream origins. General third-party application examples and the
 obsolete Rancher-era Kubernetes stack are not deployable entries.
 
+The hidden `container-crontab` compatibility entry additionally resolves an
+installed legacy revision 3 and upgrades it to the published Container Cron
+`v0.6.2` at revision 4. It preserves the existing service name and the
+`metrics`/`debug` answers, and stops the old scheduler before starting its
+replacement. Normal Stack upgrade/finish/rollback actions retain the original
+Catalog namespace; no direct Stack identifier or database rewrite is required.
+Its original Rancher image is recorded separately as unassessed legacy rollback
+material, never a new-install default. See the
+[compatibility upgrade contract](infra-templates/container-crontab/4/README.md).
+
 New template revisions consume published PastureStack runtime artifacts built
 from verified upstream inputs. Image tags, producer commits, manifest digests,
 licenses and runtime evidence are recorded in [catalog-images.json](catalog-images.json).

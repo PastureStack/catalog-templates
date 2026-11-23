@@ -35,6 +35,7 @@ CATALOG_SERVICE_BIN=$(command -v "$CATALOG_SERVICE_BIN")
 
 bash scripts/audit-deployable-images
 python3 scripts/check-catalog-version-labels.py
+python3 scripts/check-cron-compatibility-contract.py
 
 source_commit=$(git rev-parse HEAD)
 test_branch=pasturestack-catalog-test
@@ -148,6 +149,8 @@ for version_id in \
     vxlan-overlay-network:3 \
     vxlan-overlay-network:5 \
     container-schedule:4 \
+    container-crontab:3 \
+    container-crontab:4 \
     healthcheck:3 \
     ipsec-overlay:14 \
     layer-2-flat-network:8 \
