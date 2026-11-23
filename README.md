@@ -93,7 +93,7 @@ bash scripts/audit-deployable-images
 CATALOG_SERVICE_BIN=/path/to/reviewed/catalog-service bash scripts/test
 ```
 
-The integration test never downloads its service dependency. Supply a locally reviewed binary through `CATALOG_SERVICE_BIN`. Its test configuration uses the repository branch together with the exact current commit as `pinnedCommit`.
+The integration test never downloads its service dependency. Supply a locally reviewed binary through `CATALOG_SERVICE_BIN`. Its fixture keeps the reviewed HTTPS Catalog URL and `main` branch, loads the exact current commit from a self-contained Git bundle, and verifies that bundle in an independent receiver before starting Catalog Service. The source checkout must include complete Git history.
 
 Templates use established compatibility filenames and schema keys. See [COMPATIBILITY.md](COMPATIBILITY.md), [SECURITY.md](SECURITY.md), [ORIGIN.md](ORIGIN.md), and [LICENSING.md](LICENSING.md).
 

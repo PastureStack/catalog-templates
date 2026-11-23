@@ -94,8 +94,9 @@ def _catalog_commit():
 def _catalog_config():
     data = {
         'catalogs': {
-            'library': {
-                'url': _catalog_repo(),
+            _catalog_name(): {
+                'url': os.environ.get(
+                    'CATALOG_TEST_SOURCE_URL', _catalog_repo()),
                 'branch': _current_branch(),
                 'pinnedCommit': _catalog_commit(),
             },
@@ -118,12 +119,14 @@ def test_validate_exits_normal(catalog_service):
     config = _catalog_config()
     with tempfile.TemporaryDirectory(
             prefix='pasturestack-catalog-validate-') as cache:
-        catalog_service.assert_retcode(
-            0,
+        args = [
             '--config', config,
             '--cache', cache,
-            '--validate', '--sqlite', '--port', '18088',
-            cwd=cache)
+            '--validate', '--sqlite', '--port', '18088']
+        bundled = os.environ.get('CATALOG_TEST_BUNDLED_SOURCES')
+        if bundled:
+            args.extend(['--bundled-sources', bundled])
+        catalog_service.assert_retcode(0, *args, cwd=cache)
     os.remove(config)
 
 

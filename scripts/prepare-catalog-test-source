@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+source_repo=$1
+fixture_root=$2
+source_commit=$3
+branch=pasturestack-catalog-test
+source_url=https://github.com/PastureStack/catalog-templates.git
+test_repo="$fixture_root/repo"
+bundle="$fixture_root/catalog-templates.bundle"
+
+# The product accepts the legacy alias only for this reviewed HTTPS source.
+# Supply its exact test commit through the normal operator-owned bundle path.
+# A shallow source cannot produce a self-contained bundle with all parents.
+test "$(git -C "$source_repo" rev-parse --is-shallow-repository)" = false
+git clone --quiet --no-hardlinks "$source_repo" "$test_repo"
+git -C "$test_repo" checkout --quiet -B "$branch" "$source_commit"
+test "$(git -C "$test_repo" rev-parse HEAD)" = "$source_commit"
+test -z "$(git -C "$test_repo" status --porcelain)"
+git -C "$test_repo" bundle create "$bundle" "refs/heads/$branch"
+
+# Verify in an independent empty receiver, not against the producer's objects.
+receiver="$fixture_root/verified-receiver"
+git init --quiet "$receiver"
+git -C "$receiver" bundle verify "$bundle"
+git -C "$receiver" -c protocol.allow=never -c protocol.file.allow=always \
+    fetch --quiet --no-tags "$bundle" \
+    "refs/heads/$branch:refs/remotes/bundled/source"
+git -C "$receiver" checkout --quiet --detach "$source_commit"
+git -C "$receiver" fsck --full --strict
+test "$(git -C "$receiver" rev-parse HEAD)" = "$source_commit"
+bundle_sha=$(sha256sum "$bundle" | cut -d' ' -f1)
+
+python3 - "$fixture_root" "$source_url" "$source_commit" "$bundle_sha" <<'PY'
+import json
+from pathlib import Path
+import sys
+
+root, url, commit, digest = sys.argv[1:]
+source = {"url": url, "branch": "main", "pinnedCommit": commit}
+root = Path(root)
+(root / "repo.json").write_text(
+    json.dumps({"catalogs": {"pasturestack": source}}), encoding="utf-8")
+source = dict(source, bundle="catalog-templates.bundle", sha256=digest,
+              requiredTemplates=[
+                  {"base": "infra", "name": "container-crontab", "revision": 3},
+                  {"base": "infra", "name": "container-crontab", "revision": 4},
+                  {"base": "infra", "name": "container-schedule", "revision": 4},
+              ])
+(root / "bundled-sources.json").write_text(
+    json.dumps({"version": 1, "sources": [source]}), encoding="utf-8")
+print("CATALOG_TEST_BUNDLE_OK source=" + commit + " sha256=" + digest)
+PY

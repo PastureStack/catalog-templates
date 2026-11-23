@@ -38,36 +38,27 @@ python3 scripts/check-catalog-version-labels.py
 python3 scripts/check-cron-compatibility-contract.py
 
 source_commit=$(git rev-parse HEAD)
-test_branch=pasturestack-catalog-test
 test_parent=$(mktemp -d /tmp/pasturestack-catalog-test.XXXXXX)
-test_repo="$test_parent/repo"
-git clone --quiet --no-hardlinks "$repo_root" "$test_repo"
-git -C "$test_repo" checkout --quiet -B "$test_branch" "$source_commit"
+bash scripts/prepare-catalog-test-source \
+    "$repo_root" "$test_parent" "$source_commit"
 
 export CATALOG_SERVICE_BIN
-export CATALOG_TEST_REPO="$test_repo"
-export CATALOG_TEST_BRANCH="$test_branch"
+export CATALOG_TEST_REPO="$test_parent/repo"
+export CATALOG_TEST_BRANCH=main
 export CATALOG_TEST_COMMIT="$source_commit"
+export CATALOG_TEST_NAME=pasturestack
+export CATALOG_TEST_SOURCE_URL=https://github.com/PastureStack/catalog-templates.git
+export CATALOG_TEST_BUNDLED_SOURCES="$test_parent/bundled-sources.json"
 
-scratch_config=$(mktemp /tmp/pasturestack-catalog-config.XXXXXX)
+scratch_config="$test_parent/repo.json"
 service_log=$(mktemp /tmp/pasturestack-catalog-service.XXXXXX.log)
 cache_dir=$(mktemp -d /tmp/pasturestack-catalog-cache.XXXXXX)
-cat > "$scratch_config" <<JSON
-{
-  "catalogs": {
-    "library": {
-      "url": "${CATALOG_TEST_REPO}",
-      "branch": "${CATALOG_TEST_BRANCH}",
-      "pinnedCommit": "${CATALOG_TEST_COMMIT}"
-    }
-  }
-}
-JSON
 
 (
     cd "$cache_dir"
     exec env TMPDIR=/tmp PASTURESTACK_CATALOG_ALLOWED_LOCAL_ROOTS=/tmp "$CATALOG_SERVICE_BIN" \
         --config "$scratch_config" \
+        --bundled-sources "$CATALOG_TEST_BUNDLED_SOURCES" \
         --cache "$cache_dir" \
         --sqlite \
         --refresh-interval 7200 \
@@ -91,7 +82,7 @@ fi
 catalog_ready=false
 for _ in $(seq 1 30); do
     if curl -fsS \
-        'http://localhost:8088/v1-catalog/templateversions/library:infra*healthcheck:0' \
+        'http://localhost:8088/v1-catalog/templateversions/pasturestack:infra*healthcheck:0' \
         >/dev/null 2>&1; then
         catalog_ready=true
         break
@@ -99,7 +90,7 @@ for _ in $(seq 1 30); do
     sleep 1
 done
 if [ "$catalog_ready" != true ]; then
-    echo "catalog-service did not index library:infra*healthcheck:0 from pinned commit $source_commit" >&2
+    echo "catalog-service did not index pasturestack:infra*healthcheck:0 from pinned commit $source_commit" >&2
     exit 1
 fi
 
@@ -163,7 +154,7 @@ for version_id in \
     vault-volume-driver:5 \
     vxlan-overlay-network:7 \
     windows-container-networking:4; do
-    version_url="http://localhost:8088/v1-catalog/templateversions/library:infra*${version_id}"
+    version_url="http://localhost:8088/v1-catalog/templateversions/pasturestack:infra*${version_id}"
     if ! curl -fsS "$version_url" >/dev/null; then
         echo "catalog-service version lookup failed: ${version_id} (${version_url}), pinned commit ${source_commit}" >&2
         exit 1
